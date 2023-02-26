@@ -9,11 +9,5 @@ def hello_world():
     return render_template('bfl_page.html', **deadlines)
 
 
-@app.route('/get_len', methods=['GET', 'POST'])
-def get_len():
-    name = request.form['name'];
-    return json.dumps({'len': len(name)})
-
-
 if __name__ == '__main__':
     app.run()
