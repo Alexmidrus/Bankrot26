@@ -6,11 +6,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def hello_world():
-    return render_template('bfl_page.html',
-                           today=deadlines['today'],
-                           three_days=deadlines['three_days'],
-                           four_weeks=deadlines['four_weeks'],
-                           six_months=deadlines['six_months'])
+    return render_template('bfl_page.html', **deadlines)
 
 
 @app.route('/get_len', methods=['GET', 'POST'])
