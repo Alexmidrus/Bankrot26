@@ -1631,22 +1631,6 @@ $( document ).ready(function() {
 		
 		var form = $(this).closest('form');
 
-		/*
-		switch (form.find('[type="radio"]:checked').val()){
-			case 'whatsapp':
-				//e.preventDefault();
-				$(this).closest('.modal').modal('hide');
-				clearSteps(form);
-				createMsgModal('whatsapp', 'Я оставил вопрос на вашем сайте, хочу продолжить общение здесь');
-				break;
-
-			case 'telegram':
-				//e.preventDefault();
-				$(this).closest('.modal').modal('hide');
-				clearSteps(form);
-				createMsgModal('telegram', 'Я оставил вопрос на вашем сайте, хочу продолжить общение здесь');
-				break;
-		}*/
 		
 		step.find('[required]').each(function () {
 			if($(this).attr('type') == 'tel' && $(this).val().length < 16) {
@@ -1724,9 +1708,6 @@ $( document ).ready(function() {
 			$(form).find('[name="lead[quiz]"]').val(main_quiz_data);
 		}
 
-		/*if (form.find('[name="lead[type]"]:checked')[0].value == 'office' && !form.find('[name="lead[date]"]')[0].value){
-			return;
-		}*/
 		
 		if (form.find('[name="lead[phone]"]').val())
 			$('#gift_phone_number').val(form.find('[name="lead[phone]"]').val());
@@ -1812,9 +1793,8 @@ $( document ).ready(function() {
 					method: method,
 					dataType: 'json',
 					success: function success(data) {
-						if (form.hasClass('steps-modal-form')){
-
-						} else {
+						if (form.hasClass('steps-modal-form')){}
+						else {
 							form[0].reset();
 						}
 							form.removeAttr('data-sending');
