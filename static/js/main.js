@@ -1746,7 +1746,9 @@ $( document ).ready(function() {
 
 		form.attr('data-sending', true);
 
-		postForms.ready(function () { // Отвечает за отправку форм по Ajax
+
+
+		/*postForms.ready(function () { // Отвечает за отправку форм по Ajax
 			postForms.execute(window.rekey, {
 				action: 'sendform' // этот параметр не имеет значения
 			}).then(function () {
@@ -1795,6 +1797,105 @@ $( document ).ready(function() {
 					}
 				});
 			});
+		}); */
+
+
+        
+         /*
+         
+          ------- Формирование Ajax запроса с форм на странице --------
+
+         -> Передаеются данные через _GET параметры в data
+         -> переменная сityId хранит выбранный пользователем город
+
+
+         */
+		var data = form.serialize();
+		var cityId = 0;
+				
+		if (getCookie('edin_center_geo') && form.find('[name="lead[city_id]"]').length == 0) {
+			var geo = JSON.parse(decodeURIComponent(getCookie('edin_center_geo')));
+			cityId = geo.id || 999;
+		}
+
+		if (cityId) {
+			data += '&lead%5Bcity_id%5D=' + cityId;
+		}
+		if (window.usluga) {
+			data += '&lead%5Busluga%5D=' + window.usluga;
+		}
+
+		if ($_GET['utm_source']) {
+			data += '&lead%5Butm_source%5D=' + encodeURIComponent($_GET['utm_source']);
+		} else if(sessionStorage.getItem('utm_source')){
+			data += '&lead%5Butm_source%5D=' + sessionStorage.getItem('utm_source');
+		}
+
+		if ($_GET['utm_medium']) {
+			data += '&lead%5Butm_medium%5D=' + encodeURIComponent($_GET['utm_medium']);
+		} else if(sessionStorage.getItem('utm_medium')){
+			data += '&lead%5Butm_medium%5D=' + sessionStorage.getItem('utm_medium');
+		}
+
+		if ($_GET['utm_campaign']) {
+			data += '&lead%5Butm_campaign%5D=' + encodeURIComponent($_GET['utm_campaign']);
+		} else if(sessionStorage.getItem('utm_campaign')){
+			data += '&lead%5Butm_campaign%5D=' + sessionStorage.getItem('utm_campaign');
+		}
+
+		if ($_GET['utm_term']) {
+			data += '&lead%5Butm_term%5D=' + encodeURIComponent($_GET['utm_term']);
+		} else if(sessionStorage.getItem('utm_term')){
+			data += '&lead%5Butm_term%5D=' + sessionStorage.getItem('utm_term');
+		}
+
+		if ($_GET['utm_content']) {
+			data += '&lead%5Butm_content%5D=' + encodeURIComponent($_GET['utm_content']);
+		} else if(sessionStorage.getItem('utm_content')){
+			data += '&lead%5Butm_content%5D=' + sessionStorage.getItem('utm_content');
+		}
+
+		var url = form.attr('action');
+		var method = form.attr('method');
+		var button = form.find('[type=submit]');
+		button.attr('disabled', true);
+
+		$.ajax({
+			url: url,
+			data: data,
+			method: method,
+			dataType: 'json',
+			success: function success(data) {
+				if (form.hasClass('steps-modal-form')){
+							
+				} else {
+					form[0].reset();
+				}
+					form.removeAttr('data-sending');
+					button.attr('disabled', false);
+					form.find('.is-valid').removeClass('is-valid');
+					form.find('.is-invalid').removeClass('is-invalid');
+						
+				if (form.attr('close-on-send')){
+					form.parents('.modal').modal('hide');
+				}
+						
+				if (form.attr('modal-confirm')){
+					openSuccessModal(form.attr('confirm-title'), form.attr('confirm-text'), form.attr('confirm-class'), form.attr('confirm-icon'), form.attr('confirm-button'));
+				}
+			},
+			error: function error(_error) {
+						
+				form.parents('.modal').modal('hide');
+				openSuccessModal('Произошла ошибка', 'Попробуйте отправить заявку позднее', 'success-error', 'icon-emote-excl', null);
+						
+				form.removeAttr('data-sending');
+				button.attr('disabled', false);
+
+				if (form.hasClass('main-quiz-form')){
+					clearSteps(form);
+				}
+			}
 		});
 
 	});
