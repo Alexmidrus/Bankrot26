@@ -20,23 +20,23 @@ jQuery.event.special.mousewheel = {
 };
 
 function setCookie(key, value, expiry) {
-	let expires = new Date();
+	var expires = new Date();
 	expires.setTime(expires.getTime() + (expiry * 24 * 60 * 60 * 1000));
 	document.cookie = key + '=' + value + ';path=/;samesite=strict;expires=' + expires.toUTCString();
 }
 
 function getCookie(key) {
-	let keyValue = document.cookie.match('(^|;) ?' + key + '=([^;]*)(;|$)');
+	var keyValue = document.cookie.match('(^|;) ?' + key + '=([^;]*)(;|$)');
 	return keyValue ? keyValue[2] : null;
 }
 
 function eraseCookie(key) {
-	let keyValue = getCookie(key);
+	var keyValue = getCookie(key);
 	setCookie(key, keyValue, '-1');
 }
 
 String.prototype.hashCode = function() {
-	let hash = 0,
+	var hash = 0,
 	i, chr;
 	if (this.length === 0) return hash;
 	for (i = 0; i < this.length; i++) {
@@ -49,13 +49,13 @@ String.prototype.hashCode = function() {
 
 function formatDate(date) {
 
-	let dd = date.getDate();
+	var dd = date.getDate();
 	if (dd < 10) dd = '0' + dd;
 
-	let mm = date.getMonth() + 1;
+	var mm = date.getMonth() + 1;
 	if (mm < 10) mm = '0' + mm;
 
-	let yy = date.getFullYear() % 100;
+	var yy = date.getFullYear() % 100;
 	if (yy < 10) yy = '0' + yy;
 
 	return dd + '.' + mm + '.' + yy;
@@ -420,7 +420,11 @@ function messenger_check(msg_type, msg_text, modal){
 			webLink = webLink+'&text='+msg_text;
 			appLink = appLink+'&text='+msg_text;
 			break;
-		}
+		/*case "telegram":
+			webLink = "https://t.me/EdinCenter_bot";
+			appLink = "tg://resolve?domain=EdinCenter_bot";
+			break;*/
+		}			
 	} 	
 
 	
@@ -429,7 +433,6 @@ function messenger_check(msg_type, msg_text, modal){
 	modal.append('<a href="'+ webLink +'" id="wwlink" target="_blank" style="display:none"><span></span></a>');
 	var timer_click;
 	var link = $('#wwlink');
-
 
 	protocolCheck(appLink, function () {
 		timer_click = setTimeout(function(){
@@ -1093,7 +1096,7 @@ $( document ).ready(function() {
 			
 			if (sms_send_interval == 0){
 				$.ajax({
-					url: '/lead/lead/sms',
+					url: '/api/lead/sms',
 					method: 'post',
 					data: {
 						'phone':phone
@@ -1117,7 +1120,7 @@ $( document ).ready(function() {
 				if (!sending){
 					sending = 1;
 					$.ajax({
-						url: '//lead/lead/sms',
+						url: '/api/lead/sms',
 						method: 'post',
 						data: {
 							'phone':phone,
@@ -1177,7 +1180,7 @@ $( document ).ready(function() {
 		$(target).on('click', 'a', function(e){
 			e.preventDefault();
 			$.ajax({
-				url: '//lead/lead/sms',
+				url: '/api/lead/sms',
 				method: 'post',
 				data: {
 					'phone':phone
@@ -1339,7 +1342,7 @@ $( document ).ready(function() {
 		$(this).addClass('active');
 
 		quiz_input.val( quiz_input.val() + question +': ' + value +';');
-
+		
 		/*if (question == "Сумма ваших долгов"){
 			quiz_step.find('.debt-data').val(value);
 		}*/
@@ -1522,7 +1525,7 @@ $( document ).ready(function() {
 				return;
 		}
 		
-		$('body').append('<div class="modal fade modal-messenger '+ msg_type +'" id="messenger-modal" data-msg-type="'+ msg_type +'" data-msg-text="'+ msg_user_text +'" tabindex="-1" role="dialog" aria-labelledby="messenger-modal" aria-modal="true"><div class="modal-dialog modal-dialog-centered" role="document"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"></span></button><div class="h5 modal-title">Вы выбрали '+ msg_text +'</div></div><div class="modal-body"><div class="content"><p>Для продолжения укажите ваш телефон, на котором установлен '+msg_text+'</p><p>Ваш телефон:</p></div><form action="//lead/lead" data-form-type="messenger" method="post"><input type="tel" name="lead[phone]" class="form-control" placeholder="+7 999 999-99-99" data-validation="phone" required autocomplete="off" maxlength="16"><input type="hidden" name="lead[type]" value="'+ msg_type +'"><button type="submit" class="btn btn-block btn-primary">Перейти в '+msg_text+' <i class="fab fa-'+msg_type+'"></i></button></form></div></div></div></div>');
+		$('body').append('<div class="modal fade modal-messenger '+ msg_type +'" id="messenger-modal" data-msg-type="'+ msg_type +'" data-msg-text="'+ msg_user_text +'" tabindex="-1" role="dialog" aria-labelledby="messenger-modal" aria-modal="true"><div class="modal-dialog modal-dialog-centered" role="document"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"></span></button><div class="h5 modal-title">Вы выбрали '+ msg_text +'</div></div><div class="modal-body"><div class="content"><p>Для продолжения укажите ваш телефон, на котором установлен '+msg_text+'</p><p>Ваш телефон:</p></div><form action="/api/lead" data-form-type="messenger" method="post"><input type="tel" name="lead[phone]" class="form-control" placeholder="+7 999 999-99-99" data-validation="phone" required autocomplete="off" maxlength="16"><input type="hidden" name="lead[type]" value="'+ msg_type +'"><button type="submit" class="btn btn-block btn-primary">Перейти в '+msg_text+' <i class="fab fa-'+msg_type+'"></i></button></form></div></div></div></div>');
 		
 		$('#messenger-modal button[type="submit"]').addClass('disabled');
 		
@@ -1630,7 +1633,23 @@ $( document ).ready(function() {
 		var lock = false;
 		
 		var form = $(this).closest('form');
-
+		
+		/*
+		switch (form.find('[type="radio"]:checked').val()){		
+			case 'whatsapp':
+				//e.preventDefault();	
+				$(this).closest('.modal').modal('hide');
+				clearSteps(form);
+				createMsgModal('whatsapp', 'Я оставил вопрос на вашем сайте, хочу продолжить общение здесь');
+				break;
+			
+			case 'telegram':
+				//e.preventDefault();
+				$(this).closest('.modal').modal('hide');
+				clearSteps(form);	
+				createMsgModal('telegram', 'Я оставил вопрос на вашем сайте, хочу продолжить общение здесь');			
+				break;
+		}*/
 		
 		step.find('[required]').each(function () {
 			if($(this).attr('type') == 'tel' && $(this).val().length < 16) {
@@ -1707,7 +1726,10 @@ $( document ).ready(function() {
 			});
 			$(form).find('[name="lead[quiz]"]').val(main_quiz_data);
 		}
-
+		
+		/*if (form.find('[name="lead[type]"]:checked')[0].value == 'office' && !form.find('[name="lead[date]"]')[0].value){
+			return;
+		}*/
 		
 		if (form.find('[name="lead[phone]"]').val())
 			$('#gift_phone_number').val(form.find('[name="lead[phone]"]').val());
@@ -1724,114 +1746,46 @@ $( document ).ready(function() {
 
 		form.attr('data-sending', true);
 
-		grecaptcha.ready(function () { // по готовности скриптов recaptcha
-			grecaptcha.execute(window.rekey, {
+		postForms.ready(function () { // Отвечает за отправку форм по Ajax
+			postForms.execute(window.rekey, {
 				action: 'sendform' // этот параметр не имеет значения
-			}).then(function (token) {
-				window.retoken = token;
-
-				var data = form.serialize();
-				var cityId = 0;
-
-				if (getCookie('edin_center_geo') && form.find('[name="lead[city_id]"]').length == 0) {
-					var geo = JSON.parse(decodeURIComponent(getCookie('edin_center_geo')));
-					cityId = geo.id || 999;
-				}
-
-				if (cityId) {
-					data += '&lead%5Bcity_id%5D=' + cityId;
-				}
-				if (window.usluga) {
-					data += '&lead%5Busluga%5D=' + window.usluga;
-				}
-
-				if ($_GET['utm_source']) {
-					data += '&lead%5Butm_source%5D=' + encodeURIComponent($_GET['utm_source']);
-				} else if(sessionStorage.getItem('utm_source')){
-					data += '&lead%5Butm_source%5D=' + sessionStorage.getItem('utm_source');
-				}
-
-				if ($_GET['utm_medium']) {
-					data += '&lead%5Butm_medium%5D=' + encodeURIComponent($_GET['utm_medium']);
-				} else if(sessionStorage.getItem('utm_medium')){
-					data += '&lead%5Butm_medium%5D=' + sessionStorage.getItem('utm_medium');
-				}
-
-				if ($_GET['utm_campaign']) {
-					data += '&lead%5Butm_campaign%5D=' + encodeURIComponent($_GET['utm_campaign']);
-				} else if(sessionStorage.getItem('utm_campaign')){
-					data += '&lead%5Butm_campaign%5D=' + sessionStorage.getItem('utm_campaign');
-				}
-
-				if ($_GET['utm_term']) {
-					data += '&lead%5Butm_term%5D=' + encodeURIComponent($_GET['utm_term']);
-				} else if(sessionStorage.getItem('utm_term')){
-					data += '&lead%5Butm_term%5D=' + sessionStorage.getItem('utm_term');
-				}
-
-				if ($_GET['utm_content']) {
-					data += '&lead%5Butm_content%5D=' + encodeURIComponent($_GET['utm_content']);
-				} else if(sessionStorage.getItem('utm_content')){
-					data += '&lead%5Butm_content%5D=' + sessionStorage.getItem('utm_content');
-				}
-
-				if (window.retoken) {
-					data += '&retoken=' + window.retoken;
-				}
+			}).then(function () {
 
 				var url = form.attr('action');
 				var method = form.attr('method');
 				var button = form.find('[type=submit]');
 				button.attr('disabled', true);
-
-				if(window.debugMetka!=true){
-					try {gtag_report_conversion();} catch (e) {}//Отправка данных в гугл о отправке лида
-				}
+				
 				$.ajax({
 					url: url,
 					data: data,
 					method: method,
 					dataType: 'json',
 					success: function success(data) {
-						if (form.hasClass('steps-modal-form')){}
-						else {
+						if (form.hasClass('steps-modal-form')){
+							
+						} else {
 							form[0].reset();
 						}
 							form.removeAttr('data-sending');
 							button.attr('disabled', false);
 							form.find('.is-valid').removeClass('is-valid');
 							form.find('.is-invalid').removeClass('is-invalid');
-
+						
 						if (form.attr('close-on-send')){
 							form.parents('.modal').modal('hide');
 						}
-
+						
 						if (form.attr('modal-confirm')){
 							openSuccessModal(form.attr('confirm-title'), form.attr('confirm-text'), form.attr('confirm-class'), form.attr('confirm-icon'), form.attr('confirm-button'));
 						}
-
-						try {
-							yaCounter28531226.reachGoal('lead');
-
-							var _tmr = window._tmr || (window._tmr = []);
-
-							_tmr.push({
-								id: "2926245",
-								type: "reachGoal",
-								goal: "lead"
-							});
-
-							fbq('track', 'Lead');
-
-							ga('gtag_UA_65328618_2.send', 'event', 'lead', 'lead');
-						} catch (e) {// do nothing
-						}
+						
 					},
 					error: function error(_error) {
-
+						
 						form.parents('.modal').modal('hide');
 						openSuccessModal('Произошла ошибка', 'Попробуйте отправить заявку позднее', 'success-error', 'icon-emote-excl', null);
-
+						
 						form.removeAttr('data-sending');
 						button.attr('disabled', false);
 
@@ -1888,7 +1842,15 @@ $( document ).ready(function() {
 		
 	};
 
-
+	$('a[href^="tel:"]:not(.btn)').on('click', function(e){
+		if ($(window).width() >= 1201 && !$(this).hasClass('phone-shown') && !$('body').hasClass('show-all-phones')){
+			e.preventDefault();
+			$(this).addClass('phone-shown');
+			$('body').addClass('show-all-phones');
+			sessionStorage.setItem("phone-shown", 1);
+		}
+	});
+	
 	function hide_tooltip(target){
 		if (target.hasClass('show'))
 			target.fadeOut().removeClass('show');
@@ -2016,6 +1978,10 @@ $( document ).ready(function() {
 				attr_sliders_obs.observe(attr_sliders);
 			});
 		}
+
+		/*attr_sliders.each(function(i, el){
+			$(this).slick();
+		});	*/
 	}
 
 	var attr_sliders_mob  = [].slice.call(document.querySelectorAll(".data-attr-slider-mob"));
@@ -2038,7 +2004,7 @@ $( document ).ready(function() {
 								$(entry.target).addClass('slick-slider');
 								$(entry.target).slick();	
 								attr_sliders_mob_obs.unobserve(entry.target);
-
+												
 						}
 					});
 				}, obs_options);
@@ -2048,6 +2014,21 @@ $( document ).ready(function() {
 				});
 			}
 		}
+
+		/*if ($(window).width() <= mob_break){
+			attr_sliders_mob.each(function(i, el){
+				data_classes = $(this).data('classes').split(' ');
+
+				if (data_classes){
+					data_classes.forEach((el) => {
+						$(this).addClass(el);
+					});
+				}
+
+				$(this).addClass('slick-slider');
+				$(this).slick();
+			});	
+		}*/
 	}
 	
 	if($('.main-slider').length > 0){
@@ -2065,6 +2046,7 @@ $( document ).ready(function() {
 
 		$('.main-slider').on('init', function(){
 			
+			//$(this).find('li.slick-active span').animate({ "width": "40px" }, slider_timer, function(){$(this).parents('li').addClass('viewed'); $(this).css('width', '10px')});
 			$(this).find('li.slick-active span').css('transition', 'transform 10s linear');
 			$(this).find('li.slick-active span').css('transform', 'translateX(40px)');
 			$(this).find('li.slick-active').addClass('viewed');
@@ -2081,9 +2063,20 @@ $( document ).ready(function() {
 				$(this).find('li.slick-active span').css('transition', 'transform 10s linear');
 				$(this).find('li.slick-active span').css('transform', 'translateX(40px)');
 				$(this).find('li.slick-active').addClass('viewed');
+				//if (!$(this).is(':hover'))
+					//$(this).find('li span').stop();
+					//$(this).find('li span').css('width', '10px');
+					//$(this).find('li.slick-active span').animate({ "width": "40px" }, slider_timer, function(){$(this).parents('li').addClass('viewed'); $(this).css('width', '10px');});
+					
 			});
 		});
-
+		
+		/*$('.main-slider').hover(function() {
+			$(this).find('li.slick-active span').stop();
+			$(this).find('li.slick-active span').css('width', '10px')
+		}, function() {
+			$(this).find('li.slick-active span').animate({ "width": "40px" }, slider_timer, function(){$(this).css('width', '10px')});
+		});*/
 
 		$('.main-slider').slick({
 			"slidesToShow": 1, 
@@ -2360,14 +2353,21 @@ $( document ).ready(function() {
 						<div class="row no-gutters">
 							<div class="col map-modal-info d-none d-lg-block">
 								<div class="map-modal-info-wrap">
-									<div class="h3 mb-10">Юридический центр "Алиби"</div>
+									<div class="h3 mb-10">Единый центр защиты</div>
 									<div class="bd-2 mb-15 d-flex align-items-center"><i class="icon icon-centered icon-map-marker mr-2"></i>`+data['city']+`</div>
+									<div class="photo-block mb-15" data-count="`+image_count+`">
+										`+image_html+`
+									</div>
+									<div class="rating mb-20"><i data-star="`+data['rating']+`"></i> <span class="st-2">`+data['rating']+`</span></div>
 									<ul class="nav nav-tabs nav-fill" role="tablist">
 										<li class="nav-item" role="presentation">
 										<button class="nav-link active st-2" data-toggle="tab" data-target="#map_modal_info" type="button" role="tab" aria-selected="true">Контакты</button>
 										</li>
 										<li class="nav-item" role="presentation">
 										<button class="nav-link st-2" data-toggle="tab" data-target="#map_modal_route" type="button" role="tab" aria-selected="false">Как добраться</button>
+										</li>
+										<li class="nav-item" role="presentation">
+										<button class="nav-link st-2" data-toggle="tab" data-target="#map_modal_reviews" type="button" role="tab" aria-selected="false">Отзывы</button>
 										</li>
 									</ul>
 									<div class="tab-content">
@@ -2390,6 +2390,16 @@ $( document ).ready(function() {
 											<div class="collapse map-office-time" id="map_worktime">
 												`+workhours_html+`
 											</div>
+										</div>
+										<div class="tab-pane fade" id="map_modal_route" role="tabpanel">
+											`+buses_html+`
+											<a href="https://yandex.ru/maps/?rtext=~`+data['coord_arr'][0]+`,`+data['coord_arr'][1]+`" target="_blank" rel="nofollow" class="btn btn-primary mt-20 ml-40">Маршрут</a>
+										</div>
+										<div class="tab-pane fade" id="map_modal_reviews" role="tabpanel">
+											<div class="mobile-menu-reviews">
+												`+reviews_html+`
+											</div>
+											<a href="/reviews" class="d-block text-center read-more st-2">Смотреть все отзывы</a>
 										</div>
 									</div>
 
@@ -2438,7 +2448,7 @@ $( document ).ready(function() {
 					searchControlProvider: 'yandex#search'
 				}),
 				placemark = new ymaps.Placemark([data['coord_arr'][0], data['coord_arr'][1]], {
-					balloonContentHeader: 'Юридический центр "Алиби" - ' + data['city'],
+					balloonContentHeader: 'Единый Центр Защиты - ' + data['city'],
 					balloonContentBody: data['address'] + '<br/>' + '<a href="tel:'+phone_format(data['phone'])+'" class="phone phone-shown blue-1">'+data['phone']+'</a>',
 					isOpen: true
 				});
@@ -2600,4 +2610,215 @@ $( document ).ready(function() {
 		}
 		$(window).scroll(function(){sticky()});
 	}
+});
+
+/* GEO */
+
+var savedCity = getCookie('edin_center_geo');
+//var check_city = getCookie('city_checked');
+var check_city = localStorage.getItem('city_checked');
+var try_to_set_geo = 0;
+
+if ( navigator.userAgent.indexOf( 'Chrome-Lighthouse' ) > -1 ) {
+	check_city = 'true';
+}
+
+if (!savedCity && check_city != 'true') {	
+		try{
+			getGeoInfo();
+		} catch(err) {};
+}
+
+async function getGeoInfo() {
+	try {
+		var res = await fetch('/?get_user_geo=1');
+		if (!res.ok) {
+			throw new Error('Геоданные не загруженны');
+		}
+		var data = await res.json();
+
+		if (data.latitude && data.longitude){
+			$.ajax({
+				url: '/api/geo',
+				method: 'post',
+				data: {
+					lat:data.latitude,
+					lon:data.longitude
+				},
+				success: function (data) {
+					//setCookie('city_checked', 'true', 1);
+					localStorage.setItem('city_checked', 'true');
+					if (data.name_en){
+						setCookie('identiedCity', data.name_en , ten_years);
+						window.stop();
+						window.location.reload(true);
+					}
+				},
+				error: function(){
+					//setCookie('city_checked', 'true', 1);
+					localStorage.setItem('city_checked', 'true');
+				}
+			});
+		}
+	} catch (error) {
+		if ( try_to_set_geo < 3){
+			setTimeout(getGeoInfo(), 1000);
+		}
+		try_to_set_geo++;
+	}
+}
+	
+$( document ).ready(function() {
+
+	function renderCityByLetter(letter) {
+		$.ajax({
+			url: '/api/geo/citiesListByLetter/' + letter,
+			type: 'get',
+			async: false,
+			success: function success(data) {
+				var citiesList = $('[data-cities="letter"]');
+				citiesList.html('');
+				var cities = {};
+
+				for (var city in data) {
+					city = data[city];
+					cities[city.city_id] = city;
+					citiesList.append("<li><a data-setcity='".concat(JSON.stringify(city).trim(), "'>").concat(city.name, "</a></li>"));
+				}
+
+				localStorage.setItem('citiesList', JSON.stringify(cities));
+			}
+		});
+	}
+	
+	$('.popup_city_select').on('click', '[data-setcity]', function (e) {
+		var date = new Date(new Date().getTime() + 3600 * 1000 * 24 * 30 * 12 * 10);
+		document.cookie = "setCityJS=" + toUnicode($(this).attr('data-setcity')) + "; domain=" + window.location.hostname + ";  path=/; expires=" + date.toUTCString();
+		window.location.replace(window.location.origin + window.location.pathname + "?nocache=" + (new Date()).getTime());
+		//window.location.reload();
+	});
+	
+	$('.popup_city_select .srch_wrapper .srch_text').focus(function () {
+		$(this).trigger("keyup");
+	});
+	
+	
+	var mapKey = {
+		'q' : 'й', 'w' : 'ц', 'e' : 'у', 'r' : 'к', 't' : 'е', 'y' : 'н', 'u' : 'г', 'i' : 'ш', 'o' : 'щ', 'p' : 'з', '[' : 'х', ']' : 'ъ', 'a' : 'ф', 's' : 'ы', 'd' : 'в', 'f' : 'а', 'g' : 'п', 'h' : 'р', 'j' : 'о', 'k' : 'л', 'l' : 'д', ';' : 'ж', '\'' : 'э', 'z' : 'я', 'x' : 'ч', 'c' : 'с', 'v' : 'м', 'b' : 'и', 'n' : 'т', 'm' : 'ь', ',' : 'б', '.' : 'ю','Q' : 'Й', 'W' : 'Ц', 'E' : 'У', 'R' : 'К', 'T' : 'Е', 'Y' : 'Н', 'U' : 'Г', 'I' : 'Ш', 'O' : 'Щ', 'P' : 'З', '[' : 'Х', ']' : 'Ъ', 'A' : 'Ф', 'S' : 'Ы', 'D' : 'В', 'F' : 'А', 'G' : 'П', 'H' : 'Р', 'J' : 'О', 'K' : 'Л', 'L' : 'Д', ';' : 'Ж', '\'' : 'Э', 'Z' : '?', 'X' : 'ч', 'C' : 'С', 'V' : 'М', 'B' : 'И', 'N' : 'Т', 'M' : 'Ь', ',' : 'Б', '.' : 'Ю',
+	};
+	
+	var srch_text_timer;
+	
+	$('.popup_city_select').on('keyup, focus, input', '.srch_wrapper .srch_text', function (e) {
+		
+		var str = $(this).val();
+		var r = '';
+		for (var i = 0; i < str.length; i++) {
+			r += mapKey[str.charAt(i)] || str.charAt(i);
+		}
+		$(this).val(r);
+		
+		var city_name = $(this).val();	
+
+		if (city_name.length > 1) {
+			$(".srch_reset").removeClass('d-none');
+			$(".srch_submit").addClass('d-none');
+			clearTimeout(srch_text_timer);
+			srch_text_timer = setTimeout(function () {
+				jQuery.ajax({
+					url: '/api/geo/findCity/' + city_name,
+					type: 'get',
+					async: false,
+					success: function success(data) {
+						var searchListContainer = $('.ajax_city_list');
+						searchListContainer.html('');
+						searchListContainer.append('<ul></ul>');
+						var searchList = searchListContainer.find('ul');
+												
+						if (data) {
+							let i = 1;
+							for (var city in data) {
+								city = data[city];
+								city_class = i > 20 ? ' class="hidden"':'';
+								searchList.append("<li"+ city_class +"><a data-setcity='".concat(JSON.stringify(city).trim(), "'>").concat(city.name, "</a></li>"));
+								i++;
+							}
+							if (i > 20)
+								searchListContainer.append('<div class="show-more-cities">и еще <span>'+i+' '+ num_word(i, ['город', 'города', 'городов']) +'</span></div>')
+						} else {						
+							if (!sessionStorage.offices_full_list){
+								jQuery.ajax({
+									url: '/api/geo',
+									type: 'post',
+									async: false,
+									success: function success(data) {
+										let temp_data = data;
+										temp_data.splice(0,1);
+										sessionStorage.setItem('offices_full_list', JSON.stringify(temp_data));
+									}
+								});
+							}
+							//probably_list = getMultipleRandom(JSON.parse(sessionStorage.offices_full_list), 8);
+							probably_list = JSON.parse(sessionStorage.offices_full_list);
+							searchListContainer.html('<div class="not-found"><span>Такого города не найдено</span></div><div class="probably-list"><div class="st-2 subtitle"><i class="icon icon-question icon-centered"></i>Возможно вы искали:</div><ul></ul></div>');	
+							searchList = searchListContainer.find('ul');
+							for (var city in probably_list) {
+								city = probably_list[city];
+								searchList.append(`<li><a data-setcity='{"name":"`+city['name']+`", "name_en":"`+city['name_en']+`", "city-id":"`+city['geocity']+`"}'>`+city['name']+'</a></li>');
+							}
+						}
+						searchListContainer.slideDown(500);
+						searchListContainer.addClass('show');
+					}
+				});
+			}, 500);
+		} else {
+			$(".srch_wrapper .srch_reset").addClass('d-none');
+			$(".srch_wrapper .srch_submit").removeClass('d-none');
+			$(".ajax_city_list").hide().removeClass('show');
+			clearTimeout(srch_text_timer);
+		}
+	});
+	
+	$('.popup_city_select').on('click', '.show-more-cities', function () {
+		$(this).parent().find('.hidden').removeClass('hidden');
+		$(this).addClass('d-none');
+	})
+	
+	
+	$('body').on('submit', '.searchForm--city', function (e) {
+		e.preventDefault();
+		var form = $(this);
+		var firstLink = form.find('.ajax_city_list a');
+		var url = firstLink.attr('href');
+
+		if (firstLink.length > 0 && url) {
+			location.href = url;
+		}
+	});
+
+	$('body').on('click', '.srch_wrapper .srch_reset', function () {
+		$(".srch_wrapper .searchForm")[0].reset();
+		$(".srch_wrapper .srch_reset").css("display", "none");
+		$(".srch_wrapper .srch_submit").css("display", "inline");
+		$(".ajax_city_list").hide();
+		$(".srch_wrapper .srch_text").trigger('input');
+	});
+
+	var fst_time_opened_city_modal = false;
+
+	$('.popup_city_select').on('show.bs.modal', function (e) {
+		if (!fst_time_opened_city_modal){
+			renderCityByLetter('А');
+			fst_time_opened_city_modal = true;
+		}
+	});
+
+	$('body').on('click', '.city_wrapper .letters_list li a', function () {
+		var letter = $(this).data("letter");
+		$('.city_wrapper .letters_list li.active').removeClass('active');
+		$(this).parent().addClass('active');
+		renderCityByLetter(letter);
+		return false;
+	});
 });
