@@ -1,12 +1,19 @@
-from flask import Flask, render_template, json, request
-from date_template import deadlines
+from flask import Flask, render_template
+import meta
+
 
 app = Flask(__name__)
 
 
 @app.route('/')
-def hello_world():
-    return render_template('bfl_page.html', **deadlines)
+@app.route('/index')
+def main():
+    return render_template('main_page.html',)
+
+
+@app.route('/zashhita-v-sude')
+def gpk():
+    return render_template('gpk.html')
 
 
 if __name__ == '__main__':

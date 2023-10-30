@@ -1,0 +1,207 @@
+<div class="modal fade modern-modal mobile-fullscreen-modal mobile-menu-form" id="modern_lead_modalform" tabindex="-1" role="dialog" aria-labelledby="modern_lead_modalform" aria-modal="true">
+	<div class="modal-dialog modal-dialog-centered" role="document">
+		<div class="modal-content">
+			<div class="modal-body">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Закрыть"><span aria-hidden="true"></span></button>
+				<form class="steps-modal-form" action="/api/lead" method="POST">
+					<input type="hidden" name="form_sender" class="form-sender">
+					<div class="steps-wrap">
+						<div class="steps-wrap_step step-1">
+							<div class="mobile-menu-header">
+                                <div class="st-1 text-center">Юридическая консультация</div>
+							</div>
+							<div class="mobile-menu-scroll">
+								<div class="content">
+									<div class="text-center text-lg-left sh-2 mb-20 mb-lg-15 quiz-theme-header d-none">Выберите тему</div>
+									<div class="quiz-themes d-none">
+										<span class="quiz-select" data-step="quiz" data-quiz='{"1":{"question":"Сумма ваших долгов","answers":{"1":"до 300 т. р.","2":"300 - 500 т. р.","3":"500 т.р - 1 млн р.","4":"более 1 млн р."}},"2":{"question":"Есть ли у вас автокредит или ипотека?","answers":{"1":"Да","2":"Нет"}},"3":{"question":"Есть ли у вас просрочки более 3-х месяцев?","answers":{"1":"Да","2":"Нет"}}}'>Списать долги, банкротство</span>
+										<!--span class="quiz-select" data-step="quiz" data-quiz='{"1":{"question":"Вопрос 1","answers":{"1":"Да","2":"Нет","3":"Не знаю"}},"2":{"question":"Вопрос 2?","answers":{"1":"Да","2":"Нет"}}}'>Иск, суды</span>
+										<span class="quiz-select" data-step="quiz" data-quiz='{"1":{"question":"Вопрос 1","answers":{"1":"Да","2":"Нет","3":"Не знаю"}},"2":{"question":"Вопрос 2?","answers":{"1":"Да","2":"Нет"}}}'>Документы</span>
+										<span class="quiz-select" data-step="quiz" data-quiz='{"1":{"question":"Вопрос 1","answers":{"1":"Да","2":"Нет","3":"Не знаю"}},"2":{"question":"Вопрос 2?","answers":{"1":"Да","2":"Нет"}}}'>Мобилизация</span>
+										<span class="quiz-select quiz-select-hidden" data-step="quiz" data-quiz='{"1":{"question":"Вопрос 1","answers":{"1":"Да","2":"Нет","3":"Не знаю"}},"2":{"question":"Вопрос 2?","answers":{"1":"Да","2":"Нет"}}}'>Еще одна тема</span>
+										<span class="quiz-select more">Еще <i class="icon icon-arrow-down icon-gray-2 icon-centered"></i></span-->
+									</div>
+									<textarea class="form-control" name="lead[question]" placeholder="Ваш вопрос юристу" data-notsavetostate="true"></textarea>
+								</div>
+								<div class="modal-btn-wrap">
+									<button class="btn btn-block btn-primary" data-step="info">Начать консультацию</button>
+								</div>
+							</div>
+						</div>
+						<div class="steps-wrap_step step-info d-none">
+							<div class="mobile-menu-header">
+								<div class="st-1 text-center">Укажите ваши данные</div>
+								<button type="button" class="back d-lg-none" aria-label="Назад" data-step="prev"><span aria-hidden="true"></span></button>
+							</div>
+							<div class="mobile-menu-scroll">
+								<div class="content">
+									<p class="sh-2 mb-20">Для того, чтобы юрист связался с вами</p>
+									<input type="text" name="lead[city_text]" class="form-control" placeholder="Ваш город" value="Ярославль" data-notsavetostate="true">
+									<input type="tel" name="lead[phone]" class="form-control" placeholder="Номер телефона" data-validation="phone" required maxlength="16">
+									<span class="form-control-annot">Для регистрации, никаких спам рассылок</span>
+									<input type="text" name="lead[name]" class="form-control" placeholder="Ваше имя">
+									<div class="bd-3 gray-2 mb-15">Отправляя данную форму, вы соглашаетесь с <a href="/security.pdf" target="_blank">политикой обработки персональных данных</a></div>
+								</div>
+								<div class="modal-btn-wrap">
+									<button class="btn btn-block btn-primary" name="main_lead" type="submit" data-send="send" data-step="next">Отправить данные</button>
+									<button type="button" class="back btn btn-block pb-0 d-none d-lg-block" data-step="prev">Назад</button>
+								</div>
+							</div>
+						</div>
+						<div class="steps-wrap_step step-contact-info d-none">
+							<div class="mobile-menu-header">
+								<div class="st-1 text-center">Как удобнее общаться?</div>
+								<button type="button" class="back d-lg-none" aria-label="Назад" data-step="prev"><span aria-hidden="true"></span></button>
+							</div>
+							<div class="mobile-menu-scroll">
+								<div class="content">
+									<div class="modal-choice-group row no-gutters">
+										<input type="radio" id="phone_choice" checked required name="lead[type]" value="phone" data-value="phone" data-notsavetostate="true">
+										<label class="modal-choice phone-choice" for="phone_choice">Звонок на телефон <span class="text-small d-block gray-2">проще и быстрее</span></label>
+                                        <input type="radio" id="office_choice" required name="lead[type]" value="office" data-value="office" data-notsavetostate="true">
+										<label class="modal-choice office-choice" for="office_choice">Записаться на прием в офис <span class="text-small d-block gray-2">без звонков и переписок</span></label>
+                                        <input type="radio" id="whatsapp_choice" required name="lead[type]" value="whatsapp" data-value="whatsapp" data-notsavetostate="true">
+										<label class="modal-choice whatsapp-choice" for="whatsapp_choice">Whatsapp</label>
+										<input type="radio" id="telegram_choice" required name="lead[type]" value="telegram" data-value="telegram" data-notsavetostate="true">
+										<label class="modal-choice telegram-choice" for="telegram_choice">Telegram</label>
+									</div>
+								</div>
+								<div class="modal-btn-wrap">
+									<button class="btn btn-block btn-primary" name="type_select_lead" type="submit" data-send="send" data-step="radio">Подтвердить</button>
+									<button type="button" class="back btn btn-block pb-0 d-none d-lg-block" data-step="prev">Назад</button>
+								</div>
+							</div>
+						</div>
+						<div class="steps-wrap_step step-phone d-none">
+							<div class="mobile-menu-header">
+								<div class="st-1 text-center">Вы выбрали бесплатный<br class="d-lg-none"> звонок<br class="d-none d-lg-block"> на ваш телефон</div>
+							</div>
+							<div class="mobile-menu-scroll">
+								<div class="content">
+									<p class="mb-30 text-center">Юрист будет звонить вам, пожалуйста, возьмите трубку</p>
+									<!--div class="modal-phone-info">8-800-600-95-05</div-->
+								</div>
+								<div class="modal-btn-wrap">
+									<button class="btn btn-block btn-purple close close-primary-btn" data-action="open-modal" data-target="#gift_modal">Для вас сюрприз <i class="icon icon-gift"></i></button>
+								</div>
+							</div>
+						</div>
+                        <div class="steps-wrap_step step-office d-none">
+							<div class="mobile-menu-header">
+								<div class="st-1 text-center">Запись на прием в офис<br class="d-lg-none"> г. Ярославль</div>
+								<button type="button" class="back d-lg-none" aria-label="Назад" data-step="contact-info"><span aria-hidden="true"></span></button>
+							</div>
+							<div class="mobile-menu-scroll">
+								<div class="content">
+									<div class="menu-mobile-toggle-group menu-mobile-select office_address_select" data-change="#office_address">
+										<span class="menu-mobile-toggle d-flex justify-content-between disabled">ул. Свободы 11/37, 2 этаж</span>
+											<ul class="mob-menu-list list-toggle">
+												<li class="d-flex justify-content-between select" data-value="ул. Свободы 11/37, 2 этаж" data-city="Ярославль" data-phone="8 (4852) 58-15-15" data-office-time='{"1":["09:00","19:00"],"2":["09:00","19:00"],"3":["09:00","19:00"],"4":["09:00","19:00"],"5":["09:00","19:00"],"6":["10:00","16:00"],"0":[]}'>ул. Свободы 11/37, 2 этаж</li>
+                                            </ul>
+									</div>
+									<div class="menu-mobile-toggle-group menu-mobile-select office_date_select" data-change="#office_date">
+										<span class="menu-mobile-toggle d-flex flex-wrap justify-content-between">27 Октября 2023<span class="gray-3 bd-2 regular">Сегодня</span></span>
+										<ul class="mob-menu-list list-toggle"></ul>
+									</div>
+
+									<div class="menu-mobile-toggle-group menu-mobile-select office_time_select" data-change="#office_time">
+										<span class="menu-mobile-toggle d-flex justify-content-between">--:--</span>
+										<ul class="mob-menu-list list-toggle"></ul>
+									</div>
+
+									<input class="d-none" name="lead[address]" id="office_address" type="text" value="ул. Свободы 11/37, 2 этаж" data-notsavetostate="true">
+									<input class="d-none" name="lead[date]" id="office_date" type="date" data-notsavetostate="true">
+									<input class="d-none" name="lead[time]" id="office_time" type="time" data-notsavetostate="true">
+								</div>
+								<div class="modal-btn-wrap mt-20">
+									<button class="btn btn-block btn-primary" data-step="office-sms">Далее</button>
+									<button type="button" class="back btn btn-block pb-0 d-none d-lg-block" data-step="contact-info">Назад</button>
+								</div>
+							</div>
+						</div>
+						<div class="steps-wrap_step step-office-sms d-none">
+							<div class="mobile-menu-header">
+								<div class="st-1 text-center">Подтверждение записи</div>
+								<button type="button" class="back d-lg-none" aria-label="Назад" data-step="office"><span aria-hidden="true"></span></button>
+							</div>
+							<div class="mobile-menu-scroll">
+								<div class="content">
+									<p class="bd-2">Для завершения записи на прием подтвердите ваш телефон.</p>
+									<p class="bd-2 mb-0">Введите код из СМС</p>
+									<p class="bd-2">Код отправлен на номер: <span class="sms-phone st-2"></span></p>
+									<input class="form-control mb-20" name="sms-code" type="tel" data-notsavetostate="true" maxlength="4">
+									<span class="error-msg bd-2 d-none red-1"></span>
+									<div class="sms-resend bd-2 gray-3"><span class="sms-resend-text"></span><span class="sms-resend-seconds"></span></div>
+								</div>
+								<div class="modal-btn-wrap mt-20">
+									<button type="button" class="back btn btn-block pb-0 d-none d-lg-block" data-step="office">Назад</button>
+								</div>
+							</div>
+						</div>
+
+                        <div class="steps-wrap_step step-quiz d-none" data-next-step="info">
+							<div class="mobile-menu-header">
+								<div class="st-1 header text-center"></div>
+								<button type="button" class="back quiz-reset d-lg-none" aria-label="Назад" data-step="1"><span aria-hidden="true"></span></button>
+							</div>
+							<div class="mobile-menu-scroll">
+								<div class="content">
+									<div class="first-info text-center">
+										<button class="quiz-reset bd-3 gray-3 no-btn mb-20" data-step="1">Другая тема обращения?</button>
+										<div class="bd-2 mb-20 text-left">Ответьте на несколько вопросов, чтобы мы смогли сразу начать вам помогать</div>
+									</div>
+									<div class="quiz-progress"></div>
+									<div class="quiz-block">
+										<div class="quiz-question sh-2 mb-20"></div>
+										<div class="quiz-answers"></div>
+									</div>
+									<input class="quiz-data d-none" name="lead[quiz]" type="text" data-notsavetostate="true">
+                                </div>
+							</div>
+							<div class="modal-btn-wrap mt-20 d-none">
+								<button type="button" class="back quiz-reset btn btn-block pb-0 d-none d-lg-block" data-step="1">Назад</button>
+							</div>
+						</div>
+                        <div class="steps-wrap_step step-office-confirm d-none">
+							<div class="mobile-menu-header">
+								<div class="st-1 text-center">Вы записаны на прием<br class="d-lg-none"> в Единый центр защиты</div>
+							</div>
+							<div class="mobile-menu-scroll">
+								<div class="content text-center">
+									<div class="btn btn-primary no-transform office-confirm-info"><i class="icon icon-calendar icon-centered icon-white"></i><span><span class="date"></span> в <span class="time"></span></span></div>
+									<div class="office-time-left bd-2"></div>
+									<button class="btn btn-purple close close-primary-btn" data-action="open-modal" data-target="#gift_modal">Для вас сюрприз <i class="icon icon-gift"></i></button>
+								</div>
+								<div class="content office-confirm-address-info mt-30">
+									<div class="header st-2">Контакты</div>
+									<div class="address mb-15 d-flex"><i class="icon icon-map-marker icon-gray-body icon-large mr-15"></i><span class="bd-2"></span></div>
+									<div class="phone mb-15 d-flex"><i class="icon icon-phone icon-gray-body icon-large mr-15"></i><span class="bd-2"></span></div>
+									<div class="worktime d-flex"><i class="icon icon-clock icon-gray-body icon-large mr-15"></i><span class="bd-2"></span></div>
+								</div>
+							</div>
+						</div>
+                        <div class="steps-wrap_step step-office-confirm-phone d-none">
+							<div class="mobile-menu-header">
+								<div class="st-1 text-center">Вы выбрали запись на прием<br class="d-lg-none"> в офис на другой день</div>
+							</div>
+							<div class="mobile-menu-scroll">
+								<div class="content">
+									<p class="mb-30 text-center">Оператор прямо сейчас будет звонить вам. Пожалуйста, возьмите трубку</p>
+								</div>
+								<div class="modal-btn-wrap text-center mt-20">
+									<button class="btn btn-primary close close-primary-btn" data-dismiss="modal">Хорошо</button>
+								</div>
+							</div>
+						</div>
+						<div class="loading">
+							<div></div>
+							<div></div>
+							<div></div>
+							<div></div>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>

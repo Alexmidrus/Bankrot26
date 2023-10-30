@@ -1,0 +1,26 @@
+<div class="modal fade modern-modal gift-modal mobile-fullscreen-modal mobile-fullscreen-with-menu" id="gift_modal" tabindex="-1" role="dialog" aria-labelledby="gift_modal" aria-modal="true">
+	<div class="modal-dialog modal-dialog-centered" role="document">
+		<div class="modal-content">
+			<div class="modal-body">
+				<button type="button" class="close white-close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"></span></button>
+				<div class="mobile-menu-scroll">
+					<div class="content text-center">
+						<form class="" action="/api/lead" method="POST" modal-confirm="true" confirm-title="Поздравляем!<br>Мы зачислили на ваш бонусный счет 10 000 рублей" confirm-text="Оператор свяжется с вами и расскажет, как активировать подарок" confirm-button="Отлично" close-on-send="true">
+							<input id="gift_phone_number" name="lead[phone]" type="tel" required class="d-none">
+							<input name="lead[gift]" type="text" required class="d-none" value="списание долгов 10000 руб" data-notsavetostate="true">
+							<div class="h3 mb-0 white">Мы субсидируем до </div>
+							<div class="h1-nmv mb-0 white">10 000 ₽</div>
+							<div class="bd-2 mb-15 white">для тех, кто хочет списать долги</div>
+							<img class="mb-30 mx-auto" src="https://edin.center/images/gift-safe.png">
+							<button class="btn btn-white st-1 mb-25 close close-primary-btn" type="submit" >Получить 10 000 ₽</button>
+							<div class="d-flex px-30">
+								<p class="white bd-3 text-left mb-0">Нет долгов? Поделитесь с тем, у кого есть проблемы с кредитами</p>
+								<a href="https://edin.center/yaroslavl" class="share-button ml-15" data-title="Подарок" data-text="Получите 10000 рублей на процедуру банкротства"><i class="icon icon-share icon-large icon-centered icon-bg-rounded icon-bg-opacity-black-1 icon-bg-small-medium icon-white"></i></a>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

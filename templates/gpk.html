@@ -1,0 +1,1866 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<section class="pb-50 pt-20 pt-md-50 pt-lg-90 pb-lg-90 pb-md-60">
+	<div class="container position-relative">
+		<div class="row no-gutters">
+			<div class="col-lg-7 main-col d-flex flex-column justify-content-center px-15 px-lg-0">
+				<div class="mb-20 text-uppercase sh-2 text-center text-lg-left letter-sp-1">Квалифицированные юристы с большим опытом работы</div>
+				<h1 class="text-center text-lg-left">Защитим ваши интересы <br class="d-lg-block d-none">в суде любой инстанции <span style="white-space:nowrap">в Ярославле</span></h1>
+				<div class="d-flex pt-lg-10 pt-0 mb-20 mb-lg-30 px-30 px-lg-0 flex-row justify-content-center justify-content-lg-start align-items-center align-items-lg-start">
+                         <i class="icon icon-shield icon-red icon-centered mb-lg-2 load"></i>
+                         <p class="gray-2 pl-20 pl-lg-30 mb-0 text-left">Более 203 тыс. успешных дел</p>
+                    </div>
+				<div class="d-flex align-items-center flex-column flex-lg-row pt-0 pt-lg-15">
+                         <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#single_quiz_modal">Бесплатная консультация</button>
+                    </div>
+			</div>
+			<div class="col-lg-5 d-none d-lg-block">
+				<picture>
+                         <source srcset="https://edin.center/images/mtp-zvs-main.webp" type="image/webp">
+                         <img class="img-fluid" alt="" loading="lazy" src="https://edin.center/images/mtp-zvs-main.png" width="" height="">
+                    </picture> 
+			</div>
+		</div>
+		<div class="eclipse-bg yellow" style="top:-73px; left:-335px"></div>
+		<div class="eclipse-bg red" style="top:216px; right:-287px"></div>
+		<div class="eclipse-bg red" style="bottom:-540px; right:-560px"></div>
+	</div>
+</section>
+
+<section class="std-section">
+	<div class="container p-0 position-relative">
+		<div class="h1 text-center">Как мы поможем <br>в рамках услуги «представительство в суде»?</div>
+		<div class="st-1 text-center mb-lg-60 mb-md-50 mb-40">Каждый гражданин имеет право на защиту своих интересов в суде</div>
+		<div class="row m-0 justify-content-center">
+			<div class="col-xl-3 col-lg-4 col-md-6 col-12 mb-30">
+				<div class="card overflow-hidden p-0">
+                         <img class="img-fluid" src="https://edin.center/images/pic-docs-on-folder.jpg" loading="lazy" alt="Составление претензии с документацией">
+					<div class="card-body mt-auto px-lg-40 px-30 pb-40 pt-15">
+						<div class="h3 semibold gray-1 mb-15">Составление претензии</div>
+						<div class="bd-3 gray-3">Проработаем каждый пункт правовой позиции. Составим претензию для максимально эффективной работы в суде</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-xl-3 col-lg-4 col-md-6 col-12 mb-30">
+				<div class="card overflow-hidden p-0">
+                         <img class="img-fluid" src="https://edin.center/images/pic-justice.jpg" loading="lazy" alt="Защита в суде">
+					<div class="card-body mt-auto px-lg-40 px-30 pb-40 pt-15">
+						<div class="h3 semibold gray-1 mb-15">Подача заявления в суд</div>
+						<div class="bd-3 gray-3">Правильно составим заявление и направим весь пакет документов в суд</div>
+					</div>
+			</div>
+			</div>
+			<div class="col-xl-3 col-lg-4 col-md-6 col-12 mb-30">
+				<div class="card overflow-hidden p-0">
+                         <img class="img-fluid" src="https://edin.center/images/pic-doc-with-pencil.jpg" loading="lazy" alt="Защита прав заёмщиков">
+					<div class="card-body mt-auto px-lg-40 px-30 pb-40 pt-15">
+						<div class="h3 semibold gray-1 mb-15">Нормы поведения в суде</div>
+						<div class="bd-3 gray-3">Если это ваш первый суд или вы не знаете, как себя вести в суде - мы дадим вам четкие инструкции и подготовим к заседанию</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-xl-3 col-lg-4 col-md-6 col-12 mb-30">
+				<div class="card overflow-hidden p-0">
+                         <img class="img-fluid" src="https://edin.center/images/pic-lady-justice.jpg" loading="lazy" alt="Персональный представитель в суде" >
+					<div class="card-body mt-auto px-lg-40 px-30 pb-40 pt-15">
+						<div class="h3 semibold gray-1 mb-15">Личная защита в суде</div>
+						<div class="bd-3 gray-3">Мы представим ваши интересы в суде, грамотно обоснуем позицию на заседании. Решим дело с максимальной выгодой для вас</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="eclipse-bg red" style="top:-172px; left:-388px"></div>
+		<div class="eclipse-bg red" style="bottom:-497px; right:-80px"></div>
+		<div class="eclipse-bg yellow" style="top:-409px; right:-172px"></div>
+	</div>
+</section>
+
+
+<section class="std-bg-section bg-radial-grad-big lazy-bg main-quiz">
+	<div class="container">
+		<div class="h1 text-center mb-lg-60 mb-md-50 mb-40">Ответьте на вопросы и узнайте, как защитить интересы в суде любой инстанции</div>
+		<div class="row pt-lg-20">
+			<div class="col-lg-8">
+				<div class="card notransform quiz-card">
+					<div class="d-flex justify-content-md-between align-items-center mb-lg-40">
+					     <div class="h3">
+							Пройдите опрос
+						</div>
+						<div class="d-none d-md-flex align-items-center">
+							<i class="icon icon-shield icon-bg-blue-2 icon-blue icon-centered icon-bg-rounded icon-bg-medium"></i>
+							<p class="gray-3 sh-3 pl-15">Гарантируем: ваши данные <br>останутся в безопасности</p>											
+						</div>
+					</div>
+					<div class="main-quiz-content">
+						<form class="steps-main-form main-quiz-form" action="/api/lead" method="POST">
+							<div class="steps-wrap position-relative">
+								<div class="steps-wrap_step step-1">
+									<div class="main-quiz-content-progress">
+										<span class="active"></span>
+										<span></span>
+										<span></span>
+										<span></span>
+										<div class="main-quiz-content-progress-text bd-3">Шаг 1 из 4</div>
+									</div>
+									<div class="sh-1 mb-30">Какая у вас ситуация?</div>
+									<div class="main-quiz-content-question" data-question="Ситуация - ">
+										<div class="checkbox-btn w-100">
+											<input type="radio" id="main_quiz_1_1" name="main-quiz-1" required value="хочу подать в суд" data-notsavetostate="true" data-step="next">
+											<label class="btn btn-lg" for="main_quiz_1_1">Вы хотите подать в суд</label>
+										</div>
+										<div class="checkbox-btn w-100">
+											<input type="radio" id="main_quiz_1_2" name="main-quiz-1" required value="на меня хотят подать в суд" data-notsavetostate="true" data-step="next">
+											<label class="btn btn-lg" for="main_quiz_1_2">На вас хотят подать в суд</label>
+										</div>
+									</div>							
+								</div>
+								<div class="steps-wrap_step step-2 d-none">
+									<div class="main-quiz-content-progress">
+										<span class="pass"></span>
+										<span class="active"></span>
+										<span></span>
+										<span></span>
+										<div class="main-quiz-content-progress-text bd-3">Шаг 2 из 4</div>
+									</div>
+									<div class="sh-1 mb-30">Выберите область права</div>
+									<div class="main-quiz-content-question" data-question="Область права -">
+										<div class="checkbox-btn">
+											<input type="radio" id="main_quiz_2_1" name="main-quiz-2" required value="земельные споры" data-notsavetostate="true" data-step="next">
+											<label class="btn btn-lg" for="main_quiz_2_1">Земельные споры</label>
+										</div>
+										<div class="checkbox-btn">
+											<input type="radio" id="main_quiz_2_2" name="main-quiz-2" required value="защита прав заемщиков" data-notsavetostate="true" data-step="next">
+											<label class="btn btn-lg" for="main_quiz_2_2">Защита прав заемщиков</label>
+										</div>
+										<div class="checkbox-btn">
+											<input type="radio" id="main_quiz_2_3" name="main-quiz-2" required value="защита прав потребителей" data-notsavetostate="true" data-step="next">
+											<label class="btn btn-lg" for="main_quiz_2_3">Защита прав потребителей</label>
+										</div>
+										<div class="checkbox-btn">
+											<input type="radio" id="main_quiz_2_4" name="main-quiz-2" required value="трудовые споры" data-notsavetostate="true" data-step="next">
+											<label class="btn btn-lg" for="main_quiz_2_4">Трудовые споры</label>
+										</div>
+										<div class="checkbox-btn">
+											<input type="radio" id="main_quiz_2_5" name="main-quiz-2" required value="семейные споры" data-notsavetostate="true" data-step="next">
+											<label class="btn btn-lg" for="main_quiz_2_5">Семейные споры</label>
+										</div>
+										<div class="checkbox-btn">
+											<input type="radio" id="main_quiz_2_6" name="main-quiz-2" required value="административные дела" data-notsavetostate="true" data-step="next">
+											<label class="btn btn-lg" for="main_quiz_2_6">Административные дела</label>
+										</div>
+										<div class="checkbox-btn">
+											<input type="radio" id="main_quiz_2_7" name="main-quiz-2" required value="гражданско-правовые споры" data-notsavetostate="true" data-step="next">
+											<label class="btn btn-lg" for="main_quiz_2_7">Гражданские споры</label>
+										</div>
+										<div class="checkbox-btn">
+											<input type="radio" id="main_quiz_2_8" name="main-quiz-2" required value="наследственные споры" data-notsavetostate="true" data-step="next">
+											<label class="btn btn-lg" for="main_quiz_2_8">Наследственные споры</label>
+										</div>
+										<div class="checkbox-btn">
+											<input type="radio" id="main_quiz_2_9" name="main-quiz-2" required value="жилищные споры" data-notsavetostate="true" data-step="next">
+											<label class="btn btn-lg" for="main_quiz_2_9">Жилищные споры</label>
+										</div>
+									</div>								
+									<div class="text-left mt-auto">
+										<button class="btn btn-outline-primary" data-step="prev">Назад</button>
+									</div>
+								</div>
+								<div class="steps-wrap_step step-3 d-none">
+									<div class="main-quiz-content-progress">
+										<span class="pass"></span>
+										<span class="pass"></span>
+										<span class="active"></span>
+										<span></span>
+										<div class="main-quiz-content-progress-text bd-3">Шаг 3 из 4</div>
+									</div>
+									<div class="sh-1 mb-30">Что нужно сделать?</div>
+									<div class="main-quiz-content-question" data-question="Что нужно сделать - ">
+										<div class="checkbox-btn">
+											<input type="radio" id="main_quiz_3_1" name="main-quiz-3" required value="составить претензию" data-notsavetostate="true" data-step="next">
+											<label class="btn btn-lg" for="main_quiz_3_1">Составить судебную претензию</label>
+										</div>
+										<div class="checkbox-btn">
+											<input type="radio" id="main_quiz_3_2" name="main-quiz-3" required value="провести анализ документов" data-notsavetostate="true" data-step="next">
+											<label class="btn btn-lg" for="main_quiz_3_2">Провести анализ документов</label>
+										</div>
+										<div class="checkbox-btn">
+											<input type="radio" id="main_quiz_3_3" name="main-quiz-3" required value="собрать доказательную базу" data-notsavetostate="true" data-step="next">
+											<label class="btn btn-lg" for="main_quiz_3_3">Собрать доказательную базу</label>
+										</div>
+										<div class="checkbox-btn">
+											<input type="radio" id="main_quiz_3_4" name="main-quiz-3" required value="составить исковое заявление в суд" data-notsavetostate="true" data-step="next">
+											<label class="btn btn-lg" for="main_quiz_3_4">Составить исковое заявление в суд</label>
+										</div>
+									</div>					
+									<div class="text-left mt-auto">
+										<button class="btn btn-outline-primary" data-step="prev">Назад</button>
+									</div>
+								</div>
+								<div class="steps-wrap_step step-4 d-none">
+									<div class="main-quiz-content-progress">
+										<span class="pass"></span>
+										<span class="pass"></span>
+										<span class="pass"></span>
+										<span class="active"></span>
+										<div class="main-quiz-content-progress-text bd-3">Шаг 4 из 4</div>
+									</div>
+									<div class="h3 mb-10">Спасибо!</div>
+									<div class="bd-2 gray-2 mb-20">Укажите контактные данные, чтобы наш юрист связался с Вами и сообщил, как защитить свои интересы в суде любой инстанции.</div>
+									<div class="main-quiz-content-form mw-360 w-100 mx-auto mb-30">
+										<input type="hidden" name="lead[quiz]" required>
+										<input type="text" name="lead[name]" class="form-control" placeholder="Ваше имя">
+										<input type="tel" name="lead[phone]" class="form-control" placeholder="Номер телефона" data-validation="phone" required maxlength="16">
+										<input type="text" name="lead[city_text]" class="form-control" placeholder="Ваш город" value="Ярославль" data-notsavetostate="true">
+										<div class="bd-3 gray-2 mt-15">Отправляя данную форму, вы соглашаетесь с <a href="/security.pdf" target="_blank">политикой обработки персональных данных</a></div>
+									</div>									
+									<div class="text-center mt-auto">
+										<button class="btn btn-primary" data-step="next" type="submit" data-send="send">Получить консультацию</button>
+									</div>
+								</div>
+								<div class="steps-wrap_step step-5 d-none">
+									<div class="main-quiz-content-progress">
+										<span class="pass"></span>
+										<span class="pass"></span>
+										<span class="pass"></span>
+										<span class="pass"></span>
+										<div class="main-quiz-content-progress-text bd-3">Отлично!</div>
+									</div>
+									<div class="d-flex flex-column align-items-center my-auto">
+										<div class="h3 text-center mb-30">Спасибо! Мы уже занимаемся вашим делом!</div>
+										<div class="bd-2 text-center gray-2">Ожидайте, наш юрист свяжется с вами очень быстро</div>
+									</div>
+								</div>											
+								<div class="loading">
+									<div></div>
+									<div></div>
+									<div></div>
+									<div></div>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-4 d-none d-lg-block">
+                    <div class="card py-35 notransform mb-20">
+                         <div class="d-flex mb-25">
+                              <img class="avatar" src="https://edin.center/images/mtp-bfl-avatar-3.png" loading="lazy">
+                              <div class="pl-25">
+                                   <div class="st-1">Владимир Серпутько</div>
+                                   <div class="gray-3 bd-2">Юрист первичного приема в Ярославле</div>		
+                              </div>									
+                         </div>
+                         <div class="semi-opacity-block mb-15 blue-3 noheight">
+						Для полного понимания ситуации, нам нужно задать несколько вопросов <i class="icon icon-emote-question icon-centered icon-yellow d-inline-block position-relative" style="top: 4px;"></i>												
+                         </div>
+                         <div class="semi-opacity-block blue-3 noheight">	
+						Мы найдем легкое решение любого вопроса
+                         </div>
+                    </div>													
+			</div>
+		</div>
+	</div>
+</section>
+
+
+
+<section class="std-section overflow-md-hidden">
+	<div class="container position-relative">
+		<div class="row justify-content-center">
+			<div class="col-lg-11">
+				<div class="h1 text-left mb-lg-75 mb-md-50 mb-30">Работаем во всех областях права:</div>
+				
+				<div class="row">
+					<div class="col-lg-4 col-md-6 col-12">
+						<div class="d-flex flex-row align-items-center mb-40">
+							<i class="icon icon-check icon-blue icon-centered icon-bg-rounded icon-bg-medium icon-bg-blue-2 mr-25"></i>
+							<div class="st-1">Земельные споры</div>
+						</div>
+						<div class="d-flex flex-row align-items-center mb-40">
+							<i class="icon icon-check icon-blue icon-centered icon-bg-rounded icon-bg-medium icon-bg-blue-2 mr-25"></i>
+							<div class="st-1">Защита прав заемщиков</div>
+						</div>
+						<div class="d-flex flex-row align-items-center mb-40">
+							<i class="icon icon-check icon-blue icon-centered icon-bg-rounded icon-bg-medium icon-bg-blue-2 mr-25"></i>
+							<div class="st-1">Защита прав потребителей</div>
+						</div>
+					</div>
+
+					<div class="col-lg-4 col-md-6 col-12">
+						<div class="d-flex flex-row align-items-center mb-40">
+							<i class="icon icon-check icon-blue icon-centered icon-bg-rounded icon-bg-medium icon-bg-blue-2 mr-25"></i>
+							<div class="st-1">Трудовые споры</div>
+						</div>
+						<div class="d-flex flex-row align-items-center mb-40">
+							<i class="icon icon-check icon-blue icon-centered icon-bg-rounded icon-bg-medium icon-bg-blue-2 mr-25"></i>
+							<div class="st-1">Семейные споры</div>
+						</div>
+						<div class="d-flex flex-row align-items-center mb-40">
+							<i class="icon icon-check icon-blue icon-centered icon-bg-rounded icon-bg-medium icon-bg-blue-2 mr-25"></i>
+							<div class="st-1">Административные дела</div>
+						</div>
+					</div>
+					
+					<div class="col-lg-4 col-md-6 col-12">
+						<div class="d-flex flex-row align-items-center mb-40">
+							<i class="icon icon-check icon-blue icon-centered icon-bg-rounded icon-bg-medium icon-bg-blue-2 mr-25"></i>
+							<div class="st-1">Гражданско-правовые споры</div>
+						</div>
+						<div class="d-flex flex-row align-items-center mb-40">
+							<i class="icon icon-check icon-blue icon-centered icon-bg-rounded icon-bg-medium icon-bg-blue-2 mr-25"></i>
+							<div class="st-1">Наследственные споры</div>
+						</div>
+						<div class="d-flex flex-row align-items-center mb-40">
+							<i class="icon icon-check icon-blue icon-centered icon-bg-rounded icon-bg-medium icon-bg-blue-2 mr-25"></i>
+							<div class="st-1">Жилищные и семейные споры</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="text-center mt-20">
+			<button type="button" class="btn btn-primary fade-mobnav-btn btn-lg" data-toggle="modal" data-target="#single_quiz_modal">Оставить заявку</button>
+		</div>	
+	</div>
+</section>
+
+<section class="std-section">
+	<div class="container p-0 position-relative">
+		<div class="h1 text-center">Почему не стоит самостоятельно защищать себя в суде</div>
+		<div class="st-1 text-center mb-lg-60 mb-md-50 mb-40">Давайте сравним последствия</div>
+		<div class="row m-0 justify-content-center">
+			<div class="col-lg-6 col-12 mb-50 mb-md-30 mb-lg-0">
+				<div class="card notransform noshadow bg-radial-grad-big px-30 px-lg-40 pt-lg-50 pt-40 pb-60">
+					<div class="smiles-section small-bg mb-lg-40 mb-25 d-flex justify-content-start align-items-center">
+						<i class="icon icon-emote-minus icon-centered icon-red mr-md-15"></i>
+						<div class="h3 text-center mb-md-0">Самостоятельное представительство в суде</div>
+					</div>
+					
+					<div class="semi-opacity-block py-25 pb-25 pb-lg-30 pl-25 pl-lg-30 pr-30 pr-lg-40 mb-10 minus-block bd-2">Судебное заседание подчиняется множеству собственных законов. Даже неправильное приветствие судьи может сформировать негативное отношение к стороне процесса.</div>
+					<div class="semi-opacity-block py-25 pb-25 pb-lg-30 pl-25 pl-lg-30 pr-30 pr-lg-40 mb-10 minus-block bd-2">Для достижения результата в судебном процессе мало факта нарушения ваших прав. Необходимо грамотное обоснование нормами и статьями закона, которые изменяются регулярно и применяются по-разному.</div>
+					<div class="semi-opacity-block py-25 pb-25 pb-lg-30 pl-25 pl-lg-30 pr-30 pr-lg-40 mb-10 minus-block bd-2">На действия противоположной стороны могут потребоваться молниеносная реакция и оценка представленных противником фактов с точки зрения закона.</div>
+				</div>
+			</div>
+			<div class="col-lg-6 col-12">
+				<div class="card notransform noshadow bg-radial-grad-big px-30 px-lg-40 pt-lg-50 pt-40 pb-60">
+					<div class="smiles-section small-bg mb-lg-40 mb-25 d-flex justify-content-start align-items-center">
+						<i class="icon icon-emote-plus icon-centered icon-green mr-md-15"></i>
+						<div class="h3 text-center mb-md-0">Поддержка юристов Единого центра защиты</div>
+					</div>			
+					<div class="semi-opacity-block py-25 pb-25 pb-lg-30 pl-25 pl-lg-30 pr-30 pr-lg-40 mb-10 plus-block bd-2">Мы ежедневно проводим более 100 процессов в судах по всей России. Достойно представим ваши интересы в суде с учетом всех гласных и негласных правил проведения заседания.</div>
+					<div class="semi-opacity-block py-25 pb-25 pb-lg-30 pl-25 pl-lg-30 pr-30 pr-lg-40 mb-10 plus-block bd-2">Уже при подготовке к процессу мы учтем все правовые нормы и статьи, применимые к вашей ситуации. И сформируем правовую позицию с учетом всех возможных сценариев противника.</div>
+					<div class="semi-opacity-block py-25 pb-25 pb-lg-30 pl-25 pl-lg-30 pr-30 pr-lg-40 mb-10 plus-block bd-2">Оценим правовую позицию оппонента и при необходимости скорректируем нашу во время проведения судебного процесса. Оспорим результаты экспертизы, если они не в вашу пользу.</div>
+						
+					</div>
+				</div>
+			</div>
+
+		</div>	
+	</div>
+</section>
+
+<section class="std-section bfl-steps">
+	<div class="container px-lg-0 position-relative">
+		
+		<div class="row mb-lg-50">	
+			<div class="col-lg-6 mb-50 mb-lg-0">
+				<div class="card notransform position-relative px-lg-60 pb-lg-60 pt-lg-50">
+					<div class="h2 mb-lg-40">Принципы, которых мы придерживаемся</div>
+					<ul class="pl-0 nomarkers line-marker mb-0">
+						<li>Продумывание персональной стратегии защиты/подачи иска</li>
+						<li>Полный юридический разбор и анализ вашей ситуации</li>
+						<li>Изучение стратегии и слабых мест другой стороны</li>
+						<li>Сбор и своевременная подача всех необходимых документов</li>
+						<li class="mb-0">Аргументированная позиция, которая опирается на закон</li>
+						
+					</ul>
+				</div>
+			</div>
+			<div class="col-lg-6 position-relative d-flex align-items-center">
+				<picture>
+					<source srcset="https://edin.center/images/mtp-zvs-step-1.webp" type="image/webp">
+					<img class="img-fluid mt-40 mb-40" loading="lazy" src="https://edin.center/images/mtp-zvs-step-1.png" width="570" height="">
+				</picture>
+			</div>
+		</div>
+		<div class="row mb-lg-50 pt-lg-50 flex-column-reverse flex-lg-row">
+			<div class="col-lg-6 position-relative">
+				<picture>
+					<img class="img-fluid step-2" loading="lazy" style="top:0; left:0;" src="https://edin.center/images/mtp-mainpage-about3.png" width="570" height="546">
+				</picture>
+			</div>
+			<div class="col-lg-6 mb-25 mb-lg-0">
+				<div class="card notransform px-lg-60 pb-lg-60 pt-lg-50 second-card">
+					<div class="h2 mb-lg-40">Мы профессионалы своего дела</div>
+					<div class="row">
+						<div class="col-6 mb-20 gray-2"><div class="red-1 h1 mb-0">558</div> юристов в штате</div>
+						<div class="col-6 mb-20 gray-2 text-right"><div class="red-1 h1 mb-0">496 798</div> консультаций проведено</div>
+						<div class="col-6 mb-20 gray-2"><div class="red-1 h1 mb-0">212 624</div> договоров заключено</div>
+						<div class="col-6 mb-20 gray-2 text-right"><div class="red-1 h1 mb-0">203 074</div> успешных дел</div>	
+					</div>	
+					<div class="text-center mt-20">
+						<button type="button" class="btn btn-primary fade-mobnav-btn btn-lg" data-toggle="modal" data-target="#single_quiz_modal">Получить консультацию</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="eclipse-bg red" style="top:-472px; right:-114px"></div>	
+		<div class="eclipse-bg yellow" style="top:-363px; left:-292px"></div>
+		<div class="eclipse-bg red" style="top:110px; left:-136px"></div>
+		<div class="eclipse-bg yellow" style="top:320px; right:-149px"></div>
+		<div class="eclipse-bg red" style="bottom:-85px; right:-319px"></div>
+		<div class="eclipse-bg red" style="bottom:-161px; left:-274px"></div>
+		<div class="eclipse-bg yellow" style="bottom:-242px; left:140px"></div>
+		
+	</div>
+</section>
+
+<section class="std-bg-section bg-radial-grad-big lazy-bg">
+	<div class="container position-relative">
+		<div class="row justify-content-between">
+			<div class="col-12 col-lg-6 pl-lg-45">
+				<div class="h1 text-center text-lg-left position-relative">Остались вопросы?</div>
+				<div class="h3 text-center text-lg-left position-relative mb-40 mb-lg-20">Ответим и подробно объясним все моменты по телефону. Консультация бесплатна.</div>
+				<div class="smiles-section d-flex justify-content-center justify-content-lg-start position-mob-top-right">
+					<i class="icon icon-emote-happy-face icon-centered icon-yellow"></i>
+					<i class="icon icon-emote-question icon-centered icon-red"></i>
+				</div>
+			</div>
+			<div class="col-12 col-lg-5 d-flex flex-column justify-content-center">
+				<form action="/api/lead" method="POST" class="mw-480 mx-lg-0 mx-auto w-100" modal-confirm="true">
+					<input type="tel" name="lead[phone]" class="form-control noborder mb-25" required placeholder="Номер телефона" data-validation="phone" maxlength="16">
+					<button class="btn btn-block btn-primary" type="submit">Отправить</button>
+				</form>
+				<div class="bd-3 gray-2 mt-15 mw-480 mx-lg-0 mx-auto">Отправляя данную форму, вы соглашаетесь с <a href="/security.pdf" target="_blank">политикой обработки персональных данных</a></div>
+			</div>
+		</div>
+		<div class="eclipse-bg red" style="bottom:-9px; right:-123px"></div>
+		<div class="eclipse-bg yellow" style="bottom:-88px; right:-498px"></div>
+	</div>
+</section>
+
+<section class="std-section">
+	<div class="section-header text-center mb-75 pl-15 pr-15">
+		<div class="h1 mw-992 mx-auto">От 5-ти успешно завершенных <br class="d-none d-xl-inline">дел каждый день</div>
+		<div class="h3 gray-3 mw-768 mx-auto">Посмотрите кейсы нашей компании</div>
+	</div>
+	<div class="container p-0 position-relative">
+		<div class="data-attr-slider slick-slider ecz-style review-slider review-slider-one-color slider-over-25 slider-15" data-slick='{
+																		"slidesToShow": 2, 
+																		"slidesToScroll": 2,
+																		"infinite": false,
+																		"dots": true,
+																		"speed" :300,
+																		"responsive": [
+																			{
+																			"breakpoint": 992,
+																			"settings": {
+																				"arrows": false,
+																				"slidesToShow": 1, 
+																				"slidesToScroll": 1
+																				}
+																			}
+																		]
+																		}'>	
+			<div class="slider-item review-card extended review-card-one-color">
+				<div class="row h-100">
+					<div class="col-lg-4 col-12 text-lg-center review-extended-col order-3 order-lg-1 justify-content-center justify-content-lg-between">
+						<a href="https://edin.center/images/reviews/2_decision_elena-a_original.jpg" data-fancybox target="_blank" rel="nofollow" class="review-doc-wrap mb-0 mt-10">
+							<img class="review-doc-thumb" loading="lazy" src="https://edin.center/images/reviews/2_decision_elena-a_thumb.jpg" alt="Решение суда">
+							<i class="icon icon-square icon-bg-medium icon-large icon-bg-red icon-white icon-centered icon-bg-circle"></i>
+						</a>
+					</div>
+					<div class="col-lg-8 col-12 d-flex flex-column order-2">
+						<div class="review-card_header quote">
+							<img class="rounded-circle" loading="lazy" src="https://edin.center/images/reviews/5_photo_ludmila-s.jpg" width="60" height="60" alt="">
+							<div class="card-info">
+								<div class="st-1 mt-15">
+									Людмила С.
+								</div>
+							</div>
+						</div>
+						<div class="d-flex flex-column flex-md-row mb-0 mr-md-20 mr-lg-40">
+							<i class="icon icon-draft icon-blue mb-10 m-lg-0"></i>
+							<p class="st-2 pl-md-2">Срок на решение проблемы:<br> 4 месяца</p>
+						</div>
+					</div>
+					<div class="col-12 d-flex flex-column order-2 mt-20">
+						<div class="review-card_body bd-2">
+							<div class="text-short">
+								<p>Попалась на удочку мошенников. Обещали исцеление всех болезней. А получила ухудшение здоровья и несколько кредитов.</p>
+								<p>Обратилась в "Единый центр защиты", через суд расторгли договор и взыскали не только сумму кредитов. Но и компенсацию морального вреда.</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="slider-item review-card extended review-card-one-color">
+				<div class="row h-100">
+					<div class="col-lg-4 col-12 text-lg-center review-extended-col order-3 order-lg-1 justify-content-center justify-content-lg-between">
+						<a href="https://edin.center/images/reviews/3_decision_mihail-p_original.jpg" data-fancybox target="_blank" rel="nofollow" class="review-doc-wrap mb-0 mt-10">
+							<img class="review-doc-thumb" loading="lazy" src="https://edin.center/images/reviews/3_decision_mihail-p_thumb.jpg" alt="Решение суда">
+							<i class="icon icon-square icon-bg-medium icon-large icon-bg-red icon-white icon-centered icon-bg-circle"></i>
+						</a>
+					</div>
+					<div class="col-lg-8 col-12 d-flex flex-column order-2">
+						<div class="review-card_header quote">
+							<img class="rounded-circle" loading="lazy" src="https://edin.center/images/reviews/6_photo_olga-s.jpg" width="60" height="60" alt="">
+							<div class="card-info">
+								<div class="st-1 mt-15">
+									Ольга С.
+								</div>
+							</div>
+						</div>
+						<div class="d-flex flex-column flex-md-row mb-0 mr-md-20 mr-lg-40">
+							<i class="icon icon-draft icon-blue mb-10 m-lg-0"></i>
+							<p class="st-2 pl-md-2">Срок на решение проблемы:<br> 8 месяцев</p>
+						</div>
+					</div>
+					<div class="col-12 d-flex flex-column order-2 mt-20">
+						<div class="review-card_body bd-2">
+							<div class="text-short">
+								<p>9 лет назад получила земельный участок в СНТ. 5 лет пыталась оформить его в собственность.</p>
+								<p>С юристами единого центра защиты, через суд, оформлено и зарегистрировано право собственности на земельный участок, проведены кадастровые работы.</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="slider-item review-card extended review-card-one-color">
+				<div class="row h-100">
+					<div class="col-lg-4 col-12 text-lg-center review-extended-col order-3 order-lg-1 justify-content-center justify-content-lg-between">
+						<a href="https://edin.center/images/reviews/4_decision_olga-e_original.jpg" data-fancybox target="_blank" rel="nofollow" class="review-doc-wrap mb-0 mt-10">
+							<img class="review-doc-thumb" loading="lazy" src="https://edin.center/images/reviews/4_decision_olga-e_thumb.jpg" alt="Решение суда">
+							<i class="icon icon-square icon-bg-medium icon-large icon-bg-red icon-white icon-centered icon-bg-circle"></i>
+						</a>
+					</div>
+					<div class="col-lg-8 col-12 d-flex flex-column order-2">
+						<div class="review-card_header quote">
+							<img class="rounded-circle" loading="lazy" src="https://edin.center/images/reviews/7_photo_lubov-m.jpg" width="60" height="60" alt="">
+							<div class="card-info">
+								<div class="st-1 mt-15">
+									Любовь М.
+								</div>
+							</div>
+						</div>
+						<div class="d-flex flex-column flex-md-row mb-0 mr-md-20 mr-lg-40">
+							<i class="icon icon-draft icon-blue mb-10 m-lg-0"></i>
+							<p class="st-2 pl-md-2">Срок на решение проблемы:<br> 3 месяца</p>
+						</div>
+					</div>
+					<div class="col-12 d-flex flex-column order-2 mt-20">
+						<div class="review-card_body bd-2">
+							<div class="text-short">
+								<p>В преддверии сезона дождей решили отремонтировать крышу, заключили договор с фирмой. Подрядчик использовал дешевый материал и выполнил работу не качественно.</p>
+								<p>Юристы единого центра защиты через суд доказали низкое качество материалов и работы. Взыскали как уплаченную сумму, так и ущерб.</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="slider-item review-card extended review-card-one-color">
+				<div class="row h-100">
+					<div class="col-lg-4 col-12 text-lg-center review-extended-col order-3 order-lg-1 justify-content-center justify-content-lg-between">
+						<a href="https://edin.center/images/reviews/1_decision_david-n_original.jpg" data-fancybox target="_blank" rel="nofollow" class="review-doc-wrap mb-0 mt-10">
+							<img class="review-doc-thumb" loading="lazy" src="https://edin.center/images/reviews/1_decision_david-n_thumb.jpg" alt="Решение суда">
+							<i class="icon icon-square icon-bg-medium icon-large icon-bg-red icon-white icon-centered icon-bg-circle"></i>
+						</a>
+					</div>
+					<div class="col-lg-8 col-12 d-flex flex-column order-2">
+						<div class="review-card_header quote">
+							<img class="rounded-circle" loading="lazy" src="https://edin.center/images/reviews/8_photo_viktoria-v.jpg" width="60" height="60" alt="">
+							<div class="card-info">
+								<div class="st-1 mt-15">
+									Виктория В.
+								</div>
+							</div>
+						</div>
+						<div class="d-flex flex-column flex-md-row mb-0 mr-md-20 mr-lg-40">
+							<i class="icon icon-draft icon-blue mb-10 m-lg-0"></i>
+							<p class="st-2 pl-md-2">Срок на решение проблемы:<br> 4 месяца</p>
+						</div>
+					</div>
+					<div class="col-12 d-flex flex-column order-2 mt-20">
+						<div class="review-card_body bd-2">
+							<div class="text-short">
+								<p>При разводе бывший муж решил, что все имущество его, а 2 млн. кредитов - мои!</p>
+								<p>В суде доказали на чьи конкретно нужды были потрачены кредитные деньги. Имущество и долги распределены справедливо, по закону.</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="eclipse-bg red" style="top:-179px; right:-192px"></div>
+		<div class="eclipse-bg yellow" style="top:217px; left:-105px"></div>
+	</div>
+</section>	
+
+
+<section class="std-section">
+	<div class="container p-md-0 position-relative">
+		<div class="h1 text-center mb-lg-75 mb-md-60 mb-50 mw-992 mx-auto">Часто задаваемые вопросы</div>
+
+          <div class="accordion accordion-mtp" id="accordion_faq_1">
+               <div class="accordion-mtp-item">
+                    <div class="accordion-mtp-header">
+                         <div class="accordion-mtp-header-text h3" data-toggle="collapse" data-target="#faq-1">
+                              <i class="icon icon-emote-question icon-centered icon-big icon-red ml-0 mr-20"></i> Сразу ли я могу обращаться в суд, если мои права нарушены?
+                         </div>
+                    </div>
+
+                    <div id="faq-1" class="collapse show" data-parent="#accordion_faq_1">
+                    <div class="accordion-mtp-body">
+                         <p class="gray-3">Самая распространенная причина, по которой суды оставляют заявления граждан без рассмотрения - несоблюдение досудебного порядка. Важно помнить, что подаче искового заявления предшествует досудебная претензия или иная попытка мирного урегулирования вопроса.</p>					
+                    </div>
+                    </div>
+               </div>
+               
+               <div class="accordion-mtp-item">
+                    <div class="accordion-mtp-header">
+                         <div class="accordion-mtp-header-text h3 collapsed" data-toggle="collapse" data-target="#faq-2">
+                              <i class="icon icon-emote-question icon-centered icon-big icon-red ml-0 mr-20"></i> Что необходимо для успешной защиты в суде?
+                         </div>
+                    </div>
+
+                    <div id="faq-2" class="collapse" data-parent="#accordion_faq_1">
+                    <div class="accordion-mtp-body">
+                         <p class="gray-3">Необходим правильно сформированный пакет документов. Сильная и обоснованная правовая позиция, уверенность при ее защите с соблюдением досудебного порядка.</p>
+                    </div>
+                    </div>
+               </div>
+               
+               <div class="accordion-mtp-item">
+                    <div class="accordion-mtp-header">
+                         <div class="accordion-mtp-header-text h3 collapsed" data-toggle="collapse" data-target="#faq-3">
+                              <i class="icon icon-emote-question icon-centered icon-big icon-red ml-0 mr-20"></i> Как подобрать компетентного юриста?
+                         </div>
+                    </div>
+
+                    <div id="faq-3" class="collapse" data-parent="#accordion_faq_1">
+                    <div class="accordion-mtp-body">
+                         <p class="gray-3">При выборе своего защитника нужно помнить: мало знания норм закона, правоприменительная практика не менее важна. Выбирайте практикующего юриста.</p>
+                    </div>
+                    </div>
+               </div>
+          </div>
+     </div>
+</section>
+
+<section class="std-section">
+	<div class="container p-md-0 position-relative">
+		<div class="card notransform card-page-desc">
+			<p>Для успешного исхода дела в суде требуется не толь знать нормы процессуального и материального права, но и иметь большой практический опыт участия в судебных заседаниях. Обращаясь к юристам Единого Центра Защиты в Ярославле, вы можете быть уверены в профессиональном и качественном представительстве в суде.</p>
+			<div class='text-right'>
+				<a class="ml-2 collapsed" id="spisanieDescButton" data-toggle="collapse" href="#spisanieDesc" role="button" aria-expanded="false" aria-controls="spisanieDesc"><span>Читать подробнее</span></a>
+			</div>
+
+			<div class="collapse" id="spisanieDesc">
+				<p>Мы оказываем помощь не только истцам и ответчикам, но и другим лицам, имеющим интерес в конкретном судебном заседании. В рамках услуги "представительство в суде" юрист использует все возможности правовой помощи для защиты интересов и прав своего доверителя. Проводится работа по сбору и предоставлению всех доказательств для суда, оспариванию доводов другой стороны и выстраиванию правильной линии защиты при ведении дела.</p>
+
+				<p>Обратите внимание, что согласно <a href="http://pravo.gov.ru/proxy/ips/?docbody=&nd=102079219" target="_blank" rel="nofollow">ст. 110 АПК</a>, все судебные расходы лиц, в пользу которых было вынесено решение суда, взыскиваются с проигравшей стороны. Таким образом, при благополучном решении спора, все издержки лягут не на ваши плечи.</p>	
+
+				<p>Не сомневайтесь, наши юристы защитят ваши интересы на любом этапе судебного производства и приложат все усилия для победы.</p>														
+			</div>
+		</div>
+
+	</div>
+</section>
+
+<script>
+	document.addEventListener('DOMContentLoaded', function() {
+		jQuery(function($){
+			$('#spisanieDesc').on('show.bs.collapse', function () {
+				$(this).parent().find('#spisanieDescButton').hide();
+			});
+		});
+	});
+</script>
+
+
+<section class="std-section">
+	<div class="container p-0 position-relative">
+		<div class="h1 mw-992 mx-auto text-center mb-lg-75">Полезные статьи по судебным процессам</div>
+	
+		<div class="data-attr-slider slick-slider slider-15 ecz-style news-slider slider-over-25" data-slick='{
+																					"slidesToShow": 4, 
+																					"slidesToScroll": 1,
+																					"infinite": false,
+																					"speed" :300,
+																					"responsive": [
+																						{
+																						"breakpoint": 1200,
+																						"settings": {
+																							"slidesToShow": 3
+																							}
+																						},{
+																						"breakpoint": 992,
+																						"settings": {
+																							"slidesToShow": 2,
+																							"dots": true,
+																							"arrows": false
+																							}
+																						},{
+																						"breakpoint": 768,
+																						"settings": {
+																							"slidesToShow": 1,
+																							"dots": true,
+																							"arrows": false
+																							}
+																						}
+																					]
+																					}'>
+								<div class="slide-item news-item">
+						<a class="card card-news lazy-bg" style="background-image:url('https://edin.center/upload/pics/medium-540/2022/12/154108-3.jpg');" href="https://edin.center/articles/otlichiya-sudebnoy-i-vnesudebnoy-procedur-bankrotstva">			
+							<div class="st-1 mb-30 header">Отличия судебной и внесудебной процедур банкротства</div>
+							<div class="st-1 mt-auto mb-0">Подробнее</div>
+						</a>
+					</div>
+									<div class="slide-item news-item">
+						<a class="card card-news lazy-bg" style="background-image:url('https://edin.center/upload/pics/medium-540/2022/11/152825-33f8bbb471bb21a64699f9bbc5715ad6.jpg');" href="https://edin.center/articles/bankrotstvo-fizicheskih-lic-poshagovaya-instrukciya">			
+							<div class="st-1 mb-30 header">Банкротство физических лиц в 2023 году: пошаговая инструкция</div>
+							<div class="st-1 mt-auto mb-0">Подробнее</div>
+						</a>
+					</div>
+									<div class="slide-item news-item">
+						<a class="card card-news lazy-bg" style="background-image:url('https://edin.center/upload/pics/medium-540/2021/09/100541-20200817103154-20200310125858-10.03-1.jpg');" href="https://edin.center/articles/pensiya-po-potere-kormilca-dlya-vdovy-chto-delat-esli-dokumentalnyh-dokazatelstv-nahozhdeniya-na-izhdivenii-net">			
+							<div class="st-1 mb-30 header">Пенсия по потере кормильца для вдовы: что делать, если документальных доказат...</div>
+							<div class="st-1 mt-auto mb-0">Подробнее</div>
+						</a>
+					</div>
+						</div>
+		<div class="eclipse-bg yellow" style="top:-219px; right:-201px"></div>
+		<div class="eclipse-bg red" style="top:-229px; left:-116px"></div>	
+	</div>
+</section>
+
+<section class="std-section">
+	<div class="container p-0 position-relative">
+		<div class="h1 text-center mb-lg-90 mb-md-75 mb-75">Отзывы и оценки <br class="d-inline d-md-none">о «Единый центр защиты» <span class="d-block">на сторонних площадках</span></div>
+			<div class="data-attr-slider slick-slider ecz-style rating-slider mb-lg-90 mb-md-60 mb-45" data-slick='{
+																					"slidesToShow": 3, 
+																					"slidesToScroll": 1,
+																					"infinite": false,
+																					"speed" :300,
+																					"responsive": [
+																						{
+																						"breakpoint": 1200,
+																						"settings": {
+																							"slidesToShow": 2
+																							}
+																						},{
+																						"breakpoint": 992,
+																						"settings": {
+																							"slidesToShow": 1,
+																							"dots": true,
+																							"arrows": false
+																							}
+																						}
+																					]
+																					}'>
+									<div class="slider-item rating-item pt-60 mb-20 mx-15">
+						<a href="https://otzovik.com/reviews/ediniy_centr_zaschiti_russia_yaroslavl/" target="_blank" rel="nofollow">
+							<div class="card card-rating pt-lg-75 p-lg-60 pt-md-75 pt-60 px-md-50 px-30 pb-md-60 pb-50">
+								<div class="icon-wrap d-inline-flex mx-auto mb-30"><i class="icon icon-default icon-logo-otzovik-dc icon-bg icon-bg-white icon-centered icon-bg-circle"></i></div>
+								<div class="h2 pb-lg-30 pb-25 mb-35 border-b-gray-5 text-center">Отзовик.ру</div>
+								<div class="d-flex">
+									<div class="card-rating-count white mr-25">4</div>
+									<div class="card-rating-info">
+										<div class="rating">
+											<i data-star="4"></i>
+										</div>
+										<div class="count sh-1">
+																					</div>
+									</div>
+								</div>
+							</div>
+						</a>
+					</div>
+										<div class="slider-item rating-item pt-60 mb-20 mx-15">
+						<a href="https://yaroslavl.flamp.ru/firm/edinyjj_centr_zashhity_yuridicheskaya_sluzhba-70000001061056941" target="_blank" rel="nofollow">
+							<div class="card card-rating pt-lg-75 p-lg-60 pt-md-75 pt-60 px-md-50 px-30 pb-md-60 pb-50">
+								<div class="icon-wrap d-inline-flex mx-auto mb-30"><i class="icon icon-default icon-logo-flamp-dc icon-bg icon-bg-white icon-centered icon-bg-circle"></i></div>
+								<div class="h2 pb-lg-30 pb-25 mb-35 border-b-gray-5 text-center">Фламп</div>
+								<div class="d-flex">
+									<div class="card-rating-count white mr-25">5</div>
+									<div class="card-rating-info">
+										<div class="rating">
+											<i data-star="5"></i>
+										</div>
+										<div class="count sh-1">
+																					</div>
+									</div>
+								</div>
+							</div>
+						</a>
+					</div>
+										<div class="slider-item rating-item pt-60 mb-20 mx-15">
+						<a href="https://yaroslavl.zoon.ru/law/yuridicheskaya_sluzhba_edinyj_tsentr_zaschity/" target="_blank" rel="nofollow">
+							<div class="card card-rating pt-lg-75 p-lg-60 pt-md-75 pt-60 px-md-50 px-30 pb-md-60 pb-50">
+								<div class="icon-wrap d-inline-flex mx-auto mb-30"><i class="icon icon-default icon-logo-zoon-dc icon-bg icon-bg-white icon-centered icon-bg-circle"></i></div>
+								<div class="h2 pb-lg-30 pb-25 mb-35 border-b-gray-5 text-center">Zoon</div>
+								<div class="d-flex">
+									<div class="card-rating-count white mr-25">4.1</div>
+									<div class="card-rating-info">
+										<div class="rating">
+											<i data-star="4.1"></i>
+										</div>
+										<div class="count sh-1">
+																					</div>
+									</div>
+								</div>
+							</div>
+						</a>
+					</div>
+										<div class="slider-item rating-item pt-60 mb-20 mx-15">
+						<a href="/reviews/" target="_blank" rel="nofollow">
+							<div class="card card-rating pt-lg-75 p-lg-60 pt-md-75 pt-60 px-md-50 px-30 pb-md-60 pb-50">
+								<div class="icon-wrap d-inline-flex mx-auto mb-30"><i class="icon icon-default icon-logo-ecz-rf-dc icon-bg icon-bg-white icon-centered icon-bg-circle"></i></div>
+								<div class="h2 pb-lg-30 pb-25 mb-35 border-b-gray-5 text-center">ЕЦЗ.рф</div>
+								<div class="d-flex">
+									<div class="card-rating-count white mr-25">4.8</div>
+									<div class="card-rating-info">
+										<div class="rating">
+											<i data-star="4.8"></i>
+										</div>
+										<div class="count sh-1">
+																					</div>
+									</div>
+								</div>
+							</div>
+						</a>
+					</div>
+										<div class="slider-item rating-item pt-60 mb-20 mx-15">
+						<a href="https://go.2gis.com/rdukp" target="_blank" rel="nofollow">
+							<div class="card card-rating pt-lg-75 p-lg-60 pt-md-75 pt-60 px-md-50 px-30 pb-md-60 pb-50">
+								<div class="icon-wrap d-inline-flex mx-auto mb-30"><i class="icon icon-default icon-logo-2gis-dc icon-bg icon-bg-white icon-centered icon-bg-circle"></i></div>
+								<div class="h2 pb-lg-30 pb-25 mb-35 border-b-gray-5 text-center">2ГИС</div>
+								<div class="d-flex">
+									<div class="card-rating-count white mr-25">5</div>
+									<div class="card-rating-info">
+										<div class="rating">
+											<i data-star="5"></i>
+										</div>
+										<div class="count sh-1">
+											более 9 отзывов										</div>
+									</div>
+								</div>
+							</div>
+						</a>
+					</div>
+										<div class="slider-item rating-item pt-60 mb-20 mx-15">
+						<a href="https://dostupnoepravo.ru/companies-page/1-edinyy-centr-zashchity" target="_blank" rel="nofollow">
+							<div class="card card-rating pt-lg-75 p-lg-60 pt-md-75 pt-60 px-md-50 px-30 pb-md-60 pb-50">
+								<div class="icon-wrap d-inline-flex mx-auto mb-30"><i class="icon icon-default icon-logo-dp-dc icon-bg icon-bg-white icon-centered icon-bg-circle"></i></div>
+								<div class="h2 pb-lg-30 pb-25 mb-35 border-b-gray-5 text-center">Доступное право</div>
+								<div class="d-flex">
+									<div class="card-rating-count white mr-25">4.8</div>
+									<div class="card-rating-info">
+										<div class="rating">
+											<i data-star="4.8"></i>
+										</div>
+										<div class="count sh-1">
+											более 250 отзывов										</div>
+									</div>
+								</div>
+							</div>
+						</a>
+					</div>
+						
+			</div>
+		<div class="row m-0 justify-content-center">
+			<div class="col-lg-3 col-md-6 col-12 mr-lg-90 mb-40 mb-lg-0 px-30 px-md-15">
+				<div class="d-flex flex-column flex-md-row">
+					<i class="icon icon-flag-heart icon-large icon-red mb-20 m-lg-0"></i>
+					<p class="gray-3 pl-md-25">Более 1000 отзывов наших клиентов на <span class="st-1 gray-2">Яндекс</span>, <span class="st-1 gray-2">Доступное право</span> и <span class="st-1 gray-2">2ГИС</span></p>
+				</div>
+			</div>
+			<div class="col-lg-3 col-md-6 col-12 px-30 px-md-15">
+				<div class="d-flex flex-column flex-md-row">
+					<i class="icon icon-thumbup icon-large icon-red mb-20 m-lg-0"></i>
+					<p class="gray-3 pl-md-25">Каждый третий клиент обращается к нам по рекомендации</p>
+				</div>
+			</div>
+		</div>
+		<div class="eclipse-bg red" style="top:-84px; left:-318px"></div>
+		<div class="eclipse-bg yellow" style="top:-13px; right:-271px"></div>
+	</div>
+</section>
+
+<section class="std-section">
+	<div class="container position-relative p-0">
+		<div class="h1 text-center px-15 mb-lg-90 mb-md-75 mb-75">Отзывы наших клиентов</div>
+
+	
+		<div class="data-attr-slider slick-slider ecz-style slider-over-25 slider-15" data-slick='{
+																					"slidesToShow": 3, 
+																					"slidesToScroll": 3,
+																					"infinite": false,
+																					"speed" :300,
+																					"responsive": [
+																						{
+																						"breakpoint": 992,
+																						"settings": {
+																							"slidesToShow": 2, 
+																							"slidesToScroll": 2,
+																							"arrows": false
+																							}
+																						},
+																						{
+																						"breakpoint": 767,
+																						"settings": {
+																							"slidesToShow": 1,
+																							"slidesToScroll": 1,
+																							"arrows": false
+																							}
+																						}
+																					]
+																					}'>
+								<div class="rating-item">
+						<div class="card office-rating">
+							<div class="office-rating-header d-flex">
+								<div class="office-rating-avatar">А</div>
+								<div class="office-rating-header-content">
+									<div class="office-rating-name"><span>Алексей Г., </span>Ярославль</div>
+									<div class="office-rating-rating"><i data-star="5"></i><span>23.10.23</span></div>
+								</div>
+							</div>
+							<div class="office-rating-content bd-2">											
+								Все понравилось 	
+							</div>
+						</div>
+					</div>
+									<div class="rating-item">
+						<div class="card office-rating">
+							<div class="office-rating-header d-flex">
+								<div class="office-rating-avatar">В</div>
+								<div class="office-rating-header-content">
+									<div class="office-rating-name"><span>Владимир Ч., </span>Ярославль</div>
+									<div class="office-rating-rating"><i data-star="5"></i><span>20.10.23</span></div>
+								</div>
+							</div>
+							<div class="office-rating-content bd-2">											
+								Удобный офис, доброжелательный персонал.	
+							</div>
+						</div>
+					</div>
+									<div class="rating-item">
+						<div class="card office-rating">
+							<div class="office-rating-header d-flex">
+								<div class="office-rating-avatar">Л</div>
+								<div class="office-rating-header-content">
+									<div class="office-rating-name"><span>Людмила А., </span>Ярославль</div>
+									<div class="office-rating-rating"><i data-star="5"></i><span>06.10.23</span></div>
+								</div>
+							</div>
+							<div class="office-rating-content bd-2">											
+								Доброжелательность, профессионализм сотрудника. 	
+							</div>
+						</div>
+					</div>
+									<div class="rating-item">
+						<div class="card office-rating">
+							<div class="office-rating-header d-flex">
+								<div class="office-rating-avatar">И</div>
+								<div class="office-rating-header-content">
+									<div class="office-rating-name"><span>Игорь Ш., </span>Ярославль</div>
+									<div class="office-rating-rating"><i data-star="5"></i><span>03.10.23</span></div>
+								</div>
+							</div>
+							<div class="office-rating-content bd-2">											
+								Пока всё отлично за все благодарю	
+							</div>
+						</div>
+					</div>
+									<div class="rating-item">
+						<div class="card office-rating">
+							<div class="office-rating-header d-flex">
+								<div class="office-rating-avatar">С</div>
+								<div class="office-rating-header-content">
+									<div class="office-rating-name"><span>Светлана К., </span>Ярославль</div>
+									<div class="office-rating-rating"><i data-star="4.5"></i><span>30.09.23</span></div>
+								</div>
+							</div>
+							<div class="office-rating-content bd-2">											
+								Все хорошо 	
+							</div>
+						</div>
+					</div>
+									<div class="rating-item">
+						<div class="card office-rating">
+							<div class="office-rating-header d-flex">
+								<div class="office-rating-avatar">М</div>
+								<div class="office-rating-header-content">
+									<div class="office-rating-name"><span>Маргарита В., </span>Ярославль</div>
+									<div class="office-rating-rating"><i data-star="5"></i><span>28.09.23</span></div>
+								</div>
+							</div>
+							<div class="office-rating-content bd-2">											
+								Всё хорошо	
+							</div>
+						</div>
+					</div>
+									<div class="rating-item">
+						<div class="card office-rating">
+							<div class="office-rating-header d-flex">
+								<div class="office-rating-avatar">Ю</div>
+								<div class="office-rating-header-content">
+									<div class="office-rating-name"><span>Юлия, </span>Ярославль</div>
+									<div class="office-rating-rating"><i data-star="5"></i><span>21.09.23</span></div>
+								</div>
+							</div>
+							<div class="office-rating-content bd-2">											
+								Профессионализ, чуткое отношение к клиенту	
+							</div>
+						</div>
+					</div>
+									<div class="rating-item">
+						<div class="card office-rating">
+							<div class="office-rating-header d-flex">
+								<div class="office-rating-avatar">К</div>
+								<div class="office-rating-header-content">
+									<div class="office-rating-name"><span>Константин, </span>Ярославль</div>
+									<div class="office-rating-rating"><i data-star="4"></i><span>16.09.23</span></div>
+								</div>
+							</div>
+							<div class="office-rating-content bd-2">											
+								Подробно обсудили волнующие меня моменты	
+							</div>
+						</div>
+					</div>
+									<div class="rating-item">
+						<div class="card office-rating">
+							<div class="office-rating-header d-flex">
+								<div class="office-rating-avatar">С</div>
+								<div class="office-rating-header-content">
+									<div class="office-rating-name"><span>Сергей Б., </span>Ярославль</div>
+									<div class="office-rating-rating"><i data-star="5"></i><span>13.09.23</span></div>
+								</div>
+							</div>
+							<div class="office-rating-content bd-2">											
+								Информация была раскрыта в полном объеме. Услуга была оказана на высоком уровне	
+							</div>
+						</div>
+					</div>
+									<div class="rating-item">
+						<div class="card office-rating">
+							<div class="office-rating-header d-flex">
+								<div class="office-rating-avatar">О</div>
+								<div class="office-rating-header-content">
+									<div class="office-rating-name"><span>Ольга К., </span>Ярославль</div>
+									<div class="office-rating-rating"><i data-star="5"></i><span>05.09.23</span></div>
+								</div>
+							</div>
+							<div class="office-rating-content bd-2">											
+								Я решила обратиться в компанию Единый центр защиты за банкротством, когда мои финансовые проблемы стали невыноси<span class="more-addit">...</span><span class="hidden-text ">мо тяжелыми.  Я очень боялась этой процедуры, но сотрудники компании очень дружелюбные и профессиональные, они помогли мне понять все этапы и риски процедуры. Спасибо! Рекомендую!</span><div class="read-more st-2">Читать полностью</div>	
+							</div>
+						</div>
+					</div>
+									<div class="rating-item">
+						<div class="card office-rating">
+							<div class="office-rating-header d-flex">
+								<div class="office-rating-avatar">О</div>
+								<div class="office-rating-header-content">
+									<div class="office-rating-name"><span>Олег, </span>Ярославль</div>
+									<div class="office-rating-rating"><i data-star="5"></i><span>31.08.23</span></div>
+								</div>
+							</div>
+							<div class="office-rating-content bd-2">											
+								Огромное спасибо за консультацию!	
+							</div>
+						</div>
+					</div>
+									<div class="rating-item">
+						<div class="card office-rating">
+							<div class="office-rating-header d-flex">
+								<div class="office-rating-avatar">С</div>
+								<div class="office-rating-header-content">
+									<div class="office-rating-name"><span>Светлана  Ж., </span>Ярославль</div>
+									<div class="office-rating-rating"><i data-star="5"></i><span>15.08.23</span></div>
+								</div>
+							</div>
+							<div class="office-rating-content bd-2">											
+								Грамотные специалисты	
+							</div>
+						</div>
+					</div>
+									<div class="rating-item">
+						<div class="card office-rating">
+							<div class="office-rating-header d-flex">
+								<div class="office-rating-avatar">Е</div>
+								<div class="office-rating-header-content">
+									<div class="office-rating-name"><span>Елена С., </span>Ярославль</div>
+									<div class="office-rating-rating"><i data-star="5"></i><span>13.08.23</span></div>
+								</div>
+							</div>
+							<div class="office-rating-content bd-2">											
+								Здравствуйте!!! Вы нам очень помогли...спасибо большое ,что есть такие специалисты,знающие свое дело! 	
+							</div>
+						</div>
+					</div>
+									<div class="rating-item">
+						<div class="card office-rating">
+							<div class="office-rating-header d-flex">
+								<div class="office-rating-avatar"> </div>
+								<div class="office-rating-header-content">
+									<div class="office-rating-name"><span> Н., </span>Ярославль</div>
+									<div class="office-rating-rating"><i data-star="5"></i><span>12.08.23</span></div>
+								</div>
+							</div>
+							<div class="office-rating-content bd-2">											
+								Мне реально помогли	
+							</div>
+						</div>
+					</div>
+									<div class="rating-item">
+						<div class="card office-rating">
+							<div class="office-rating-header d-flex">
+								<div class="office-rating-avatar">Т</div>
+								<div class="office-rating-header-content">
+									<div class="office-rating-name"><span>Таисия Я., </span>Ярославль</div>
+									<div class="office-rating-rating"><i data-star="5"></i><span>11.08.23</span></div>
+								</div>
+							</div>
+							<div class="office-rating-content bd-2">											
+								Отлично.Професионально.
+Очень благодарны. 
+Желаем Максиму карьрного роста!	
+							</div>
+						</div>
+					</div>
+									<div class="rating-item">
+						<div class="card office-rating">
+							<div class="office-rating-header d-flex">
+								<div class="office-rating-avatar">Ф</div>
+								<div class="office-rating-header-content">
+									<div class="office-rating-name"><span>Фаина В., </span>Ярославль</div>
+									<div class="office-rating-rating"><i data-star="5"></i><span>02.08.23</span></div>
+								</div>
+							</div>
+							<div class="office-rating-content bd-2">											
+								Обратилась в организацию ЕЦЗ по процедуре банкротства. Грамотные специалисты, все ясно рассказали, заключили дог<span class="more-addit">...</span><span class="hidden-text ">овор. Всегда на связи. Рекомендую!</span><div class="read-more st-2">Читать полностью</div>	
+							</div>
+						</div>
+					</div>
+									<div class="rating-item">
+						<div class="card office-rating">
+							<div class="office-rating-header d-flex">
+								<div class="office-rating-avatar">А</div>
+								<div class="office-rating-header-content">
+									<div class="office-rating-name"><span>Альбина Г., </span>Ярославль</div>
+									<div class="office-rating-rating"><i data-star="5"></i><span>08.07.23</span></div>
+								</div>
+							</div>
+							<div class="office-rating-content bd-2">											
+								Специалист доступно объясняет, консультация понравилась	
+							</div>
+						</div>
+					</div>
+									<div class="rating-item">
+						<div class="card office-rating">
+							<div class="office-rating-header d-flex">
+								<div class="office-rating-avatar">С</div>
+								<div class="office-rating-header-content">
+									<div class="office-rating-name"><span>Светлана К., </span>Ярославль</div>
+									<div class="office-rating-rating"><i data-star="5"></i><span>26.06.23</span></div>
+								</div>
+							</div>
+							<div class="office-rating-content bd-2">											
+								коротко и ясно, спасибо 	
+							</div>
+						</div>
+					</div>
+									<div class="rating-item">
+						<div class="card office-rating">
+							<div class="office-rating-header d-flex">
+								<div class="office-rating-avatar">М</div>
+								<div class="office-rating-header-content">
+									<div class="office-rating-name"><span>Мария К., </span>Ярославль</div>
+									<div class="office-rating-rating"><i data-star="5"></i><span>22.06.23</span></div>
+								</div>
+							</div>
+							<div class="office-rating-content bd-2">											
+								Отлично работают 	
+							</div>
+						</div>
+					</div>
+						</div>	
+		<div class="eclipse-bg red" style="top:-256px; right:-200px"></div>
+		<div class="eclipse-bg yellow" style="top:-218px; left:-304px"></div>	
+	</div>
+
+	<div class="container position-relative py-lg-60 py-md-50 py-40">
+		<div class="row justify-content-center">
+			<div class="col-lg-10 col-12 p-0 row text-center text-md-left">
+				<div class="col-md-8 col-12">
+					<div class="h1 mb-lg-0 mb-50">Наши клиенты не просто получают результат, <br class="d-none d-xl-inline">а благодарят, рекомендуют <br class="d-none d-xl-inline">и приводят знакомых <i class="icon d-block d-md-inline-block icon-big icon-thumbup icon-yellow mt-15 mt-lg-0 load"></i></div>
+				</div>
+				<div class="col-md-4 col-12">
+					<img class="img-fluid mb-30" loading="lazy" src="https://edin.center/images/mtp-ppl-imgs.png" style="max-width:258px" width="258" height="58">
+					<div class="gray-3 mb-30">Доверьтесь нам, и мы начнем помогать с первого дня</div>
+					<button type="button" class="btn btn-yellow fade-mobnav-btn btn-lg" data-toggle="modal" data-target="#single_quiz_modal">Стать клиентом</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="container p-0 position-relative">
+
+		<div class="d-block d-lg-none mb-50 px-30 px-md-15">
+			<i class="icon icon-vidicon icon-blue d-inline-flex icon-centered mb-20"></i>
+			<div class="h3">Видеоотзывы наших <br>клиентов</div>
+		</div>
+
+		<div class="data-attr-slider slick-slider ecz-style video-slider slider-over-25 slider-15" data-slick='{
+																					"slidesToShow": 4, 
+																					"slidesToScroll": 4,
+																					"infinite": false,
+																					"speed" :300,
+																					"responsive": [
+																						{
+																						"breakpoint": 1200,
+																						"settings": {
+																							"slidesToShow": 3,
+																							"slidesToScroll": 3
+																							}
+																						},
+																						{
+																						"breakpoint": 992,
+																						"settings": {
+																							"slidesToShow": 2, 
+																							"slidesToScroll": 2,
+																							"arrows": false
+																							}
+																						},
+																						{
+																						"breakpoint": 767,
+																						"settings": {
+																							"slidesToShow": 1,
+																							"slidesToScroll": 1,
+																							"arrows": false
+																							}
+																						}
+																					]
+																					}'>	
+			<div class="slide-item d-none d-lg-block">
+				<div class="card bg-white expl-card">
+					<i class="icon icon-vidicon icon-blue mb-20"></i>
+					<div class="st-1">Видеоотзывы наших клиентов</div>
+				</div>
+			</div>
+			
+						<div class="slide-item">
+				<div class="video-card-wrap">
+					<div class="card video-card lazy-bg" style="background-image:url('https://i.ytimg.com/vi/VEcp9MLqO5U/hqdefault.jpg')">
+						<i class="icon icon-play-circle icon-giant icon-white"></i>
+						<a href="https://www.youtube.com/embed/VEcp9MLqO5U?autoplay=1&rel=0" data-fancybox></a>
+					</div>
+					<div class="h3 pl-15 mb-0">Ровел Сасуникович</div>
+					<div class="st-2 pl-15 gray-3">Омск</div>
+				</div>
+			</div>
+						<div class="slide-item">
+				<div class="video-card-wrap">
+					<div class="card video-card lazy-bg" style="background-image:url('https://i.ytimg.com/vi/X9UMR7x7MMY/hqdefault.jpg')">
+						<i class="icon icon-play-circle icon-giant icon-white"></i>
+						<a href="https://www.youtube.com/embed/X9UMR7x7MMY?autoplay=1&rel=0" data-fancybox></a>
+					</div>
+					<div class="h3 pl-15 mb-0">Олеся</div>
+					<div class="st-2 pl-15 gray-3">Ростов-на-Дону</div>
+				</div>
+			</div>
+						<div class="slide-item">
+				<div class="video-card-wrap">
+					<div class="card video-card lazy-bg" style="background-image:url('https://i.ytimg.com/vi/1VuVNnO04SQ/hqdefault.jpg')">
+						<i class="icon icon-play-circle icon-giant icon-white"></i>
+						<a href="https://www.youtube.com/embed/1VuVNnO04SQ?autoplay=1&rel=0" data-fancybox></a>
+					</div>
+					<div class="h3 pl-15 mb-0">Виталий</div>
+					<div class="st-2 pl-15 gray-3">Сочи</div>
+				</div>
+			</div>
+						<div class="slide-item">
+				<div class="video-card-wrap">
+					<div class="card video-card lazy-bg" style="background-image:url('https://i.ytimg.com/vi/guLyFGQxVew/hqdefault.jpg')">
+						<i class="icon icon-play-circle icon-giant icon-white"></i>
+						<a href="https://www.youtube.com/embed/guLyFGQxVew?autoplay=1&rel=0" data-fancybox></a>
+					</div>
+					<div class="h3 pl-15 mb-0">Людмила</div>
+					<div class="st-2 pl-15 gray-3">Тюмень</div>
+				</div>
+			</div>
+						<div class="slide-item">
+				<div class="video-card-wrap">
+					<div class="card video-card lazy-bg" style="background-image:url('https://i.ytimg.com/vi/-WkDMAXAnpo/hqdefault.jpg')">
+						<i class="icon icon-play-circle icon-giant icon-white"></i>
+						<a href="https://www.youtube.com/embed/-WkDMAXAnpo?autoplay=1&rel=0" data-fancybox></a>
+					</div>
+					<div class="h3 pl-15 mb-0">Жугират</div>
+					<div class="st-2 pl-15 gray-3">Сочи</div>
+				</div>
+			</div>
+						<div class="slide-item">
+				<div class="video-card-wrap">
+					<div class="card video-card lazy-bg" style="background-image:url('https://i.ytimg.com/vi/JHE8DfjR8Go/hqdefault.jpg')">
+						<i class="icon icon-play-circle icon-giant icon-white"></i>
+						<a href="https://www.youtube.com/embed/JHE8DfjR8Go?autoplay=1&rel=0" data-fancybox></a>
+					</div>
+					<div class="h3 pl-15 mb-0">Александра</div>
+					<div class="st-2 pl-15 gray-3">Сочи</div>
+				</div>
+			</div>
+						<div class="slide-item">
+				<div class="video-card-wrap">
+					<div class="card video-card lazy-bg" style="background-image:url('https://i.ytimg.com/vi/WAdW73NruzM/hqdefault.jpg')">
+						<i class="icon icon-play-circle icon-giant icon-white"></i>
+						<a href="https://www.youtube.com/embed/WAdW73NruzM?autoplay=1&rel=0" data-fancybox></a>
+					</div>
+					<div class="h3 pl-15 mb-0">Ирина</div>
+					<div class="st-2 pl-15 gray-3">Тольятти</div>
+				</div>
+			</div>
+						<div class="slide-item">
+				<div class="video-card-wrap">
+					<div class="card video-card lazy-bg" style="background-image:url('https://i.ytimg.com/vi/ETvrzqPh1H0/hqdefault.jpg')">
+						<i class="icon icon-play-circle icon-giant icon-white"></i>
+						<a href="https://www.youtube.com/embed/ETvrzqPh1H0?autoplay=1&rel=0" data-fancybox></a>
+					</div>
+					<div class="h3 pl-15 mb-0">Елена</div>
+					<div class="st-2 pl-15 gray-3">Краснодар</div>
+				</div>
+			</div>
+						<div class="slide-item">
+				<div class="video-card-wrap">
+					<div class="card video-card lazy-bg" style="background-image:url('https://i.ytimg.com/vi/vJZkDjVmP2Y/hqdefault.jpg')">
+						<i class="icon icon-play-circle icon-giant icon-white"></i>
+						<a href="https://www.youtube.com/embed/vJZkDjVmP2Y?autoplay=1&rel=0" data-fancybox></a>
+					</div>
+					<div class="h3 pl-15 mb-0">Александр</div>
+					<div class="st-2 pl-15 gray-3">Тольятти</div>
+				</div>
+			</div>
+						<div class="slide-item">
+				<div class="video-card-wrap">
+					<div class="card video-card lazy-bg" style="background-image:url('https://i.ytimg.com/vi/qB3fCHPPcXk/hqdefault.jpg')">
+						<i class="icon icon-play-circle icon-giant icon-white"></i>
+						<a href="https://www.youtube.com/embed/qB3fCHPPcXk?autoplay=1&rel=0" data-fancybox></a>
+					</div>
+					<div class="h3 pl-15 mb-0">Надежда</div>
+					<div class="st-2 pl-15 gray-3">Тюмень</div>
+				</div>
+			</div>
+						<div class="slide-item">
+				<div class="video-card-wrap">
+					<div class="card video-card lazy-bg" style="background-image:url('https://i.ytimg.com/vi/rStyq1T1s3E/hqdefault.jpg')">
+						<i class="icon icon-play-circle icon-giant icon-white"></i>
+						<a href="https://www.youtube.com/embed/rStyq1T1s3E?autoplay=1&rel=0" data-fancybox></a>
+					</div>
+					<div class="h3 pl-15 mb-0">Сергей</div>
+					<div class="st-2 pl-15 gray-3">Новокузнецк</div>
+				</div>
+			</div>
+						<div class="slide-item">
+				<div class="video-card-wrap">
+					<div class="card video-card lazy-bg" style="background-image:url('https://i.ytimg.com/vi/7Nz9UdFJ3U0/hqdefault.jpg')">
+						<i class="icon icon-play-circle icon-giant icon-white"></i>
+						<a href="https://www.youtube.com/embed/7Nz9UdFJ3U0?autoplay=1&rel=0" data-fancybox></a>
+					</div>
+					<div class="h3 pl-15 mb-0">Евгений</div>
+					<div class="st-2 pl-15 gray-3">Оренбург</div>
+				</div>
+			</div>
+						<div class="slide-item">
+				<div class="video-card-wrap">
+					<div class="card video-card lazy-bg" style="background-image:url('https://i.ytimg.com/vi/WPYwOLkU5l0/hqdefault.jpg')">
+						<i class="icon icon-play-circle icon-giant icon-white"></i>
+						<a href="https://www.youtube.com/embed/WPYwOLkU5l0?autoplay=1&rel=0" data-fancybox></a>
+					</div>
+					<div class="h3 pl-15 mb-0">Наталья</div>
+					<div class="st-2 pl-15 gray-3">Сочи</div>
+				</div>
+			</div>
+						<div class="slide-item">
+				<div class="video-card-wrap">
+					<div class="card video-card lazy-bg" style="background-image:url('https://i.ytimg.com/vi/jqMcmf4jkBg/hqdefault.jpg')">
+						<i class="icon icon-play-circle icon-giant icon-white"></i>
+						<a href="https://www.youtube.com/embed/jqMcmf4jkBg?autoplay=1&rel=0" data-fancybox></a>
+					</div>
+					<div class="h3 pl-15 mb-0">Татьяна</div>
+					<div class="st-2 pl-15 gray-3">Красноярск</div>
+				</div>
+			</div>
+						<div class="slide-item">
+				<div class="video-card-wrap">
+					<div class="card video-card lazy-bg" style="background-image:url('https://i.ytimg.com/vi/3RAy-C4_m1U/hqdefault.jpg')">
+						<i class="icon icon-play-circle icon-giant icon-white"></i>
+						<a href="https://www.youtube.com/embed/3RAy-C4_m1U?autoplay=1&rel=0" data-fancybox></a>
+					</div>
+					<div class="h3 pl-15 mb-0">Анастасия</div>
+					<div class="st-2 pl-15 gray-3">Тюмень</div>
+				</div>
+			</div>
+						<div class="slide-item">
+				<div class="video-card-wrap">
+					<div class="card video-card lazy-bg" style="background-image:url('https://i.ytimg.com/vi/vilnkTOrAcA/hqdefault.jpg')">
+						<i class="icon icon-play-circle icon-giant icon-white"></i>
+						<a href="https://www.youtube.com/embed/vilnkTOrAcA?autoplay=1&rel=0" data-fancybox></a>
+					</div>
+					<div class="h3 pl-15 mb-0">Людмила</div>
+					<div class="st-2 pl-15 gray-3">Новокузнецк</div>
+				</div>
+			</div>
+						<div class="slide-item">
+				<div class="video-card-wrap">
+					<div class="card video-card lazy-bg" style="background-image:url('https://i.ytimg.com/vi/t_1bKnfqZkc/hqdefault.jpg')">
+						<i class="icon icon-play-circle icon-giant icon-white"></i>
+						<a href="https://www.youtube.com/embed/t_1bKnfqZkc?autoplay=1&rel=0" data-fancybox></a>
+					</div>
+					<div class="h3 pl-15 mb-0">Нина</div>
+					<div class="st-2 pl-15 gray-3">Иркутск</div>
+				</div>
+			</div>
+						<div class="slide-item">
+				<div class="video-card-wrap">
+					<div class="card video-card lazy-bg" style="background-image:url('https://i.ytimg.com/vi/zus0WOIhoQo/hqdefault.jpg')">
+						<i class="icon icon-play-circle icon-giant icon-white"></i>
+						<a href="https://www.youtube.com/embed/zus0WOIhoQo?autoplay=1&rel=0" data-fancybox></a>
+					</div>
+					<div class="h3 pl-15 mb-0">Александр</div>
+					<div class="st-2 pl-15 gray-3">Ростов-на-Дону</div>
+				</div>
+			</div>
+						<div class="slide-item">
+				<div class="video-card-wrap">
+					<div class="card video-card lazy-bg" style="background-image:url('https://i.ytimg.com/vi/A_31Clwh0Tk/hqdefault.jpg')">
+						<i class="icon icon-play-circle icon-giant icon-white"></i>
+						<a href="https://www.youtube.com/embed/A_31Clwh0Tk?autoplay=1&rel=0" data-fancybox></a>
+					</div>
+					<div class="h3 pl-15 mb-0">Екатерина</div>
+					<div class="st-2 pl-15 gray-3">Иркутск</div>
+				</div>
+			</div>
+						<div class="slide-item">
+				<div class="video-card-wrap">
+					<div class="card video-card lazy-bg" style="background-image:url('https://i.ytimg.com/vi/9Yj-e0guSOU/hqdefault.jpg')">
+						<i class="icon icon-play-circle icon-giant icon-white"></i>
+						<a href="https://www.youtube.com/embed/9Yj-e0guSOU?autoplay=1&rel=0" data-fancybox></a>
+					</div>
+					<div class="h3 pl-15 mb-0">Тамара</div>
+					<div class="st-2 pl-15 gray-3">Санкт-Петербург</div>
+				</div>
+			</div>
+						<div class="slide-item">
+				<div class="video-card-wrap">
+					<div class="card video-card lazy-bg" style="background-image:url('https://i.ytimg.com/vi/edFBnAacp_s/hqdefault.jpg')">
+						<i class="icon icon-play-circle icon-giant icon-white"></i>
+						<a href="https://www.youtube.com/embed/edFBnAacp_s?autoplay=1&rel=0" data-fancybox></a>
+					</div>
+					<div class="h3 pl-15 mb-0">Валерия</div>
+					<div class="st-2 pl-15 gray-3">Новокузнецк</div>
+				</div>
+			</div>
+						<div class="slide-item">
+				<div class="video-card-wrap">
+					<div class="card video-card lazy-bg" style="background-image:url('https://i.ytimg.com/vi/2hynSBMC4N8/hqdefault.jpg')">
+						<i class="icon icon-play-circle icon-giant icon-white"></i>
+						<a href="https://www.youtube.com/embed/2hynSBMC4N8?autoplay=1&rel=0" data-fancybox></a>
+					</div>
+					<div class="h3 pl-15 mb-0">Александр</div>
+					<div class="st-2 pl-15 gray-3">Новокузнецк</div>
+				</div>
+			</div>
+						<div class="slide-item">
+				<div class="video-card-wrap">
+					<div class="card video-card lazy-bg" style="background-image:url('https://i.ytimg.com/vi/t_1pbcVlCCo/hqdefault.jpg')">
+						<i class="icon icon-play-circle icon-giant icon-white"></i>
+						<a href="https://www.youtube.com/embed/t_1pbcVlCCo?autoplay=1&rel=0" data-fancybox></a>
+					</div>
+					<div class="h3 pl-15 mb-0">Вера</div>
+					<div class="st-2 pl-15 gray-3">Новокузнецк</div>
+				</div>
+			</div>
+						<div class="slide-item">
+				<div class="video-card-wrap">
+					<div class="card video-card lazy-bg" style="background-image:url('https://i.ytimg.com/vi/7qMaCb8YEuk/hqdefault.jpg')">
+						<i class="icon icon-play-circle icon-giant icon-white"></i>
+						<a href="https://www.youtube.com/embed/7qMaCb8YEuk?autoplay=1&rel=0" data-fancybox></a>
+					</div>
+					<div class="h3 pl-15 mb-0">Андрей</div>
+					<div class="st-2 pl-15 gray-3">Сочи</div>
+				</div>
+			</div>
+						<div class="slide-item">
+				<div class="video-card-wrap">
+					<div class="card video-card lazy-bg" style="background-image:url('https://i.ytimg.com/vi/1TLD92qeUK4/hqdefault.jpg')">
+						<i class="icon icon-play-circle icon-giant icon-white"></i>
+						<a href="https://www.youtube.com/embed/1TLD92qeUK4?autoplay=1&rel=0" data-fancybox></a>
+					</div>
+					<div class="h3 pl-15 mb-0">Ирина</div>
+					<div class="st-2 pl-15 gray-3">Нижний Новгород</div>
+				</div>
+			</div>
+						<div class="slide-item">
+				<div class="video-card-wrap">
+					<div class="card video-card lazy-bg" style="background-image:url('https://i.ytimg.com/vi/78XDmAIz8vY/hqdefault.jpg')">
+						<i class="icon icon-play-circle icon-giant icon-white"></i>
+						<a href="https://www.youtube.com/embed/78XDmAIz8vY?autoplay=1&rel=0" data-fancybox></a>
+					</div>
+					<div class="h3 pl-15 mb-0">Татьяна</div>
+					<div class="st-2 pl-15 gray-3">Нижний Новгород</div>
+				</div>
+			</div>
+						<div class="slide-item">
+				<div class="video-card-wrap">
+					<div class="card video-card lazy-bg" style="background-image:url('https://i.ytimg.com/vi/H98_cGlbpTM/hqdefault.jpg')">
+						<i class="icon icon-play-circle icon-giant icon-white"></i>
+						<a href="https://www.youtube.com/embed/H98_cGlbpTM?autoplay=1&rel=0" data-fancybox></a>
+					</div>
+					<div class="h3 pl-15 mb-0">Галина</div>
+					<div class="st-2 pl-15 gray-3">Нижний Новгород</div>
+				</div>
+			</div>
+						<div class="slide-item">
+				<div class="video-card-wrap">
+					<div class="card video-card lazy-bg" style="background-image:url('https://i.ytimg.com/vi/MyrzZXXAkmc/hqdefault.jpg')">
+						<i class="icon icon-play-circle icon-giant icon-white"></i>
+						<a href="https://www.youtube.com/embed/MyrzZXXAkmc?autoplay=1&rel=0" data-fancybox></a>
+					</div>
+					<div class="h3 pl-15 mb-0">Елена</div>
+					<div class="st-2 pl-15 gray-3">Сочи</div>
+				</div>
+			</div>
+						<div class="slide-item">
+				<div class="video-card-wrap">
+					<div class="card video-card lazy-bg" style="background-image:url('https://i.ytimg.com/vi/r9dqDeeo4xI/hqdefault.jpg')">
+						<i class="icon icon-play-circle icon-giant icon-white"></i>
+						<a href="https://www.youtube.com/embed/r9dqDeeo4xI?autoplay=1&rel=0" data-fancybox></a>
+					</div>
+					<div class="h3 pl-15 mb-0">Венера</div>
+					<div class="st-2 pl-15 gray-3">Тюмень</div>
+				</div>
+			</div>
+						<div class="slide-item">
+				<div class="video-card-wrap">
+					<div class="card video-card lazy-bg" style="background-image:url('https://i.ytimg.com/vi/KpSX-F53kns/hqdefault.jpg')">
+						<i class="icon icon-play-circle icon-giant icon-white"></i>
+						<a href="https://www.youtube.com/embed/KpSX-F53kns?autoplay=1&rel=0" data-fancybox></a>
+					</div>
+					<div class="h3 pl-15 mb-0">Ольга</div>
+					<div class="st-2 pl-15 gray-3">Барнаул</div>
+				</div>
+			</div>
+						<div class="slide-item">
+				<div class="video-card-wrap">
+					<div class="card video-card lazy-bg" style="background-image:url('https://i.ytimg.com/vi/DOhmr4-HzrE/hqdefault.jpg')">
+						<i class="icon icon-play-circle icon-giant icon-white"></i>
+						<a href="https://www.youtube.com/embed/DOhmr4-HzrE?autoplay=1&rel=0" data-fancybox></a>
+					</div>
+					<div class="h3 pl-15 mb-0">Надежда</div>
+					<div class="st-2 pl-15 gray-3">Барнаул</div>
+				</div>
+			</div>
+						<div class="slide-item">
+				<div class="video-card-wrap">
+					<div class="card video-card lazy-bg" style="background-image:url('https://i.ytimg.com/vi/UnRA5j0Q0G8/hqdefault.jpg')">
+						<i class="icon icon-play-circle icon-giant icon-white"></i>
+						<a href="https://www.youtube.com/embed/UnRA5j0Q0G8?autoplay=1&rel=0" data-fancybox></a>
+					</div>
+					<div class="h3 pl-15 mb-0">Юрий</div>
+					<div class="st-2 pl-15 gray-3">Барнаул</div>
+				</div>
+			</div>
+						<div class="slide-item">
+				<div class="video-card-wrap">
+					<div class="card video-card lazy-bg" style="background-image:url('https://i.ytimg.com/vi/rTiGs68e5hw/hqdefault.jpg')">
+						<i class="icon icon-play-circle icon-giant icon-white"></i>
+						<a href="https://www.youtube.com/embed/rTiGs68e5hw?autoplay=1&rel=0" data-fancybox></a>
+					</div>
+					<div class="h3 pl-15 mb-0">Валентина</div>
+					<div class="st-2 pl-15 gray-3">Барнаул</div>
+				</div>
+			</div>
+						<div class="slide-item">
+				<div class="video-card-wrap">
+					<div class="card video-card lazy-bg" style="background-image:url('https://i.ytimg.com/vi/zxoykfQnqX8/hqdefault.jpg')">
+						<i class="icon icon-play-circle icon-giant icon-white"></i>
+						<a href="https://www.youtube.com/embed/zxoykfQnqX8?autoplay=1&rel=0" data-fancybox></a>
+					</div>
+					<div class="h3 pl-15 mb-0">Николай</div>
+					<div class="st-2 pl-15 gray-3">Барнаул</div>
+				</div>
+			</div>
+						<div class="slide-item">
+				<div class="video-card-wrap">
+					<div class="card video-card lazy-bg" style="background-image:url('https://i.ytimg.com/vi/f5o-e89Lmq8/hqdefault.jpg')">
+						<i class="icon icon-play-circle icon-giant icon-white"></i>
+						<a href="https://www.youtube.com/embed/f5o-e89Lmq8?autoplay=1&rel=0" data-fancybox></a>
+					</div>
+					<div class="h3 pl-15 mb-0">Мухарам</div>
+					<div class="st-2 pl-15 gray-3">Оренбург</div>
+				</div>
+			</div>
+						<div class="slide-item">
+				<div class="video-card-wrap">
+					<div class="card video-card lazy-bg" style="background-image:url('https://i.ytimg.com/vi/ZwJrANBlfwY/hqdefault.jpg')">
+						<i class="icon icon-play-circle icon-giant icon-white"></i>
+						<a href="https://www.youtube.com/embed/ZwJrANBlfwY?autoplay=1&rel=0" data-fancybox></a>
+					</div>
+					<div class="h3 pl-15 mb-0">Татьяна</div>
+					<div class="st-2 pl-15 gray-3">Оренбург</div>
+				</div>
+			</div>
+						<div class="slide-item">
+				<div class="video-card-wrap">
+					<div class="card video-card lazy-bg" style="background-image:url('https://i.ytimg.com/vi/1MY4GDYI7hY/hqdefault.jpg')">
+						<i class="icon icon-play-circle icon-giant icon-white"></i>
+						<a href="https://www.youtube.com/embed/1MY4GDYI7hY?autoplay=1&rel=0" data-fancybox></a>
+					</div>
+					<div class="h3 pl-15 mb-0">Алексей</div>
+					<div class="st-2 pl-15 gray-3">Новокузнецк</div>
+				</div>
+			</div>
+						<div class="slide-item">
+				<div class="video-card-wrap">
+					<div class="card video-card lazy-bg" style="background-image:url('https://i.ytimg.com/vi/u4OHLAbwgdw/hqdefault.jpg')">
+						<i class="icon icon-play-circle icon-giant icon-white"></i>
+						<a href="https://www.youtube.com/embed/u4OHLAbwgdw?autoplay=1&rel=0" data-fancybox></a>
+					</div>
+					<div class="h3 pl-15 mb-0">Елена</div>
+					<div class="st-2 pl-15 gray-3">Ростов-на-Дону</div>
+				</div>
+			</div>
+						<div class="slide-item">
+				<div class="video-card-wrap">
+					<div class="card video-card lazy-bg" style="background-image:url('https://i.ytimg.com/vi/fUqVr1QcPKU/hqdefault.jpg')">
+						<i class="icon icon-play-circle icon-giant icon-white"></i>
+						<a href="https://www.youtube.com/embed/fUqVr1QcPKU?autoplay=1&rel=0" data-fancybox></a>
+					</div>
+					<div class="h3 pl-15 mb-0">Алексей</div>
+					<div class="st-2 pl-15 gray-3">Ростов-на-Дону</div>
+				</div>
+			</div>
+					</div>
+		<div class="eclipse-bg red" style="top:-256px; right:163px"></div>
+		<div class="eclipse-bg yellow" style="top:-218px; left:-304px"></div>
+	</div>
+</section>	
+
+
+<section class="std-section question-block">
+	<div class="container p-md-0 position-relative bg-gray-rounds lazy-bg mt-lg-50">
+		<div class="row">
+			<div class="col-lg-6 pl-lg-50 position-relative">
+				<picture>
+					<source srcset="https://edin.center/images/mtp-bfl-questions-man.webp" type="image/webp">
+					<img class="img-fluid question-img" loading="lazy" src="https://edin.center/images/mtp-bfl-questions-man.png" width="467" height="618">
+				</picture>
+				<i class="icon icon-quote icon-yellow"></i>
+			</div>
+			<div class="col-lg-6 pr-lg-75 pb-lg-50 pt-lg-75 pb-30">
+				<div class="card notransform noshadow bg-radial-grad-big lazy-bg p-50 pb-60 mx-auto ml-lg-auto mr-lg-0 mb-30 mb-lg-0" style="max-width: 436px;">
+					<div class="smiles-section d-flex justify-content-center mb-25">
+						<i class="icon icon-emote-happy-face icon-centered icon-blue"></i>
+						<i class="icon icon-emote-question icon-centered icon-red"></i>
+					</div>
+					<div class="h2 text-center mb-20 mb-lg-30">Другие вопросы?<br> Всегда поможем</div>
+					<div class="mb-20 phone-wrap bg-light-gray px-40 pt-25 pb-20 d-flex justify-content-center">
+						<a href="tel:+74852581515" class="phone d-block h2 mb-0">
+							8 (4852) 58-15-15						</a>
+					</div>
+					<div class="button-wrap text-center pt-lg-15">
+						<button type="button" class="btn btn-primary fade-mobnav-btn btn-lg" data-toggle="modal" data-target="#single_quiz_modal">Консультация с юристом</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+
+<style>
+.single-quiz-modal .modal-content{
+	border-radius: 15px;
+}
+.single-quiz-modal .modal-body{
+	padding:0;
+}
+.single-quiz-modal .modal-dialog .close {
+	z-index: 1;
+}
+</style>
+
+<div class="modal fade modern-modal single-quiz-modal main-quiz" id="single_quiz_modal" tabindex="-1" role="dialog" aria-labelledby="single_quiz_modal" aria-modal="true">
+     <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+          <div class="modal-content">
+               <div class="modal-body">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"></span></button>
+                    <div class="card notransform quiz-card">
+					<div class="d-flex justify-content-md-between align-items-center mb-lg-40">
+							<div class="h3">
+								Пройдите опрос
+							</div>
+							<div class="d-none d-md-flex align-items-center">
+								<i class="icon icon-shield icon-bg-blue-2 icon-blue icon-centered icon-bg-rounded icon-bg-medium"></i>
+								<p class="gray-3 sh-3 pl-15">Гарантируем: ваши данные <br>останутся в безопасности</p>											
+							</div>
+						</div>
+						<div class="main-quiz-content">
+							<form class="steps-main-form main-quiz-form" action="/api/lead" method="POST">
+								<div class="steps-wrap position-relative">
+									<div class="steps-wrap_step step-1">
+										<div class="main-quiz-content-progress">
+											<span class="active"></span>
+											<span></span>
+											<span></span>
+											<span></span>
+											<div class="main-quiz-content-progress-text bd-3">Шаг 1 из 4</div>
+										</div>
+										<div class="sh-1 mb-30">Какая у вас ситуация?</div>
+										<div class="main-quiz-content-question" data-question="Ситуация - ">
+											<div class="checkbox-btn w-100">
+												<input type="radio" id="modal_main_quiz_1_1" name="main-quiz-1" required value="хочу подать в суд" data-notsavetostate="true" data-step="next">
+												<label class="btn btn-lg" for="modal_main_quiz_1_1">Вы хотите подать в суд</label>
+											</div>
+											<div class="checkbox-btn w-100">
+												<input type="radio" id="modal_main_quiz_1_2" name="main-quiz-1" required value="на меня хотят подать в суд" data-notsavetostate="true" data-step="next">
+												<label class="btn btn-lg" for="modal_main_quiz_1_2">На вас хотят подать в суд</label>
+											</div>
+										</div>							
+									</div>
+									<div class="steps-wrap_step step-2 d-none">
+										<div class="main-quiz-content-progress">
+											<span class="pass"></span>
+											<span class="active"></span>
+											<span></span>
+											<span></span>
+											<div class="main-quiz-content-progress-text bd-3">Шаг 2 из 4</div>
+										</div>
+										<div class="sh-1 mb-30">Выберите область права</div>
+										<div class="main-quiz-content-question" data-question="Область права -">
+											<div class="checkbox-btn">
+												<input type="radio" id="modal_main_quiz_2_1" name="main-quiz-2" required value="земельные споры" data-notsavetostate="true" data-step="next">
+												<label class="btn btn-lg" for="modal_main_quiz_2_1">Земельные споры</label>
+											</div>
+											<div class="checkbox-btn">
+												<input type="radio" id="modal_main_quiz_2_2" name="main-quiz-2" required value="защита прав заемщиков" data-notsavetostate="true" data-step="next">
+												<label class="btn btn-lg" for="modal_main_quiz_2_2">Защита прав заемщиков</label>
+											</div>
+											<div class="checkbox-btn">
+												<input type="radio" id="modal_main_quiz_2_3" name="main-quiz-2" required value="защита прав потребителей" data-notsavetostate="true" data-step="next">
+												<label class="btn btn-lg" for="modal_main_quiz_2_3">Защита прав потребителей</label>
+											</div>
+											<div class="checkbox-btn">
+												<input type="radio" id="modal_main_quiz_2_4" name="main-quiz-2" required value="трудовые споры" data-notsavetostate="true" data-step="next">
+												<label class="btn btn-lg" for="modal_main_quiz_2_4">Трудовые споры</label>
+											</div>
+											<div class="checkbox-btn">
+												<input type="radio" id="modal_main_quiz_2_5" name="main-quiz-2" required value="семейные споры" data-notsavetostate="true" data-step="next">
+												<label class="btn btn-lg" for="modal_main_quiz_2_5">Семейные споры</label>
+											</div>
+											<div class="checkbox-btn">
+												<input type="radio" id="modal_main_quiz_2_6" name="main-quiz-2" required value="административные дела" data-notsavetostate="true" data-step="next">
+												<label class="btn btn-lg" for="modal_main_quiz_2_6">Административные дела</label>
+											</div>
+											<div class="checkbox-btn">
+												<input type="radio" id="modal_main_quiz_2_7" name="main-quiz-2" required value="гражданско-правовые споры" data-notsavetostate="true" data-step="next">
+												<label class="btn btn-lg" for="modal_main_quiz_2_7">Гражданские споры</label>
+											</div>
+											<div class="checkbox-btn">
+												<input type="radio" id="modal_main_quiz_2_8" name="main-quiz-2" required value="наследственные споры" data-notsavetostate="true" data-step="next">
+												<label class="btn btn-lg" for="modal_main_quiz_2_8">Наследственные споры</label>
+											</div>
+											<div class="checkbox-btn">
+												<input type="radio" id="modal_main_quiz_2_9" name="main-quiz-2" required value="жилищные споры" data-notsavetostate="true" data-step="next">
+												<label class="btn btn-lg" for="modal_main_quiz_2_9">Жилищные споры</label>
+											</div>
+										</div>								
+										<div class="text-left mt-auto">
+											<button class="btn btn-outline-primary" data-step="prev">Назад</button>
+										</div>
+									</div>
+									<div class="steps-wrap_step step-3 d-none">
+										<div class="main-quiz-content-progress">
+											<span class="pass"></span>
+											<span class="pass"></span>
+											<span class="active"></span>
+											<span></span>
+											<div class="main-quiz-content-progress-text bd-3">Шаг 3 из 4</div>
+										</div>
+										<div class="sh-1 mb-30">Что нужно сделать?</div>
+										<div class="main-quiz-content-question" data-question="Что нужно сделать - ">
+											<div class="checkbox-btn">
+												<input type="radio" id="modal_main_quiz_3_1" name="main-quiz-3" required value="составить претензию" data-notsavetostate="true" data-step="next">
+												<label class="btn btn-lg" for="modal_main_quiz_3_1">Составить судебную претензию</label>
+											</div>
+											<div class="checkbox-btn">
+												<input type="radio" id="modal_main_quiz_3_2" name="main-quiz-3" required value="провести анализ документов" data-notsavetostate="true" data-step="next">
+												<label class="btn btn-lg" for="modal_main_quiz_3_2">Провести анализ документов</label>
+											</div>
+											<div class="checkbox-btn">
+												<input type="radio" id="modal_main_quiz_3_3" name="main-quiz-3" required value="собрать доказательную базу" data-notsavetostate="true" data-step="next">
+												<label class="btn btn-lg" for="modal_main_quiz_3_3">Собрать доказательную базу</label>
+											</div>
+											<div class="checkbox-btn">
+												<input type="radio" id="modal_main_quiz_3_4" name="main-quiz-3" required value="составить исковое заявление в суд" data-notsavetostate="true" data-step="next">
+												<label class="btn btn-lg" for="modal_main_quiz_3_4">Составить исковое заявление в суд</label>
+											</div>
+										</div>					
+										<div class="text-left mt-auto">
+											<button class="btn btn-outline-primary" data-step="prev">Назад</button>
+										</div>
+									</div>
+									<div class="steps-wrap_step step-4 d-none">
+										<div class="main-quiz-content-progress">
+											<span class="pass"></span>
+											<span class="pass"></span>
+											<span class="pass"></span>
+											<span class="active"></span>
+											<div class="main-quiz-content-progress-text bd-3">Шаг 4 из 4</div>
+										</div>
+										<div class="h3 mb-10">Спасибо!</div>
+										<div class="bd-2 gray-2 mb-20">Укажите контактные данные, чтобы наш юрист связался с Вами и сообщил, как защитить свои интересы в суде любой инстанции.</div>
+										<div class="main-quiz-content-form mw-360 w-100 mx-auto mb-30">
+											<input type="hidden" name="lead[quiz]" required>
+											<input type="text" name="lead[name]" class="form-control" placeholder="Ваше имя">
+											<input type="tel" name="lead[phone]" class="form-control" placeholder="Номер телефона" data-validation="phone" required maxlength="16">
+											<input type="text" name="lead[city_text]" class="form-control" placeholder="Ваш город" value="Ярославль" data-notsavetostate="true">
+											<div class="bd-3 gray-2 mt-15">Отправляя данную форму, вы соглашаетесь с <a href="/security.pdf" target="_blank">политикой обработки персональных данных</a></div>
+										</div>									
+										<div class="text-center mt-auto">
+											<button class="btn btn-primary" data-step="next" type="submit" data-send="send">Получить консультацию</button>
+										</div>
+									</div>
+									<div class="steps-wrap_step step-5 d-none">
+										<div class="main-quiz-content-progress">
+											<span class="pass"></span>
+											<span class="pass"></span>
+											<span class="pass"></span>
+											<span class="pass"></span>
+											<div class="main-quiz-content-progress-text bd-3">Отлично!</div>
+										</div>
+										<div class="d-flex flex-column align-items-center my-auto">
+											<div class="h3 text-center mb-30">Спасибо! Мы уже занимаемся вашим делом!</div>
+											<div class="bd-2 text-center gray-2">Ожидайте, наш юрист свяжется с вами очень быстро</div>
+										</div>
+									</div>											
+									<div class="loading">
+										<div></div>
+										<div></div>
+										<div></div>
+										<div></div>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+               </div>
+          </div>
+     </div>
+</div>
+
+{% endblock %}
+
+

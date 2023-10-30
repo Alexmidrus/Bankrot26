@@ -1,0 +1,1007 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+    @media (min-width:1200px) {
+        .mainpage-upd .mr-xl-15,
+        .mainpage-upd .mx-xl-15 {margin-right:250px!important}
+        .mainpage-upd .ml-xl-15,
+        .mainpage-upd .mx-xl-15 {margin-left:250px!important}
+}
+</style>
+
+<section class="mainpage-upd section section--hero bg-deep-gradiented first-home-section">
+    <div class="bg-deep-gradiented container-fluid px-0 d-flex flex-column flex-xl-row">
+        <div id="main-form" class="w-100 wrp-600 text-center mx-auto px-20 py-75 order-xl-2">
+            <h1 class="h3 mb-15"><span class="text-primary">Экспресс консультация юриста</span> <nobr>в Ярославле</nobr></h1>
+            <div class="step-form pls-set-height">
+            <form class="steps-modal-form w-100 mw-560 rounded px-25 py-25 shadow-large bg-light" action="/api/lead" method="POST">
+						<input type="hidden" name="form_sender" class="form-sender">
+						<div class="steps-wrap">
+							<div class="steps-wrap_step step-1">
+								<div class="st-1 text-center mb-20">Легкое и правильное решение любого правового вопроса</div>
+								<textarea class="form-control anim-placeholder" name="lead[question]" placeholder="Опишите задачу и мы подберем юриста для ее решения" required></textarea>
+								<div class="text-center">
+									<button class="btn btn-lg btn-primary" data-step="next">Получить консультацию</button>
+								</div>
+							</div>
+							<div class="steps-wrap_step step-2 d-none">
+								<div class="mobile-menu-header">
+									<div class="st-1 text-center mb-0">Мы уже нашли нужного юриста</div>
+									<button type="button" class="back d-lg-none" aria-label="Назад" data-step="prev"><span aria-hidden="true"></span></button>
+								</div>
+								<div class="mobile-menu-scroll">
+									<div class="content">
+									</div>
+									<div class="modal-btn-wrap">
+										<button class="btn btn-block btn-primary" name="main_lead" type="submit" data-send="send" data-step="next">Отправить</button>
+									</div>
+                                    <div class="consent2 text-secondary text-center mt-20">Отправляя данную форму, вы соглашаетесь с <a href="/security.pdf" target="_blank">политикой обработки персональных данных</a></div>
+								</div>
+							</div>
+							<div class="steps-wrap_step step-3 d-none">
+								<div class="mobile-menu-header">
+									<div class="st-1 text-center">Спасибо за обращение!</div>
+								</div>
+								<div class="mobile-menu-scroll">
+									<div class="content">
+										<p class="mb-30 mt-30 text-center">В ближайшее время мы свяжемся с вами</p>
+									</div>
+								</div>
+							</div>
+							<div class="loading">
+								<div></div>
+								<div></div>
+								<div></div>
+								<div></div>
+							</div>
+						</div>
+					</form>
+            </div>
+        </div>
+        <div class="flex-xl-1 mt-xl-n2 d-flex order-xl-1 align-items-end w-50 overflow-xl-hidden position-relative justify-content-end move-up">
+            <img class="position-absolute ml-n12 mr-12 ml-xl-n13 mr-xl-15 d-none d-md-block d-xl-none d-xxl-block lax img-mobile-hidden" data-lax-translate-x="0 0, (vh/1.25) -200" loading="lazy" src="https://edin.center/images/person-an-ltr.png" alt="" width="289" height="492">
+            <picture>
+                <source srcset="https://edin.center/images/person-sc-ltr.webp" type="image/webp">
+                <img class="position-relative mr-n8 mr-sm-0 mr-md-n8 mr-xl-0 lax" data-lax-translate-x="0 0, (vh/1.25) -100" src="https://edin.center/images/person-sc-ltr.png" alt="" width="359" height="542">
+            </picture>
+        </div>
+        <div class="flex-xl-1 mt-xl-n2 d-flex order-xl-3 align-items-end w-50 overflow-hidden position-absolute position-xl-relative to-rb to-xl-none">
+            <img class="position-absolute ml-10 ml-xl-15 d-none d-md-block d-xl-none d-xxl-block lax img-mobile-hidden" data-lax-translate-x="0 0, (vh/1.25) 200" loading="lazy"  src="https://edin.center/images/person-dp-rtl.png" alt="" width="321" height="493">
+            <picture>
+                <source srcset="https://edin.center/images/person-vb-rtl.webp" type="image/webp">
+                <img class="position-relative ml-n8 ml-sm-0 ml-md-n7 ml-xl-0 lax" data-lax-translate-x="0 0, (vh/1.25) 100" src="https://edin.center/images/person-vb-rtl.png" alt="" height="545">
+            </picture>
+        </div>
+    </div>
+</section>
+
+<section class="section mainpage-upd section--help-with-decorated bg-light deferred-html">
+    <div class="container pb-9 text-center">
+        <div class="section__content">
+            <picture>
+                <source srcset="https://edin.center/images/ec-shield.webp" type="image/webp">
+                <img class="el-shield move-up img-defer--mobile-only" loading="lazy" src="https://edin.center/images/ec-shield.png" alt="" width="277" height="325">
+            </picture>
+            <div class="h2 mt-8 mb-5">Мы поможем Вам с</div>
+            <div class="row">
+                <div class="col col-12 col-md-6 col-xl-3">
+                    <div class="card card--with-triangle">
+                        <a href="https://edin.center/bankrotstvo-fizicheskih-lic">
+                            <img loading="lazy" src="https://edin.center/images/cards-card.jpg" class="card-img-top img-defer" alt="Банкротство физических лиц" width="" height="">
+                        </a>
+                        <div class="card-body">
+                            <h6 class="card-title">
+                                <a href="https://edin.center/bankrotstvo-fizicheskih-lic">Банкротство физических лиц</a>
+                            </h6>
+                            <p class="card-text">Узнайте, как ликвидировать кредитные долги, уже сейчас!</p>
+                        </div>
+                        <a class="link-alt position-absolute to-rb mr-4 mb-4 pls-modal" data-modal-type="card" data-modal-form="ask" href="https://edin.center/bankrotstvo-fizicheskih-lic">
+                            <span class="btn btn-primary rounded-circle p-1 ml-1"><i class="icon icon-arrow-right icon-white icon-centered ml-0"></i></span>
+                        </a>
+                    </div>
+                </div>
+                <div class="col col-12 col-md-6 col-xl-3">
+                    <div class="card card--with-triangle">
+                        <a href="https://edin.center/zashhita-v-sude">
+                            <img loading="lazy" src="https://edin.center/images/cards-court.jpg" class="card-img-top img-defer" alt="Защита в суде" width="" height="">
+                        </a>
+                        <div class="card-body">
+                            <h6 class="card-title">
+                                <a href="https://edin.center/zashhita-v-sude">Защита в суде</a>
+                            </h6>
+                            <p class="card-text">Защитим ваши интересы в суде. Огромный опыт в сложных делах.</p>
+                        </div>
+                        <a class="link-alt position-absolute to-rb mr-4 mb-4 pls-modal" data-modal-type="card" data-modal-form="ask" href="https://edin.center/zashhita-v-sude">
+                        <span class="btn btn-primary rounded-circle p-1 ml-1"><i class="icon icon-arrow-right icon-white icon-centered ml-0"></i></span>
+                        </a>
+                    </div>
+                </div>
+                <div class="col col-12 col-md-6 col-xl-3">
+                    <div class="card card--with-triangle">
+                        <a href="https://edin.center/pomosh-dolzhnikam">
+                            <img loading="lazy" src="https://edin.center/images/cards-doc-with-folder.jpg" class="card-img-top img-defer" alt="Защита прав заёмщиков" width="" height="">
+                        </a>
+                        <div class="card-body">
+                            <h6 class="card-title">
+                                <a href="https://edin.center/pomosh-dolzhnikam">Защита прав заёмщиков</a>
+                            </h6>
+                            <p class="card-text">Юридическая помощь заемщикам банков и МФО.</p>
+                        </div>
+                        <a class="link-alt position-absolute to-rb mr-4 mb-4 pls-modal" data-modal-type="card" data-modal-form="ask" href="https://edin.center/pomosh-dolzhnikam">
+                        <span class="btn btn-primary rounded-circle p-1 ml-1"><i class="icon icon-arrow-right icon-white icon-centered ml-0"></i></span>
+                        </a>
+                    </div>
+                </div>
+                <div class="col col-12 col-md-6 col-xl-3">
+                    <div class="card card--with-triangle">
+                        <a href="https://edin.center/spory-s-zastroishikami">
+                            <img loading="lazy" src="https://edin.center/images/cards-build-building.jpg" class="card-img-top img-defer" alt="Споры с застройщиком" width="" height="">
+                        </a>
+                        <div class="card-body">
+                            <h6 class="card-title">
+                                <a href="https://edin.center/spory-s-zastroishikami">Споры с застройщиком</a>
+                            </h6>
+                            <p class="card-text">Мы призовём застройщика к ответу!</p>
+                        </div>
+                        <a class="link-alt position-absolute to-rb mr-4 mb-4 pls-modal" data-modal-type="card" data-modal-form="ask" href="https://edin.center/spory-s-zastroishikami">
+                        <span class="btn btn-primary rounded-circle p-1 ml-1"><i class="icon icon-arrow-right icon-white icon-centered ml-0"></i></span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col col-12 col-md-6 col-xl-3">
+                    <div class="card card--with-triangle">
+                        <a href="https://edin.center/proverka-dokumentov-i-dogovorov">
+                            <img loading="lazy" src="https://edin.center/images/cards-doc-with-pen.jpg" class="card-img-top img-defer" alt="Договоры" width="" height="">
+                        </a>
+                        <div class="card-body">
+                            <h6 class="card-title">
+                                <a href="https://edin.center/proverka-dokumentov-i-dogovorov">Договоры</a>
+                            </h6>
+                            <p class="card-text">Составим грамотный договор, проверим существующий.</p>
+                        </div>
+                        <a class="link-alt position-absolute to-rb mr-4 mb-4 pls-modal" data-modal-type="card" data-modal-form="ask" href="https://edin.center/proverka-dokumentov-i-dogovorov">
+                        <span class="btn btn-primary rounded-circle p-1 ml-1"><i class="icon icon-arrow-right icon-white icon-centered ml-0"></i></span>
+                        </a>
+                    </div>
+                </div>
+                <div class="col col-12 col-md-6 col-xl-3">
+                    <div class="card card--with-triangle">
+                        <a href="https://edin.center/urist-po-trudovomu-pravy">
+                            <img loading="lazy" src="https://edin.center/images/cards-labor-code.jpg" class="card-img-top img-defer" alt="Трудовые споры" width="" height="">
+                        </a>
+                        <div class="card-body">
+                            <h6 class="card-title">
+                                <a href="https://edin.center/urist-po-trudovomu-pravy">Трудовые споры</a>
+                            </h6>
+                            <p class="card-text">Получите консультацию юриста по трудовым спорам.</p>
+                        </div>
+                        <a class="link-alt position-absolute to-rb mr-4 mb-4 pls-modal" data-modal-type="card" data-modal-form="ask" href="https://edin.center/urist-po-trudovomu-pravy">
+                        <span class="btn btn-primary rounded-circle p-1 ml-1"><i class="icon icon-arrow-right icon-white icon-centered ml-0"></i></span>
+                        </a>
+                    </div>
+                </div>
+                <div class="col col-12 col-md-6 col-xl-3">
+                    <div class="card card--with-triangle">
+                        <a href="https://edin.center/migracionnye-spory">
+                            <img loading="lazy" src="https://edin.center/images/migration/pic3u.png" class="card-img-top img-defer" alt="Миграционные споры" width="" height="">
+                        </a>
+                        <div class="card-body">
+                            <h6 class="card-title">
+                                <a href="https://edin.center/migracionnye-spory">Миграционные споры</a>
+                            </h6>
+                            <p class="card-text">Поможем с получением гражданства и разрешением на работу</p>
+                        </div>
+                        <a class="link-alt position-absolute to-rb mr-4 mb-4 pls-modal" data-modal-type="card" data-modal-form="ask" href="https://edin.center/migracionnye-spory">
+                        <span class="btn btn-primary rounded-circle p-1 ml-1"><i class="icon icon-arrow-right icon-white icon-centered ml-0"></i></span>
+                        </a>
+                    </div>
+                </div>
+                <div class="col col-12 col-md-6 col-xl-3">
+                    <div class="card card--with-triangle">
+                        <a href="https://edin.center/urist-po-semejnomu-pravy">
+                            <img loading="lazy" src="https://edin.center/images/cards-family-disputes.jpg" class="card-img-top img-defer" alt="Семейные споры" width="" height="">
+                        </a>
+                        <div class="card-body">
+                            <h6 class="card-title">
+                                <a href="https://edin.center/urist-po-semejnomu-pravy">Семейные споры</a>
+                            </h6>
+                            <p class="card-text">Расторжение брака, раздел имущества, взыскание алиментов, брачный договор.</p>
+                        </div>
+                        <a class="link-alt position-absolute to-rb mr-4 mb-4 pls-modal" data-modal-type="card" data-modal-form="ask" href="https://edin.center/urist-po-semejnomu-pravy">
+                        <span class="btn btn-primary rounded-circle p-1 ml-1"><i class="icon icon-arrow-right icon-white icon-centered ml-0"></i></span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- <a href="/" class="btn btn-primary-lighten px-7 mt-9 font-weight-bold">Показать все услуги</a> -->
+        <div class="bg-warning mt-10 mx-xl-11 px-3 px-sm-9 py-5 py-sm-8 rounded shadow-large lax" data-lax-translate-y="0 0, (vh/1.3) 150" data-lax-anchor="self">
+            <div class="h2 mx-xl-9 mb-30">Не можете понять какая услуга нужна именно вам?</div>
+            <p class="h5 font-weight-medium mx-xl-10 mb-7">Оставьте заявку на консультацию и наши юристы подскажут вам, как проще всего решить вашу проблему</p>
+                        <!-- для узких вертикальных колонок, добавляем  class .vert-->
+            <style>
+                .vert .widthBut {
+                    width: 100%;
+                    margin-bottom: 10px;
+                    font-size: 0.8em;
+                }
+
+                .vert .besplatno {
+                    margin-top: 50px;
+                }
+
+                .lgLead .widthBut {
+                    word-break: break-all;
+                    font-size: 0.8em;
+                }
+            </style>
+            <form action="https://edin.center/api/lead" data-form-type="lead" method="post" class="text-left  "  modal-confirm="true" confirm-title="Спасибо за обращение!" confirm-text="В ближайшее время мы свяжемся с вами">
+                <div class="to-appointment clearfix ">
+                    <input type="tel"
+                           name="lead[phone]"
+                           class="form-control widthBut "
+                           placeholder="Ваш номер телефона"
+                           data-validation="phone"
+                           required
+                           autocomplete="off"
+                           data-notsavetostate="true"
+                           >
+
+                    <input type="submit" class=" btn btn-primary dependent-on-consent widthBut" value="Получить консультацию">
+                </div>
+                                <p class="consent2 text-secondary">
+                    Отправляя свои данные, я соглашаюсь с <a href="/privacy-policy.pdf" target="_blank">политикой</a> и даю <a href="/security.pdf" target="_blank">согласие на обработку персональных данных</a>                </p>
+                <input type="hidden" name="lead[usluga]" value="8">
+                            </form>
+                        </div>
+    </div>
+</section>
+
+<section class="section mainpage-upd section--if-you-tired deferred-html">
+    <div class="container pt-9">
+        <div class="h2 text-center">Если вы устали от...</div>
+        <div class="if-you-tired row h6 mb-0 font-weight-medium">
+            <div class="col-12 col-lg-4 my-lg-9 mt-xl-9 mb-xl-6 d-flex flex-column flex-lg-column-reverse justify-content-between pl-lg-0 order-lg-1 text-lg-right">
+                <div class="if-you-tired__item flex-lg-row-reverse pt-0 pb-3 py-lg-0 mr-lg-0">
+                    <div class="border rounded-circle bg-white mr-5 mr-lg-0 ml-lg-3">
+                        <img class="img-defer" loading="lazy" src="/images/icon-stat.svg" alt="" width="" height="">
+                    </div>
+                    <div class="p-0">
+                        Постоянного хаоса в юридических делах
+                    </div>
+                </div>
+                <div class="if-you-tired__item flex-lg-row-reverse py-3 py-lg-0 mr-lg-5 mr-xl-7">
+                    <div class="border rounded-circle bg-white mr-5 mr-lg-0 ml-lg-3">
+                        <img class="img-defer" loading="lazy" src="/images/icon-ancient-build.svg" alt="" width="" height="">
+                    </div>
+                    <div class="p-0">
+                        Постоянного давления со стороны банков
+                    </div>
+                </div>
+                <div class="if-you-tired__item flex-lg-row-reverse py-3 py-lg-0 mr-lg-n7">
+                    <div class="border rounded-circle bg-white mr-5 mr-lg-0 ml-lg-3">
+                        <img class="img-defer" loading="lazy" src="/images/icon-lost-man.svg" alt="" width="" height="">
+                    </div>
+                    <div class="p-0 pl-xl-10">
+                        Юристов, которые ничего не делают
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-lg-4 my-lg-9 mt-xl-9 mb-xl-6 d-flex flex-column justify-content-between pr-lg-0 order-lg-3">
+                <div class="if-you-tired__item py-3 py-lg-0 ml-lg-n7">
+                    <div class="border rounded-circle bg-white mr-5 mr-lg-3 ml-lg-0">
+                        <img class="img-defer" loading="lazy" src="/images/icon-anket.svg" alt="" width="" height="">
+                    </div>
+                    <div class="p-0">
+                        Неграмотно составленных договоров и контрактов
+                    </div>
+                </div>
+                <div class="if-you-tired__item py-3 py-lg-0 ml-lg-5 ml-xl-7">
+                    <div class="border rounded-circle bg-white mr-5 mr-lg-3 ml-lg-0">
+                        <img class="img-defer" loading="lazy" src="/images/icon-calc.svg" alt="" width="" height="">
+                    </div>
+                    <div class="p-0">
+                        Переплаты за юридические услуги
+                    </div>
+                </div>
+                <div class="if-you-tired__item pt-3 pb-0 py-lg-0">
+                    <div class="border rounded-circle bg-white mr-5 mr-lg-3 ml-lg-0">
+                        <img class="img-defer" loading="lazy" src="/images/icon-stop.svg" alt="" width="" height="">
+                    </div>
+                    <div class="p-0">
+                        Отсутствия результатов
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-lg-4 p-0 w-100 w-sm-50 w-lg-100 mt-6 mt-lg-0 px-6 ml-0 px-sm-0 order-lg-2 text-center border-0">
+                <img class="mw-100 img-defer" loading="lazy" src="/images/person-vb-rtl-new.png" alt="" width="" height="">
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section mainpage-upd section--appeal-to-prof bg-warning overflow-hidden deferred-html">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-12 col-lg-8 pl-lg-6 py-9 py-lg-0">
+                <div class="h2">Обратитесь к профессионалам!</div>
+                <div class="row">
+                    <div class="col-12 col-sm-6">
+                        <div class="h1 pls-decorate font-weight-black mb-0 text-warning"><span class="pls-number-increase">558</span></div>
+                        <p>юристов в штате</p>
+                    </div>
+                    <div class="col-12 col-sm-6">
+                        <div class="h1 pls-decorate font-weight-black mb-0 text-warning pls-number-increase">496 798</div>
+                        <p>консультаций проведено</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 col-sm-6">
+                        <div class="h1 pls-decorate font-weight-black mb-0 text-warning pls-number-increase">212 624</div>
+                        <p>договоров заключено</p>
+                    </div>
+                    <div class="col-12 col-sm-6">
+                        <div class="h1 pls-decorate font-weight-black mb-0 text-warning pls-number-increase">203 074</div>
+                        <p>успешных дел</p>
+                    </div>
+                </div>
+                <div class="row mt-6">
+                    <div class="col-12">            <!-- для узких вертикальных колонок, добавляем  class .vert-->
+            <style>
+                .vert .widthBut {
+                    width: 100%;
+                    margin-bottom: 10px;
+                    font-size: 0.8em;
+                }
+
+                .vert .besplatno {
+                    margin-top: 50px;
+                }
+
+                .lgLead .widthBut {
+                    word-break: break-all;
+                    font-size: 0.8em;
+                }
+            </style>
+            <form action="https://edin.center/api/lead" data-form-type="lead" method="post" class="text-left  "  modal-confirm="true" confirm-title="Спасибо за обращение!" confirm-text="В ближайшее время мы свяжемся с вами">
+                <div class="to-appointment clearfix ">
+                    <input type="tel"
+                           name="lead[phone]"
+                           class="form-control widthBut "
+                           placeholder="Ваш номер телефона"
+                           data-validation="phone"
+                           required
+                           autocomplete="off"
+                           data-notsavetostate="true"
+                           >
+
+                    <input type="submit" class=" btn btn-primary dependent-on-consent widthBut" value="Получить консультацию">
+                </div>
+                                <p class="consent2 text-secondary">
+                    Отправляя свои данные, я соглашаюсь с <a href="/privacy-policy.pdf" target="_blank">политикой</a> и даю <a href="/security.pdf" target="_blank">согласие на обработку персональных данных</a>                </p>
+                <input type="hidden" name="lead[usluga]" value="8">
+                            </form>
+                </div>
+                </div>
+            </div>
+            <div class="d-none d-lg-flex col-lg-4 pt-7 pr-0">
+                <img class="ml-xl-8 lax img-defer" data-lax-translate-x="0 0, (vh/1.25) 100" data-lax-anchor="self" loading="lazy" src="/images/person-dp-rtl.png" alt="Обратитесь к профессионалам!" width="" height="">
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section mainpage-upd section--interactive-map deferred-html">
+    <div class="container pt-9 pb-xl-9">
+        <div class="section__content text-center mx-auto">
+            <div class="h2">
+                <span class="text-primary">Наша цель</span> – оказывать <span class="text-primary">лучшую</span> юридическую помощь в России и странах СНГ.            </div>
+            <p class="h6 font-weight-medium move-up">«Единый Центр Защиты» — это более 700 юристов, <span class="d-block">с представительствами в <span>38</span> городах и онлайн по всей России</span></p>
+            <div class="interactive-map gradient-y">
+                <img loading="lazy" src="/images/map.jpg" alt="Карта присутствия Единый Центр" class="interactive-map__map mw-100 lax img-defer" data-lax-scale="vh 0.3, (vh/2) 1" data-lax-anchor="self" width="" height="">
+                <img class="interactive-map__caption img-defer" loading="lazy" src="/images/caption-count-of-employees.svg" alt="Единый Центр это более 700 сотрудников по всей стране" width="" height="">
+            </div>
+        </div>
+        <div class="section__content d-xl-flex flex-xl-wrap justify-content-xl-center w-100 text-center mx-auto">
+            <div class="h2 order-xl-1 mt-xl-n6 px-xl-10 move-up">
+                Мы - <a href="/about/structure">команда</a> профессионалов, которые работают не ради денег, а ради клиента
+            </div>
+            <div class="gradient-xl-y order-xl-0 mt-xl-n10 mt-xxl-n12 lax" data-lax-translate-y="(vh-(elh/2)) 150, (vh/3) 0" data-lax-anchor="self">
+                <img class="mw-100 img-defer" loading="lazy" src="/images/five-lawyers.png" alt="Юристы компании Единый Центр Защиты" width="" height="">
+            </div>
+        </div>
+    </div>
+</section>
+
+    <section class="section mainpage-upd mt-8 pb-8 bg-light spisanie" >
+        <div class="container">
+            <div class="section__before dotted-way-rb" style='background-position-x: 81%;'>
+                <div class="h2 mt-1 pt-7 text-center mx-auto" style="max-width: 600px;">
+                    <h2>Юридические услуги <span class="text-primary">в&nbsp;Ярославле</span></h2>                </div>
+            </div>
+            <div class="section__content pb-9 mx-auto">
+
+                <div class="bg-white mx-xl-11 px-3 px-sm-9 py-5 py-sm-8 rounded shadow-large">
+                    <p><p>Современное российское законодательство меняется вместе с процессами становления именно правового общества. И эти изменения затрагивают не только сферу бизнеса и предпринимательства, но и жизнь простых граждан.</p>
+<p>Сегодня абсолютно нормально решать возникающие вопросы и споры в правовом поле и это не может не радовать.</p></p>
+                    <div class='text-right'>
+                        <a class="ml-2 collapsed" id="spisanieDescButton" data-toggle="collapse" href="#spisanieDesc" role="button" aria-expanded="false" aria-controls="spisanieDesc"><span>Читать подробнее</span></a>
+                    </div>
+
+                    <div class="collapse" id="spisanieDesc">
+                        <h3 class='h3' style='font-size: 2.0rem; font-weight: 500;'>По каким вопросам сегодня обращаются к юристам чаще всего?</h3>
+
+<p>1.	Наследственные, земельные споры и оформление права собственности. Юридически не закрепленное право для государства не существует. Поэтому фактически полученное по наследству «семейное гнездо», участок со спорным границами, построенный гараж – все это и многое другое требует соответствующей регистрации. И именно грамотное юридическое сопровождение определяет положительный итог.</p>
+
+<p>2.	Трудовые и пенсионные споры. Неофициальное трудоустройство или заработная плата, рабочий стаж времен СССР и другие вопросы из этой области могут быть решены в судебном порядке. В итоге гражданин получает положенную ему пенсию или зарплату с иными выплатами, соответствующие записи в трудовой книжке.</p>
+
+<p>3.	Защита прав потребителя. Это, пожалуй, самая обширная область, затрагивающая жизнь каждого из нас. Особенно актуально это стало после появления потребительского кредитования, так как усложнило для простого покупателя процесс возврата товара и уплаченных за него денег. А так как в большинстве случае требуется знание не только Закона о защите прав потребителя, но и иных нормативных актов, помощь юриста в таких вопросах неоценима, будь то сфера торговли или услуг или отношения со страховщиком.</p>
+
+<p>4.	Семейное право. Цивилизованно развестись, поделить совместно нажитое имущество или определить порядок общения с общим ребенком часто мешает эмоциональный фактор. Между тем, здоровые отношения во время развода исключат многие проблемы в будущем, да и в принципе сохранят нервы участникам.</p>
+
+<p>Обращаться к юристу стоит и тогда, когда проблема еще не встала в полный рост: чем раньше специалист включится в работу, тем больше шансов на успех.</p>                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                jQuery(function($){
+                    $('#spisanieDesc').on('show.bs.collapse', function () {
+                        $(this).parent().find('#spisanieDescButton').hide();
+                    });
+                });
+            });
+        </script>
+    </section>
+
+<section class="section mainpage-upd section--media-resources bg-light deferred-html">
+    <div class="tabs container py-9">
+        <div class="h2 mb-8 text-center text-md-left">Медиа-ресурсы</div>
+        <ul class="tabs__nav mb-7 justify-content-center justify-content-md-start">
+            <li class="active" data-tabs-target="media-res-news">Новости</li>
+            <li data-tabs-target="media-res-articles">Статьи</li>
+        </ul>
+                    <div class="tabs__item" id="media-res-news">
+                <div class="row">
+                                            <div class="col-12 col-md-6 col-lg-4 mb-6">
+                            <div class="card mx-auto my-0 p-0">
+                                <a href="https://edin.center/newsfeed/novovvedeniy-v-zakonodatelstve-rf">
+                                    <img class="card-img-top rounded-top img-defer" alt="Нововведений в законодательстве РФ" loading="lazy" src="https://edin.center/upload/pics/medium/2023/10/131035-Октябрь_законы.jpg" width="" height="" onerror="this.src='/img/placeholder-540.jpg'">
+                                </a>
+                                <div class="card-body px-5 pt-4 pb-9">
+                                    <h6 class="card-title">
+                                        <a href="https://edin.center/newsfeed/novovvedeniy-v-zakonodatelstve-rf">
+                                            Нововведений в законодательстве РФ                                        </a>
+                                    </h6>
+                                </div>
+                                <a class="link-alt position-absolute to-rb mr-4 mb-4" href="https://edin.center/newsfeed/novovvedeniy-v-zakonodatelstve-rf">
+                                    Подробнее
+                                    <span class="btn btn-primary rounded-circle p-1 ml-1"><i class="icon icon-arrow-right icon-white icon-centered ml-0"></i></span>
+                                </a>
+                            </div>
+                        </div>
+                                            <div class="col-12 col-md-6 col-lg-4 mb-6">
+                            <div class="card mx-auto my-0 p-0">
+                                <a href="https://edin.center/newsfeed/kak-poluchit-novoe-bezopasnoe-zhile-vzamen-vethogo">
+                                    <img class="card-img-top rounded-top img-defer" alt="Как получить новое безопасное жилье взамен ветхого?" loading="lazy" src="https://edin.center/upload/pics/medium/2023/08/075334-Как_получить_жилье_взамен_на_аварийное_Новость.jpg" width="" height="" onerror="this.src='/img/placeholder-540.jpg'">
+                                </a>
+                                <div class="card-body px-5 pt-4 pb-9">
+                                    <h6 class="card-title">
+                                        <a href="https://edin.center/newsfeed/kak-poluchit-novoe-bezopasnoe-zhile-vzamen-vethogo">
+                                            Как получить новое безопасное жилье взамен ветхого?                                        </a>
+                                    </h6>
+                                </div>
+                                <a class="link-alt position-absolute to-rb mr-4 mb-4" href="https://edin.center/newsfeed/kak-poluchit-novoe-bezopasnoe-zhile-vzamen-vethogo">
+                                    Подробнее
+                                    <span class="btn btn-primary rounded-circle p-1 ml-1"><i class="icon icon-arrow-right icon-white icon-centered ml-0"></i></span>
+                                </a>
+                            </div>
+                        </div>
+                                            <div class="col-12 col-md-6 col-lg-4 mb-6">
+                            <div class="card mx-auto my-0 p-0">
+                                <a href="https://edin.center/newsfeed/pomosch-postradavshim-ot-pavodka-v-primorskom-krae-">
+                                    <img class="card-img-top rounded-top img-defer" alt="Помощь пострадавшим от паводка в Приморском крае " loading="lazy" src="https://edin.center/upload/pics/medium/2023/08/075440-Паводок_в_Приморье_Новость.jpg" width="" height="" onerror="this.src='/img/placeholder-540.jpg'">
+                                </a>
+                                <div class="card-body px-5 pt-4 pb-9">
+                                    <h6 class="card-title">
+                                        <a href="https://edin.center/newsfeed/pomosch-postradavshim-ot-pavodka-v-primorskom-krae-">
+                                            Помощь пострадавшим от паводка в Приморском крае                                         </a>
+                                    </h6>
+                                </div>
+                                <a class="link-alt position-absolute to-rb mr-4 mb-4" href="https://edin.center/newsfeed/pomosch-postradavshim-ot-pavodka-v-primorskom-krae-">
+                                    Подробнее
+                                    <span class="btn btn-primary rounded-circle p-1 ml-1"><i class="icon icon-arrow-right icon-white icon-centered ml-0"></i></span>
+                                </a>
+                            </div>
+                        </div>
+                                            <div class="col-12 col-md-6 col-lg-4 mb-6">
+                            <div class="card mx-auto my-0 p-0">
+                                <a href="https://edin.center/newsfeed/kreditnye-kanikuly-dostupny-vsem">
+                                    <img class="card-img-top rounded-top img-defer" alt="Кредитные каникулы - всем!" loading="lazy" src="https://edin.center/upload/pics/medium/2023/07/132823-Кредитные_каникулы_Новость.jpg" width="" height="" onerror="this.src='/img/placeholder-540.jpg'">
+                                </a>
+                                <div class="card-body px-5 pt-4 pb-9">
+                                    <h6 class="card-title">
+                                        <a href="https://edin.center/newsfeed/kreditnye-kanikuly-dostupny-vsem">
+                                            Кредитные каникулы - всем!                                        </a>
+                                    </h6>
+                                </div>
+                                <a class="link-alt position-absolute to-rb mr-4 mb-4" href="https://edin.center/newsfeed/kreditnye-kanikuly-dostupny-vsem">
+                                    Подробнее
+                                    <span class="btn btn-primary rounded-circle p-1 ml-1"><i class="icon icon-arrow-right icon-white icon-centered ml-0"></i></span>
+                                </a>
+                            </div>
+                        </div>
+                                            <div class="col-12 col-md-6 col-lg-4 mb-6">
+                            <div class="card mx-auto my-0 p-0">
+                                <a href="https://edin.center/newsfeed/banki-budut-vozvraschat-klientam-dengi-perevedennye-moshennikam">
+                                    <img class="card-img-top rounded-top img-defer" alt="Банки будут возвращать клиентам деньги, переведенные мошенникам" loading="lazy" src="https://edin.center/upload/pics/medium/2023/07/001046-Банки_вернут_деньги_Новость.jpg" width="" height="" onerror="this.src='/img/placeholder-540.jpg'">
+                                </a>
+                                <div class="card-body px-5 pt-4 pb-9">
+                                    <h6 class="card-title">
+                                        <a href="https://edin.center/newsfeed/banki-budut-vozvraschat-klientam-dengi-perevedennye-moshennikam">
+                                            Банки будут возвращать клиентам деньги, переведенные мошенникам                                        </a>
+                                    </h6>
+                                </div>
+                                <a class="link-alt position-absolute to-rb mr-4 mb-4" href="https://edin.center/newsfeed/banki-budut-vozvraschat-klientam-dengi-perevedennye-moshennikam">
+                                    Подробнее
+                                    <span class="btn btn-primary rounded-circle p-1 ml-1"><i class="icon icon-arrow-right icon-white icon-centered ml-0"></i></span>
+                                </a>
+                            </div>
+                        </div>
+                                            <div class="col-12 col-md-6 col-lg-4 mb-6">
+                            <div class="card mx-auto my-0 p-0">
+                                <a href="https://edin.center/newsfeed/v-abakane-yurist-pomog-podtverdit-dosrochnuyu-pensiyu-po-starosti-na-osnovanii-uhoda-za-rebenkom">
+                                    <img class="card-img-top rounded-top img-defer" alt="В Абакане юрист помог подтвердить досрочную пенсию по старости на основании ухода за ребенком" loading="lazy" src="https://edin.center/upload/pics/medium/2023/07/001003-Досрочная_пенсия_Новость.jpg" width="" height="" onerror="this.src='/img/placeholder-540.jpg'">
+                                </a>
+                                <div class="card-body px-5 pt-4 pb-9">
+                                    <h6 class="card-title">
+                                        <a href="https://edin.center/newsfeed/v-abakane-yurist-pomog-podtverdit-dosrochnuyu-pensiyu-po-starosti-na-osnovanii-uhoda-za-rebenkom">
+                                            В Абакане юрист помог подтвердить досрочную пенсию по старости на основании у...                                        </a>
+                                    </h6>
+                                </div>
+                                <a class="link-alt position-absolute to-rb mr-4 mb-4" href="https://edin.center/newsfeed/v-abakane-yurist-pomog-podtverdit-dosrochnuyu-pensiyu-po-starosti-na-osnovanii-uhoda-za-rebenkom">
+                                    Подробнее
+                                    <span class="btn btn-primary rounded-circle p-1 ml-1"><i class="icon icon-arrow-right icon-white icon-centered ml-0"></i></span>
+                                </a>
+                            </div>
+                        </div>
+                                            <div class="col-12 col-md-6 col-lg-4 mb-6">
+                            <div class="card mx-auto my-0 p-0">
+                                <a href="https://edin.center/newsfeed/vzyskanie-dolgov-po-alimentam">
+                                    <img class="card-img-top rounded-top img-defer" alt="Взыскание долгов по алиментам" loading="lazy" src="https://edin.center/upload/pics/medium/2023/07/000933-Взыскание_алиментов_Новость.jpg" width="" height="" onerror="this.src='/img/placeholder-540.jpg'">
+                                </a>
+                                <div class="card-body px-5 pt-4 pb-9">
+                                    <h6 class="card-title">
+                                        <a href="https://edin.center/newsfeed/vzyskanie-dolgov-po-alimentam">
+                                            Взыскание долгов по алиментам                                        </a>
+                                    </h6>
+                                </div>
+                                <a class="link-alt position-absolute to-rb mr-4 mb-4" href="https://edin.center/newsfeed/vzyskanie-dolgov-po-alimentam">
+                                    Подробнее
+                                    <span class="btn btn-primary rounded-circle p-1 ml-1"><i class="icon icon-arrow-right icon-white icon-centered ml-0"></i></span>
+                                </a>
+                            </div>
+                        </div>
+                                            <div class="col-12 col-md-6 col-lg-4 mb-6">
+                            <div class="card mx-auto my-0 p-0">
+                                <a href="https://edin.center/newsfeed/vozmestili-290-000-rubley-klientke-za-materialnyy-vred-posle-dtp">
+                                    <img class="card-img-top rounded-top img-defer" alt="Возместили 290 000 рублей клиентке за материальный вред после ДТП" loading="lazy" src="https://edin.center/upload/pics/medium/2023/07/001024-Возместили_290_000_рублей_после_ДТП_Новость.jpg" width="" height="" onerror="this.src='/img/placeholder-540.jpg'">
+                                </a>
+                                <div class="card-body px-5 pt-4 pb-9">
+                                    <h6 class="card-title">
+                                        <a href="https://edin.center/newsfeed/vozmestili-290-000-rubley-klientke-za-materialnyy-vred-posle-dtp">
+                                            Возместили 290 000 рублей клиентке за материальный вред после ДТП                                        </a>
+                                    </h6>
+                                </div>
+                                <a class="link-alt position-absolute to-rb mr-4 mb-4" href="https://edin.center/newsfeed/vozmestili-290-000-rubley-klientke-za-materialnyy-vred-posle-dtp">
+                                    Подробнее
+                                    <span class="btn btn-primary rounded-circle p-1 ml-1"><i class="icon icon-arrow-right icon-white icon-centered ml-0"></i></span>
+                                </a>
+                            </div>
+                        </div>
+                                            <div class="col-12 col-md-6 col-lg-4 mb-6">
+                            <div class="card mx-auto my-0 p-0">
+                                <a href="https://edin.center/newsfeed/novaya-shema-moshennikov-">
+                                    <img class="card-img-top rounded-top img-defer" alt="Новая схема мошенников " loading="lazy" src="https://edin.center/upload/pics/medium/2023/07/000726-Новая_схема_мошенничества_Новость.jpg" width="" height="" onerror="this.src='/img/placeholder-540.jpg'">
+                                </a>
+                                <div class="card-body px-5 pt-4 pb-9">
+                                    <h6 class="card-title">
+                                        <a href="https://edin.center/newsfeed/novaya-shema-moshennikov-">
+                                            Новая схема мошенников                                         </a>
+                                    </h6>
+                                </div>
+                                <a class="link-alt position-absolute to-rb mr-4 mb-4" href="https://edin.center/newsfeed/novaya-shema-moshennikov-">
+                                    Подробнее
+                                    <span class="btn btn-primary rounded-circle p-1 ml-1"><i class="icon icon-arrow-right icon-white icon-centered ml-0"></i></span>
+                                </a>
+                            </div>
+                        </div>
+                                    </div>
+                <div class="text-center mt-8">
+                    <a class="btn btn-primary-lighten px-7 font-weight-bold" href="https://edin.center/newsfeed">Все новости</a>
+                </div>
+            </div>
+                            <div class="tabs__item" style="display: none;" id="media-res-articles">
+                <div class="row">
+                                            <div class="col-12 col-md-6 col-lg-4 mb-6">
+                            <div class="card mx-auto my-0 p-0">
+                                <a href="https://edin.center/articles/kak-poluchit-informaciyu-o-svoih-zadolzhennostyah-i-zadolzhennostyah-rodstvennikov-cherez-fssp-rossii">
+                                    <img class="card-img-top rounded-top img-defer" alt="Как получить информацию о своих задолженностях и задолженностях родственников через ФССП России" loading="lazy" src="https://edin.center/img/placeholder.jpg" width="" height="" onerror="this.src='/img/placeholder-540.jpg'">
+                                </a>
+                                <div class="card-body px-5 pt-4 pb-9">
+                                    <h6 class="card-title">
+                                        <a href="https://edin.center/articles/kak-poluchit-informaciyu-o-svoih-zadolzhennostyah-i-zadolzhennostyah-rodstvennikov-cherez-fssp-rossii">
+                                            Как получить информацию о своих задолженностях и задолженностях родственников...                                        </a>
+                                    </h6>
+                                </div>
+                                <a class="link-alt position-absolute to-rb mr-4 mb-4" href="https://edin.center/articles/kak-poluchit-informaciyu-o-svoih-zadolzhennostyah-i-zadolzhennostyah-rodstvennikov-cherez-fssp-rossii">
+                                    Подробнее
+                                    <span class="btn btn-primary rounded-circle p-1 ml-1"><i class="icon icon-arrow-right icon-white icon-centered ml-0"></i></span>
+                                </a>
+                            </div>
+                        </div>
+                                            <div class="col-12 col-md-6 col-lg-4 mb-6">
+                            <div class="card mx-auto my-0 p-0">
+                                <a href="https://edin.center/articles/yurist-ecz-pomog-proyti-bankrotstva-i-sohranit-zhile-mnogodetnoy-seme">
+                                    <img class="card-img-top rounded-top img-defer" alt="Юрист ЕЦЗ помог пройти банкротства и сохранить жилье многодетной семье‼️" loading="lazy" src="https://edin.center/img/placeholder.jpg" width="" height="" onerror="this.src='/img/placeholder-540.jpg'">
+                                </a>
+                                <div class="card-body px-5 pt-4 pb-9">
+                                    <h6 class="card-title">
+                                        <a href="https://edin.center/articles/yurist-ecz-pomog-proyti-bankrotstva-i-sohranit-zhile-mnogodetnoy-seme">
+                                            Юрист ЕЦЗ помог пройти банкротства и сохранить жилье многодетной семье‼️                                        </a>
+                                    </h6>
+                                </div>
+                                <a class="link-alt position-absolute to-rb mr-4 mb-4" href="https://edin.center/articles/yurist-ecz-pomog-proyti-bankrotstva-i-sohranit-zhile-mnogodetnoy-seme">
+                                    Подробнее
+                                    <span class="btn btn-primary rounded-circle p-1 ml-1"><i class="icon icon-arrow-right icon-white icon-centered ml-0"></i></span>
+                                </a>
+                            </div>
+                        </div>
+                                            <div class="col-12 col-md-6 col-lg-4 mb-6">
+                            <div class="card mx-auto my-0 p-0">
+                                <a href="https://edin.center/articles/refinansirovanie-kredita-umnyy-shag-k-finansovoy-svobode-i-snizheniyu-dolgovoy-nagruzki">
+                                    <img class="card-img-top rounded-top img-defer" alt="Рефинансирование кредита: умный шаг?" loading="lazy" src="https://edin.center/upload/pics/medium/2023/10/131056-Рефинансирование_кредита.jpg" width="" height="" onerror="this.src='/img/placeholder-540.jpg'">
+                                </a>
+                                <div class="card-body px-5 pt-4 pb-9">
+                                    <h6 class="card-title">
+                                        <a href="https://edin.center/articles/refinansirovanie-kredita-umnyy-shag-k-finansovoy-svobode-i-snizheniyu-dolgovoy-nagruzki">
+                                            Рефинансирование кредита: умный шаг?                                        </a>
+                                    </h6>
+                                </div>
+                                <a class="link-alt position-absolute to-rb mr-4 mb-4" href="https://edin.center/articles/refinansirovanie-kredita-umnyy-shag-k-finansovoy-svobode-i-snizheniyu-dolgovoy-nagruzki">
+                                    Подробнее
+                                    <span class="btn btn-primary rounded-circle p-1 ml-1"><i class="icon icon-arrow-right icon-white icon-centered ml-0"></i></span>
+                                </a>
+                            </div>
+                        </div>
+                                            <div class="col-12 col-md-6 col-lg-4 mb-6">
+                            <div class="card mx-auto my-0 p-0">
+                                <a href="https://edin.center/articles/">
+                                    <img class="card-img-top rounded-top img-defer" alt="Могут ли забрать квартиру за долги? Правовые аспекты и возможные сценарии" loading="lazy" src="https://edin.center/upload/pics/medium/2023/10/131015-Квартира_за_долги.jpg" width="" height="" onerror="this.src='/img/placeholder-540.jpg'">
+                                </a>
+                                <div class="card-body px-5 pt-4 pb-9">
+                                    <h6 class="card-title">
+                                        <a href="https://edin.center/articles/">
+                                            Могут ли забрать квартиру за долги? Правовые аспекты и возможные сценарии                                        </a>
+                                    </h6>
+                                </div>
+                                <a class="link-alt position-absolute to-rb mr-4 mb-4" href="https://edin.center/articles/">
+                                    Подробнее
+                                    <span class="btn btn-primary rounded-circle p-1 ml-1"><i class="icon icon-arrow-right icon-white icon-centered ml-0"></i></span>
+                                </a>
+                            </div>
+                        </div>
+                                            <div class="col-12 col-md-6 col-lg-4 mb-6">
+                            <div class="card mx-auto my-0 p-0">
+                                <a href="https://edin.center/articles/chto-stoit-uchest-rabotodatelyu-kotoryy-vzyal-k-sebe-na-rabotu-inostranca">
+                                    <img class="card-img-top rounded-top img-defer" alt="Что стоит учесть мигрантам и работодателям при получении патента " loading="lazy" src="https://edin.center/upload/pics/medium/2023/10/130934-Патент.jpg" width="" height="" onerror="this.src='/img/placeholder-540.jpg'">
+                                </a>
+                                <div class="card-body px-5 pt-4 pb-9">
+                                    <h6 class="card-title">
+                                        <a href="https://edin.center/articles/chto-stoit-uchest-rabotodatelyu-kotoryy-vzyal-k-sebe-na-rabotu-inostranca">
+                                            Что стоит учесть мигрантам и работодателям при получении патента                                         </a>
+                                    </h6>
+                                </div>
+                                <a class="link-alt position-absolute to-rb mr-4 mb-4" href="https://edin.center/articles/chto-stoit-uchest-rabotodatelyu-kotoryy-vzyal-k-sebe-na-rabotu-inostranca">
+                                    Подробнее
+                                    <span class="btn btn-primary rounded-circle p-1 ml-1"><i class="icon icon-arrow-right icon-white icon-centered ml-0"></i></span>
+                                </a>
+                            </div>
+                        </div>
+                                            <div class="col-12 col-md-6 col-lg-4 mb-6">
+                            <div class="card mx-auto my-0 p-0">
+                                <a href="https://edin.center/articles/net-bezvyhodnyh-situaciy-vyhod-est-vsegda-i-vo-vsem">
+                                    <img class="card-img-top rounded-top img-defer" alt="Нет безвыходных ситуаций, выход есть всегда и во всём!" loading="lazy" src="https://edin.center/img/placeholder.jpg" width="" height="" onerror="this.src='/img/placeholder-540.jpg'">
+                                </a>
+                                <div class="card-body px-5 pt-4 pb-9">
+                                    <h6 class="card-title">
+                                        <a href="https://edin.center/articles/net-bezvyhodnyh-situaciy-vyhod-est-vsegda-i-vo-vsem">
+                                            Нет безвыходных ситуаций, выход есть всегда и во всём!                                        </a>
+                                    </h6>
+                                </div>
+                                <a class="link-alt position-absolute to-rb mr-4 mb-4" href="https://edin.center/articles/net-bezvyhodnyh-situaciy-vyhod-est-vsegda-i-vo-vsem">
+                                    Подробнее
+                                    <span class="btn btn-primary rounded-circle p-1 ml-1"><i class="icon icon-arrow-right icon-white icon-centered ml-0"></i></span>
+                                </a>
+                            </div>
+                        </div>
+                                            <div class="col-12 col-md-6 col-lg-4 mb-6">
+                            <div class="card mx-auto my-0 p-0">
+                                <a href="https://edin.center/articles/etapy-procedury-bankrotstva-fizicheskih-lic-v-2023-godu">
+                                    <img class="card-img-top rounded-top img-defer" alt="Этапы процедуры банкротства физических лиц в 2023 году" loading="lazy" src="https://edin.center/upload/pics/medium/2023/09/121410-Этапы_процедуры_Статья_(2).jpg" width="" height="" onerror="this.src='/img/placeholder-540.jpg'">
+                                </a>
+                                <div class="card-body px-5 pt-4 pb-9">
+                                    <h6 class="card-title">
+                                        <a href="https://edin.center/articles/etapy-procedury-bankrotstva-fizicheskih-lic-v-2023-godu">
+                                            Этапы процедуры банкротства физических лиц в 2023 году                                        </a>
+                                    </h6>
+                                </div>
+                                <a class="link-alt position-absolute to-rb mr-4 mb-4" href="https://edin.center/articles/etapy-procedury-bankrotstva-fizicheskih-lic-v-2023-godu">
+                                    Подробнее
+                                    <span class="btn btn-primary rounded-circle p-1 ml-1"><i class="icon icon-arrow-right icon-white icon-centered ml-0"></i></span>
+                                </a>
+                            </div>
+                        </div>
+                                            <div class="col-12 col-md-6 col-lg-4 mb-6">
+                            <div class="card mx-auto my-0 p-0">
+                                <a href="https://edin.center/articles/usloviya-bankrotstva-fizicheskih-lic-v-2023-godu">
+                                    <img class="card-img-top rounded-top img-defer" alt="Условия банкротства физических лиц в 2023 году" loading="lazy" src="https://edin.center/upload/pics/medium/2023/09/121236-Условия_БФЛ_Статья_(2).jpg" width="" height="" onerror="this.src='/img/placeholder-540.jpg'">
+                                </a>
+                                <div class="card-body px-5 pt-4 pb-9">
+                                    <h6 class="card-title">
+                                        <a href="https://edin.center/articles/usloviya-bankrotstva-fizicheskih-lic-v-2023-godu">
+                                            Условия банкротства физических лиц в 2023 году                                        </a>
+                                    </h6>
+                                </div>
+                                <a class="link-alt position-absolute to-rb mr-4 mb-4" href="https://edin.center/articles/usloviya-bankrotstva-fizicheskih-lic-v-2023-godu">
+                                    Подробнее
+                                    <span class="btn btn-primary rounded-circle p-1 ml-1"><i class="icon icon-arrow-right icon-white icon-centered ml-0"></i></span>
+                                </a>
+                            </div>
+                        </div>
+                                            <div class="col-12 col-md-6 col-lg-4 mb-6">
+                            <div class="card mx-auto my-0 p-0">
+                                <a href="https://edin.center/articles/sroki-provedeniya-procedury-bankrotstva-v-2023-godu">
+                                    <img class="card-img-top rounded-top img-defer" alt="Сроки проведения процедуры банкротства в 2023 году" loading="lazy" src="https://edin.center/upload/pics/medium/2023/09/121258-Сроки_банкротства_Статья_(2).jpg" width="" height="" onerror="this.src='/img/placeholder-540.jpg'">
+                                </a>
+                                <div class="card-body px-5 pt-4 pb-9">
+                                    <h6 class="card-title">
+                                        <a href="https://edin.center/articles/sroki-provedeniya-procedury-bankrotstva-v-2023-godu">
+                                            Сроки проведения процедуры банкротства в 2023 году                                        </a>
+                                    </h6>
+                                </div>
+                                <a class="link-alt position-absolute to-rb mr-4 mb-4" href="https://edin.center/articles/sroki-provedeniya-procedury-bankrotstva-v-2023-godu">
+                                    Подробнее
+                                    <span class="btn btn-primary rounded-circle p-1 ml-1"><i class="icon icon-arrow-right icon-white icon-centered ml-0"></i></span>
+                                </a>
+                            </div>
+                        </div>
+                                    </div>
+                <div class="text-center mt-8">
+                    <a class="btn btn-primary-lighten px-7 font-weight-bold" href="https://edin.center/articles">Все статьи</a>
+                </div>
+            </div>
+            </div>
+</section>
+<section class="section mainpage-upd bg-warning text-center deferred-html">
+    <div class="container py-9 py-xl-11">
+        <div class="h2 mb-9 wrp-800 mx-auto">
+            Вы получите <span class="text-primary">консультацию</span> по решению Вашей проблемы, а также:
+        </div>
+        <div class="row text-md-left mb-md-5">
+            <div class="col-12 col-xl-4 px-xl-0 mb-8 mb-md-0">
+                <div class="d-flex flex-wrap flex-md-nowrap justify-content-center justify-content-md-start">
+                    <div class="block-image">
+                        <img class="pls-scale img-defer" loading="lazy" src="/images/document-magnifier.png" alt="Рекомендации по дальнейшим действиям" width="" height="">
+                    </div>
+                    <div class="mt-n4 mt-md-5 mt-xl-0">
+                        <div class="h1 pls-decorate font-weight-black mb-0 text-warning">01</div>
+                        <div>Разбор конкретно вашей ситуации, рекомендации по дальнейшим действиям</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-xl-4 px-xl-0 mb-8 mb-md-0">
+                <div class="d-flex flex-wrap flex-md-nowrap justify-content-center justify-content-md-start">
+                    <div class="block-image mt-xl-n5">
+                        <img class="pls-scale img-defer" loading="lazy" src="/images/ec-folder.png" alt="Список необходимых документов" width="" height="">
+                    </div>
+                    <div class="mt-n6 mt-md-7 mt-xl-0">
+                        <div class="h1 pls-decorate font-weight-black mb-0 text-warning">02</div>
+                        <div>Список необходимых документов, для быстрого решения проблемы</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-xl-4 px-xl-0 mb-8 mb-md-0">
+                <div class="d-flex flex-wrap flex-md-nowrap justify-content-center justify-content-md-start">
+                    <div class="block-image">
+                        <img class="pls-scale img-defer" loading="lazy" src="/images/ec-document-2.png" alt="Упрощение процедуры, получения банкротства" width="" height="">
+                    </div>
+                    <div class="mt-n4 mt-md-5 mt-xl-0">
+                        <div class="h1 pls-decorate font-weight-black mb-0 text-warning">03</div>
+                        <div>Рекомендации по быстрому решению вашего вопроса</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="wrp-900 mx-auto px-xl-10">
+                        <!-- для узких вертикальных колонок, добавляем  class .vert-->
+            <style>
+                .vert .widthBut {
+                    width: 100%;
+                    margin-bottom: 10px;
+                    font-size: 0.8em;
+                }
+
+                .vert .besplatno {
+                    margin-top: 50px;
+                }
+
+                .lgLead .widthBut {
+                    word-break: break-all;
+                    font-size: 0.8em;
+                }
+            </style>
+            <form action="https://edin.center/api/lead" data-form-type="lead" method="post" class="text-left  "  modal-confirm="true" confirm-title="Спасибо за обращение!" confirm-text="В ближайшее время мы свяжемся с вами">
+                <div class="to-appointment clearfix ">
+                    <input type="tel"
+                           name="lead[phone]"
+                           class="form-control widthBut "
+                           placeholder="Ваш номер телефона"
+                           data-validation="phone"
+                           required
+                           autocomplete="off"
+                           data-notsavetostate="true"
+                           >
+
+                    <input type="submit" class=" btn btn-primary dependent-on-consent widthBut" value="Получить консультацию">
+                </div>
+                                <p class="consent2 text-secondary">
+                    Отправляя свои данные, я соглашаюсь с <a href="/privacy-policy.pdf" target="_blank">политикой</a> и даю <a href="/security.pdf" target="_blank">согласие на обработку персональных данных</a>                </p>
+                <input type="hidden" name="lead[usluga]" value="8">
+                            </form>
+                        </div>
+    </div>
+</section>
+<section class="section mainpage-upd section--not-find-answer deferred-html">
+    <div class="container pt-11">
+        <div class="row position-relative">
+            <div class="col-12 col-xl-11 offset-xl-1">
+                <div class="not-find-answer pt-6 px-6 pb-12 p-xl-8">
+                    <div class="row">
+                        <div class="col-12 col-xl-2">
+                            <div class="contact-with-us">
+                                <img loading="lazy" src="/images/caption-contact-with-us.svg" alt="" class="contact-with-us__caption img-fluid img-defer" width="" height="">
+                                <img loading="lazy" src="/images/messenger-phone.png" alt="" class="contact-with-us__phone lax img-defer" data-lax-scale="(vh-(elh/2)) 0.5, (vh/2) 1" data-lax-anchor="self" width="" height="">
+                            </div>
+                        </div>
+                        <div class="col-12 col-xl-10">
+                            <div class="row text-center text-xl-left">
+                                <div class="col-12 h4">Не нашли ответ на нужный вопрос?</div>
+                                <div class="col-12 col-xl-5">
+                                    <p>Воспользуйтесь формой обратной связи</p>
+                                    <form action="https://edin.center/api/lead" data-form-type="lead" method="post" class="w-100 text-left" modal-confirm="true" confirm-title="Спасибо за вопрос!" confirm-text="В ближайшее время мы свяжемся с вами"> <textarea class="form-control mb-3" name="lead[question]" placeholder="Опишите вашу ситуацию"></textarea> <input class="form-control mb-7" type="tel" name="lead[phone]" placeholder="Номер телефона" data-validation="phone" required autocomplete="off" data-notsavetostate="true" > <div class="row"> <div class="col-12 col-md-5 col-xl-12"> <input type="submit" class="btn btn-primary w-100 mb-5 mb-md-0 mb-xl-5 dependent-on-consent" value="Задать вопрос"> </div> <div class="col-12 col-md-7 col-xl-12 d-flex align-items-center"> <p class="consent2 text-secondary"> Отправляя свои данные, я соглашаюсь с <a href="/privacy-policy.pdf" target="_blank">политикой</a> и даю <a href="/security.pdf" target="_blank">согласие на обработку персональных данных</a> </p> </div> </div> <input type="hidden" name="lead[usluga]" value="8"> </form>                                </div>
+                                <div class="col-12 col-xl-2 align-self-center text-center">
+                                    <div class="caption-or py-8 py-xl-0">или</div>
+                                </div>
+                                <div class="col-12 col-xl-5">
+                                    <p>Напишите нам напрямую в мессенджер</p>
+                                    <div class="messanger-buttons">
+                                        <a href="https://wa.me/send/?phone=79384505171" data-messenger="whatsapp" data-send="messenger" target="_blank" rel="nofollow noreferrer" class="btn social social--whatsapp">
+                                            <img class="img-defer" loading="lazy" src="/images/icon-whatsapp.svg" alt="" width="" height=""> Написать в WhatsApp
+                                        </a>
+                                        <a href="https://t.me/EdinCenter_bot" data-messenger="telegram" data-send="messenger" target="_blank" rel="nofollow noreferrer" class="btn social social--telegram">
+                                            <img  class="img-defer" loading="lazy" src="/images/icon-telegram.svg" alt="" width="" height=""> Написать в Telegram
+                                        </a>
+                                        <a href="https://vk.me/club89891139" data-send="messenger" target="_blank" rel="nofollow noreferrer" class="btn social social--vk">
+                                            <img class="img-defer" loading="lazy" src="/images/icon-altvk.svg" alt="" width="" height=""> Написать в ВКонтакте
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+    <section class="mainpage-upd legacy-icons section section--contract-in-place deferred-html">
+    <div class="container d-flex pb-9">
+        <div class="section__content w-xl-50 mx-auto mt-n5 pt-xl-10 pt-xxl-9 order-1 order-xl-0">
+            <div class="h2 mb-8 text-center text-xl-left move-up">
+                Вы можете приехать к нам в офис и на месте заключить договор о сотрудничестве
+            </div>
+        </div>
+        <div class="section__image promo w-xl-50 mx-auto mt-lg-6 mt-1 order-0 order-xl-1">
+            <img src="/images/caption-contract-in-place.svg" alt="Договор на месте" class="promo__caption lax d-none d-lg-block img-defer" data-lax-translate-x="(vh/1.3) -100, 0 50" data-lax-anchor="self" width="" height="">
+            <img src="/images/ec-documents-triple.png" alt="Единый Центр Защиты Документы" class="promo__image lax img-defer" data-lax-rotate="(vh-elh) -7, 0 0" data-lax-anchor="self" width="" height="">
+        </div>
+        <div class="row order-3 w-100">                <div class="col-12 col-xl-4 mb-5 mb-xl-0">
+                    <div class="row ">
+                        <div class="col-12 col-mg-6 col-lg-8 col-xl-12">
+                            <div class="h6 mb-5 city-select">
+                                <div class="icon float-left mr-2"><i class="icon__geo"></i></div>
+                                <a href="#" class="city-select__name" data-toggle="modal" data-target="#city_select">Ярославль</a>
+                                <a href="#" class="city-select__caption text-nowrap d-none d-sm-inline" data-toggle="modal" data-target="#city_select">выбрать</a>
+                            </div><div class="geo-address mb-3">ул. Свободы 11/37, 2 этаж</div>
+                            <div class="geo-opening-hours mb-5">
+                                <div>пн-пт: 09:00 - 19:00</div>
+                                <div>сб: 10:00 - 16:00</div>
+                                <div>вс: выходной</div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-mg-6 col-lg-4 col-xl-12">
+                            <div class="h6 geo-phone">
+                                <div class="icon float-left mr-2"><i class="icon__phone"></i></div><a class="border-0 phone red-1" href="tel:8 (4852) 58-15-15">8 (4852) 58-15-15</a>
+                            </div>
+                            <div class="h6 geo-email officeMail">
+                                <div class="icon float-left mr-2"><i class="icon__email"></i></div><a class="border-0" href="mailto:yarsl@edin.center">yarsl@edin.center</a>                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class=" col-12 col-xl-8">
+                <div>
+                                            <div class="h6">Ориентир</div>
+                        <p class="mb-7">Доходный дом Понизовкиных, вход с улицы Свободы, в соседних зданиях ТК Европа, ТЦ Ниагара</p>
+                                    </div>
+                <div class="office-details flex-column flex-md-row">
+                                            <div class="office-details__item">
+                            <div class="h6">Район</div>
+                            <p>Кировский район</p>
+                        </div>
+                                            <div class="office-details__item">
+                            <div class="h6">Остановка</div>
+                            <p>Знаменская башня</p>
+                        </div>
+                                            <div class="office-details__item">
+                            <div class="h6">Автобусы</div>
+                            <p>49, 99с, 139, 140, 178</p>
+                        </div>
+                                            <div class="office-details__item">
+                            <div class="h6">Троллейбусы</div>
+                            <p>1</p>
+                        </div>
+                                    </div>
+                </div>        </div>
+    </div>
+    </section>
+
+<div class="container deferred-html">
+    <section class="section mainpage-upd section--your-visit bg-warning px-4 py-md-75 px-md-75 px-20 py-40 mb-75 text-center">
+        <div class="h4 mb-7">Сообщите о своем визите, чтобы мы успели подготовиться</div>
+        <div class="section__content wrp-970 mx-auto">
+                    <form action="https://edin.center/api/lead" data-form-type="lead" method="post" class="text-left" modal-confirm="true" confirm-title="Спасибо за сообщение о визите" confirm-text="Будем ждать вас с нетерпением!">
+            <div class="row">
+                <div class="col-12 col-xl-4">
+                    <input class="form-control mb-3"
+                           type="tel"
+                           name="lead[phone]"
+                           placeholder="Ваш телефон"
+                           data-validation="phone"
+                           required
+                           autocomplete="off"
+                           data-notsavetostate="true"
+                           >
+                </div>
+                <div class="col-12 col-xl-4">
+                    <input class="form-control mb-3 datetimepicker" type="text" name="lead[question]" data-notsavetostate="true" placeholder="Дата и время визита" required autocomplete="off">
+                </div>
+                <div class="col-12 col-xl-4">
+                    <input type="submit" class="btn btn-primary w-100 mb-3 dependent-on-consent" value="Сообщить о визите">
+                </div>
+            </div>
+            <div class="mt-1">
+                <p class="consent2 text-secondary">
+                    Отправляя свои данные, я соглашаюсь с <a href="/privacy-policy.pdf" target="_blank">политикой</a> и даю <a href="/security.pdf" target="_blank">согласие на обработку персональных данных</a>                </p>
+            </div>
+            <input type="hidden" name="lead[usluga]" value="8">
+        </form>
+                </div>
+    </section>
+</div>
+{% endblock %}

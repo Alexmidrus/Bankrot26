@@ -35,6 +35,10 @@ function eraseCookie(key) {
 	setCookie(key, keyValue, '-1');
 }
 
+function numberWithSep(x, sep = ' ') {
+	return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, sep);
+}
+
 String.prototype.hashCode = function() {
 	var hash = 0,
 	i, chr;
@@ -82,28 +86,33 @@ var $_GET = location.search.substr(1).split("&").reduce((o,i)=>(u=decodeURICompo
 
 
 if ($_GET['utm_source']) {
-	sessionStorage.setItem('utm_source', encodeURIComponent($_GET['utm_source']));
+	setCookie('utm_source', encodeURIComponent($_GET['utm_source']), 1);
 }
 
 if ($_GET['utm_medium']) {
-	sessionStorage.setItem('utm_medium', encodeURIComponent($_GET['utm_medium']));
+	setCookie('utm_medium', encodeURIComponent($_GET['utm_medium']), 1);
 }
 
 if ($_GET['utm_campaign']) {
-	sessionStorage.setItem('utm_campaign', encodeURIComponent($_GET['utm_campaign']));
+	setCookie('utm_campaign', encodeURIComponent($_GET['utm_campaign']), 1);
 }
 
 if ($_GET['utm_term']) {
-	sessionStorage.setItem('utm_term', encodeURIComponent($_GET['utm_term']));
+	setCookie('utm_term', encodeURIComponent($_GET['utm_term']), 1);
 }
 
 if ($_GET['utm_content']) {
-	sessionStorage.setItem('utm_content', encodeURIComponent($_GET['utm_content']));
+	setCookie('utm_content', encodeURIComponent($_GET['utm_content']), 1);
+}
+
+if ($_GET['ref']) {
+	sessionStorage.setItem('ref', $_GET['ref']);
 }
 
 if (sessionStorage.getItem('ShowChat') == 'true'){
 	document.body.classList.add("show-stickchat");
 }
+
 
 function toUnicode(str) {
 	return str.split('').map(function (value, index, array) {
@@ -115,12 +124,12 @@ function toUnicode(str) {
 	}).join('');
 }
 
-function num_word(value, words){  
-	value = Math.abs(value) % 100; 
+function num_word(value, words){
+	value = Math.abs(value) % 100;
 	var num = value % 10;
-	if(value > 10 && value < 20) return words[2]; 
+	if(value > 10 && value < 20) return words[2];
 	if(num > 1 && num < 5) return words[1];
-	if(num == 1) return words[0]; 
+	if(num == 1) return words[0];
 	return words[2];
 }
 
@@ -397,9 +406,9 @@ function messenger_check(msg_type, msg_text, modal){
 			}, {}]
 		}, {}, [1])(1)
 	});
-	
-	var webLink, appLink; 
-	
+
+	var webLink, appLink;
+
 
 	switch(msg_type){
 		case "whatsapp":
@@ -410,11 +419,11 @@ function messenger_check(msg_type, msg_text, modal){
 			webLink = "https://t.me/EdinCenter_bot";
 			appLink = "tg://resolve?domain=EdinCenter_bot";
 			break;
-	}	
+	}
 
 	if (msg_text){
 		msg_text = encodeURIComponent(msg_text);
-		
+
 		switch(msg_type){
 		case "whatsapp":
 			webLink = webLink+'&text='+msg_text;
@@ -424,15 +433,19 @@ function messenger_check(msg_type, msg_text, modal){
 			webLink = "https://t.me/EdinCenter_bot";
 			appLink = "tg://resolve?domain=EdinCenter_bot";
 			break;*/
-		}			
-	} 	
+		}
+	}
 
-	
-	
+
+
 
 	modal.append('<a href="'+ webLink +'" id="wwlink" target="_blank" style="display:none"><span></span></a>');
 	var timer_click;
 	var link = $('#wwlink');
+
+	try{
+		yaCounter28531226.reachGoal('messengers');
+	} catch(e){}
 
 	protocolCheck(appLink, function () {
 		timer_click = setTimeout(function(){
@@ -440,7 +453,7 @@ function messenger_check(msg_type, msg_text, modal){
 		}, 1000);
 	}, function () {
 		document.location.href = appLink;
-		if(timer_click != undefined){                
+		if(timer_click != undefined){
 			timer_click.remove();
 		}
 	}, function () {
@@ -459,9 +472,56 @@ $.fn.isInViewport = function () {
 };
 
 
+function calltrack(){
+	if (getCookie('utm_campaign') || getCookie('utm_source') || getCookie('utm_medium') ){
+		var calltrack;
+
+		if (getCookie('calltrack')){
+			calltrack = JSON.parse(getCookie('calltrack'));
+		}
+
+		if(!calltrack)
+			calltrack = 0;
+
+		if (calltrack.city != window.cityID){
+			$.ajax({
+				url: '/api/geo/calltrack',
+				method: 'get',
+				data: {
+					city: window.cityID,
+				},
+				success: function (data) {
+					if (data['phone']){
+						setCookie('calltrack', JSON.stringify(data), 15 / 24 / 60);
+						$('a[href^="tel:'+window.basicPhone+'"]').each(function(i, el){
+
+							$(this).attr('href','tel:'+phone_format(data['phone']));
+
+							if ($(this).text().trim() == window.basicPhoneText)
+								$(this).text(data['phone']);
+
+						});
+
+						$('.map-link[data-phone^="'+window.basicPhoneText+'"]').attr('data-phone', data['phone']);
+
+					} else {
+						setCookie('calltrack', '{"city":"0"}', 15 / 24 / 60);
+					}
+				},
+				error: function(){
+					setCookie('calltrack', '{"city":"0"}', 15 / 24 / 60);
+				}
+
+			});
+		}
+	}else{
+		setCookie('calltrack', '{"city":"0"}', 60 / 24 / 60);
+	}
+};
+
 document.addEventListener("DOMContentLoaded", function() {
 	var lazyBackgrounds = [].slice.call(document.querySelectorAll(".lazy-bg"));
-   
+
 	if ("IntersectionObserver" in window) {
 	  	let lazyBackgroundObserver = new IntersectionObserver(function(entries, observer) {
 	   		entries.forEach(function(entry) {
@@ -471,7 +531,7 @@ document.addEventListener("DOMContentLoaded", function() {
 				}
 	    		});
 		});
-   
+
 		lazyBackgrounds.forEach(function(lazyBackground) {
 	    		lazyBackgroundObserver.observe(lazyBackground);
 	 	});
@@ -483,7 +543,7 @@ document.addEventListener("DOMContentLoaded", function() {
 		let icons_obs = new IntersectionObserver(function(entries, observer) {
 			entries.forEach(function(entry) {
 				if (entry.isIntersecting) {
-					entry.target.classList.add("load");				
+					entry.target.classList.add("load");
 					icons_obs.unobserve(entry.target);
 				}
 			});
@@ -497,6 +557,46 @@ document.addEventListener("DOMContentLoaded", function() {
 		});
 	}
 });
+
+
+function openSuccessModal(modal_title, modal_text, modal_class, modal_icon, modal_btn_text){
+
+	if (!modal_title)
+		modal_title = "Заявка создана";
+	if (!modal_text)
+		modal_text = "Ожидайте, наш менеджер свяжется с вами очень быстро";
+	if (!modal_icon)
+		modal_icon = "icon-checkbox-circle";
+	if (!modal_btn_text)
+		modal_btn_text = "Хорошо";
+
+
+	$('body').append(`
+	<div class="modal fade modern-modal success-modal mobile-fullscreen-modal mobile-fullscreen-with-menu `+modal_class+`" id="success_modal" tabindex="-1" role="dialog" aria-labelledby="succes_modal" aria-modal="true">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content">
+				<div class="modal-body">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Закрыть"><span aria-hidden="true"></span></button>
+					<div class="mobile-menu-scroll">
+						<div class="d-flex align-items-center flex-column text-center">
+							<i class="icon `+modal_icon+` icon-centered"></i>
+							<div class="h2">`+modal_title+`</div>
+							<div class="mb-30">`+modal_text+`</div>
+							<button class="btn btn-primary" data-dismiss="modal">`+modal_btn_text+`</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>`);
+
+
+	$('#success_modal').modal('show');
+	$('#success_modal').on('hidden.bs.modal', function (e) {
+		$('#success_modal').remove();
+	});
+
+};
 
 
 const mob_break = 991;
@@ -531,9 +631,9 @@ $(window).resize(function() {
 });
 
 $( document ).ready(function() {
-	
+
 	var mob_main_btn = $('.mobile-nav-content .main-btn');
-	
+
 	function mob_button_check(){
 		var is_view;
 		$('.fade-mobnav-btn').each(function(i, el){
@@ -544,51 +644,57 @@ $( document ).ready(function() {
 			mob_main_btn.removeClass('active-btn');
 		else
 			mob_main_btn.addClass('active-btn');
-	}	
-	
+	}
+
 	header_size();
 
-	if ($(window).width() < mob_break){	
+	if ($(window).width() < mob_break){
 		mob_button_check();
 	}
 
 	if (iOS()){
 		$('.mobile-nav').addClass('iOS');
 	}
-	
+
 	$(window).scroll(function(event){
 		if ($(window).width() > mob_break){
 			var st = $(this).scrollTop();
 			if (st < lastScrollTop){
 				if (startMenuView == 0){
 					startMenuView = 1;
-					$('body').addClass('show-menu');	
+					$('body').addClass('show-menu');
 				}
 
 			} else {
 				if (startMenuView == 1){
 					startMenuView = 0;
-					$('body').removeClass('show-menu');					
+					$('body').removeClass('show-menu');
 				}
-			   
+
 			}
-			
+
 			if (menuFixed == 0 && st > 300){
 					menuFixed = 1;
 					$('body').addClass('menu-fixed');
 			}
-			
+
 			if (st == 0) {
 				$('body').removeClass('menu-fixed');
 				menuFixed = 0;
 			}
-			
+
 			lastScrollTop = st;
 		}else{
 			mob_button_check();
 		}
 	});
-	
+
+	if ($('.desktop-bottom-buttons').length){
+		if ($('.desktop-bottom-buttons').offset().top < 1500){
+			$('.desktop-bottom-buttons').removeClass('show').addClass('static');
+		}
+	}
+
 	$(window).scroll(function(event){
 		if ($(window).width() > mob_break){
 			var st = $(this).scrollTop();
@@ -598,7 +704,7 @@ $( document ).ready(function() {
 			var show_height = 1000;
 			if (buttons_show_height > 0)
 				show_height = buttons_show_height;
-			
+
 			if (st > show_height){
 				if (sb > wrap_top + 120){
 					elem.removeClass('show').addClass('static');
@@ -608,7 +714,7 @@ $( document ).ready(function() {
 				}
 			} else{
 				elem.removeClass('show');
-			}			
+			}
 		}
 	});
 
@@ -630,7 +736,7 @@ $( document ).ready(function() {
 				active = true;
 				target = this;
 			}
-		});	
+		});
 
 		$('.mobile-menu-content').on('touchmove', function(e){
 			if (active) {
@@ -650,17 +756,17 @@ $( document ).ready(function() {
 				if (currentY > 30){
 					initialY = 0;
 					var menu_tab = $(this).parents('.mobile-menu-fixed');
-			
+
 					menu_tab.removeClass('show');
 					setTimeout(function() {
 						menu_tab.removeClass('enable');
 					}, 200);
-					
+
 					$('.mobile-menu-bg').removeClass('show');
 					$('body').removeClass('modal-open');
 					$('html').removeClass('modal-open');
 					$('.mob-menu-drop').removeClass('active');
-					
+
 					if (menu_tab.hasClass('show-form')){
 						menu_tab.removeClass('show-form');
 						menu_tab.find('.mobile-menu-form').removeClass('show');
@@ -681,11 +787,11 @@ $( document ).ready(function() {
 		}
 
 	}
-	
+
 	if ($('.newsfeed-article-menu').length > 0 && $(window).width() > mob_break){
 		var toc = "";
 		var level = 1;
-	 
+
 		document.getElementById("contents").innerHTML =
 		    document.getElementById("contents").innerHTML.replace(
 			   /<h([\d])>([^<]+)<\/h([\d])>/gi,
@@ -693,27 +799,27 @@ $( document ).ready(function() {
 				  if (openLevel != closeLevel) {
 					 return str;
 				  }
-	 
+
 				  if (openLevel > level) {
 					 toc += (new Array(openLevel - level + 1)).join("<ul>");
 				  } else if (openLevel < level) {
 					 toc += (new Array(level - openLevel + 1)).join("</ul>");
 				  }
-	 
+
 				  level = parseInt(openLevel);
-	 
+
 				  var anchor = titleText.replace(/ /g, "_").hashCode();
 				  toc += "<li><a class=\"toc-link\" data-header=\"#" + anchor + "\">" + titleText
 					 + "</a></li>";
-	 
+
 				  return "<h" + openLevel + " id=\"" + anchor + "\"" + "class=\"article-header\">"+ titleText + "</h" + closeLevel + ">";
 			   }
 		    );
-	 
+
 		if (level && toc) {
 		    toc += (new Array(level + 1)).join("</ul>");
 		}
-	 
+
 		document.getElementById("toc").innerHTML = toc + document.getElementById("toc").innerHTML;
 
 		if (toc != ''){
@@ -723,16 +829,16 @@ $( document ).ready(function() {
 		$("body").on('click', '.toc-link', function (event) {
 			event.preventDefault();
 			var anc_offset = 15;
-	
+
 			if ($($(this).attr('data-header')).offset().top < window.scrollY && $(window).width() > mob_break){
 				anc_offset = anc_offset + headerSize;
 			}
-	
+
 			$('html, body').animate({
 				scrollTop: $($(this).attr('data-header')).offset().top - anc_offset
 			}, 500);
 		});
-	
+
 		function article_header_check(){
 			$('.article-header').each(function(i, el){
 				if ($(this).offset().top - window.scrollY < 150 && $(this).offset().top > window.scrollY){
@@ -748,57 +854,69 @@ $( document ).ready(function() {
 		});
 
 	};
-	
-	
+
+
 	$('.modal').on('shown.bs.modal', function (e) {
 		$('html').addClass('modal-open');
 	})
-	
+
 	$('.modal').on('hide.bs.modal', function (e) {
 		$('html').removeClass('modal-open');
 	})
-	
-	
+
+
 	$('.modal').on('show.bs.modal', function (e) {
 		var mob_form = $('#'+$(this).attr('id')+'_mob');
-		
+
 		if (mob_form.length > 0){
 			if ($(window).width() < mob_break) {
 				e.preventDefault();
 				var menu_tab = mob_form.parents('.mobile-menu-fixed');
 				var menu_content = menu_tab.find('.mob-menu-content-wrap');
 				var loader = menu_tab.find('.loading');
-				
+
 				loader.addClass('show');
-			
+
 				if (!menu_tab.hasClass('show')){
 					menu_tab.addClass('show');
 					menu_tab.parents('.mobile-nav-menus').find('.mobile-menu-bg').addClass('show');
 				}
-			
-			
+
+
 				setTimeout(function () {
-					
+
 					mob_form.addClass('show');
 					menu_tab.addClass('show-form');
-					
+
 					loader.removeClass('show').addClass('transition');
 					setTimeout(function () {
 						loader.removeClass('transition');
 					}, 200);
 				}, 400);
-					
+
 			}
 		}
 	});
 
-	
+
+	$('.nav-item.dropdown').mouseleave(function() {
+		var menuitem = $(this);
+		menuitem.addClass( "open" );
+		setTimeout(function(){
+			menuitem.removeClass( "open" );
+		}, 500);
+	});
+
+	$('.nav-item.dropdown').mouseenter(function() {
+		$('.nav-item.dropdown').removeClass( "open" );
+	});
+
 	/*$('.mobile-menu-wrap .back:not([data-step])').on('click', function(e){
 		var menu_tab = $(this).parents('.mobile-menu-fixed');
 		var loader = menu_tab.find('.loading');
-		
+
 		loader.addClass('show');
-		
+
 		setTimeout(function () {
 			current_step = menu_tab.find('.mobile-menu-form.show').find('.steps-wrap_step:not(.d-none)');
 			if (current_step.index() > 0){
@@ -808,23 +926,23 @@ $( document ).ready(function() {
 				menu_tab.removeClass('show-form');
 				menu_tab.find('.mobile-menu-form').removeClass('show');
 			}
-			
+
 			loader.removeClass('show').addClass('transition');
 			setTimeout(function () {
 				loader.removeClass('transition');
 			}, 200);
 		}, 400);
-		
+
 	});*/
-	
-	
+
+
 	$('.mob-menu-drop').on('click', function(e){
 		e.preventDefault();
 		var target = $($(this).data('target'));
 		var navs = $('.mobile-nav-menus .mobile-menu-fixed').not(target);
 		var navs_btns = $('.mob-menu-drop');
 		var bg = $('.mobile-menu-bg');
-		
+
 		$(target).find('.mobile-menu-content').removeClass('scroll');
 
 		if (target.hasClass('show')){
@@ -849,7 +967,7 @@ $( document ).ready(function() {
 			setTimeout(function() {
 				target.addClass('show');
 			}, 10);
-			
+
 			navs_btns.removeClass('active');
 			$(this).addClass('active');
 			$('body').addClass('modal-open');
@@ -857,9 +975,9 @@ $( document ).ready(function() {
 		}
 
 		$('.modal.show').modal('hide');
-		
+
 	});
-	
+
 	$('.mobile-nav-menus').on('click','.mobile-menu-fixed.show', function(e){
 		if(e.target.className == 'mobile-menu-wrap'){
 			$(this).removeClass('show');
@@ -870,21 +988,21 @@ $( document ).ready(function() {
 			$('body').removeClass('modal-open');
 			$('html').removeClass('modal-open');
 			$('.mob-menu-drop').removeClass('active');
-			
+
 			if ($(this).hasClass('show-form')){
 				$(this).removeClass('show-form');
 				$(this).find('.mobile-menu-form').removeClass('show');
 			}
-			
+
 			if ($(this).find('.steps-modal-form').length > 0)
 				clearSteps($(this).find('.steps-modal-form'));
-			
+
 		}
 	});
-	
+
 	$('.mobile-menu-fixed .close').on('click', function(e){
 		var menu_tab = $(this).parents('.mobile-menu-fixed');
-		
+
 		menu_tab.removeClass('show');
 		setTimeout(function() {
 			menu_tab.removeClass('enable');
@@ -894,7 +1012,7 @@ $( document ).ready(function() {
 		$('body').removeClass('modal-open');
 		$('html').removeClass('modal-open');
 		$('.mob-menu-drop').removeClass('active');
-		
+
 		if (menu_tab.hasClass('show-form')){
 			menu_tab.removeClass('show-form');
 			menu_tab.find('.mobile-menu-form').removeClass('show');
@@ -903,31 +1021,31 @@ $( document ).ready(function() {
 		if (menu_tab.find('.steps-modal-form').length > 0)
 				clearSteps(menu_tab.find('.steps-modal-form'));
 	});
-	
+
 	$('.menu-mobile-toggle:not(.disabled)').on('click', function(e){
 		$(this).next().slideToggle();
 		$(this).toggleClass('show');
 	});
-	
-	
+
+
 	$('.menu-mobile-select[data-change]').on('click', 'li', function(e){
 		var parent_select = $(this).parents('.menu-mobile-select');
 		var select_text = parent_select.find('.menu-mobile-toggle');
 		var select_list =  parent_select.find('ul');
 		var target = $(parent_select.data('change'));
 		var value = $(this).data('value');
-		
+
 		parent_select.find('li').removeClass('select');
 		$(this).addClass('select');
 		select_text.html($(this).html());
 		target.val(value);
 		select_list.slideToggle();
 		select_text.removeClass('show');
-		
+
 		parent_select.trigger('select-change');
 	});
-		
-		
+
+
 	$(function(){
 		var requiredCheckboxes = $('.checkbox-group :checkbox[required]');
 		requiredCheckboxes.change(function(){
@@ -944,33 +1062,33 @@ $( document ).ready(function() {
 		office_update_date($(this));
 		office_update_time($(this));
 	});
-		
+
 	$('.menu-mobile-select.office_address_select').on('select-change', function(e){
 		office_update_date($(this).parents('.steps-wrap_step'));
 		office_update_time($(this).parents('.steps-wrap_step'));
 	});
-	
+
 	$('.menu-mobile-select.office_date_select').on('select-change', function(e){
 		office_update_time($(this).parents('.steps-wrap_step'));
 	});
-	
-	
+
+
 	function office_update_date(step){
 		var this_date = new Date();
 		this_date.setHours(this_date.getHours() + 1);
-		
+
 		if (this_date.getMinutes() >= 30)
 			this_date.setHours(this_date.getHours() + 1);
-		
+
 		var selected_date = new Date(step.find('#office_date').val());
 		var selected_office_time = step.find('.office_address_select .select').data('office-time');
 		var i = 0;
-		
+
 		var select_new_date_output = '';
-		
+
 		if (this_date.getHours() >= selected_office_time[this_date.getDay()][1].split(':', 2)[0])
 			i = 1;
-		
+
 		counter = 0;
 		while (counter < 3){
 			let loop_date = new Date;
@@ -978,8 +1096,8 @@ $( document ).ready(function() {
 
 			loop_date.setDate(this_date.getDate() + i);
 			loop_date.setHours(0, 0, 0);
-			
-			
+
+
 
 			if (loop_date.getDay() > 0){
 				switch (i){
@@ -991,60 +1109,60 @@ $( document ).ready(function() {
 						break;
 					case 2:
 						current_day_name = 'Послезавтра';
-						break;	
+						break;
 				}
-				
+
 				if (select_new_date_output == '') {
 					select_new_date_output += '<li class="select d-flex justify-content-between"';
 				} else {
 					select_new_date_output += '<li class="d-flex justify-content-between"';
 				}
-				
+
 				loop_date_value = loop_date.getFullYear()+"-"+("0" + (loop_date.getMonth() + 1)).slice(-2)+"-"+("0" + loop_date.getDate()).slice(-2);
-				
+
 				select_new_date_output += ' data-value="'+loop_date_value+'">'+loop_date.toLocaleDateString();
 				if (current_day_name != '')
 						select_new_date_output += '<span class="gray-3 bd-2 regular">'+current_day_name+'</span>';
 				select_new_date_output += '</li>';
-				
+
 				counter++;
 			}
 			i++;
 		}
 		select_new_date_output +='<li data-value="1970-01-01">Другой день <span class="d-block gray-3 bd-2 regular">для записи с вами свяжется оператор</span></li>';
-		
-		
+
+
 		step.find('.office_date_select ul').html(select_new_date_output);
 		step.find('.office_date_select .menu-mobile-toggle').html(step.find('.office_date_select li.select').html());
-		step.find('#office_date').val(step.find('.office_date_select .select').data('value'));	
+		step.find('#office_date').val(step.find('.office_date_select .select').data('value'));
 	}
-	
+
 	function office_update_time(step){
 		var this_date = new Date();
 		this_date.setHours(this_date.getHours() + 1);
-		
+
 		if (this_date.getMinutes() >= 30)
 			this_date.setHours(this_date.getHours() + 1);
-		
+
 		var selected_date = new Date(step.find('.office_date_select .select').data('value'));
 		var selected_office_time = step.find('.office_address_select .select').data('office-time');
 		var office_start_hours, office_end_hours;
 		var select_new_date = [];
 		var time_selector = step.find('.office_time_select');
-		
+
 		if (selected_date.getYear() == 70){
 			time_selector.addClass("d-none");
 		} else {
 			time_selector.removeClass("d-none");
 		}
-		
+
 		if (this_date.toDateString() != selected_date.toDateString()){
 			this_date = selected_date;
 			this_date.setHours(0, 0, 0);
 		}
-		
+
 		if (selected_office_time != null){
-						
+
 			office_start_hours = selected_office_time[this_date.getDay()][0].split(':', 2)[0];
 			office_end_hours = selected_office_time[this_date.getDay()][1].split(':', 2)[0];
 
@@ -1069,7 +1187,7 @@ $( document ).ready(function() {
 				} else {
 					select_new_time_output += '<li data-value="'+item+'">'+item+'</li>';
 				}
-				
+
 			});
 
 			step.find('.office_time_select ul').html(select_new_time_output);
@@ -1093,7 +1211,7 @@ $( document ).ready(function() {
 		if (phone.length > 0){
 
 			$(this).find('.sms-phone').text(phone);
-			
+
 			if (sms_send_interval == 0){
 				$.ajax({
 					url: '/api/lead/sms',
@@ -1152,7 +1270,7 @@ $( document ).ready(function() {
 
 
 	});
-	
+
 
 
 	function office_resend_sms(target, phone){
@@ -1160,7 +1278,7 @@ $( document ).ready(function() {
 		var sms_resend_sec = $(target).find('.sms-resend-seconds');
 		var sms_resend_text = $(target).find('.sms-resend-text');
 		var counter = sms_send_timeout;
-	
+
 		sms_resend_text.text('Отправить повторно, через');
 		sms_resend_sec.text(' '+counter+' сек');
 
@@ -1199,30 +1317,30 @@ $( document ).ready(function() {
 
 	$('.step-office').on('click', '[data-step="office-sms"]', function(e){
 		var step = $(this).parents('.step-office');
-		
+
 		window.office_form_office = step.find('.office_address_select .select').data();
 		window.office_form_date = step.find('#office_date').val();
-		window.office_form_time = step.find('#office_time').val();		
+		window.office_form_time = step.find('#office_time').val();
 	})
-	
-	
+
+
 	$('.step-office-confirm').on('step_load', function(e){
 		var this_date = new Date();
 		var office = window.office_form_office;
 		var date = window.office_form_date;
 		var time = window.office_form_time;
 		var diff = new Date(date +' '+ time) - this_date;
-		
+
 		if (diff > 0){
 			let minutes  = Math.floor(diff / (1000 * 60));
 			let hours = Math.floor(minutes / 60);
-			
+
 			minutes = Math.floor(minutes % 60);
 
 			if (hours < 24){
 				$(this).find('.office-time-left').text('Осталось '+(hours ? hours+' ч. ':'')+ minutes + ' мин.' );
 			}
-			
+
 			let days = Math.floor((new Date(date) - this_date.setHours(0, 0, 0)) / (1000 * 60 * 60 * 24));
 
 			switch (days){
@@ -1234,31 +1352,31 @@ $( document ).ready(function() {
 						break;
 					case 2:
 						day_name = 'Послезавтра';
-						break;	
+						break;
 					default:
 						day_name = new Date(date).toLocaleDateString();
 				}
-			
+
 		} else {
 			day_name = new Date(date).toLocaleDateString();
 		}
-		
-		
+
+
 		$(this).find('.office-confirm-info .time').text(time);
 		$(this).find('.office-confirm-info .date').text(day_name);
-		
+
 		$(this).find('.office-confirm-address-info .address span').text('г.	'+office['city']+', '+office['value']);
 		$(this).find('.office-confirm-address-info .phone span').html('<a href="tel:'+office['phone']+'" class="phone phone-shown gray-1">'+office['phone']+'</a>');
-		
+
 		if (this_date.getDay()==0){
 			$(this).find('.office-confirm-address-info .worktime span').text('Сегодня закрыто');
 		} else{
 			$(this).find('.office-confirm-address-info .worktime span').text('Открыто до '+ office['officeTime'][this_date.getDay()][1]);
 		}
-		
+
 	});
-	
-	
+
+
 	$('.quiz-select:not(.more)').on('click', function(e){
 		var data = JSON.parse($(this).attr('data-quiz'));
 		var step = $(this).attr('data-step');
@@ -1266,12 +1384,12 @@ $( document ).ready(function() {
 		if (data)
 			$(this).parents('form').find('.step-'+step).attr('data-quiz', JSON.stringify(data)).attr('data-title', title);
 	});
-	
+
 	$('.quiz-select.more').on('click', function(e){
 		$(this).parent().find('.quiz-select-hidden').removeClass('quiz-select-hidden');
-		$(this).addClass('d-none'); 
+		$(this).addClass('d-none');
 	});
-	
+
 	$('.step-quiz').on('step_load', function(e){
 		var data = JSON.parse($(this).attr('data-quiz'));
 		var quiz_step = $(this).attr('quiz-step');
@@ -1284,25 +1402,25 @@ $( document ).ready(function() {
 		var html_answers = '';
 		var html_progress = '';
 		var next_step = $(this).attr('data-next-step')
-				
+
 		if (!quiz_step){
 			$(this).attr('quiz-step', 1);
 			quiz_step = 1;
 			quiz_input.val('');
 			//$(this).find('.debt-data').val('');
 		}
-		
+
 		if (quiz_step == 1){
 			$(this).find('.first-info').fadeIn(300);
 		}else{
 			$(this).find('.first-info').fadeOut(500);
 		}
-		
+
 		if (title)
 			$(this).find('.mobile-menu-header .st-1').text(title);
-		
-		
-		
+
+
+
 		for (var i = 1; i <= max_step; i++) {
 			if (quiz_step >= i){
 				html_progress+='<span class="active"></span>';
@@ -1310,28 +1428,28 @@ $( document ).ready(function() {
 				html_progress+='<span></span>';
 			}
 		}
-		
+
 		progress.fadeOut(500, function(){
 			$(this).html(html_progress);
 			$(this).fadeIn(300);
 		});
-		
+
 		$(this).find('.quiz-block').fadeOut(500, function(){
 			quiz_question.text(data[quiz_step].question);
-			
+
 			$.each(data[quiz_step].answers, function( index, value ) {
 				if (quiz_step == max_step){
-					html_answers += '<div class="quiz-answer-wrap"><div class="quiz-answer" data-step="'+next_step+'">'+value+'</div></div>'; 
+					html_answers += '<div class="quiz-answer-wrap"><div class="quiz-answer" data-step="'+next_step+'">'+value+'</div></div>';
 				} else {
-					html_answers += '<div class="quiz-answer-wrap"><div class="quiz-answer">'+value+'</div></div>'; 
+					html_answers += '<div class="quiz-answer-wrap"><div class="quiz-answer">'+value+'</div></div>';
 				}
 			});
-			
+
 			quiz_answers.html(html_answers);
 			$(this).fadeIn(300);
 		})
 	});
-	
+
 	$('.step-quiz').on('click', '.quiz-answer', function(e){
 
 		var value = $(this).text();
@@ -1342,44 +1460,60 @@ $( document ).ready(function() {
 		$(this).addClass('active');
 
 		quiz_input.val( quiz_input.val() + question +': ' + value +';');
-		
+
 		/*if (question == "Сумма ваших долгов"){
 			quiz_step.find('.debt-data').val(value);
 		}*/
 
 		if (!$(this).attr('data-step')){
-			
+
 			if (quiz_step.attr('quiz-step')){
 				quiz_step.attr('quiz-step', parseInt(quiz_step.attr('quiz-step')) + 1);
 			} else{
 				quiz_step.attr('quiz-step', 2);
 			}
-			
+
 			quiz_step.trigger('step_load');
 		} else {
 			quiz_step.attr('quiz-step', '');
 		}
 	})
-	
+
 	$('.step-quiz').on('click', '.quiz-reset', function(e){
 		$(this).parents('.step-quiz').attr('quiz-step', '');
 	});
-	
-	
+
+
 	function clearSteps(selector){
 		var wrap = $(selector).find('.steps-wrap');
 		var progress_bar = wrap.find('.modal-progress-bar span');
 		var step_class = '.steps-wrap_step';
-		
+
 		setTimeout(function () {
 			wrap.find(step_class).each(function () {
 				$(this).addClass('d-none');
 			});
-			
+
 			wrap.find(step_class).first().removeClass('d-none');
-			progress_bar.css('width', wrap.find(step_class).first().data('progress') + '%');	
+			progress_bar.css('width', wrap.find(step_class).first().data('progress') + '%');
 		}, 200);
-		
+
+	}
+
+	function clearStepsData(selector){
+		var wrap = $(selector).closest('.steps-wrap');
+
+		wrap.find('input').each(function () {
+			$(this).val();
+		});
+
+		wrap.find('input[type="checkbox"]:checked').each(function () {
+			$(this).prop('checked',false);
+		});
+
+		wrap.find('input[type="radio"]:checked').each(function () {
+			$(this).prop('checked',false);
+		});
 	}
 
 	function changeStep(target_step){
@@ -1391,12 +1525,12 @@ $( document ).ready(function() {
 			loader.addClass('show');
 
 			target_step.trigger('step_load');
-			
+
 			setTimeout(function () {
 				wrap.find(step_class).each(function () {
 					$(this).addClass('d-none');
 				});
-				target_step.removeClass('d-none');	
+				target_step.removeClass('d-none');
 				loader.removeClass('show').addClass('transition');
 				setTimeout(function () {
 					loader.removeClass('transition');
@@ -1404,7 +1538,7 @@ $( document ).ready(function() {
 			}, 400);
 		}
 	}
-	
+
 	$('.steps-wrap').on('click', '[data-step]', function (e) {
 		if ($(this).prop("tagName") != 'INPUT'){
 			e.preventDefault();
@@ -1416,11 +1550,15 @@ $( document ).ready(function() {
 		var step_data = $(this).data('step');
 		var report = true;
 		var lock = false;
-		
+
+		if ($(this).data('clear') == true){
+			clearStepsData($(this));
+		}
+
 		if(step_data!="prev"){
 			step.find('[required]').each(function () {
 				$(this)[0].checkValidity();
-				
+
 				if($(this).attr('type') == 'tel' && $(this).val().length < 16) {
 					lock = true;
 					$(this).removeClass('is-valid').addClass('is-invalid');
@@ -1432,7 +1570,7 @@ $( document ).ready(function() {
 				} else {
 					$(this)[0].setCustomValidity('');
 				}
-				
+
 				if (!$(this)[0].validity.valid) {
 					lock = true;
 					$(this).removeClass('is-valid').addClass('is-invalid');
@@ -1461,7 +1599,7 @@ $( document ).ready(function() {
 				target_step = wrap.find('.step-' + radio_val);
 			}
 		} else if(step_data=='office-confirm' && step.find('#office_date').val() == '1970-01-01'){
-			target_step = wrap.find('.step-office-confirm-phone');	
+			target_step = wrap.find('.step-office-confirm-phone');
 		} else if(step_data!=''){
 			target_step = wrap.find('.step-' + step_data);
 		}
@@ -1469,37 +1607,37 @@ $( document ).ready(function() {
 		if (step.length > 0 && !lock && target_step) {
 			var loader = wrap.find('.loading');
 			loader.addClass('show');
-			
-			if (target_step.data('progress')) 
+
+			if (target_step.data('progress'))
 				progress_bar.css('width', target_step.data('progress') + '%');
-			
+
 			if(step_data=="prev" && target_step.find('.checkbox-btn').length > 0){
 				target_step.find('.checkbox-btn input').each(function(i, el){
 					$(el).prop('checked', false);
 				});
-			}	
+			}
 
 			target_step.trigger('step_load');
-			
+
 			setTimeout(function () {
 				wrap.find(step_class).each(function () {
 					$(this).addClass('d-none');
 				});
-				target_step.removeClass('d-none');	
+				target_step.removeClass('d-none');
 				loader.removeClass('show').addClass('transition');
 				setTimeout(function () {
 					loader.removeClass('transition');
 				}, 200);
 			}, 400);
 		}
-	});           
-	
+	});
+
 	$('[data-content-fill]').click(function(e){
 		var target = $($(this).data('target'));
 		target.find('textarea').val($(this).text());
 	});
-	
-	
+
+
 	$('body').on('click', '[data-messenger]', function(e){
 		e.preventDefault();
 		let type = $(this).data('messenger');
@@ -1511,7 +1649,7 @@ $( document ).ready(function() {
 
 	function createMsgModal(type, msg_user_text){
 		var msg_type, msg_text;
-		
+
 		switch (type){
 			case 'whatsapp':
 				msg_type = type;
@@ -1524,16 +1662,16 @@ $( document ).ready(function() {
 			default:
 				return;
 		}
-		
+
 		$('body').append('<div class="modal fade modal-messenger '+ msg_type +'" id="messenger-modal" data-msg-type="'+ msg_type +'" data-msg-text="'+ msg_user_text +'" tabindex="-1" role="dialog" aria-labelledby="messenger-modal" aria-modal="true"><div class="modal-dialog modal-dialog-centered" role="document"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"></span></button><div class="h5 modal-title">Вы выбрали '+ msg_text +'</div></div><div class="modal-body"><div class="content"><p>Для продолжения укажите ваш телефон, на котором установлен '+msg_text+'</p><p>Ваш телефон:</p></div><form action="/api/lead" data-form-type="messenger" method="post"><input type="tel" name="lead[phone]" class="form-control" placeholder="+7 999 999-99-99" data-validation="phone" required autocomplete="off" maxlength="16"><input type="hidden" name="lead[type]" value="'+ msg_type +'"><button type="submit" class="btn btn-block btn-primary">Перейти в '+msg_text+' <i class="fab fa-'+msg_type+'"></i></button></form></div></div></div></div>');
-		
+
 		$('#messenger-modal button[type="submit"]').addClass('disabled');
-		
+
 		$('#messenger-modal').modal('show');
-		
+
 		$('#messenger-modal').on('shown.bs.modal', function (e) {
 			$(this).find('input[type="tel"]').focus();
-			
+
 			$(this).find('input[type="tel"]').on('propertychange input', function (e) {
 				if ($(this).val().length >= 16){
 					$('#messenger-modal button[type="submit"]').removeClass('disabled');
@@ -1542,7 +1680,7 @@ $( document ).ready(function() {
 					$('#messenger-modal button[type="submit"]').addClass('disabled');
 				}
 			});
-			
+
 			$('#messenger-modal button[type="submit"]').click(function(e){
 				if ($(this).hasClass('disabled')){
 					e.preventDefault();
@@ -1551,37 +1689,37 @@ $( document ).ready(function() {
 				}
 			});
 		});
-		
-		
-		
+
+
+
 		$('#messenger-modal').on('hidden.bs.modal', function (e) {
 			$('#messenger-modal').remove();
 		});
-		
-		
-		
+
+
+
 		$('#messenger-modal').submit(function( event ) {
 			var msg_type = $(this).data('msg-type');
 			var msg_text = $(this).data('msg-text');
-			
+
 			messenger_check(msg_type, msg_text, $(this));
-			
+
 			var close_timer = setTimeout(function(){
-				$('#messenger-modal').modal('hide');    
+				$('#messenger-modal').modal('hide');
 			}, 5000);
 		});
 	};
 
 	if ($('.textarea-help-btns').length){
 		$('.textarea-help-btns').each(function(i) {
-			
+
 			var wrap = $(this).find('.help-btns-wrap');
-			
+
 			if ($('.textarea-help-btns textarea').val().length > 0){
 				hide_help_btns();
 			}
-				
-			
+
+
 			$('.textarea-help-btns .help-btn').on('click', function (e) {
 				$(this).closest('.textarea-help-btns').find('textarea').val($(this).text());
 				hide_help_btns()
@@ -1594,7 +1732,7 @@ $( document ).ready(function() {
 					show_help_btns();
 			});
 
- 
+
 			function hide_help_btns(){
 				if (!wrap.hasClass('d-none')){
 					wrap.addClass('hide');
@@ -1616,8 +1754,10 @@ $( document ).ready(function() {
 	}
 
 	$('form').on('input', '[required]', function (e) {
-		if ($(this).hasClass('is-invalid'))
+		if ($(this).hasClass('is-invalid')){
 			$(this).removeClass('is-invalid');
+			$(this)[0].setCustomValidity('');
+		}
 	})
 
 
@@ -1631,26 +1771,26 @@ $( document ).ready(function() {
 		var step = $(this).closest(step_class);
 		var report = true;
 		var lock = false;
-		
+
 		var form = $(this).closest('form');
-		
+
 		/*
-		switch (form.find('[type="radio"]:checked').val()){		
+		switch (form.find('[type="radio"]:checked').val()){
 			case 'whatsapp':
-				//e.preventDefault();	
+				//e.preventDefault();
 				$(this).closest('.modal').modal('hide');
 				clearSteps(form);
 				createMsgModal('whatsapp', 'Я оставил вопрос на вашем сайте, хочу продолжить общение здесь');
 				break;
-			
+
 			case 'telegram':
 				//e.preventDefault();
 				$(this).closest('.modal').modal('hide');
-				clearSteps(form);	
-				createMsgModal('telegram', 'Я оставил вопрос на вашем сайте, хочу продолжить общение здесь');			
+				clearSteps(form);
+				createMsgModal('telegram', 'Я оставил вопрос на вашем сайте, хочу продолжить общение здесь');
 				break;
 		}*/
-		
+
 		step.find('[required]').each(function () {
 			if($(this).attr('type') == 'tel' && $(this).val().length < 16) {
 				lock = true;
@@ -1663,7 +1803,7 @@ $( document ).ready(function() {
 			} else {
 				$(this)[0].setCustomValidity('');
 			}
-			
+
 			if (!$(this)[0].validity.valid) {
 				lock = true;
 				$(this).removeClass('is-valid').addClass('is-invalid');
@@ -1675,17 +1815,17 @@ $( document ).ready(function() {
 				$(this).removeClass('is-invalid').addClass('is-valid');
 			}
 		});
-		
+
 		if (!lock){
 			form.find('.form-sender').val($(this).attr('name'));
 			form.submit();
 		}
-		
+
 		if (!$(this).data('step')){
 			if (step.find('.is-invalid').length === 0)
 				$(this).closest('.modal').modal('hide');
 		}
-		
+
 	});
 
 
@@ -1704,7 +1844,7 @@ $( document ).ready(function() {
 		clearSteps($(this));
 	});
 
-	$('body').on('submit', 'form:not(.searchForm)', function (e) {//Отправка лидов
+	$('body').on('submit', 'form:not(.searchForm):not(.special)', function (e) {//Отправка лидов
 		e.preventDefault();
 		var form = $(this);
 
@@ -1726,13 +1866,23 @@ $( document ).ready(function() {
 			});
 			$(form).find('[name="lead[quiz]"]').val(main_quiz_data);
 		}
-		
+
 		/*if (form.find('[name="lead[type]"]:checked')[0].value == 'office' && !form.find('[name="lead[date]"]')[0].value){
 			return;
 		}*/
-		
-		if (form.find('[name="lead[phone]"]').val())
-			$('#gift_phone_number').val(form.find('[name="lead[phone]"]').val());
+
+		phone_input = form.find('[type="tel"]');
+
+		if (phone_input.val().length < 16){
+
+			phone_input.removeClass('is-valid').addClass('is-invalid');
+			phone_input[0].setCustomValidity('Введите номер телефона');
+			phone_input[0].reportValidity();
+			return false;
+		}
+
+		if (phone_input.val())
+			$('#gift_phone_number').val(phone_input.val());
 
 		var formType = form.attr('data-form-type') || 'lead';
 
@@ -1746,18 +1896,82 @@ $( document ).ready(function() {
 
 		form.attr('data-sending', true);
 
-
-
-		/*postForms.ready(function () { // Отвечает за отправку форм по Ajax
-			postForms.execute(window.rekey, {
+		grecaptcha.ready(function () { // по готовности скриптов recaptcha
+			grecaptcha.execute(window.rekey, {
 				action: 'sendform' // этот параметр не имеет значения
-			}).then(function () {
+			}).then(function (token) {
+				window.retoken = token;
+
+				var data = form.serialize();
+				var cityId = 0;
+				var cityName = '';
+
+				if (getCookie('edin_center_geo') && form.find('[name="lead[city_id]"]').length == 0) {
+					var geo = JSON.parse(decodeURIComponent(getCookie('edin_center_geo')));
+					cityId = geo.id || 999;
+					if (cityId == 999){
+						cityName = geo.name;
+					}
+				}
+
+				if (cityId) {
+					data += '&lead%5Bcity_id%5D=' + cityId;
+				}
+				if (cityName) {
+					data += '&lead%5Bcity_text%5D=' + cityName;
+				}
+				if (window.usluga) {
+					data += '&lead%5Busluga%5D=' + window.usluga;
+				}
+
+				if ($_GET['utm_source']) {
+					data += '&lead%5Butm_source%5D=' + encodeURIComponent($_GET['utm_source']);
+				} else if(getCookie('utm_source')){
+					data += '&lead%5Butm_source%5D=' + getCookie('utm_source');
+				}
+
+				if ($_GET['utm_medium']) {
+					data += '&lead%5Butm_medium%5D=' + encodeURIComponent($_GET['utm_medium']);
+				} else if(getCookie('utm_medium')){
+					data += '&lead%5Butm_medium%5D=' + getCookie('utm_medium');
+				}
+
+				if ($_GET['utm_campaign']) {
+					data += '&lead%5Butm_campaign%5D=' + encodeURIComponent($_GET['utm_campaign']);
+				} else if(getCookie('utm_campaign')){
+					data += '&lead%5Butm_campaign%5D=' + getCookie('utm_campaign');
+				}
+
+				if ($_GET['utm_term']) {
+					data += '&lead%5Butm_term%5D=' + encodeURIComponent($_GET['utm_term']);
+				} else if(getCookie('utm_term')){
+					data += '&lead%5Butm_term%5D=' + getCookie('utm_term');
+				}
+
+				if ($_GET['utm_content']) {
+					data += '&lead%5Butm_content%5D=' + encodeURIComponent($_GET['utm_content']);
+				} else if(getCookie('utm_content')){
+					data += '&lead%5Butm_content%5D=' + getCookie('utm_content');
+				}
+
+				if ($_GET['ref']) {
+					data += '&lead%5Bref%5D=' + encodeURIComponent($_GET['ref']);
+				} else if(sessionStorage.getItem('ref')){
+					data += '&lead%5Bref%5D=' + sessionStorage.getItem('ref');
+				}
+
+				if (window.retoken) {
+					data += '&retoken=' + window.retoken;
+				}
 
 				var url = form.attr('action');
 				var method = form.attr('method');
 				var button = form.find('[type=submit]');
 				button.attr('disabled', true);
-				
+
+				if(window.debugMetka!=true){
+					try {gtag_report_conversion();} catch (e) {}//Отправка данных в гугл о отправке лида
+				}
 				$.ajax({
 					url: url,
 					data: data,
@@ -1765,7 +1979,7 @@ $( document ).ready(function() {
 					dataType: 'json',
 					success: function success(data) {
 						if (form.hasClass('steps-modal-form')){
-							
+
 						} else {
 							form[0].reset();
 						}
@@ -1773,21 +1987,42 @@ $( document ).ready(function() {
 							button.attr('disabled', false);
 							form.find('.is-valid').removeClass('is-valid');
 							form.find('.is-invalid').removeClass('is-invalid');
-						
+
 						if (form.attr('close-on-send')){
 							form.parents('.modal').modal('hide');
 						}
-						
+
 						if (form.attr('modal-confirm')){
 							openSuccessModal(form.attr('confirm-title'), form.attr('confirm-text'), form.attr('confirm-class'), form.attr('confirm-icon'), form.attr('confirm-button'));
 						}
-						
+
+						try {
+							yaCounter28531226.reachGoal('lead');
+
+							var _tmr = window._tmr || (window._tmr = []);
+
+							_tmr.push({
+								id: "2926245",
+								type: "reachGoal",
+								goal: "lead"
+							});
+
+							fbq('track', 'Lead');
+
+							ga('gtag_UA_65328618_2.send', 'event', 'lead', 'lead');
+						} catch (e) {// do nothing
+						}
 					},
 					error: function error(_error) {
-						
+
 						form.parents('.modal').modal('hide');
-						openSuccessModal('Произошла ошибка', 'Попробуйте отправить заявку позднее', 'success-error', 'icon-emote-excl', null);
-						
+
+						error_data = _error.responseJSON;
+
+						error_msg = error_data.errors.message ? error_data.errors.message : error_data.message;
+						error_msg = error_msg ? error_msg : 'Попробуйте отправить заявку позднее';
+						openSuccessModal('Произошла ошибка', error_msg, 'success-error', 'icon-emote-excl', null);
+
 						form.removeAttr('data-sending');
 						button.attr('disabled', false);
 
@@ -1797,166 +2032,71 @@ $( document ).ready(function() {
 					}
 				});
 			});
-		}); */
-
-
-        
-         /*
-         
-          ------- Формирование Ajax запроса с форм на странице --------
-
-         -> Передаеются данные через _GET параметры в data
-         -> переменная сityId хранит выбранный пользователем город
-
-
-         */
-		var data = form.serialize();
-		var cityId = 0;
-				
-		if (getCookie('edin_center_geo') && form.find('[name="lead[city_id]"]').length == 0) {
-			var geo = JSON.parse(decodeURIComponent(getCookie('edin_center_geo')));
-			cityId = geo.id || 999;
-		}
-
-		if (cityId) {
-			data += '&lead%5Bcity_id%5D=' + cityId;
-		}
-		if (window.usluga) {
-			data += '&lead%5Busluga%5D=' + window.usluga;
-		}
-
-		if ($_GET['utm_source']) {
-			data += '&lead%5Butm_source%5D=' + encodeURIComponent($_GET['utm_source']);
-		} else if(sessionStorage.getItem('utm_source')){
-			data += '&lead%5Butm_source%5D=' + sessionStorage.getItem('utm_source');
-		}
-
-		if ($_GET['utm_medium']) {
-			data += '&lead%5Butm_medium%5D=' + encodeURIComponent($_GET['utm_medium']);
-		} else if(sessionStorage.getItem('utm_medium')){
-			data += '&lead%5Butm_medium%5D=' + sessionStorage.getItem('utm_medium');
-		}
-
-		if ($_GET['utm_campaign']) {
-			data += '&lead%5Butm_campaign%5D=' + encodeURIComponent($_GET['utm_campaign']);
-		} else if(sessionStorage.getItem('utm_campaign')){
-			data += '&lead%5Butm_campaign%5D=' + sessionStorage.getItem('utm_campaign');
-		}
-
-		if ($_GET['utm_term']) {
-			data += '&lead%5Butm_term%5D=' + encodeURIComponent($_GET['utm_term']);
-		} else if(sessionStorage.getItem('utm_term')){
-			data += '&lead%5Butm_term%5D=' + sessionStorage.getItem('utm_term');
-		}
-
-		if ($_GET['utm_content']) {
-			data += '&lead%5Butm_content%5D=' + encodeURIComponent($_GET['utm_content']);
-		} else if(sessionStorage.getItem('utm_content')){
-			data += '&lead%5Butm_content%5D=' + sessionStorage.getItem('utm_content');
-		}
-
-		var url = form.attr('action');
-		var method = form.attr('method');
-		var button = form.find('[type=submit]');
-		button.attr('disabled', true);
-
-		$.ajax({
-			url: url,
-			data: data,
-			method: method,
-			dataType: 'json',
-			success: function success(data) {
-				if (form.hasClass('steps-modal-form')){
-							
-				} else {
-					form[0].reset();
-				}
-					form.removeAttr('data-sending');
-					button.attr('disabled', false);
-					form.find('.is-valid').removeClass('is-valid');
-					form.find('.is-invalid').removeClass('is-invalid');
-						
-				if (form.attr('close-on-send')){
-					form.parents('.modal').modal('hide');
-				}
-						
-				if (form.attr('modal-confirm')){
-					openSuccessModal(form.attr('confirm-title'), form.attr('confirm-text'), form.attr('confirm-class'), form.attr('confirm-icon'), form.attr('confirm-button'));
-				}
-			},
-			error: function error(_error) {
-						
-				form.parents('.modal').modal('hide');
-				openSuccessModal('Произошла ошибка', 'Попробуйте отправить заявку позднее', 'success-error', 'icon-emote-excl', null);
-						
-				form.removeAttr('data-sending');
-				button.attr('disabled', false);
-
-				if (form.hasClass('main-quiz-form')){
-					clearSteps(form);
-				}
-			}
 		});
 
 	});
-	
+
 	$('#modern_lead_modalform').on('show.bs.modal', function (e) {
-		$(this).find('.quiz-select').trigger('click');
+		if (window.usluga == 9){
+			$(this).find('.quiz-select').trigger('click');
+		}
 	})
 
-	function openSuccessModal(modal_title, modal_text, modal_class, modal_icon, modal_btn_text){
-		
-		if (!modal_title)
-			modal_title = "Заявка создана";
-		if (!modal_text)
-			modal_text = "Ожидайте, наш менеджер свяжется с вами очень быстро";
-		if (!modal_icon)
-			modal_icon = "icon-checkbox-circle";
-		if (!modal_btn_text)
-			modal_btn_text = "Хорошо";
-		
-		
-		$('body').append(`
-		<div class="modal fade modern-modal success-modal mobile-fullscreen-modal mobile-fullscreen-with-menu `+modal_class+`" id="success_modal" tabindex="-1" role="dialog" aria-labelledby="succes_modal" aria-modal="true">
-			<div class="modal-dialog modal-dialog-centered" role="document">
-				<div class="modal-content">
-					<div class="modal-body">
-						<button type="button" class="close" data-dismiss="modal" aria-label="Закрыть"><span aria-hidden="true"></span></button>
-						<div class="mobile-menu-scroll">
-							<div class="d-flex align-items-center flex-column text-center">
-								<i class="icon `+modal_icon+` icon-centered"></i>
-								<div class="h2">`+modal_title+`</div>
-								<div class="mb-30">`+modal_text+`</div>
-								<button class="btn btn-primary" data-dismiss="modal">`+modal_btn_text+`</button>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>`);
-		
-		
-		$('#success_modal').modal('show');
-		$('#success_modal').on('hidden.bs.modal', function (e) {
-			$('#success_modal').remove();
-		});
-		
-	};
+	$('.mobile-nav-wrap a.main-btn').on('click', function(e){
+		calltrack();
+		$('body').addClass('show-all-phones');
+		sessionStorage.setItem("phone-shown", 1);
+	});
 
 	$('a[href^="tel:"]:not(.btn)').on('click', function(e){
-		if ($(window).width() >= 1201 && !$(this).hasClass('phone-shown') && !$('body').hasClass('show-all-phones')){
+
+		if(!$(this).hasClass('phone-shown') && !$('body').hasClass('show-all-phones')){
+
 			e.preventDefault();
+
+			calltrack();
+
 			$(this).addClass('phone-shown');
 			$('body').addClass('show-all-phones');
 			sessionStorage.setItem("phone-shown", 1);
+		}else{
+
+			if ($(window).width() >= 1201){
+				try{
+					yaCounter28531226.reachGoal('phone');
+				} catch(err){console.log(err)}
+			}else{
+				try{
+					yaCounter28531226.reachGoal('mob');
+				} catch(err){console.log(err)}
+			}
 		}
 	});
-	
+
+	$('body').on('click','.ajax_city_list a, .office_partners .another_list a, .officesList a', function(){
+		eraseCookie('calltrack');
+		sessionStorage.removeItem('phone-shown');
+	})
+
+
+	/*if (!getCookie('calltrack')){
+		setTimeout(calltrack(), 5000);
+	}*/
+
+
+	$('.mobile-menu-links a[href^="tel:"]:not(.btn)').on('click', function(e){
+		yaCounter28531226.reachGoal('mob_footer');
+	});
+
+	$('.mobile-menu-links .mob-menu-main-form-btn').on('click', function(e){
+		yaCounter28531226.reachGoal('msg_footer');
+	});
+
 	function hide_tooltip(target){
 		if (target.hasClass('show'))
 			target.fadeOut().removeClass('show');
 	}
-	
+
 	var logo_tooltip = $('.logo-dp-tooltip');
 	if(logo_tooltip.length > 0){
 		$('.logo-dp-check').on('mouseenter', function(e){
@@ -1969,7 +2109,7 @@ $( document ).ready(function() {
 				hide_tooltip(logo_tooltip);
 			}
 		});
-		
+
 		logo_tooltip.on('mouseleave', function(e){
 			hide_tooltip(logo_tooltip);
 		});
@@ -1984,7 +2124,7 @@ $( document ).ready(function() {
 			}
 		});
 	}
-	
+
 	var adress_tooltip = $('.adress-info-tooltip');
 	if(adress_tooltip.length > 0){
 		$('.adress-info-wrap').on('click', function(e){
@@ -2010,7 +2150,7 @@ $( document ).ready(function() {
 			}
 		});
 	}
-	
+
 	$('.tooltip-activate').on('click', function(e){
 		var generic_tooltip = $(this).find('.generic-tooltip');
 
@@ -2020,7 +2160,7 @@ $( document ).ready(function() {
 				var generic_tooltip_content = generic_tooltip.html();
 
 				$('body').append('<div class="modal mobile-fullscreen-modal mobile-fullscreen-with-menu tooltip-modal fade" id="tooltip-modal" tabindex="-1" role="dialog" aria-labelledby="tooltip-modal" aria-modal="true"><div class="modal-dialog modal-dialog-centered" role="document"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"></span></button></div><div class="modal-body"><div class="content pr-75 pl-20">'+generic_tooltip_content+'</div></div></div></div>');
-		
+
 				$('#tooltip-modal').modal("show");
 
 				$('#tooltip-modal').on('hidden.bs.modal', function (e) {
@@ -2031,7 +2171,7 @@ $( document ).ready(function() {
 			}else{
 				if (generic_tooltip.find('.close').length == 0)
 					generic_tooltip.append('<button type="button" class="close tooltip-close" aria-label="Закрыть"><span aria-hidden="true"></span></button>');
-				
+
 				generic_tooltip.on('click', '.close', function(){
 					hide_tooltip(generic_tooltip);
 				})
@@ -2045,9 +2185,35 @@ $( document ).ready(function() {
 		}
 	});
 
+	(function () {
+		var ttEl = document.querySelector(".anim-placeholder");
+		if (document.body.contains(ttEl)) {
+		     ttText = ttEl.placeholder;
+		     ttEl.placeholder = '';
+
+			ttArr = ttText.split('');
+
+		     var loopTyping = function () {
+				if (ttArr.length > 0) {
+					ttEl.placeholder += ttArr.shift();
+				} else {
+					setTimeout(function () {
+						ttEl.placeholder = '';
+						ttArr = ttText.split('');
+						loopTyping();
+					}, 2000)
+					return false;
+				};
+				timer = setTimeout(loopTyping, 50);
+			};
+
+			loopTyping();
+		}
+	 })();
+
 
 	/* SLICK */
-	
+
 	var fancybox_sliders = [];
 	$('.fbox-slider-wrap').each(function(i, el){
 		temp =  $(this).clone();
@@ -2069,12 +2235,12 @@ $( document ).ready(function() {
 			let attr_sliders_obs = new IntersectionObserver(function(entries, observer) {
 				entries.forEach(function(entry) {
 					if (entry.isIntersecting) {
-						$(entry.target).slick();					
+						$(entry.target).slick();
 						attr_sliders_obs.unobserve(entry.target);
 					}
 				});
 			}, obs_options);
-	
+
 			attr_sliders.forEach(function(attr_sliders) {
 				attr_sliders_obs.observe(attr_sliders);
 			});
@@ -2093,23 +2259,23 @@ $( document ).ready(function() {
 				let attr_sliders_mob_obs = new IntersectionObserver(function(entries, observer) {
 					entries.forEach(function(entry) {
 						if (entry.isIntersecting) {
-							
+
 								data_classes = $(entry.target).data('classes').split(' ');
-				
+
 								if (data_classes){
 									data_classes.forEach((el) => {
 										$(entry.target).addClass(el);
 									});
 								}
-				
+
 								$(entry.target).addClass('slick-slider');
-								$(entry.target).slick();	
+								$(entry.target).slick();
 								attr_sliders_mob_obs.unobserve(entry.target);
-												
+
 						}
 					});
 				}, obs_options);
-		
+
 				attr_sliders_mob.forEach(function(attr_sliders_mob) {
 					attr_sliders_mob_obs.observe(attr_sliders_mob);
 				});
@@ -2128,10 +2294,10 @@ $( document ).ready(function() {
 
 				$(this).addClass('slick-slider');
 				$(this).slick();
-			});	
+			});
 		}*/
 	}
-	
+
 	if($('.main-slider').length > 0){
 		var slider_timer = 5000;
 		var initial_slide = 0;
@@ -2146,7 +2312,7 @@ $( document ).ready(function() {
 			slider_timer = $('.main-slider').data('timer');
 
 		$('.main-slider').on('init', function(){
-			
+
 			//$(this).find('li.slick-active span').animate({ "width": "40px" }, slider_timer, function(){$(this).parents('li').addClass('viewed'); $(this).css('width', '10px')});
 			$(this).find('li.slick-active span').css('transition', 'transform 10s linear');
 			$(this).find('li.slick-active span').css('transform', 'translateX(40px)');
@@ -2160,7 +2326,7 @@ $( document ).ready(function() {
 				}
 
 				$(this).find('li span').css('transition', 'none');
-				$(this).find('li span').css('transform', 'none');	
+				$(this).find('li span').css('transform', 'none');
 				$(this).find('li.slick-active span').css('transition', 'transform 10s linear');
 				$(this).find('li.slick-active span').css('transform', 'translateX(40px)');
 				$(this).find('li.slick-active').addClass('viewed');
@@ -2168,10 +2334,10 @@ $( document ).ready(function() {
 					//$(this).find('li span').stop();
 					//$(this).find('li span').css('width', '10px');
 					//$(this).find('li.slick-active span').animate({ "width": "40px" }, slider_timer, function(){$(this).parents('li').addClass('viewed'); $(this).css('width', '10px');});
-					
+
 			});
 		});
-		
+
 		/*$('.main-slider').hover(function() {
 			$(this).find('li.slick-active span').stop();
 			$(this).find('li.slick-active span').css('width', '10px')
@@ -2180,7 +2346,7 @@ $( document ).ready(function() {
 		});*/
 
 		$('.main-slider').slick({
-			"slidesToShow": 1, 
+			"slidesToShow": 1,
 			"slidesToScroll": 1,
 			"initialSlide": initial_slide,
 			"infinite": true,
@@ -2207,15 +2373,15 @@ $( document ).ready(function() {
 				}
 			]
 		});
-		
+
 	}
-	
+
 	$('.slider-fancybox-open').on('click', function(e){
 		e.preventDefault();
 		target = $(this).closest('.fbox-slider-wrap');
 		slide = $(this).closest('.slick-slide').data('slick-index');
 		content = fancybox_sliders[target.attr('id')];
-		
+
 		Fancybox.show([
 			{
 				src: '<div class="fancybox-slider container">'+content+'</div>',
@@ -2224,9 +2390,9 @@ $( document ).ready(function() {
 		],
 		{
 			mainClass: "fancybox-slider-window",
-		} 
+		}
 		);
-		
+
 		$('.fancybox-slider > .slick-slider').slick({
 			infinite: false,
 			slidesToShow: 1,
@@ -2234,36 +2400,36 @@ $( document ).ready(function() {
 			initialSlide: slide,
 			adaptiveHeight: true
 		});
-		
+
 		$('.fancybox-slider-window').on('click', '.close', function(e){
 			Fancybox.close();
 		});
-		
+
 		$('.fancybox-slider-window .controls').on('click', '.slick-next', function(e){
 			$(this).parents('.slick-slider').slick('slickNext');
 		});
 		$('.fancybox-slider-window .controls').on('click', '.slick-prev', function(e){
 			$(this).parents('.slick-slider').slick('slickPrev');
 		});
-		
+
 	});
-	
-	
+
+
 	/* OTHER */
-	
+
 	if ($('.simple-graph').length > 0){
 		$('.simple-graph').each(function(){
 			var cols = [];
 			$(this).find('.simple-graph-item').each(function(i,e){
 				if ($(this).data('count'))
 					cols.push($(this).data('count'))
-			});	
+			});
 			var max = Math.max(...cols);
 			$(this).find('.simple-graph-item').each(function(i,e){
 				if ($(this).data('count'))
 					$(this).css('height', Math.round($(this).data('count') / max * 100)+'%');
 			});
-			
+
 		});
 	}
 
@@ -2278,7 +2444,7 @@ $( document ).ready(function() {
 			})
 		}
 	});
-	
+
 	$('.show-closest-poll').on('click', function(e){
 		poll = $(this).parent().find('.poll');
 		if (!poll.hasClass('show')){
@@ -2288,14 +2454,14 @@ $( document ).ready(function() {
 			})
 		}
 	});
-	
+
 	$('footer .navbar .nav-item .menu-header').on('click', function(e){
 		if ($(window).width() < 768){
 			$(this).parents('.footer-menu-col').find('.footer-menu-hidden').slideToggle();
 			$(this).parents('.footer-menu-col').toggleClass('show');
 		}
 	});
-	
+
 	$('.share-button').on('click', function(e){
 	    if (navigator.share){
 			e.preventDefault();
@@ -2313,7 +2479,7 @@ $( document ).ready(function() {
 					trigger: 'manual',
 					delay: { show: 100, hide: 1000 }
 			});
-				
+
 			navigator.clipboard.writeText($(this).attr('href'))
 			.then(() => {
 				tooltip_btn.tooltip('show');
@@ -2326,11 +2492,11 @@ $( document ).ready(function() {
 			});
 		}
 	});
-	
+
 	$('.office-rating-content .read-more').on('click', function(e){
 		$(this).parent().addClass('show');
 	});
-	
+
 	$('.map-link').on('click', function(e){
 		let data = $(this).data()
 		data['coord_arr'] = data['coord'].replace(/\s+/g, '').split(',');
@@ -2338,10 +2504,10 @@ $( document ).ready(function() {
 		data['rating'] = window.rating_total;
 
 		if (window.office_photo){
-			if (data['office-number']){
-				data['photo'] = window.office_photo[parseInt(data['office-number'])];
+			if (data['officeNumber']){
+				data['photo'] = window.office_photo['dop-'+data['officeNumber']];
 			}else{
-				data['photo'] = window.office_photo[0];
+				data['photo'] = window.office_photo['main'];
 			}
 		}
 
@@ -2380,35 +2546,45 @@ $( document ).ready(function() {
 			workhours_html += '</div>';
 		});
 
+		let reference_html = '';
+		if (data['reference_point']){
+			reference_html = '<div class="d-flex align-items-center info-item"><i class="icon load icon-map-marker icon-gray-body icon-centered icon-bg-gray-6 icon-bg-rounded icon-bg-light-medium mr-10"></i><div class="bd-2">'+data['reference_point']+'</div></div>';
+		}
+
+		let bus_stop_html = '';
+		if (data['busstop']){
+			bus_stop_html = '<div class="d-flex align-items-center info-item"><i class="icon load icon-bus icon-gray-body icon-centered icon-bg-gray-6 icon-bg-rounded icon-bg-light-medium mr-10"></i><div class="bd-2">'+data['busstop']+'</div></div>';
+		}
+
 		let buses_html = '';
 
 		if (data['bus']){
-			buses_html += '<div class="d-flex align-items-center"><i class="icon icon-bus icon-gray-body icon-centered icon-bg-gray-6 icon-bg-rounded icon-bg-light-medium mr-10"></i><div class="bd-2">Автобусы</div></div><div class="buses-list">';
-			
+			buses_html += '<div class="d-flex align-items-center"><i class="icon load icon-bus icon-gray-body icon-centered icon-bg-gray-6 icon-bg-rounded icon-bg-light-medium mr-10"></i><div class="bd-2">Автобусы</div></div><div class="buses-list">';
+
 			remove_shit_from_buses(data['bus']).forEach(function(el, i) {
 				buses_html += '<span>'+el+'</span>';
 			});
-												
+
 			buses_html += '</div>';
 		}
 
 		if (data['buses']){
-			buses_html += '<div class="d-flex align-items-center"><i class="icon icon-minibus icon-gray-body icon-centered icon-bg-gray-6 icon-bg-rounded icon-bg-light-medium mr-10"></i><div class="bd-2">Маршуртки</div></div><div class="buses-list red">';
-			
+			buses_html += '<div class="d-flex align-items-center"><i class="icon load icon-minibus icon-gray-body icon-centered icon-bg-gray-6 icon-bg-rounded icon-bg-light-medium mr-10"></i><div class="bd-2">Маршрутки</div></div><div class="buses-list red">';
+
 			remove_shit_from_buses(data['buses']).forEach(function(el, i) {
 				buses_html += '<span>'+el+'</span>';
 			});
-												
+
 			buses_html += '</div>';
 		}
 
 		if (data['trolleybus']){
-			buses_html += '<div class="d-flex align-items-center"><i class="icon icon-bus icon-gray-body icon-centered icon-bg-gray-6 icon-bg-rounded icon-bg-light-medium mr-10"></i><div class="bd-2">Троллейбусы</div></div><div class="buses-list">';
-			
+			buses_html += '<div class="d-flex align-items-center"><i class="icon load icon-bus icon-gray-body icon-centered icon-bg-gray-6 icon-bg-rounded icon-bg-light-medium mr-10"></i><div class="bd-2">Троллейбусы</div></div><div class="buses-list">';
+
 			remove_shit_from_buses(data['trolleybus']).forEach(function(el, i) {
 				buses_html += '<span>'+el+'</span>';
 			});
-												
+
 			buses_html += '</div>';
 		}
 
@@ -2446,46 +2622,41 @@ $( document ).ready(function() {
 
 
 		$('body').append(`
-		<div class="modal fade modern-modal map-modal" id="map_modal" tabindex="-1" role="dialog" aria-labelledby="map_modal" aria-modal="true">
+		<div class="modal fade modern-modal map-modal mobile-fullscreen-modal" id="map_modal" tabindex="-1" role="dialog" aria-labelledby="map_modal" aria-modal="true">
 			<div class="modal-dialog modal-xl modal-dialog-centered" role="document">
 				<div class="modal-content">
 					<div class="modal-body">
+						<div class="mobile-menu-header d-lg-none"><div class="st-1 text-center">Карта</div></div>
 						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"></span></button>
-						<div class="row no-gutters">
-							<div class="col map-modal-info d-none d-lg-block">
+						<div class="row no-gutters map-modal-wrap">
+							<div class="col map-modal-info">
 								<div class="map-modal-info-wrap">
-									<div class="h3 mb-10">Единый центр защиты</div>
-									<div class="bd-2 mb-15 d-flex align-items-center"><i class="icon icon-centered icon-map-marker mr-2"></i>`+data['city']+`</div>
-									<div class="photo-block mb-15" data-count="`+image_count+`">
-										`+image_html+`
-									</div>
-									<div class="rating mb-20"><i data-star="`+data['rating']+`"></i> <span class="st-2">`+data['rating']+`</span></div>
+									<div class="h3 mb-10">Юридический центр Алиби</div>
+									<div class="bd-2 mb-15 d-flex align-items-center"><i class="icon load icon-centered icon-map-marker mr-2"></i>`+data['city']+`</div>
 									<ul class="nav nav-tabs nav-fill" role="tablist">
 										<li class="nav-item" role="presentation">
-										<button class="nav-link active st-2" data-toggle="tab" data-target="#map_modal_info" type="button" role="tab" aria-selected="true">Контакты</button>
+										<button class="nav-link active st-2 text-nowrap" data-toggle="tab" data-target="#map_modal_info" type="button" role="tab" aria-selected="true">Контакты</button>
 										</li>
 										<li class="nav-item" role="presentation">
-										<button class="nav-link st-2" data-toggle="tab" data-target="#map_modal_route" type="button" role="tab" aria-selected="false">Как добраться</button>
+										<button class="nav-link st-2 text-nowrap" data-toggle="tab" data-target="#map_modal_route" type="button" role="tab" aria-selected="false">Как добраться</button>
 										</li>
-										<li class="nav-item" role="presentation">
-										<button class="nav-link st-2" data-toggle="tab" data-target="#map_modal_reviews" type="button" role="tab" aria-selected="false">Отзывы</button>
 										</li>
 									</ul>
 									<div class="tab-content">
 										<div class="tab-pane fade show active" id="map_modal_info" role="tabpanel">
 											<div class="d-flex align-items-center info-item">
-												<i class="icon icon-map-marker icon-gray-body icon-centered icon-bg-gray-6 icon-bg-rounded icon-bg-light-medium mr-10"></i>
+												<i class="icon load icon-map-marker icon-gray-body icon-centered icon-bg-gray-6 icon-bg-rounded icon-bg-light-medium mr-10"></i>
 												<div class="bd-2">`+data['address']+`</div>
 											</div>
 											<div class="d-flex align-items-center justify-content-between info-item">
-												<i class="icon icon-phone icon-gray-body icon-centered icon-bg-gray-6 icon-bg-rounded icon-bg-light-medium mr-10"></i>
+												<i class="icon load icon-phone icon-gray-body icon-centered icon-bg-gray-6 icon-bg-rounded icon-bg-light-medium mr-10"></i>
 												<a class="ml-0 mr-auto bd-2 blue-1 phone phone-shown" href="tel:`+phone_format(data['phone'])+`">`+data['phone']+`</a>
 												<span class="messanger-links selector-messanger-links ml-auto">
-													<a class="whatsapp" href="https://wa.me/send/?phone=79384505171" data-messenger="whatsapp" target="_blank" rel="nofollow"><i class="icon icon-whatsapp"></i></a><a class="telegram" href="https://t.me/EdinCenter_bot" data-messenger="telegram" target="_blank" rel="nofollow"><i class="icon icon-telegram"></i></a>
+													<a class="whatsapp" href="https://wa.me/send/?phone=79384505171" data-messenger="whatsapp" target="_blank" rel="nofollow"><i class="icon load icon-whatsapp"></i></a><a class="telegram" href="https://t.me/EdinCenter_bot" data-messenger="telegram" target="_blank" rel="nofollow"><i class="icon load icon-telegram"></i></a>
 												</span>
 											</div>
 											<div class="d-flex align-items-center info-item map-office-time-toggler collapsed" data-toggle="collapse" data-target="#map_worktime">
-												<i class="icon icon-clock icon-gray-body icon-centered icon-bg-gray-6 icon-bg-rounded icon-bg-light-medium mr-10"></i>
+												<i class="icon load icon-clock icon-gray-body icon-centered icon-bg-gray-6 icon-bg-rounded icon-bg-light-medium mr-10"></i>
 												<div class="bd-2">`+opened+`</div>
 											</div>
 											<div class="collapse map-office-time" id="map_worktime">
@@ -2493,6 +2664,8 @@ $( document ).ready(function() {
 											</div>
 										</div>
 										<div class="tab-pane fade" id="map_modal_route" role="tabpanel">
+											`+reference_html+`
+											`+bus_stop_html+`
 											`+buses_html+`
 											<a href="https://yandex.ru/maps/?rtext=~`+data['coord_arr'][0]+`,`+data['coord_arr'][1]+`" target="_blank" rel="nofollow" class="btn btn-primary mt-20 ml-40">Маршрут</a>
 										</div>
@@ -2500,7 +2673,6 @@ $( document ).ready(function() {
 											<div class="mobile-menu-reviews">
 												`+reviews_html+`
 											</div>
-											<a href="/reviews" class="d-block text-center read-more st-2">Смотреть все отзывы</a>
 										</div>
 									</div>
 
@@ -2514,8 +2686,8 @@ $( document ).ready(function() {
 				</div>
 			</div>
 		</div>`);
-			
-		
+
+
 		$('#map_modal .office-rating-content .read-more').on('click', function(e){
 			$(this).parent().addClass('show');
 		});
@@ -2525,7 +2697,7 @@ $( document ).ready(function() {
 			ymaps_api.src = "https://api-maps.yandex.ru/2.1/?lang=ru_RU";
 			ymaps_api.setAttribute("name","ymaps_api");
 			document.head.append(ymaps_api);
-			
+
 			ymaps_api.onload = function() {this.setAttribute('loaded', true)};
 
 			setTimeout(function check_ymaps(){
@@ -2534,7 +2706,7 @@ $( document ).ready(function() {
 				} else{
 					setTimeout(check_ymaps, 100);
 				}
-				
+
 			},100)
 		} else {
 			ymaps.ready(init);
@@ -2557,18 +2729,22 @@ $( document ).ready(function() {
 			map.geoObjects.add(placemark);
 			placemark.balloon.open();
 		}
-		
+
 		$('#map_modal').modal('show');
-	
+
 		$('#map_modal').on('hidden.bs.modal', function (e) {
 			$('#map_modal').remove();
 		});
 
 		$('#map_modal').on('shown.bs.modal', function (e) {
-			$('#map_modal .map-modal-info').css('max-height', $('#map_modal .modal-content').outerHeight()+'px');
+			if ($(window).width() > mob_break){
+				$('#map_modal .map-modal-info').css('max-height', $('#map_modal .modal-content').outerHeight()+'px');
+			} else{
+				$('#map_modal .map-modal-wrap').css('height', ($('#map_modal .modal-content').outerHeight() - 55) +'px');
+			}
 		})
 	})
-	
+
 	$('.poll-form-button-group .btn').on('click', function(e){
 		let parent = $(this).parent();
 		let form_wrap = parent.next();
@@ -2582,12 +2758,12 @@ $( document ).ready(function() {
 
 	$('.show-stickchat').on('click', function(e){
 		if ($(window).width() > mob_break){
-			e.preventDefault(); 
+			e.preventDefault();
 			$('#widgetClientOverlay').addClass('show');
 			sessionStorage.setItem('ShowChat', 'true');
 			document.body.classList.add("show-stickchat");
 		}
-	})	
+	})
 
 	var UserState = localStorage.getItem('UserState') ? JSON.parse(localStorage.getItem('UserState')) : {};
 	var PreviousUserState = {};
@@ -2613,7 +2789,7 @@ $( document ).ready(function() {
 			}
 		}
 	}
-	
+
 	$("body").on("input", "form input, form textarea", function () {
 		var $field = $(this);
 		if ($field.data("notsavetostate")) {
@@ -2630,6 +2806,18 @@ $( document ).ready(function() {
 		$('html, body').animate({
 			scrollTop: $($(this).data('scroll')).offset().top - 15
 		}, 500);
+	});
+
+	$('body').on('click', '.read-more-wrap .read-more', function(e){
+		$(this).parent().addClass('show');
+	});
+
+
+	$( ".scroll-to" ).click(function(e) {
+		e.preventDefault();
+		compensate = 20;
+		$('html, body').animate(
+			{scrollTop: $($(this).attr('href')).offset().top-compensate}, 1000);
 	});
 
 	function main_btn_anim(target){
@@ -2659,7 +2847,7 @@ $( document ).ready(function() {
 
 				$(this).children('.mobile-spoiler').first().before('<div class="mobile-spoiler-content"></div>');
 				hidden_content_wrap = $(this).children('.mobile-spoiler-content');
-				
+
 				$(this).children('.mobile-spoiler').each(function(i, el){
 					hidden_timeline_content += el.outerHTML;
 					$(el).remove();
@@ -2673,7 +2861,7 @@ $( document ).ready(function() {
 					$(this).parent().prev().slideToggle(800);
 					$(this).parent().remove();
 				})
-			});			
+			});
 		}
 	}
 
@@ -2690,7 +2878,7 @@ $( document ).ready(function() {
 					parentTop= $(this).parent().offset().top;
 					parentBottom= parentTop + $(this).parent().outerHeight();
 					windowTop= $(window).scrollTop();
-					
+
 					if(stickyTop < windowTop && !$(this).hasClass('stop')){
 						$(this).addClass('fixed');
 					}
@@ -2711,6 +2899,51 @@ $( document ).ready(function() {
 		}
 		$(window).scroll(function(){sticky()});
 	}
+
+	var js_counters = [].slice.call(document.querySelectorAll(".counter-number"));
+	if(js_counters.length > 0){
+		if ("IntersectionObserver" in window) {
+			let js_counter_obs = new IntersectionObserver(function(entries, observer) {
+				entries.forEach(function(entry) {
+					if (entry.isIntersecting) {
+						var speed = 100;
+						var sep = ' ';
+						const value = entry.target.getAttribute('counter-data');
+
+						if (entry.target.getAttribute('speed'))
+							speed = entry.target.getAttribute('speed');
+
+						if (entry.target.getAttribute('sep'))
+							sep = entry.target.getAttribute('sep');
+
+						const time = value / speed;
+
+						const animate = () => {
+
+							const data = parseInt(entry.target.innerText.replaceAll(sep, ''));
+
+							if(data < value) {
+								entry.target.innerText = numberWithSep(Math.ceil(data + time), sep);
+								setTimeout(animate, 1);
+							}else{
+								entry.target.innerText = numberWithSep(value, sep);
+								js_counter_obs.unobserve(entry.target);
+							}
+						}
+
+						animate();
+					}
+				});
+			});
+
+			js_counters.forEach(function(js_counters) {
+				js_counter_obs.observe(js_counters);
+			});
+		}
+	}
+
+
+
 });
 
 /* GEO */
@@ -2720,11 +2953,11 @@ var savedCity = getCookie('edin_center_geo');
 var check_city = localStorage.getItem('city_checked');
 var try_to_set_geo = 0;
 
-if ( navigator.userAgent.indexOf( 'Chrome-Lighthouse' ) > -1 ) {
-	check_city = 'true';
+if ($_GET['disable_city_check']){
+	check_city = 'true'
 }
 
-if (!savedCity && check_city != 'true') {	
+if (!savedCity && check_city != 'true') {
 		try{
 			getGeoInfo();
 		} catch(err) {};
@@ -2768,7 +3001,7 @@ async function getGeoInfo() {
 		try_to_set_geo++;
 	}
 }
-	
+
 $( document ).ready(function() {
 
 	function renderCityByLetter(letter) {
@@ -2791,35 +3024,35 @@ $( document ).ready(function() {
 			}
 		});
 	}
-	
+
 	$('.popup_city_select').on('click', '[data-setcity]', function (e) {
 		var date = new Date(new Date().getTime() + 3600 * 1000 * 24 * 30 * 12 * 10);
 		document.cookie = "setCityJS=" + toUnicode($(this).attr('data-setcity')) + "; domain=" + window.location.hostname + ";  path=/; expires=" + date.toUTCString();
 		window.location.replace(window.location.origin + window.location.pathname + "?nocache=" + (new Date()).getTime());
 		//window.location.reload();
 	});
-	
+
 	$('.popup_city_select .srch_wrapper .srch_text').focus(function () {
 		$(this).trigger("keyup");
 	});
-	
-	
+
+
 	var mapKey = {
 		'q' : 'й', 'w' : 'ц', 'e' : 'у', 'r' : 'к', 't' : 'е', 'y' : 'н', 'u' : 'г', 'i' : 'ш', 'o' : 'щ', 'p' : 'з', '[' : 'х', ']' : 'ъ', 'a' : 'ф', 's' : 'ы', 'd' : 'в', 'f' : 'а', 'g' : 'п', 'h' : 'р', 'j' : 'о', 'k' : 'л', 'l' : 'д', ';' : 'ж', '\'' : 'э', 'z' : 'я', 'x' : 'ч', 'c' : 'с', 'v' : 'м', 'b' : 'и', 'n' : 'т', 'm' : 'ь', ',' : 'б', '.' : 'ю','Q' : 'Й', 'W' : 'Ц', 'E' : 'У', 'R' : 'К', 'T' : 'Е', 'Y' : 'Н', 'U' : 'Г', 'I' : 'Ш', 'O' : 'Щ', 'P' : 'З', '[' : 'Х', ']' : 'Ъ', 'A' : 'Ф', 'S' : 'Ы', 'D' : 'В', 'F' : 'А', 'G' : 'П', 'H' : 'Р', 'J' : 'О', 'K' : 'Л', 'L' : 'Д', ';' : 'Ж', '\'' : 'Э', 'Z' : '?', 'X' : 'ч', 'C' : 'С', 'V' : 'М', 'B' : 'И', 'N' : 'Т', 'M' : 'Ь', ',' : 'Б', '.' : 'Ю',
 	};
-	
+
 	var srch_text_timer;
-	
+
 	$('.popup_city_select').on('keyup, focus, input', '.srch_wrapper .srch_text', function (e) {
-		
+
 		var str = $(this).val();
 		var r = '';
 		for (var i = 0; i < str.length; i++) {
 			r += mapKey[str.charAt(i)] || str.charAt(i);
 		}
 		$(this).val(r);
-		
-		var city_name = $(this).val();	
+
+		var city_name = $(this).val();
 
 		if (city_name.length > 1) {
 			$(".srch_reset").removeClass('d-none');
@@ -2835,7 +3068,7 @@ $( document ).ready(function() {
 						searchListContainer.html('');
 						searchListContainer.append('<ul></ul>');
 						var searchList = searchListContainer.find('ul');
-												
+
 						if (data) {
 							let i = 1;
 							for (var city in data) {
@@ -2846,7 +3079,7 @@ $( document ).ready(function() {
 							}
 							if (i > 20)
 								searchListContainer.append('<div class="show-more-cities">и еще <span>'+i+' '+ num_word(i, ['город', 'города', 'городов']) +'</span></div>')
-						} else {						
+						} else {
 							if (!sessionStorage.offices_full_list){
 								jQuery.ajax({
 									url: '/api/geo',
@@ -2861,7 +3094,7 @@ $( document ).ready(function() {
 							}
 							//probably_list = getMultipleRandom(JSON.parse(sessionStorage.offices_full_list), 8);
 							probably_list = JSON.parse(sessionStorage.offices_full_list);
-							searchListContainer.html('<div class="not-found"><span>Такого города не найдено</span></div><div class="probably-list"><div class="st-2 subtitle"><i class="icon icon-question icon-centered"></i>Возможно вы искали:</div><ul></ul></div>');	
+							searchListContainer.html('<div class="not-found"><span>Такого города не найдено</span></div><div class="probably-list"><div class="st-2 subtitle"><i class="icon icon-question icon-centered"></i>Возможно вы искали:</div><ul></ul></div>');
 							searchList = searchListContainer.find('ul');
 							for (var city in probably_list) {
 								city = probably_list[city];
@@ -2880,13 +3113,13 @@ $( document ).ready(function() {
 			clearTimeout(srch_text_timer);
 		}
 	});
-	
+
 	$('.popup_city_select').on('click', '.show-more-cities', function () {
 		$(this).parent().find('.hidden').removeClass('hidden');
 		$(this).addClass('d-none');
 	})
-	
-	
+
+
 	$('body').on('submit', '.searchForm--city', function (e) {
 		e.preventDefault();
 		var form = $(this);
@@ -2922,4 +3155,199 @@ $( document ).ready(function() {
 		renderCityByLetter(letter);
 		return false;
 	});
+});
+
+
+//AJAX REVIEWS
+$( document ).ready(function() {
+	$('.ajax-reviews-load').on('click', function (e) {
+		e.preventDefault();
+
+		show_more_btn = $(this);
+		city = show_more_btn.data('city');
+		page = show_more_btn.attr('data-page');
+		limit = show_more_btn.data('limit');
+		rating = show_more_btn.data('rating');
+		group = show_more_btn.data('group');
+
+		$.ajax({
+			url: '/api/ajax/reviews?page='+page+(city?'&city='+city:'')+(rating?'&rating='+rating:'')+(group?'&group='+group:''),
+			type: 'get',
+			success: function success(data) {
+				$('.ajax-reviews-list').append(data);
+				if (parseInt(page)+1 >= limit){
+					show_more_btn.addClass('d-none');
+					$('.load-another-city').removeClass('d-none');
+				}else{
+					show_more_btn.attr('data-page', parseInt(page) + 1);
+				}
+			},
+			error: function(){
+
+			}
+		});
+	});
+
+	$('.rating-selector input:not(:disabled):not(:checked)').on('click',  function (e) {
+		url = $(this).data('url');
+		if (url){
+			location.href = url;
+		}
+	});
+
+});
+
+$( document ).ready(function() {
+	$('#lk_registration_modal').on('submit', 'form', function (e) {
+		e.preventDefault();
+		var form = $(this);
+
+		phone_input = form.find('[name="phone"]');
+
+		if (phone_input.val().length < 16){
+
+			phone_input.removeClass('is-valid').addClass('is-invalid');
+			phone_input[0].setCustomValidity('Введите номер телефона');
+			phone_input[0].reportValidity();
+			return false;
+		}
+
+		grecaptcha.ready(function () { // по готовности скриптов recaptcha
+			grecaptcha.execute(window.rekey, {
+				action: 'sendform' // этот параметр не имеет значения
+			}).then(function (token) {
+				window.retoken = token;
+
+				var data = form.serialize();
+				var cityId = 0;
+
+				if (getCookie('edin_center_geo')) {
+					var geo = JSON.parse(decodeURIComponent(getCookie('edin_center_geo')));
+					cityId = geo.id || 999;
+				}
+
+				if (cityId) {
+					data += '&city_id=' + cityId;
+				}
+
+				if ($_GET['ref']) {
+					data += '&ref=' + encodeURIComponent($_GET['ref']);
+				} else if(sessionStorage.getItem('ref')){
+					data += '&ref=' + sessionStorage.getItem('ref');
+				}
+
+				if (window.retoken) {
+					data += '&retoken=' + window.retoken;
+				}
+
+				var url = form.attr('action');
+				var method = form.attr('method');
+
+				$.ajax({
+					url: url,
+					data: data,
+					method: method,
+					dataType: 'json',
+					success: function success(data) {
+						form.parents('.modal').modal('hide');
+						if (data.redirect)
+							window.location.assign(data.redirect);
+					},
+					error: function error(_error) {
+
+						form.parents('.modal').modal('hide');
+
+						error_data = _error.responseJSON;
+
+						error_msg = error_data.errors.message ? error_data.errors.message : error_data.message;
+						error_msg = error_msg ? error_msg : 'Попробуйте отправить заявку позднее';
+						openSuccessModal('Произошла ошибка', error_msg, 'success-error', 'icon-emote-excl', null);
+					}
+				});
+			});
+		});
+	});
+});
+
+/* VACANCY */
+
+$( document ).ready(function() {
+
+	$('.custom-file input').on('change', function(e){
+		var file_name = $(this).val().replace(/\\/g, '/').replace(/.*\//, '');
+		$(this).parent().find('label').html('<span class="bold gray-1">Файл: </span><span class="blue-1">'+file_name+'</span>');
+	});
+
+	$('body').on('submit', 'form.vacancy-form', function (e) {
+		e.preventDefault();
+		var form = $(this);
+
+		phone_input = form.find('[name="vacancy[phone]"]');
+
+		if (phone_input.val().length < 16){
+
+			phone_input.removeClass('is-valid').addClass('is-invalid');
+			phone_input[0].setCustomValidity('Введите номер телефона');
+			phone_input[0].reportValidity();
+			return false;
+		}
+
+		if (form.attr('data-sending') === false) {
+			return;
+		}
+
+		form.attr('data-sending', true);
+
+		grecaptcha.ready(function () { // по готовности скриптов recaptcha
+			grecaptcha.execute(window.rekey, {
+				action: 'sendform' // этот параметр не имеет значения
+			}).then(function (token) {
+				window.retoken = token;
+
+				var data = new FormData(form[0]);
+
+				if (window.retoken) {
+					data.append('retoken', window.retoken);
+				}
+
+				var url = form.attr('action');
+				var method = form.attr('method');
+				var button = form.find('[type=submit]');
+				button.attr('disabled', true);
+
+				$.ajax({
+					url: url,
+					data: data,
+					method: 'POST',
+					contentType: false,
+					processData: false,
+					success: function success(data) {
+
+						form[0].reset();
+						form.removeAttr('data-sending');
+						button.attr('disabled', false);
+						form.find('.is-valid').removeClass('is-valid');
+						form.find('.is-invalid').removeClass('is-invalid');
+						form.find('.custom-file label').html('<span class="blue-1">Выберите резюме/портфолио</span> <br>(.pdf,.doc,.docx,.rtf)');
+
+						if (form.attr('modal-confirm')){
+							openSuccessModal(form.attr('confirm-title'), form.attr('confirm-text'), form.attr('confirm-class'), form.attr('confirm-icon'), form.attr('confirm-button'));
+						}
+					},
+					error: function error(_error) {
+						error_data = _error.responseJSON;
+
+						error_msg = error_data.errors.message ? error_data.errors.message : error_data.message;
+						error_msg = error_msg ? error_msg : 'Попробуйте отправить заявку позднее';
+						openSuccessModal('Ошибка', error_msg, 'success-error', 'icon-emote-excl', null);
+
+						form.removeAttr('data-sending');
+						button.attr('disabled', false);
+					}
+				});
+			});
+		});
+
+	});
+
 });

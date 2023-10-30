@@ -1,0 +1,2807 @@
+
+<style>
+    .h5, h5 {
+    font-size: 1.25rem;
+    }
+
+    #currentCityMap {min-height: 400px;}
+    @media (max-width: 767px){
+        #currentCityMap {padding-left: 34px;}
+    }
+    #currentCityMap iframe,
+    #currentCityMap > ymaps,
+    #currentCityMap > ymaps > ymaps{
+		height: 100% !important;
+        /*max-height: 500px;*/
+	}
+    .contacts-list-map{
+        min-height:250px;
+    }
+
+    .main-section{
+        margin-top:calc(-1 * var(--header-size));
+        padding-top:var(--header-size);
+        background-image:url('/images/bg_gradient_big_block.jpg');
+        background-position: top center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        z-index:1;
+    }
+
+    .main-section .container{
+        padding-top:60px;
+        padding-bottom:80px;
+    }
+
+    .inlineGallery > * {
+        display: inline-block;
+    }
+    .inlineGallery img,
+    .contacts-slider.slick-slider .slide-item img {
+        border-radius: 10px;
+    }
+
+    .listInteractive__item .inlineGallery{
+        margin-bottom:15px;
+    }
+
+    .listInteractive__item {
+        position: relative
+    }
+
+    .listInteractive__button {
+        padding: 15px;
+        cursor: pointer;
+        position: relative
+    }
+
+    .listInteractive__item:nth-child(odd) .listInteractive__button {
+        background-color: var(--gray-5)
+    }
+
+    .listInteractive__item.active .listInteractive__button {
+        background-color: var(--red-1);
+        color: #fff
+    }
+
+    .listInteractive__button:before {
+        content: '';
+        position: absolute;
+        left: 50%;
+        top: 0;
+        bottom: 0;
+        right: 50%;
+        background: rgba(0,0,0,.15)
+    }
+
+    .listInteractive__item:nth-child(odd) .listInteractive__button:before {
+        background: rgba(0,0,0,.05)
+    }
+
+    .listInteractive__button:hover:before {
+        left: 0;
+        right: 0
+    }
+
+    .listInteractive__title {
+        font-size: 1.4rem;
+        transition: font-size .5s;
+        font-weight:500;
+    }
+
+    .listInteractive__item.active .listInteractive__title {
+        font-size: 1.6rem
+    }
+
+    .listInteractive__item.active .listInteractive__arrow i:before {
+        background-color:#fff;
+    }
+
+    .listInteractive__extra {
+        display: none;
+        border-bottom: 1px solid #d8d5d5;
+        padding: 10px 0
+    }
+
+    .listInteractive__arrow {
+        font-size: 2rem
+    }
+
+    .listInteractive__item.active .listInteractive__arrow i {
+        transform: rotateX(180deg)
+    }
+
+    .listInteractive__arrow i,.listInteractive__button,.listInteractive__button:before {
+        transition: all .5s
+    }
+
+    .listInteractive__img {
+        height: 150px
+    }
+
+    .listInteractive__extra .preloader {
+        position: relative;
+        height: 100%;
+        min-height: 200px;
+        background: rgba(255,255,255,.8);
+        z-index: 10
+    }
+
+    .listInteractive__extra .preloader__img {
+        content: '';
+        width: 60px;
+        height: 70px;
+        background: url(/img/logo.png) no-repeat;
+        background-size: 100%;
+        position: absolute;
+        z-index: 11;
+        top: 50%;
+        left: 50%;
+        margin-left: -30px;
+        margin-top: -35px;
+        animation: sendLoader 5s infinite
+    }
+
+    @keyframes sendLoader {
+        0% {
+            transform: rotateY(0) rotateX(0)
+        }
+
+        25% {
+            transform: rotateY(180deg) rotateX(60deg)
+        }
+
+        50% {
+            transform: rotateY(360deg) rotateX(0)
+        }
+
+        100% {
+            transform: rotateY(0) rotateX(0)
+        }
+    }
+
+    .listInteractive__item.active .listInteractive__button a[href^="tel:"]{
+        --phone-color: #fff;
+    }
+    .listInteractive__item .listInteractive__button a[href^="tel:"]:before{
+        bottom: 0;
+        top: unset;
+    }
+    .listInteractive__item.active .listInteractive__button a[href^="tel:"]:before{
+        color: #fff !important;
+        -webkit-text-fill-color: #fff !important;
+    }
+
+    .listInteractive__item.active .btn-primary{
+        background-color: #fff;
+        color: var(--red-1);
+    }
+
+    .listInteractive__item .badge{
+        background: var(--gray-3);
+        color: #fff;
+        margin-left: 5px;
+    }
+
+    .contacts-search-form-wrap{
+        position:relative;
+    }
+
+    .contacts-search-form-wrap .icon{
+        position:absolute;
+        right:20px;
+    }
+
+    .contacts-slider{
+        padding:0 30px;
+        margin: 0 5px;
+    }
+
+    .contacts-slider.slick-slider .slick-arrow {
+        width: 30px;
+        height: 30px;
+        left: 0;
+        border-radius: 0;
+        box-shadow: none;
+        padding: 0;
+        top: calc(50% - 15px);
+    }
+
+    .contacts-slider.slick-slider .slick-arrow.slick-next {
+        left: unset;
+        right: 0;
+    }
+
+    .contacts-slider.slick-slider .slide-item{
+        display:flex;
+        justify-content:center;
+    }
+
+    @media (max-width: 991px){
+        .main-section {
+            margin-top:-83px;
+            padding-top:83px;
+        }
+    }
+
+    @media (max-width: 767px){
+        .main-section {
+            margin-top:-75px;
+            padding-top:75px;
+        }
+    }
+
+
+</style>
+
+
+
+<section class="main-section mainscreen mainscreen--contacts">
+     <div class="container">
+        <div class="card semi-opacity-block px-10 px-md-30 px-lg-40 nohover notransform noheight">
+            <div class="row">
+                <div class="col-12">
+                    <h1 class="mainscreen__heading mb-0">Ярославль</h1>
+                    <hr class="mb-30"/>
+                </div>
+                <div class="col-lg-6">
+                    <!--<div class="card grey lighten-2">-->
+                        <div class="card nohover notransform px-0 py-20">
+                            <div class="list-group list-group-flush">
+                                <div class="list-group-item gray-1 bd-2">
+                                    <span class="item-name gray-3">Телефон:</span> <a class="phone blue-1" href="tel:84852581515">8 (4852) 58-15-15</a>
+                                </div>
+                                <div class="list-group-item gray-1 bd-2">
+                                    <span class="item-name gray-3">Email:</span> <a href="mailto:yarsl@edin.center">yarsl@edin.center</a>
+                                </div>
+                                <div class="list-group-item gray-1 bd-2">
+                                    <span class="item-name gray-3">Адрес:</span> ул. Свободы 11/37, 2 этаж                                </div>
+                                                                <div class="list-group-item gray-1 bd-2">
+                                    <div class="item-name gray-3 float-left mr-1">Время работы:</div>
+                                    <div class="float-left">пн-пт: 09:00 - 19:00<br>                                    сб: 10:00 - 16:00<br>                                    вс: выходной</div>
+                                </div>
+                                                                <div class="list-group-item gray-1 bd-2">
+                                    <span class="item-name gray-3">Район:</span> Кировский район                                </div>
+                                <div class="list-group-item gray-1 bd-2">
+                                    <span class="item-name gray-3">Остановка:</span> Знаменская башня                                </div>
+                                
+                                                                <div class="list-group-item gray-1 bd-2">
+                                    <span class="item-name gray-3">Ориентир:</span> Доходный дом Понизовкиных, вход с улицы Свободы, в соседних зданиях ТК Европа, ТЦ Ниагара                                </div>
+                                                                
+                                                                
+                                                                <div class="list-group-item gray-1 bd-2">
+                                    <span class="item-name gray-3">Автобусы:</span> 49, 99с, 139, 140, 178                                </div>
+                                                                
+                                                                <div class="list-group-item gray-1 bd-2">
+                                    <span class="item-name gray-3">Маршрутные такси:</span> 71, 143, 176                                </div>
+                                                                
+                                                                <div class="list-group-item gray-1 bd-2">
+                                    <span class="item-name gray-3">Троллейбусы:</span> 1                                </div>
+                                                                
+                                                                    <div class="list-group-item px-0 py-10">
+                                        <div class="data-attr-slider contacts-slider slick-slider ecz-style" data-slick='{
+                                                                        "slidesToShow": 3, 
+                                                                        "slidesToScroll": 1,
+                                                                        "infinite": false,
+                                                                        "dots" :false,
+                                                                        "speed" :300,
+                                                                        "responsive": [
+                                                                            {
+                                                                            "breakpoint": 1200,
+                                                                            "settings": {
+                                                                                "slidesToShow": 2
+                                                                                }
+                                                                            },{
+                                                                            "breakpoint": 992,
+                                                                            "settings": {
+                                                                                "slidesToShow": 3
+                                                                                }
+                                                                            },{
+                                                                            "breakpoint": 768,
+                                                                            "settings": {
+                                                                                "slidesToShow": 2
+                                                                                }
+                                                                            },{
+                                                                            "breakpoint": 460,
+                                                                            "settings": {
+                                                                                "slidesToShow": 1
+                                                                                }
+                                                                            }
+                                                                        ]
+                                                                        }'>
+                
+                                                                                            <div class="slide-item">
+                                                        <a href="/img_proxy?url=/files/office/photo/65/4bd7e9edb7aa6c540f9bf43e2d6cf20d.jpg" data-fancybox="current">
+                                                            <img style="height: 100px;" src="/img_proxy?url=/files/office/photo/65/pre/4bd7e9edb7aa6c540f9bf43e2d6cf20d.jpg" alt="Офис Ярославль Единый центр Защиты" />
+                                                        </a>
+                                                </div>
+                                                                                            <div class="slide-item">
+                                                        <a href="/img_proxy?url=/files/office/photo/65/06108fe64457d266e713ad9d63e912f9.jpg" data-fancybox="current">
+                                                            <img style="height: 100px;" src="/img_proxy?url=/files/office/photo/65/pre/06108fe64457d266e713ad9d63e912f9.jpg" alt="Офис Ярославль Единый центр Защиты" />
+                                                        </a>
+                                                </div>
+                                                                                            <div class="slide-item">
+                                                        <a href="/img_proxy?url=/files/office/photo/65/2ad14bcf7d81befb3ac7cf88fc33bd24.jpg" data-fancybox="current">
+                                                            <img style="height: 100px;" src="/img_proxy?url=/files/office/photo/65/pre/2ad14bcf7d81befb3ac7cf88fc33bd24.jpg" alt="Офис Ярославль Единый центр Защиты" />
+                                                        </a>
+                                                </div>
+                                                                                    </div>
+                                    </div>
+                                                                
+                                <div class="list-group-item">
+                                    <a href="#" data-scroll="#citiesContacts" class="bd-2">Другие города</a>
+                                </div>
+                            </div>
+                        </div>
+                    <!--</div>-->
+                </div>
+                <div class="col-lg-6">
+                    <div id="currentCityMap" class="card p-0 city_map mt-30 mt-lg-0 nohover notransform overflow-hidden" 
+                                            data-react-map='{"id":"currentCityMap","options":{"center":["57.625171"," 39.881902"],"zoom":16},"placemark_options":{"hintContent":"\u0443\u043b. \u0421\u0432\u043e\u0431\u043e\u0434\u044b 11\/37, 2 \u044d\u0442\u0430\u0436","balloonContentHeader":"\u042f\u0440\u043e\u0441\u043b\u0430\u0432\u043b\u044c","balloonContentBody":"\u0443\u043b. \u0421\u0432\u043e\u0431\u043e\u0434\u044b 11\/37, 2 \u044d\u0442\u0430\u0436","isOpen":true}}'
+    
+                                        > 
+                                        </div> 
+                </div>
+            </div>
+
+
+                
+        </div>
+    </div>
+</section>
+
+<div class="" id="citiesContacts">
+    <div class="container">
+        <div class="md-form mt-40 mb-40 contacts-search-form-wrap">
+            <i class="icon icon-magnifier icon-gray-3 icon-centered"></i>
+            <input class="listInteractive__search form-control mb-0" type="text" placeholder="Начните вводить название города" data-notsavetostate="true" data-listInteractive-searchlist="0"/>
+        </div>
+    </div>
+    <div class="listInteractive" data-listInteractive-list="0">
+                                                        <div class="listInteractive__item">
+                    <div class="listInteractive__button" data-listinteractive="/api/geo/offices/14" data-listinteractivecb='apiGeoOfficesCb'>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <div class="wrap d-flex align-items-center">
+                                        <span class="listInteractive__title">
+                                            Абакан                                        </span>
+                                                                            </div>
+                                    <div class="bd-2">
+                                        ул. Щетинкина 24, 2 этаж, ДЦ «Столица»                                    </div>
+                                </div>
+                                <div class="d-flex align-items-center col-md-3">
+                                                                        <a class="phone" href="tel:83902313234">8 (3902) 31-32-34</a>
+                                </div>
+                                <div class="col-md-1 listInteractive__arrow d-flex d-md-block pt-10 pt-md-0">
+                                    <button class="btn btn-primary d-md-none">Подробнее</button>
+                                    <i class="icon icon-arrow-down icon-giant icon-centered" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="listInteractive__extra"><div class="preloader"><div class="preloader__img"></div></div><a class="d-none" href="https://edin.center/abakan">Единый центр защиты Абакан</a></div>
+                </div>
+                                                <div class="listInteractive__item">
+                    <div class="listInteractive__button" data-listinteractive="/api/geo/offices/60" data-listinteractivecb='apiGeoOfficesCb'>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <div class="wrap d-flex align-items-center">
+                                        <span class="listInteractive__title">
+                                            Архангельск                                        </span>
+                                                                            </div>
+                                    <div class="bd-2">
+                                        наб. Северной Двины, 27  (ТЦ «Час Пик»), 3 этаж, 307 офис                                    </div>
+                                </div>
+                                <div class="d-flex align-items-center col-md-3">
+                                                                        <a class="phone" href="tel:88182420228">8 (818) 242-0228</a>
+                                </div>
+                                <div class="col-md-1 listInteractive__arrow d-flex d-md-block pt-10 pt-md-0">
+                                    <button class="btn btn-primary d-md-none">Подробнее</button>
+                                    <i class="icon icon-arrow-down icon-giant icon-centered" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="listInteractive__extra"><div class="preloader"><div class="preloader__img"></div></div><a class="d-none" href="https://edin.center/Arkhangelsk">Единый центр защиты Архангельск</a></div>
+                </div>
+                                                <div class="listInteractive__item">
+                    <div class="listInteractive__button" data-listinteractive="/api/geo/offices/10" data-listinteractivecb='apiGeoOfficesCb'>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <div class="wrap d-flex align-items-center">
+                                        <span class="listInteractive__title">
+                                            Барнаул                                        </span>
+                                                                            </div>
+                                    <div class="bd-2">
+                                        пр. Ленина 39, 7 этаж, офис 704, ТЦ «Проспект»                                    </div>
+                                </div>
+                                <div class="d-flex align-items-center col-md-3">
+                                                                        <a class="phone" href="tel:83852997928">8 (3852) 99-79-28</a>
+                                </div>
+                                <div class="col-md-1 listInteractive__arrow d-flex d-md-block pt-10 pt-md-0">
+                                    <button class="btn btn-primary d-md-none">Подробнее</button>
+                                    <i class="icon icon-arrow-down icon-giant icon-centered" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="listInteractive__extra"><div class="preloader"><div class="preloader__img"></div></div><a class="d-none" href="https://edin.center/barnaul">Единый центр защиты Барнаул</a></div>
+                </div>
+                                                <div class="listInteractive__item">
+                    <div class="listInteractive__button" data-listinteractive="/api/geo/offices/46" data-listinteractivecb='apiGeoOfficesCb'>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <div class="wrap d-flex align-items-center">
+                                        <span class="listInteractive__title">
+                                            Владивосток                                        </span>
+                                                                            </div>
+                                    <div class="bd-2">
+                                        ул. Алеутская, 45, 5 этаж, офис 503                                    </div>
+                                </div>
+                                <div class="d-flex align-items-center col-md-3">
+                                                                        <a class="phone" href="tel:84232540735">8 (423) 254-07-35</a>
+                                </div>
+                                <div class="col-md-1 listInteractive__arrow d-flex d-md-block pt-10 pt-md-0">
+                                    <button class="btn btn-primary d-md-none">Подробнее</button>
+                                    <i class="icon icon-arrow-down icon-giant icon-centered" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="listInteractive__extra"><div class="preloader"><div class="preloader__img"></div></div><a class="d-none" href="https://edin.center/Vladivostok">Единый центр защиты Владивосток</a></div>
+                </div>
+                                                <div class="listInteractive__item">
+                    <div class="listInteractive__button" data-listinteractive="/api/geo/offices/29" data-listinteractivecb='apiGeoOfficesCb'>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <div class="wrap d-flex align-items-center">
+                                        <span class="listInteractive__title">
+                                            Воронеж                                        </span>
+                                                                            </div>
+                                    <div class="bd-2">
+                                        ул. Пушкинская, д.45                                    </div>
+                                </div>
+                                <div class="d-flex align-items-center col-md-3">
+                                                                        <a class="phone" href="tel:84732516703">8 (473) 251-67-03</a>
+                                </div>
+                                <div class="col-md-1 listInteractive__arrow d-flex d-md-block pt-10 pt-md-0">
+                                    <button class="btn btn-primary d-md-none">Подробнее</button>
+                                    <i class="icon icon-arrow-down icon-giant icon-centered" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="listInteractive__extra"><div class="preloader"><div class="preloader__img"></div></div><a class="d-none" href="https://edin.center/Voronezh">Единый центр защиты Воронеж</a></div>
+                </div>
+                                                <div class="listInteractive__item">
+                    <div class="listInteractive__button" data-listinteractive="/api/geo/offices/11" data-listinteractivecb='apiGeoOfficesCb'>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <div class="wrap d-flex align-items-center">
+                                        <span class="listInteractive__title">
+                                            Екатеринбург                                        </span>
+                                                                            </div>
+                                    <div class="bd-2">
+                                        ул. 8 марта 13                                    </div>
+                                </div>
+                                <div class="d-flex align-items-center col-md-3">
+                                                                        <a class="phone" href="tel:83433463333">8 (343) 346-33-33</a>
+                                </div>
+                                <div class="col-md-1 listInteractive__arrow d-flex d-md-block pt-10 pt-md-0">
+                                    <button class="btn btn-primary d-md-none">Подробнее</button>
+                                    <i class="icon icon-arrow-down icon-giant icon-centered" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="listInteractive__extra"><div class="preloader"><div class="preloader__img"></div></div><a class="d-none" href="https://edin.center/ekaterinburg">Единый центр защиты Екатеринбург</a></div>
+                </div>
+                                                <div class="listInteractive__item">
+                    <div class="listInteractive__button" data-listinteractive="/api/geo/offices/63" data-listinteractivecb='apiGeoOfficesCb'>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <div class="wrap d-flex align-items-center">
+                                        <span class="listInteractive__title">
+                                            Ижевск                                        </span>
+                                                                            </div>
+                                    <div class="bd-2">
+                                        Ижевск, ул. Красноармейская, 164                                    </div>
+                                </div>
+                                <div class="d-flex align-items-center col-md-3">
+                                                                        <a class="phone" href="tel:83412320344">8 (341) 232-0344</a>
+                                </div>
+                                <div class="col-md-1 listInteractive__arrow d-flex d-md-block pt-10 pt-md-0">
+                                    <button class="btn btn-primary d-md-none">Подробнее</button>
+                                    <i class="icon icon-arrow-down icon-giant icon-centered" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="listInteractive__extra"><div class="preloader"><div class="preloader__img"></div></div><a class="d-none" href="https://edin.center/Izhevsk">Единый центр защиты Ижевск</a></div>
+                </div>
+                                                <div class="listInteractive__item">
+                    <div class="listInteractive__button" data-listinteractive="/api/geo/offices/13" data-listinteractivecb='apiGeoOfficesCb'>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <div class="wrap d-flex align-items-center">
+                                        <span class="listInteractive__title">
+                                            Иркутск                                        </span>
+                                                                            </div>
+                                    <div class="bd-2">
+                                        ул. Карла Маркса, д.30                                    </div>
+                                </div>
+                                <div class="d-flex align-items-center col-md-3">
+                                                                        <a class="phone" href="tel:83952930488">8 (3952) 93-04-88</a>
+                                </div>
+                                <div class="col-md-1 listInteractive__arrow d-flex d-md-block pt-10 pt-md-0">
+                                    <button class="btn btn-primary d-md-none">Подробнее</button>
+                                    <i class="icon icon-arrow-down icon-giant icon-centered" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="listInteractive__extra"><div class="preloader"><div class="preloader__img"></div></div><a class="d-none" href="https://edin.center/irkutsk">Единый центр защиты Иркутск</a></div>
+                </div>
+                                                <div class="listInteractive__item">
+                    <div class="listInteractive__button" data-listinteractive="/api/geo/offices/25" data-listinteractivecb='apiGeoOfficesCb'>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <div class="wrap d-flex align-items-center">
+                                        <span class="listInteractive__title">
+                                            Калининград                                        </span>
+                                                                            </div>
+                                    <div class="bd-2">
+                                        Площадь Победы 10, БЦ «Кловер Сити-Центр», 6 этаж, офис 612                                    </div>
+                                </div>
+                                <div class="d-flex align-items-center col-md-3">
+                                                                        <a class="phone" href="tel:84012376718">8 (4012) 37-67-18</a>
+                                </div>
+                                <div class="col-md-1 listInteractive__arrow d-flex d-md-block pt-10 pt-md-0">
+                                    <button class="btn btn-primary d-md-none">Подробнее</button>
+                                    <i class="icon icon-arrow-down icon-giant icon-centered" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="listInteractive__extra"><div class="preloader"><div class="preloader__img"></div></div><a class="d-none" href="https://edin.center/Kaliningrad">Единый центр защиты Калининград</a></div>
+                </div>
+                                                <div class="listInteractive__item">
+                    <div class="listInteractive__button" data-listinteractive="/api/geo/offices/38" data-listinteractivecb='apiGeoOfficesCb'>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <div class="wrap d-flex align-items-center">
+                                        <span class="listInteractive__title">
+                                            Каменск-Уральский                                        </span>
+                                                                            </div>
+                                    <div class="bd-2">
+                                        пр. Победы, д. 22, 1 этаж, отдельный вход                                    </div>
+                                </div>
+                                <div class="d-flex align-items-center col-md-3">
+                                                                        <a class="phone" href="tel:83439339729">8 (3439) 33-97-29</a>
+                                </div>
+                                <div class="col-md-1 listInteractive__arrow d-flex d-md-block pt-10 pt-md-0">
+                                    <button class="btn btn-primary d-md-none">Подробнее</button>
+                                    <i class="icon icon-arrow-down icon-giant icon-centered" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="listInteractive__extra"><div class="preloader"><div class="preloader__img"></div></div><a class="d-none" href="https://edin.center/Kamensk-Uralskiy">Единый центр защиты Каменск-Уральский</a></div>
+                </div>
+                                                <div class="listInteractive__item">
+                    <div class="listInteractive__button" data-listinteractive="/api/geo/offices/3" data-listinteractivecb='apiGeoOfficesCb'>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <div class="wrap d-flex align-items-center">
+                                        <span class="listInteractive__title">
+                                            Кемерово                                        </span>
+                                                                            </div>
+                                    <div class="bd-2">
+                                        пр. Советский, 33                                    </div>
+                                </div>
+                                <div class="d-flex align-items-center col-md-3">
+                                                                        <a class="phone" href="tel:83842240481">8 (3842) 24-04-81</a>
+                                </div>
+                                <div class="col-md-1 listInteractive__arrow d-flex d-md-block pt-10 pt-md-0">
+                                    <button class="btn btn-primary d-md-none">Подробнее</button>
+                                    <i class="icon icon-arrow-down icon-giant icon-centered" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="listInteractive__extra"><div class="preloader"><div class="preloader__img"></div></div><a class="d-none" href="https://edin.center/kemerovo">Единый центр защиты Кемерово</a></div>
+                </div>
+                                                <div class="listInteractive__item">
+                    <div class="listInteractive__button" data-listinteractive="/api/geo/offices/58" data-listinteractivecb='apiGeoOfficesCb'>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <div class="wrap d-flex align-items-center">
+                                        <span class="listInteractive__title">
+                                            Киров                                        </span>
+                                                                            </div>
+                                    <div class="bd-2">
+                                        Октябрьский пр-т, д. 112, 1 этаж                                    </div>
+                                </div>
+                                <div class="d-flex align-items-center col-md-3">
+                                                                        <a class="phone" href="tel:88332205727">8 (8332) 20-57-27</a>
+                                </div>
+                                <div class="col-md-1 listInteractive__arrow d-flex d-md-block pt-10 pt-md-0">
+                                    <button class="btn btn-primary d-md-none">Подробнее</button>
+                                    <i class="icon icon-arrow-down icon-giant icon-centered" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="listInteractive__extra"><div class="preloader"><div class="preloader__img"></div></div><a class="d-none" href="https://edin.center/Kirov">Единый центр защиты Киров</a></div>
+                </div>
+                                                <div class="listInteractive__item">
+                    <div class="listInteractive__button" data-listinteractive="/api/geo/offices/6" data-listinteractivecb='apiGeoOfficesCb'>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <div class="wrap d-flex align-items-center">
+                                        <span class="listInteractive__title">
+                                            Краснодар                                        </span>
+                                                                            </div>
+                                    <div class="bd-2">
+                                        ул. Буденного, 129. Вход А, офис 2.7                                    </div>
+                                </div>
+                                <div class="d-flex align-items-center col-md-3">
+                                                                        <a class="phone" href="tel:88612100100">8 (861) 2-100-100</a>
+                                </div>
+                                <div class="col-md-1 listInteractive__arrow d-flex d-md-block pt-10 pt-md-0">
+                                    <button class="btn btn-primary d-md-none">Подробнее</button>
+                                    <i class="icon icon-arrow-down icon-giant icon-centered" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="listInteractive__extra"><div class="preloader"><div class="preloader__img"></div></div><a class="d-none" href="https://edin.center/krasnodar">Единый центр защиты Краснодар</a></div>
+                </div>
+                                                <div class="listInteractive__item">
+                    <div class="listInteractive__button" data-listinteractive="/api/geo/offices/4" data-listinteractivecb='apiGeoOfficesCb'>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <div class="wrap d-flex align-items-center">
+                                        <span class="listInteractive__title">
+                                            Красноярск                                        </span>
+                                                                            </div>
+                                    <div class="bd-2">
+                                        пр. Мира, 64, 3й этаж, помещение 4                                    </div>
+                                </div>
+                                <div class="d-flex align-items-center col-md-3">
+                                                                        <a class="phone" href="tel:83912967895">8 (391) 296-78-95</a>
+                                </div>
+                                <div class="col-md-1 listInteractive__arrow d-flex d-md-block pt-10 pt-md-0">
+                                    <button class="btn btn-primary d-md-none">Подробнее</button>
+                                    <i class="icon icon-arrow-down icon-giant icon-centered" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="listInteractive__extra"><div class="preloader"><div class="preloader__img"></div></div><a class="d-none" href="https://edin.center/krasnoyarsk">Единый центр защиты Красноярск</a></div>
+                </div>
+                                                <div class="listInteractive__item">
+                    <div class="listInteractive__button" data-listinteractive="/api/geo/offices/54" data-listinteractivecb='apiGeoOfficesCb'>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <div class="wrap d-flex align-items-center">
+                                        <span class="listInteractive__title">
+                                            Мурманск                                        </span>
+                                                                            </div>
+                                    <div class="bd-2">
+                                        ул. Капитана Егорова, дом 14, офис 422 (4 этаж)                                    </div>
+                                </div>
+                                <div class="d-flex align-items-center col-md-3">
+                                                                        <a class="phone" href="tel:88152601028">8 (8152) 60-10-28</a>
+                                </div>
+                                <div class="col-md-1 listInteractive__arrow d-flex d-md-block pt-10 pt-md-0">
+                                    <button class="btn btn-primary d-md-none">Подробнее</button>
+                                    <i class="icon icon-arrow-down icon-giant icon-centered" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="listInteractive__extra"><div class="preloader"><div class="preloader__img"></div></div><a class="d-none" href="https://edin.center/Murmansk">Единый центр защиты Мурманск</a></div>
+                </div>
+                                                <div class="listInteractive__item">
+                    <div class="listInteractive__button" data-listinteractive="/api/geo/offices/57" data-listinteractivecb='apiGeoOfficesCb'>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <div class="wrap d-flex align-items-center">
+                                        <span class="listInteractive__title">
+                                            Нижневартовск                                        </span>
+                                                                            </div>
+                                    <div class="bd-2">
+                                        ул. Ленина, 17А, офис 203                                    </div>
+                                </div>
+                                <div class="d-flex align-items-center col-md-3">
+                                                                        <a class="phone" href="tel:83466677005">8 (3466) 67-70-05</a>
+                                </div>
+                                <div class="col-md-1 listInteractive__arrow d-flex d-md-block pt-10 pt-md-0">
+                                    <button class="btn btn-primary d-md-none">Подробнее</button>
+                                    <i class="icon icon-arrow-down icon-giant icon-centered" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="listInteractive__extra"><div class="preloader"><div class="preloader__img"></div></div><a class="d-none" href="https://edin.center/Nizhnevartovsk">Единый центр защиты Нижневартовск</a></div>
+                </div>
+                                                <div class="listInteractive__item">
+                    <div class="listInteractive__button" data-listinteractive="/api/geo/offices/24" data-listinteractivecb='apiGeoOfficesCb'>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <div class="wrap d-flex align-items-center">
+                                        <span class="listInteractive__title">
+                                            Нижний Новгород                                        </span>
+                                                                            </div>
+                                    <div class="bd-2">
+                                        ул. М. Горького, д. 262, 5 этаж, каб. 54 (БЦ «Богемия Палас»)                                    </div>
+                                </div>
+                                <div class="d-flex align-items-center col-md-3">
+                                                                        <a class="phone" href="tel:88314143560">8 (831) 414-35-60</a>
+                                </div>
+                                <div class="col-md-1 listInteractive__arrow d-flex d-md-block pt-10 pt-md-0">
+                                    <button class="btn btn-primary d-md-none">Подробнее</button>
+                                    <i class="icon icon-arrow-down icon-giant icon-centered" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="listInteractive__extra"><div class="preloader"><div class="preloader__img"></div></div><a class="d-none" href="https://edin.center/Nizhniy-Novgorod">Единый центр защиты Нижний Новгород</a></div>
+                </div>
+                                                <div class="listInteractive__item">
+                    <div class="listInteractive__button" data-listinteractive="/api/geo/offices/28" data-listinteractivecb='apiGeoOfficesCb'>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <div class="wrap d-flex align-items-center">
+                                        <span class="listInteractive__title">
+                                            Нижний Тагил                                        </span>
+                                                                            </div>
+                                    <div class="bd-2">
+                                        Проспект Мира, 16                                    </div>
+                                </div>
+                                <div class="d-flex align-items-center col-md-3">
+                                                                        <a class="phone" href="tel:83435961894">8 (3435) 96-18-94</a>
+                                </div>
+                                <div class="col-md-1 listInteractive__arrow d-flex d-md-block pt-10 pt-md-0">
+                                    <button class="btn btn-primary d-md-none">Подробнее</button>
+                                    <i class="icon icon-arrow-down icon-giant icon-centered" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="listInteractive__extra"><div class="preloader"><div class="preloader__img"></div></div><a class="d-none" href="https://edin.center/nizhniy-tagil">Единый центр защиты Нижний Тагил</a></div>
+                </div>
+                                                <div class="listInteractive__item">
+                    <div class="listInteractive__button" data-listinteractive="/api/geo/offices/1" data-listinteractivecb='apiGeoOfficesCb'>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <div class="wrap d-flex align-items-center">
+                                        <span class="listInteractive__title">
+                                            Новокузнецк                                        </span>
+                                                                            </div>
+                                    <div class="bd-2">
+                                        пр. Металлургов, 52                                    </div>
+                                </div>
+                                <div class="d-flex align-items-center col-md-3">
+                                                                        <a class="phone" href="tel:83843209364">8 (3843) 20-93-64</a>
+                                </div>
+                                <div class="col-md-1 listInteractive__arrow d-flex d-md-block pt-10 pt-md-0">
+                                    <button class="btn btn-primary d-md-none">Подробнее</button>
+                                    <i class="icon icon-arrow-down icon-giant icon-centered" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="listInteractive__extra"><div class="preloader"><div class="preloader__img"></div></div><a class="d-none" href="https://edin.center/novokuzneck">Единый центр защиты Новокузнецк</a></div>
+                </div>
+                                                <div class="listInteractive__item">
+                    <div class="listInteractive__button" data-listinteractive="/api/geo/offices/16" data-listinteractivecb='apiGeoOfficesCb'>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <div class="wrap d-flex align-items-center">
+                                        <span class="listInteractive__title">
+                                            Новороссийск                                        </span>
+                                                                            </div>
+                                    <div class="bd-2">
+                                        ул. Советов, 40 (БЦ Советов), 2 этаж, 14 офис                                    </div>
+                                </div>
+                                <div class="d-flex align-items-center col-md-3">
+                                                                        <a class="phone" href="tel:88617300311">8 (861) 730-0311</a>
+                                </div>
+                                <div class="col-md-1 listInteractive__arrow d-flex d-md-block pt-10 pt-md-0">
+                                    <button class="btn btn-primary d-md-none">Подробнее</button>
+                                    <i class="icon icon-arrow-down icon-giant icon-centered" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="listInteractive__extra"><div class="preloader"><div class="preloader__img"></div></div><a class="d-none" href="https://edin.center/Novorossiysk">Единый центр защиты Новороссийск</a></div>
+                </div>
+                                                <div class="listInteractive__item">
+                    <div class="listInteractive__button" data-listinteractive="/api/geo/offices/18" data-listinteractivecb='apiGeoOfficesCb'>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <div class="wrap d-flex align-items-center">
+                                        <span class="listInteractive__title">
+                                            Омск                                        </span>
+                                                                            </div>
+                                    <div class="bd-2">
+                                        пр. Карла Маркса 18/3,  2 этаж                                    </div>
+                                </div>
+                                <div class="d-flex align-items-center col-md-3">
+                                                                        <a class="phone" href="tel:83812633589">8 (3812) 63-35-89</a>
+                                </div>
+                                <div class="col-md-1 listInteractive__arrow d-flex d-md-block pt-10 pt-md-0">
+                                    <button class="btn btn-primary d-md-none">Подробнее</button>
+                                    <i class="icon icon-arrow-down icon-giant icon-centered" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="listInteractive__extra"><div class="preloader"><div class="preloader__img"></div></div><a class="d-none" href="https://edin.center/Omsk">Единый центр защиты Омск</a></div>
+                </div>
+                                                <div class="listInteractive__item">
+                    <div class="listInteractive__button" data-listinteractive="/api/geo/offices/39" data-listinteractivecb='apiGeoOfficesCb'>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <div class="wrap d-flex align-items-center">
+                                        <span class="listInteractive__title">
+                                            Оренбург                                        </span>
+                                                                            </div>
+                                    <div class="bd-2">
+                                        ул. 8 Марта, д. 36, 1 этаж, 101 офис (БЦ «Гринвич»)                                    </div>
+                                </div>
+                                <div class="d-flex align-items-center col-md-3">
+                                                                        <a class="phone" href="tel:83532426565">8 (3532) 42-65-65</a>
+                                </div>
+                                <div class="col-md-1 listInteractive__arrow d-flex d-md-block pt-10 pt-md-0">
+                                    <button class="btn btn-primary d-md-none">Подробнее</button>
+                                    <i class="icon icon-arrow-down icon-giant icon-centered" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="listInteractive__extra"><div class="preloader"><div class="preloader__img"></div></div><a class="d-none" href="https://edin.center/Orenburg">Единый центр защиты Оренбург</a></div>
+                </div>
+                                                <div class="listInteractive__item">
+                    <div class="listInteractive__button" data-listinteractive="/api/geo/offices/26" data-listinteractivecb='apiGeoOfficesCb'>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <div class="wrap d-flex align-items-center">
+                                        <span class="listInteractive__title">
+                                            Пермь                                        </span>
+                                                                            </div>
+                                    <div class="bd-2">
+                                        ул. Сибирская, 47А, 2 этаж, офис 201/1                                    </div>
+                                </div>
+                                <div class="d-flex align-items-center col-md-3">
+                                                                        <a class="phone" href="tel:83422593308">8 (342) 259-33-08</a>
+                                </div>
+                                <div class="col-md-1 listInteractive__arrow d-flex d-md-block pt-10 pt-md-0">
+                                    <button class="btn btn-primary d-md-none">Подробнее</button>
+                                    <i class="icon icon-arrow-down icon-giant icon-centered" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="listInteractive__extra"><div class="preloader"><div class="preloader__img"></div></div><a class="d-none" href="https://edin.center/perm">Единый центр защиты Пермь</a></div>
+                </div>
+                                                <div class="listInteractive__item">
+                    <div class="listInteractive__button" data-listinteractive="/api/geo/offices/9" data-listinteractivecb='apiGeoOfficesCb'>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <div class="wrap d-flex align-items-center">
+                                        <span class="listInteractive__title">
+                                            Прокопьевск                                        </span>
+                                                                            </div>
+                                    <div class="bd-2">
+                                        ул. Ноградская 19, 2 этаж, офис 202 («Дом быта»)                                    </div>
+                                </div>
+                                <div class="d-flex align-items-center col-md-3">
+                                                                        <a class="phone" href="tel:89059663068">8 (905) 966-30-68</a>
+                                </div>
+                                <div class="col-md-1 listInteractive__arrow d-flex d-md-block pt-10 pt-md-0">
+                                    <button class="btn btn-primary d-md-none">Подробнее</button>
+                                    <i class="icon icon-arrow-down icon-giant icon-centered" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="listInteractive__extra"><div class="preloader"><div class="preloader__img"></div></div><a class="d-none" href="https://edin.center/prokopevsk">Единый центр защиты Прокопьевск</a></div>
+                </div>
+                                                <div class="listInteractive__item">
+                    <div class="listInteractive__button" data-listinteractive="/api/geo/offices/27" data-listinteractivecb='apiGeoOfficesCb'>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <div class="wrap d-flex align-items-center">
+                                        <span class="listInteractive__title">
+                                            Ростов-на-Дону                                        </span>
+                                                                            </div>
+                                    <div class="bd-2">
+                                        ул. Красноармейская 132, Бизнес-центр, 6 этаж, 401 офис                                    </div>
+                                </div>
+                                <div class="d-flex align-items-center col-md-3">
+                                                                        <a class="phone" href="tel:88632216192">8 (863) 221-61-92</a>
+                                </div>
+                                <div class="col-md-1 listInteractive__arrow d-flex d-md-block pt-10 pt-md-0">
+                                    <button class="btn btn-primary d-md-none">Подробнее</button>
+                                    <i class="icon icon-arrow-down icon-giant icon-centered" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="listInteractive__extra"><div class="preloader"><div class="preloader__img"></div></div><a class="d-none" href="https://edin.center/rostov-na-donu">Единый центр защиты Ростов-на-Дону</a></div>
+                </div>
+                                                <div class="listInteractive__item">
+                    <div class="listInteractive__button" data-listinteractive="/api/geo/offices/12" data-listinteractivecb='apiGeoOfficesCb'>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <div class="wrap d-flex align-items-center">
+                                        <span class="listInteractive__title">
+                                            Самара                                        </span>
+                                                                            </div>
+                                    <div class="bd-2">
+                                        пр. Карла Маркса, 201Б, 13 этаж, оф. 1303                                    </div>
+                                </div>
+                                <div class="d-flex align-items-center col-md-3">
+                                                                        <a class="phone" href="tel:88462217153">8 (846) 221-71-53</a>
+                                </div>
+                                <div class="col-md-1 listInteractive__arrow d-flex d-md-block pt-10 pt-md-0">
+                                    <button class="btn btn-primary d-md-none">Подробнее</button>
+                                    <i class="icon icon-arrow-down icon-giant icon-centered" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="listInteractive__extra"><div class="preloader"><div class="preloader__img"></div></div><a class="d-none" href="https://edin.center/samara">Единый центр защиты Самара</a></div>
+                </div>
+                                                <div class="listInteractive__item">
+                    <div class="listInteractive__button" data-listinteractive="/api/geo/offices/35" data-listinteractivecb='apiGeoOfficesCb'>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <div class="wrap d-flex align-items-center">
+                                        <span class="listInteractive__title">
+                                            Санкт-Петербург                                        </span>
+                                                                            </div>
+                                    <div class="bd-2">
+                                        Московский пр-т, д. 59, литер А                                    </div>
+                                </div>
+                                <div class="d-flex align-items-center col-md-3">
+                                                                        <a class="phone" href="tel:88129862523">8 (812) 986-25-23</a>
+                                </div>
+                                <div class="col-md-1 listInteractive__arrow d-flex d-md-block pt-10 pt-md-0">
+                                    <button class="btn btn-primary d-md-none">Подробнее</button>
+                                    <i class="icon icon-arrow-down icon-giant icon-centered" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="listInteractive__extra"><div class="preloader"><div class="preloader__img"></div></div><a class="d-none" href="https://edin.center/sankt-peterburg">Единый центр защиты Санкт-Петербург</a></div>
+                </div>
+                                                <div class="listInteractive__item">
+                    <div class="listInteractive__button" data-listinteractive="/api/geo/offices/34" data-listinteractivecb='apiGeoOfficesCb'>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <div class="wrap d-flex align-items-center">
+                                        <span class="listInteractive__title">
+                                            Саратов                                        </span>
+                                                                            </div>
+                                    <div class="bd-2">
+                                        ул. Большая Казачья 49/65, офис 209                                    </div>
+                                </div>
+                                <div class="d-flex align-items-center col-md-3">
+                                                                        <a class="phone" href="tel:88452651164">8 (8452) 65-11-64</a>
+                                </div>
+                                <div class="col-md-1 listInteractive__arrow d-flex d-md-block pt-10 pt-md-0">
+                                    <button class="btn btn-primary d-md-none">Подробнее</button>
+                                    <i class="icon icon-arrow-down icon-giant icon-centered" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="listInteractive__extra"><div class="preloader"><div class="preloader__img"></div></div><a class="d-none" href="https://edin.center/saratov">Единый центр защиты Саратов</a></div>
+                </div>
+                                                <div class="listInteractive__item">
+                    <div class="listInteractive__button" data-listinteractive="/api/geo/offices/19" data-listinteractivecb='apiGeoOfficesCb'>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <div class="wrap d-flex align-items-center">
+                                        <span class="listInteractive__title">
+                                            Сочи                                        </span>
+                                                                                    <span class="badge grey darken-1">+1 доп. офис</span>
+                                                                            </div>
+                                    <div class="bd-2">
+                                        ул. Московская, д. 3 к. 5, этаж 2                                    </div>
+                                </div>
+                                <div class="d-flex align-items-center col-md-3">
+                                                                        <a class="phone" href="tel:88622590440">8 (862) 259-04-40</a>
+                                </div>
+                                <div class="col-md-1 listInteractive__arrow d-flex d-md-block pt-10 pt-md-0">
+                                    <button class="btn btn-primary d-md-none">Подробнее</button>
+                                    <i class="icon icon-arrow-down icon-giant icon-centered" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="listInteractive__extra"><div class="preloader"><div class="preloader__img"></div></div><a class="d-none" href="https://edin.center/Sochi">Единый центр защиты Сочи</a></div>
+                </div>
+                                                <div class="listInteractive__item">
+                    <div class="listInteractive__button" data-listinteractive="/api/geo/offices/30" data-listinteractivecb='apiGeoOfficesCb'>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <div class="wrap d-flex align-items-center">
+                                        <span class="listInteractive__title">
+                                            Сургут                                        </span>
+                                                                            </div>
+                                    <div class="bd-2">
+                                        ул. Никольская д.8 офис 104                                    </div>
+                                </div>
+                                <div class="d-flex align-items-center col-md-3">
+                                                                        <a class="phone" href="tel:89678895580">8 (967) 889-55-80</a>
+                                </div>
+                                <div class="col-md-1 listInteractive__arrow d-flex d-md-block pt-10 pt-md-0">
+                                    <button class="btn btn-primary d-md-none">Подробнее</button>
+                                    <i class="icon icon-arrow-down icon-giant icon-centered" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="listInteractive__extra"><div class="preloader"><div class="preloader__img"></div></div><a class="d-none" href="https://edin.center/Surgut">Единый центр защиты Сургут</a></div>
+                </div>
+                                                <div class="listInteractive__item">
+                    <div class="listInteractive__button" data-listinteractive="/api/geo/offices/33" data-listinteractivecb='apiGeoOfficesCb'>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <div class="wrap d-flex align-items-center">
+                                        <span class="listInteractive__title">
+                                            Тольятти                                        </span>
+                                                                            </div>
+                                    <div class="bd-2">
+                                        ул. Фрунзе 14 Б, оф. 257                                    </div>
+                                </div>
+                                <div class="d-flex align-items-center col-md-3">
+                                                                        <a class="phone" href="tel:88482409717">8 (8482) 40-97-17</a>
+                                </div>
+                                <div class="col-md-1 listInteractive__arrow d-flex d-md-block pt-10 pt-md-0">
+                                    <button class="btn btn-primary d-md-none">Подробнее</button>
+                                    <i class="icon icon-arrow-down icon-giant icon-centered" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="listInteractive__extra"><div class="preloader"><div class="preloader__img"></div></div><a class="d-none" href="https://edin.center/Tolyatti">Единый центр защиты Тольятти</a></div>
+                </div>
+                                                <div class="listInteractive__item">
+                    <div class="listInteractive__button" data-listinteractive="/api/geo/offices/7" data-listinteractivecb='apiGeoOfficesCb'>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <div class="wrap d-flex align-items-center">
+                                        <span class="listInteractive__title">
+                                            Томск                                        </span>
+                                                                            </div>
+                                    <div class="bd-2">
+                                        ул. Алексея Беленца 9/1 , ДЦ Горизонт, вход №2, офис 232                                    </div>
+                                </div>
+                                <div class="d-flex align-items-center col-md-3">
+                                                                        <a class="phone" href="tel:83822226573">8 (3822) 22-65-73</a>
+                                </div>
+                                <div class="col-md-1 listInteractive__arrow d-flex d-md-block pt-10 pt-md-0">
+                                    <button class="btn btn-primary d-md-none">Подробнее</button>
+                                    <i class="icon icon-arrow-down icon-giant icon-centered" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="listInteractive__extra"><div class="preloader"><div class="preloader__img"></div></div><a class="d-none" href="https://edin.center/tomsk">Единый центр защиты Томск</a></div>
+                </div>
+                                                <div class="listInteractive__item">
+                    <div class="listInteractive__button" data-listinteractive="/api/geo/offices/20" data-listinteractivecb='apiGeoOfficesCb'>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <div class="wrap d-flex align-items-center">
+                                        <span class="listInteractive__title">
+                                            Тюмень                                        </span>
+                                                                            </div>
+                                    <div class="bd-2">
+                                        ул. Республики 164 , стр. 2, 2 этаж, офис 227/2                                    </div>
+                                </div>
+                                <div class="d-flex align-items-center col-md-3">
+                                                                        <a class="phone" href="tel:83452530982">8 (3452) 53-09-82</a>
+                                </div>
+                                <div class="col-md-1 listInteractive__arrow d-flex d-md-block pt-10 pt-md-0">
+                                    <button class="btn btn-primary d-md-none">Подробнее</button>
+                                    <i class="icon icon-arrow-down icon-giant icon-centered" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="listInteractive__extra"><div class="preloader"><div class="preloader__img"></div></div><a class="d-none" href="https://edin.center/Tyumen">Единый центр защиты Тюмень</a></div>
+                </div>
+                                                <div class="listInteractive__item">
+                    <div class="listInteractive__button" data-listinteractive="/api/geo/offices/23" data-listinteractivecb='apiGeoOfficesCb'>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <div class="wrap d-flex align-items-center">
+                                        <span class="listInteractive__title">
+                                            Уфа                                        </span>
+                                                                            </div>
+                                    <div class="bd-2">
+                                        пр-кт Октября, д. 55                                    </div>
+                                </div>
+                                <div class="d-flex align-items-center col-md-3">
+                                                                        <a class="phone" href="tel:83472980919">8 (347) 298-09-19</a>
+                                </div>
+                                <div class="col-md-1 listInteractive__arrow d-flex d-md-block pt-10 pt-md-0">
+                                    <button class="btn btn-primary d-md-none">Подробнее</button>
+                                    <i class="icon icon-arrow-down icon-giant icon-centered" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="listInteractive__extra"><div class="preloader"><div class="preloader__img"></div></div><a class="d-none" href="https://edin.center/Ufa">Единый центр защиты Уфа</a></div>
+                </div>
+                                                <div class="listInteractive__item">
+                    <div class="listInteractive__button" data-listinteractive="/api/geo/offices/48" data-listinteractivecb='apiGeoOfficesCb'>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <div class="wrap d-flex align-items-center">
+                                        <span class="listInteractive__title">
+                                            Хабаровск                                        </span>
+                                                                            </div>
+                                    <div class="bd-2">
+                                        ул. Комсомольская, 74, 2 этаж, офис 214                                    </div>
+                                </div>
+                                <div class="d-flex align-items-center col-md-3">
+                                                                        <a class="phone" href="tel:84212668045">8 (4212) 66-80-45</a>
+                                </div>
+                                <div class="col-md-1 listInteractive__arrow d-flex d-md-block pt-10 pt-md-0">
+                                    <button class="btn btn-primary d-md-none">Подробнее</button>
+                                    <i class="icon icon-arrow-down icon-giant icon-centered" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="listInteractive__extra"><div class="preloader"><div class="preloader__img"></div></div><a class="d-none" href="https://edin.center/Habarovsk">Единый центр защиты Хабаровск</a></div>
+                </div>
+                                                <div class="listInteractive__item">
+                    <div class="listInteractive__button" data-listinteractive="/api/geo/offices/21" data-listinteractivecb='apiGeoOfficesCb'>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <div class="wrap d-flex align-items-center">
+                                        <span class="listInteractive__title">
+                                            Чебоксары                                        </span>
+                                                                            </div>
+                                    <div class="bd-2">
+                                        пр. Ленина д.51                                    </div>
+                                </div>
+                                <div class="d-flex align-items-center col-md-3">
+                                                                        <a class="phone" href="tel:88352362164">8 (8352) 36-21-64</a>
+                                </div>
+                                <div class="col-md-1 listInteractive__arrow d-flex d-md-block pt-10 pt-md-0">
+                                    <button class="btn btn-primary d-md-none">Подробнее</button>
+                                    <i class="icon icon-arrow-down icon-giant icon-centered" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="listInteractive__extra"><div class="preloader"><div class="preloader__img"></div></div><a class="d-none" href="https://edin.center/Cheboksary">Единый центр защиты Чебоксары</a></div>
+                </div>
+                                                <div class="listInteractive__item">
+                    <div class="listInteractive__button" data-listinteractive="/api/geo/offices/56" data-listinteractivecb='apiGeoOfficesCb'>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <div class="wrap d-flex align-items-center">
+                                        <span class="listInteractive__title">
+                                            Южно-Сахалинск                                        </span>
+                                                                            </div>
+                                    <div class="bd-2">
+                                        пр. Мира, 306, офис 93 (ТЦ «Green Palace»)                                    </div>
+                                </div>
+                                <div class="d-flex align-items-center col-md-3">
+                                                                        <a class="phone" href="tel:84242334370">8 (424) 233-43-70</a>
+                                </div>
+                                <div class="col-md-1 listInteractive__arrow d-flex d-md-block pt-10 pt-md-0">
+                                    <button class="btn btn-primary d-md-none">Подробнее</button>
+                                    <i class="icon icon-arrow-down icon-giant icon-centered" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="listInteractive__extra"><div class="preloader"><div class="preloader__img"></div></div><a class="d-none" href="https://edin.center/sahalin">Единый центр защиты Южно-Сахалинск</a></div>
+                </div>
+                                                <div class="listInteractive__item">
+                    <div class="listInteractive__button" data-listinteractive="/api/geo/offices/37" data-listinteractivecb='apiGeoOfficesCb'>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <div class="wrap d-flex align-items-center">
+                                        <span class="listInteractive__title">
+                                            Ярославль                                        </span>
+                                                                            </div>
+                                    <div class="bd-2">
+                                        ул. Свободы 11/37, 2 этаж                                    </div>
+                                </div>
+                                <div class="d-flex align-items-center col-md-3">
+                                                                        <a class="phone" href="tel:84852581515">8 (4852) 58-15-15</a>
+                                </div>
+                                <div class="col-md-1 listInteractive__arrow d-flex d-md-block pt-10 pt-md-0">
+                                    <button class="btn btn-primary d-md-none">Подробнее</button>
+                                    <i class="icon icon-arrow-down icon-giant icon-centered" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="listInteractive__extra"><div class="preloader"><div class="preloader__img"></div></div><a class="d-none" href="https://edin.center/Yaroslavl">Единый центр защиты Ярославль</a></div>
+                </div>
+                      </div>
+</div>
+
+
+<script>
+var ymaps_api = document.createElement('script');
+ymaps_api.src = "https://api-maps.yandex.ru/2.1/?lang=ru_RU&onload=ymaps_load";
+ymaps_api.setAttribute("name","ymaps_api");
+document.head.append(ymaps_api);
+
+ymaps_load = function() {
+    ymaps_api.setAttribute('loaded', true);
+}
+
+
+
+document.addEventListener('DOMContentLoaded', function() {    
+    var listInteractive = $('.listInteractive');
+    if (listInteractive.length > 0) {
+        var listInteractiveItems = listInteractive.find('.listInteractive__item');
+        var listInteractiveItemsButtons = listInteractive.find('.listInteractive__button');
+        var tooglelistInteractiveItem = function tooglelistInteractiveItem() {
+            var button = $(this);
+            var requestHref = button.data('listinteractive');
+            var requestCallback = button.data('listinteractivecb');
+            var item = button.parents('.listInteractive__item');
+            var extra = item.find('.listInteractive__extra');
+            var preloader = extra.find('.preloader');
+            if (requestHref && (preloader.length || !extra.html().trim())) {
+                $.ajax({
+                    url: requestHref,
+                    success: function success(data) {
+                        window[requestCallback](data, extra);
+                    }
+                });
+            }
+
+            toggleExtra();
+            function toggleExtra() {
+                if (item.hasClass('active')) {
+                    item.removeClass('active');
+                    extra.slideUp(500);
+                } else {
+                    item.addClass('active');
+                    extra.slideDown(500);
+                }
+            }
+        };
+        listInteractiveItemsButtons.on('click', tooglelistInteractiveItem);
+
+        $('body').on('input', '.listInteractive__search', function () {
+            var input = $(this);
+            var val = input.val();
+            var listId = input.data('listinteractiveSearchlist');
+            var list = $('[data-listInteractive-list=' + listId + ']');
+            val = val.replace(/[^а-яёА-ЯЁ ]/g, '');
+            input.val(val);
+            var items = list.find('.listInteractive__item');
+            var showedItems = 0;
+            $.each(items, function (i, item) {
+                item = $(item);
+                var itemTitle = item.find('.listInteractive__title').text();
+                if (itemTitle.toLowerCase().indexOf(val.toLowerCase()) !== -1) {
+                    item.slideDown(300);
+                    showedItems++;
+                } else {
+                    item.slideUp(300);
+                }
+            });
+        });
+    }
+
+
+    if ($('.city_map').data('react-map').id){
+        $('.city_map').each(function( index ) {
+            var data = $(this).data('react-map');
+
+            setTimeout(function check_ymaps(){
+                if ($('[name="ymaps_api"]').attr('loaded') == 'true'){
+                    YandexMap(data.id, data.options, data.placemark_options);
+                } else {
+                    setTimeout(check_ymaps, 100);
+                }         
+            },100);
+        });
+    } 
+});
+
+function apiGeoOfficesCb(data, extra) {
+    var city = data;
+    extra.html(appendCityToInterectiveList(city));
+    if (city.dop_office) {
+        for (var dopOfficeNumber in city.dop_office) {
+            var dopOffice = city.dop_office[dopOfficeNumber];
+            extra.append('<div class="grey lighten-2 py-2"><div class="container"><div class="ml-lg-30 mt-lg-20 listInteractive__title"> Дополнительный офис ' + city.name + ' ('+ dopOffice.district +')' + '</div></div></div>');
+            dopOffice['number'] = parseInt(dopOfficeNumber) + 1;
+            extra.append(appendCityToInterectiveList(dopOffice));
+        }
+    }
+    /*if (city.photos || city.dop_office && city.dop_office.photos) {
+        initPhotoSwipeFromDOM('.lbGallery');
+    }*/
+
+    /* $('.listInteractive__extra').on('click','a[href^="tel:"]', function(e){
+        if ($(window).width() > 1200 && !$(this).hasClass('phone-shown')){
+            e.preventDefault();
+            $(this).addClass('phone-shown');
+            $('body').addClass('show-all-phones');
+            sessionStorage.setItem("phone-shown", 1);
+            try{
+                ym(28531226,'reachGoal','phone')
+            } catch(err){}
+        }else{
+            try{
+                ym(28531226,'reachGoal','mob');
+            } catch(err){}
+        }
+    });*/
+};
+
+function appendCityToInterectiveList(city) {
+    city.number = city.number ? city.number : '0';
+    var extraInner = $('<div class="container">\n                        <div class="row">\n                            <div class="col-lg-9">\n                                <div class="list-group list-group-flush">\n                                </div>\n                            </div>\n                            <div class="col-lg-3 listInteractive__hours pb-20 px-40 px-md-15">\n                            </div>\n                        </div>\n                        <div class="listInteractive__photos"></div>\n                    </div>');
+    var extraListHours = extraInner.find('.listInteractive__hours');
+    extraListHours.html(city.office_hours_1 + '<br/>\n       ' + city.office_hours_2 + '<br/>\n       ' + city.office_hours_3 + '\n       <h5><a class="phone blue-1" href="tel:' + city.phone.replace(/[^0-9]/g, '') + '">' + city.phone + '</a></h4>\n  ');
+    var extraListGroup = extraInner.find('.list-group');
+    extraListGroup.append('\n          <div class="list-group-item d-flex">\n            <div class="col-3">\n                Сайт\n            </div>\n            <div class="col-9">\n                <a href="https://edin.center/' + city.name_en.toLowerCase() + '">edin.center/' + city.name_en.toLowerCase() + '</a>\n            </div>\n        </div>');
+    if (city.full_address) {
+        extraListGroup.append('\n          <div class="list-group-item d-flex">\n            <div class="col-3">\n                Адрес\n            </div>\n            <div class="col-9">\n                ' + city.full_address + '\n            </div>\n        </div>');
+    }
+    if (city.email) {
+        extraListGroup.append('<div class="list-group-item d-flex">\n            <div class="col-3">\n                Email\n            </div>\n            <div class="col-9">\n                ' + city.email + '\n            </div>\n        </div>');
+    }
+    if (city.reference_point) {
+        extraListGroup.append('<div class="list-group-item d-flex">\n            <div class="col-3">\n                Ориентир\n            </div>\n            <div class="col-9">\n                ' + city.reference_point + '\n            </div>\n        </div>');
+    }
+    if (city.district) {
+        extraListGroup.append('<div class="list-group-item d-flex">\n                <div class="col-3">\n                    Район\n                </div>\n                <div class="col-9">\n                    ' + city.district + '\n                </div>\n            </div>');
+    }
+    if (city.transport_stops) {
+        extraListGroup.append('<div class="list-group-item d-flex">\n                <div class="col-3">\n                    Остановка \n                </div>\n                <div class="col-9">\n                    ' + city.transport_stops + '\n                </div>\n            </div>');
+    }
+    if (city.transport_bus) {
+        extraListGroup.append('<div class="list-group-item d-flex">\n                <div class="col-3">\n                    Автобусы \n                </div>\n                <div class="col-9">\n                   ' + city.transport_bus + '\n                </div>\n            </div>');
+    }
+    if (city.transport_trolleybus) {
+        extraListGroup.append('<div class="list-group-item d-flex">\n                <div class="col-3">\n                    Тролейбусы \n                </div>\n                <div class="col-9">\n                    ' + city.transport_trolleybus + '\n                </div>\n            </div>');
+    }
+    if (city.transport_buses) {
+        extraListGroup.append('<div class="list-group-item d-flex">\n                    <div class="col-3">\n                    Маршрутные такси \n                </div>\n                <div class="col-9">\n                    ' + city.transport_buses + '\n                </div>\n            </div>');
+    }
+    if (city.photos) {
+        var cityPhotos = city.photos;
+        extraListGroup.append('<div class="col-12">\n                                    <div class="lbGallery inlineGallery mb-0 py-10" itemscope itemtype="http://schema.org/ImageGallery">           \n                                    </div>\n                                </div>');
+        var lbGallery = extraInner.find('.lbGallery');
+        for (var i in cityPhotos) {
+            var photo = cityPhotos[i];
+            lbGallery.append('<figure class="p-2 mb-0" itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">\n                                <a href="/img_proxy?url=' + photo.big + '" data-size="1600" data-fancybox="' + city.name +'_'+ city.number + '" data-med="/img_proxy?url=' + photo.big + '">\n                                    <img class="lbGallery__img listInteractive__img" src="/img_proxy?url=' + photo.small + '" alt="Офис ' + city.name + ' Единый центр Защиты" />\n                                </a>\n                                <figcaption class="d-none" itemprop="caption description">Офис ' + city.name + '</figcaption>\n                            </figure>');
+        }
+    }
+
+    var result = extraInner;
+    if (city.coords) {
+        var coords = city.coords.split(',').map(function (coord) {
+            return coord.trim();
+        });
+        var ractMapsBlockId = 'react-map-' + city.name_en + coords.join('').replace(/\./gi, '');
+        result = $('<div/>');
+        result.append(extraInner).append('<div class="contacts-list-map" id="' + ractMapsBlockId + '"/>');
+        setTimeout(function () {
+            YandexMap(ractMapsBlockId, {/*
+                points: [{
+                    coords: coords,
+                    hintContent: city.address,
+                    balloonContentHeader: 'Единый Центр Защиты ' + city.name,
+                    balloonContentBody: city.address + '<br/>' + city.phone,
+                    isOpen: true
+                }],
+                iconImage: {
+                    href: 'data:image/svg+xml;charset=utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTkuMC4wLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iQ2FwYV8xIiB4PSIwcHgiIHk9IjBweCIgdmlld0JveD0iMCAwIDU4IDU4IiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCA1OCA1ODsiIHhtbDpzcGFjZT0icHJlc2VydmUiIHdpZHRoPSI1MTJweCIgaGVpZ2h0PSI1MTJweCI+CjxsaW5lIHN0eWxlPSJmaWxsOm5vbmU7c3Ryb2tlOiM1NTYwODA7c3Ryb2tlLXdpZHRoOjI7c3Ryb2tlLWxpbmVjYXA6cm91bmQ7c3Ryb2tlLW1pdGVybGltaXQ6MTA7IiB4MT0iMjkiIHkxPSIyOCIgeDI9IjI5IiB5Mj0iNTciLz4KPGNpcmNsZSBzdHlsZT0iZmlsbDojREQzNTJFOyIgY3g9IjI5IiBjeT0iMTQiIHI9IjE0Ii8+CjxjaXJjbGUgc3R5bGU9ImZpbGw6I0Y3NjM2MzsiIGN4PSIyNCIgY3k9IjEwIiByPSIzIi8+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+Cjwvc3ZnPgo=',
+                    size: [70, 100]
+                },
+                mapState: {
+                    zoom: 16
+                }*/
+                center: coords,
+				zoom: 16
+            },
+            {
+                hintContent: city.address,
+                balloonContentHeader: 'Единый Центр Защиты ' + city.name,
+                balloonContentBody: city.address + '<br/>' + city.phone,
+                isOpen: true
+            });
+        }, 100);
+    } else if (city.maps_kod) {
+        result = $('<div/>');
+        result.append(extraInner).append(city.maps_kod);
+    }
+
+    return result; 
+}
+
+function YandexMap(id, options, placemark_options = false){
+    if ($('[name="ymaps_api"]').length == 0){
+        let ymaps_api = document.createElement('script');
+        ymaps_api.src = "https://api-maps.yandex.ru/2.1/?lang=ru_RU&onload=ymaps_load";
+        ymaps_api.setAttribute("name","ymaps_api");
+        document.head.append(ymaps_api);
+
+        setTimeout(function check_ymaps(){
+            if ($('[name="ymaps_api"]').attr('loaded') == 'true'){
+                ymaps.ready(ym_init(options, id, placemark_options));
+            } else{
+                setTimeout(check_ymaps, 100);
+            }
+            
+        },100)
+    } else {
+        ymaps.ready(ym_init(id, options, placemark_options));
+    }
+}
+
+function ym_init (id, options, placemark_options) {
+    var map = new ymaps.Map(id, options);
+
+    if (placemark_options){
+        var placemark = new ymaps.Placemark(options['center'], placemark_options);
+
+        map.geoObjects.add(placemark);
+        placemark.balloon.open();
+    }
+}
+
+</script>
+<!-- подвал сайта -->
+<div class="desktop-bottom-buttons-wrap-wrap">
+	<div class="desktop-bottom-buttons-wrap">
+		<div class="desktop-bottom-buttons">
+							<a href="#" data-toggle="modal" data-target="#address_modal" class="btn btn-lg btn-outline-primary">Адрес и телефон</a> 
+									<a href="#" data-toggle="modal" data-target="#modern_lead_modalform" class="btn btn-lg btn-primary">Консультация онлайн</a>
+					</div>
+	</div>
+</div>
+
+<footer>
+	<div class="footer-top-block">
+		<div class="container">
+			<div class="row justify-content-between align-items-center flex-row">
+				<div class="header__logo">
+					<a class="d-flex justify-content-center align-items-center" href="https://edin.center">
+						<img class="logo logo__img" src="https://edin.center/images/mtp-logo.svg" alt="Единый центр защиты" width="52" height="60">
+						<div class="logo logo__withText">
+							Единый центр защиты
+							<span class="logo__subTitle">
+								Юридическая служба
+							</span>
+						</div>
+					</a>
+				</div>
+				<div class="footer-phone">
+						
+						<a href="tel:+74852581515" class="phone h3 white mb-0 d-block">
+							8 (4852) 58-15-15						</a>
+									</div>
+			</div>
+		</div>
+	</div>
+	<div class="footer-adress container px-lg-0">
+		<div class="row justify-content-md-between">
+						<div class="col-lg-3 col-md-6 col-12 adress-col sh-2">
+				<div class="map-link d-flex flex-row" data-coord="57.625171, 39.881902" 
+									data-address="ул. Свободы 11/37, 2 этаж" 
+									data-city="Ярославль" 
+									data-name="Yaroslavl" 
+									data-hours='{"1":["09:00","19:00"],"2":["09:00","19:00"],"3":["09:00","19:00"],"4":["09:00","19:00"],"5":["09:00","19:00"],"6":["10:00","16:00"],"0":[]}' 
+									data-phone="8 (4852) 58-15-15" 
+									 data-busstop='Знаменская башня' 
+									 data-bus="49, 99с, 139, 140, 178" 
+									 data-buses="71, 143, 176" 
+									 data-trolleybus="49, 99с, 139, 140, 178" 
+																		 data-reference_point='Доходный дом Понизовкиных, вход с улицы Свободы, в соседних зданиях ТК Европа, ТЦ Ниагара'									>
+									<i class="icon icon-map-pin icon-bg-rounded icon-bg-footer-gray icon-bg-medium icon-centered icon-white mr-15"></i>
+									г. Ярославль, ул. Свободы 11/37, 2 этаж				</div>
+			</div>
+						<div class="col-lg-3 col-md-6 col-12 adress-col d-flex flex-row">
+				<i class="icon icon-phone icon-bg-rounded icon-bg-footer-gray icon-bg-medium icon-centered icon-white mr-15"></i>
+				<a href="tel:+74852581515" class="phone mt-10 sh-2 white">
+						8 (4852) 58-15-15				</a>
+			</div>
+						<div class="col-lg-3 col-md-6 col-12 adress-col d-flex flex-row sh-2">
+				<i class="icon icon-time icon-bg-rounded icon-bg-footer-gray icon-bg-medium icon-centered icon-white mr-15"></i>
+				<div>
+					пн-пт: 09:00 - 19:00					<br>сб: 10:00 - 16:00					<br>вс: выходной				</div>
+			</div>
+						<div class="col-lg-3 col-md-6 col-12 adress-col">
+				<div class="footer-social d-flex flex-wrap align-items-center justify-content-center">
+					<a href="https://www.youtube.com/channel/UClBzeEZCfVA4qyG8uLKcJNg" target="_blank" rel="nofollow"><i class="icon icon-youtube icon-centered"></i></a>
+					<a href="https://vk.com/edin.center" target="_blank" rel="nofollow"><i class="icon icon-vk icon-centered"></i></a> 
+					<a href="https://ok.ru/edin.center" target="_blank" rel="nofollow"><i class="icon icon-ok icon-centered"></i></a>
+					<a href="https://t.me/edincentre" target="_blank" rel="nofollow"><i class="icon icon-telegram-alt icon-centered"></i></a>
+				</div>
+			</div>
+		</div>
+			</div>
+	
+	<div class="container px-0">
+		<nav class="navbar d-block">
+			<div class="row justify-content-md-between">
+									<div class="col-lg-3 col-md-6 col-12 footer-menu-col">
+						<ul class="navbar-nav">
+																													<li class="nav-item"><span class="menu-header">Физическим лицами</span></li><div class="footer-menu-hidden">
+																																									<li class="nav-item"><a class="nav-link" href="/yaroslavl/zashhita-v-sude">Защита в суде</a></li>
+																																							<li class="nav-item"><a class="nav-link" href="/yaroslavl/semejnoe-pravo">Семейное право</a></li>
+																																							<li class="nav-item"><a class="nav-link" href="/zhilishnye-spory">Жилищные споры</a></li>
+																																							<li class="nav-item"><a class="nav-link" href="/yaroslavl/zemelnye-spory">Земельные споры</a></li>
+																																							<li class="nav-item"><a class="nav-link" href="/yaroslavl/zhilishnye-spory">Жилищные споры</a></li>
+																																							<li class="nav-item"><a class="nav-link" href="/yaroslavl/trudovoe-pravo">Трудовое право</a></li>
+																																							<li class="nav-item"><a class="nav-link" href="/yaroslavl/proverka-dokumentov-i-dogovorov">Проверка документов и договоров</a></li>
+																																							<li class="nav-item"><a class="nav-link" href="/yaroslavl/autourist">Помощь автоюриста</a></li>
+																																</div>
+													</ul>
+					</div>
+									<div class="col-lg-3 col-md-6 col-12 footer-menu-col">
+						<ul class="navbar-nav">
+																													<li class="nav-item"><span class="menu-header">Заемщикам</span></li><div class="footer-menu-hidden">
+																																									<li class="nav-item"><a class="nav-link" href="/yaroslavl/bankrotstvo-fizicheskih-lic">Банкротство физических лиц</a></li>
+																																							<li class="nav-item"><a class="nav-link" href="/yaroslavl/uproshchennoe-bankrotstvo">Внесудебное банкротство</a></li>
+																																							<li class="nav-item"><a class="nav-link" href="/yaroslavl/pomosh-dolzhnikam">Защита прав заемщиков</a></li>
+																																							<li class="nav-item"><a class="nav-link" href="/yaroslavl/vzyskanie-dolgov-s-fiz-lic">Взыскание долгов</a></li>
+																																							<li class="nav-item"><a class="nav-link" href="/ne-toropites-bankrotitsya">Списать долги без рисков</a></li>
+																																							<li class="nav-item"><a class="nav-link menu-delimiter" href="/yaroslavl/ugrozhayut-kollektory">Угрожают коллекторы</a></li>
+																																							<li class="nav-item"><a class="nav-link" href="/usloviya-okazaniya-yuridicheskix-uslug-i-tarify">Условия оказания юридических услуг и Тарифы</a></li>
+																																</div>
+													</ul>
+					</div>
+									<div class="col-lg-3 col-md-6 col-12 footer-menu-col">
+						<ul class="navbar-nav">
+																													<li class="nav-item"><span class="menu-header">Юридическим лицам</span></li><div class="footer-menu-hidden">
+																																									<li class="nav-item"><a class="nav-link" href="/bankruptcy-of-a-juridical">Банкротство юридических лиц</a></li>
+																																							<li class="nav-item"><a class="nav-link" href="/yaroslavl/nalogovye-spory">Налоговые споры</a></li>
+																																							<li class="nav-item"><a class="nav-link" href="/yaroslavl/torgovaya-marka">Торговая марка</a></li>
+																																							<li class="nav-item"><a class="nav-link" href="/yaroslavl/vzyskanie-dolgov">Взыскание долгов</a></li>
+																																							<li class="nav-item"><a class="nav-link" href="/yaroslavl/b2b">Корпоративное обслуживание</a></li>
+																																							<li class="nav-item"><a class="nav-link" href="/yaroslavl/bookkeeping">Бухгалтерские услуги</a></li>
+																																</div>
+													</ul>
+					</div>
+									<div class="col-lg-3 col-md-6 col-12 footer-menu-col">
+						<ul class="navbar-nav">
+																													<li class="nav-item"><span class="menu-header">О компании</span></li><div class="footer-menu-hidden">
+																																									<li class="nav-item"><a class="nav-link" href="/about">Информация</a></li>
+																																							<li class="nav-item"><a class="nav-link" href="/about/structure">Команда</a></li>
+																																							<li class="nav-item"><a class="nav-link" href="/reviews">Отзывы</a></li>
+																																							<li class="nav-item"><a class="nav-link active" href="/contacts">Контакты</a></li>
+																																							<li class="nav-item"><a class="nav-link" href="/articles">Статьи</a></li>
+																																							<li class="nav-item"><a class="nav-link" href="/mass-media/contactman">Пресс-секретарь</a></li>
+																																							<li class="nav-item"><a class="nav-link" href="/sotrudnichestvo">Сотрудничество</a></li>
+																																							<li class="nav-item"><a class="nav-link" href="/vacancie">Вакансии</a></li>
+																																</div>
+													</ul>
+					</div>
+							</div>
+		</nav>
+	</div>
+	<div class="container px-lg-0 footer-info">
+		<p class="gray-6 bd-3 mb-0">Вся информация представлена на сайте в ознакомительных целях и не является публичной офертой. Требуется консультация специалиста.</p>
+		<p class="gray-6 bd-3 mb-0">Все материалы данного сайта являются объектами авторского права (в том числе дизайн). Запрещается копирование, распространение (в том числе путем копирования на другие сайты и ресурсы в Интернете) или любое иное использование информации и объектов без предварительного согласия правообладателя.</p>
+		<p class="gray-6 bd-3 mb-0">Логотипы "Единый центр защиты. Юридическая служба" размещенные на сайте, являются зарегистрированным товарным знаком и охраняются государством как объект интеллектуальной собственности, любое копирование и создание схожего по степени смешения товарного знака запрещено законом.</p>
+		<p class="gray-6 bd-3 mb-0">Компания оставляет за собой право производить клиентам рассылку через WhatsApp и Telegram.</p>
+	</div>
+	
+	<div class="container">
+		<div class="row justify-content-between copyright-section">
+			<div class="copyright-links sh-3 gray-6 mb-30 mb-md-0"><a href="/user_confirm.pdf" target="_blank">Пользовательское соглашение</a> и <a href="/privacy-policy.pdf" target="_blank">политики конфиденциальности</a></div>
+			<div class="copyright bd-3 gray-6">© 2015—2023 «Единый Центр Защиты»</div>
+		</div>
+		
+	</div>
+</footer>
+
+<header>
+	<div class="container p-lg-0">
+		<div class="mobile-nav d-block d-lg-none">
+			<div class="mobile-nav-content">
+				<div class="mobile-nav-wrap">
+						<a href="#" class="mob-menu-drop" data-target="#service-menu"><i class="noactive"><svg width="26" height="26" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M7.963 7.963v-1.26a3.778 3.778 0 0 1 3.778-3.778h2.52a3.778 3.778 0 0 1 3.777 3.778v1.26h2.519a2.519 2.519 0 0 1 2.519 2.518v4.496A28.905 28.905 0 0 1 13 16.778a28.902 28.902 0 0 1-10.075-1.8V10.48a2.519 2.519 0 0 1 2.519-2.518h2.518Zm2.519-1.26a1.26 1.26 0 0 1 1.26-1.26h2.518a1.26 1.26 0 0 1 1.26 1.26v1.26h-5.038v-1.26ZM11.742 13A1.26 1.26 0 0 1 13 11.74h.012a1.26 1.26 0 0 1 0 2.52h-.012A1.26 1.26 0 0 1 11.74 13Z" fill="var(--gray-2)"/><path d="M2.926 17.65v2.906a2.519 2.519 0 0 0 2.519 2.519h15.112a2.519 2.519 0 0 0 2.519-2.519V17.65A31.45 31.45 0 0 1 13 19.297c-3.521 0-6.91-.58-10.075-1.647Z" fill="var(--gray-2)"/></svg></i><i class="active"><svg width="26" height="26" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M7.963 7.963v-1.26a3.778 3.778 0 0 1 3.778-3.778h2.52a3.778 3.778 0 0 1 3.777 3.778v1.26h2.519a2.519 2.519 0 0 1 2.519 2.518v4.496A28.905 28.905 0 0 1 13 16.778a28.902 28.902 0 0 1-10.075-1.8V10.48a2.519 2.519 0 0 1 2.519-2.518h2.518Zm2.519-1.26a1.26 1.26 0 0 1 1.26-1.26h2.518a1.26 1.26 0 0 1 1.26 1.26v1.26h-5.038v-1.26ZM11.742 13A1.26 1.26 0 0 1 13 11.74h.012a1.26 1.26 0 0 1 0 2.52h-.012A1.26 1.26 0 0 1 11.74 13Z" fill="var(--red-1)"/><path d="M2.926 17.65v2.906a2.519 2.519 0 0 0 2.519 2.519h15.112a2.519 2.519 0 0 0 2.519-2.519V17.65A31.45 31.45 0 0 1 13 19.297c-3.521 0-6.91-.58-10.075-1.647Z" fill="var(--red-1)"/></svg></i>Услуги</a>
+						<a href="#" class="mob-menu-drop" data-target="#about-menu"><i class="noactive"><svg width="26" height="26" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="m13 1.842 9.75 5.625v2.005L10.827 16.49 8.961 15.43v-2.144l8.218-4.818L13 6.047 6.9 9.583v7.018L13 20.11l3.036-1.755 3.037-1.754v-2.618l3.677-2.116v6.85L13 24.343l-9.75-5.626V7.467L13 1.842Z" fill="var(--gray-2)"/></svg></i><i class="active"><svg width="26" height="26" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="m13 1.842 9.75 5.625v2.005L10.827 16.49 8.961 15.43v-2.144l8.218-4.818L13 6.047 6.9 9.583v7.018L13 20.11l3.036-1.755 3.037-1.754v-2.618l3.677-2.116v6.85L13 24.343l-9.75-5.626V7.467L13 1.842Z" fill="var(--red-1)"/></svg></i>
+						О нас</a>
+						<a href="#" class="main-btn active-btn mob-menu-drop" data-target="#cons-menu"><span><i><div class="main-btn-anim"><svg width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M3 5.572A2.571 2.571 0 0 1 5.571 3h1.176c.738 0 1.38.502 1.56 1.217l.947 3.791a1.607 1.607 0 0 1-.595 1.676l-1.108.832c-.116.086-.141.213-.108.301a9.672 9.672 0 0 0 5.74 5.74c.088.033.214.008.302-.107l.831-1.109a1.607 1.607 0 0 1 1.676-.595l3.79.948c.716.179 1.218.822 1.218 1.56v1.175A2.571 2.571 0 0 1 18.429 21H16.5C9.045 21 3 14.956 3 7.5V5.572Z" fill="#fff"/></svg></div></i></span>Консультация</a>
+						<a href="#" class="mob-menu-drop" data-target="#reviews-menu"><i class="noactive"><svg width="26" height="26" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M11.5 15v8h-8a8 8 0 0 1 8-8zm6 7.5-2.939 1.545.561-3.272-2.377-2.318 3.286-.478L17.5 15l1.47 2.977 3.285.478-2.377 2.318.56 3.272zm-6-8.5c-3.315 0-6-2.685-6-6s2.685-6 6-6 6 2.685 6 6-2.685 6-6 6z" fill="var(--gray-2)"/></svg></i><i class="active"><svg width="26" height="26" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M11.5 15v8h-8a8 8 0 0 1 8-8zm6 7.5-2.939 1.545.561-3.272-2.377-2.318 3.286-.478L17.5 15l1.47 2.977 3.285.478-2.377 2.318.56 3.272zm-6-8.5c-3.315 0-6-2.685-6-6s2.685-6 6-6 6 2.685 6 6-2.685 6-6 6z" fill="var(--red-1)"/></svg></i>Отзывы</a>
+						<a href="#" class="mob-menu-drop" data-target="#profile-menu"><i class="noactive"><svg width="26" height="26" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M23.4 13a10.4 10.4 0 1 1-20.8 0 10.4 10.4 0 0 1 20.8 0Zm-7.8-3.9a2.6 2.6 0 1 1-5.2 0 2.6 2.6 0 0 1 5.2 0ZM13 14.3a6.5 6.5 0 0 0-5.91 3.791 7.782 7.782 0 0 0 5.91 2.71 7.783 7.783 0 0 0 5.91-2.71 6.5 6.5 0 0 0-5.91-3.79Z" fill="var(--gray-2)"/></svg></i><i class="active"><svg width="26" height="26" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M23.4 13a10.4 10.4 0 1 1-20.8 0 10.4 10.4 0 0 1 20.8 0Zm-7.8-3.9a2.6 2.6 0 1 1-5.2 0 2.6 2.6 0 0 1 5.2 0ZM13 14.3a6.5 6.5 0 0 0-5.91 3.791 7.782 7.782 0 0 0 5.91 2.71 7.783 7.783 0 0 0 5.91-2.71 6.5 6.5 0 0 0-5.91-3.79Z" fill="var(--red-1)"/></svg></i>Профиль</a>
+				</div>
+			</div>
+		</div>
+		<div class="mobile-nav-menus d-block d-lg-none">
+			<div class="mobile-menu-bg"></div>
+			<div class="mobile-menu-fixed" id="service-menu">
+				<div class="mobile-menu-wrap">
+					<div class="mobile-menu-content">
+						<button type="button" class="close" aria-label="Close"><span aria-hidden="true"></span></button>
+						<div class="mobile-menu-header">
+							<div class="st-1 text-center">Услуги</div>
+						</div>
+						<div class="mobile-menu-scroll">
+							<div class="mobile-menu-links wrap">
+								<div class="menu-mobile-toggle-group">
+									<span class="menu-mobile-toggle show">Популярные</span>
+									<ul class="card-list list-toggle show">
+										<li><a href="https://edin.center/bankrotstvo-fizicheskih-lic"><i class="icon icon-card-broken"></i>Банкротство физических лиц</a></li>
+										<li><a href="https://edin.center/uproshchennoe-bankrotstvo"><i class="icon icon-doc-shield"></i>Внесудебное банкротство</a></li>
+										<li><a href="https://edin.center/pomosh-dolzhnikam"><i class="icon icon-people-protect"></i>Защита прав заемщиков</a></li>
+										<li><a href="https://edin.center/zashhita-v-sude"><i class="icon icon-judge-hammer"></i>Защита в суде</a></li>
+									</ul>
+								</div>
+										
+																		<div class="menu-mobile-toggle-group">
+											<span class="menu-mobile-toggle">Заемщикам</span>
+											<ul class="mob-menu-list list-toggle">
+																				<li><a href="/yaroslavl/bankrotstvo-fizicheskih-lic">Банкротство физических лиц</a></li>
+																			<li><a href="/yaroslavl/uproshchennoe-bankrotstvo">Внесудебное банкротство</a></li>
+																			<li><a href="/yaroslavl/pomosh-dolzhnikam">Защита прав заемщиков </a></li>
+																			<li><a href="/yaroslavl/vzyskanie-dolgov-s-fiz-lic">Взыскание долгов</a></li>
+																			<li><a href="/ne-toropites-bankrotitsya">Списать долги без рисков</a></li>
+																			<li><a class="menu-delimiter" href="/yaroslavl/ugrozhayut-kollektory">Угрожают коллекторы</a></li>
+																				<li><a class="mob-menu-form-link" href="#"  data-toggle="modal" data-target="#modern_lead_modalform">Консультация заемщикам</a></li>
+											</ul>
+										</div>
+																				<div class="menu-mobile-toggle-group">
+											<span class="menu-mobile-toggle">Физическим лицами</span>
+											<ul class="mob-menu-list list-toggle">
+																				<li><a href="/yaroslavl/zashhita-v-sude">Защита в суде</a></li>
+																			<li><a href="/yaroslavl/semejnoe-pravo">Семейное право</a></li>
+																			<li><a href="/yaroslavl/nasledstvennye-spory">Наследственные споры</a></li>
+																			<li><a href="/yaroslavl/zemelnye-spory">Земельные споры</a></li>
+																			<li><a href="/yaroslavl/zhilishnye-spory">Жилищные споры</a></li>
+																			<li><a href="/yaroslavl/vozvrat-strahovovk-i-komissii-bankov">Возврат страховок</a></li>
+																			<li><a href="/yaroslavl/trudovoe-pravo">Трудовое право</a></li>
+																			<li><a href="/yaroslavl/proverka-dokumentov-i-dogovorov">Проверка документов и договоров</a></li>
+																			<li><a href="/yaroslavl/migracionnye-spory">Миграционные споры</a></li>
+																			<li><a href="/yaroslavl/autourist">Помощь автоюриста</a></li>
+																			<li><a href="/yaroslavl/advokat">Помощь адвоката</a></li>
+																			<li><a href="/yaroslavl/zashchita-prav-potrebitelya">Защита прав потребителей</a></li>
+																				<li><a class="mob-menu-form-link" href="#"  data-toggle="modal" data-target="#modern_lead_modalform">Консультация физическим лицами</a></li>
+											</ul>
+										</div>
+																				<div class="menu-mobile-toggle-group">
+											<span class="menu-mobile-toggle">Юридическим лицам</span>
+											<ul class="mob-menu-list list-toggle">
+																				<li><a href="/yaroslavl/bankruptcy-of-a-juridical">Банкротство юрлиц</a></li>
+																			<li><a href="/yaroslavl/nalogovye-spory">Налоговые споры</a></li>
+																			<li><a href="/yaroslavl/torgovaya-marka">Торговая марка</a></li>
+																			<li><a href="/yaroslavl/vzyskanie-dolgov">Взыскание долгов</a></li>
+																			<li><a href="/yaroslavl/b2b">Корпоративное обслуживание</a></li>
+																			<li><a class="menu-delimiter" href="/yaroslavl/bookkeeping">Бухгалтерские услуги</a></li>
+																				<li><a class="mob-menu-form-link" href="#"  data-toggle="modal" data-target="#modern_lead_modalform">Консультация юридическим лицам</a></li>
+										</ul>
+									</div>
+																			<a class="external-link single-menu-item bissness" href="https://eczbiz.ru/" rel="nofollow" target="_blank">ЕЦЗ для Бизнеса<i class="icon icon-ext-link icon-blue ml-1"></i></a>
+																	
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="mobile-menu-fixed" id="about-menu">
+				<div class="mobile-menu-wrap">
+					<div class="mobile-menu-content">
+						<button type="button" class="close" aria-label="Close"><span aria-hidden="true"></span></button>
+						<div class="mobile-menu-header">
+							<div class="st-1 text-center">О нас</div>
+						</div>
+						<div class="mobile-menu-scroll">
+							<div class="mobile-menu-links wrap">
+								<div class="mobile-video-block">
+									<div class="mobile-video-block-content">
+										<div class="h2 mb-15">Единый центр защиты</div>
+										<div class="bd-2 mb-15">это более 700 юристов, с представительствами в 37 городах и онлайн по всей России</div>
+										<!--a class="sh-2 d-flex align-items-center lh-0" href="#"><i class="icon icon-play-circle icon-giant icon-white mr-1"></i> Смотреть видео</a-->
+									</div>
+										<a class="st-2 more" href="https://edin.center/about">Подробнее о нас</a>
+								</div>
+								<ul class="card-list list-toggle show">
+									<li><a href="https://edin.center/contacts"><i class="icon icon-map-marker"></i>Контакты</a></li>
+									<li><a href="https://edin.center/about/structure"><i class="icon icon-peoples"></i>Команда</a></li>
+									<li class="card-full bg-reviews-heart"><a href="https://edin.center/reviews">Отзывы <span>Более 1000 отзывов наших клиентов</span></a></li>
+									<li class="card-full bg-comleted-cases"><a href="javascript:void(0);">Завершенные дела <span>Более 9 500 успешных дел. 97 % успеха</span></a></li>
+									<li><a href="https://edin.center/newsfeed"><i class="icon icon-doc"></i>Новости</a></li>
+									<li><a href="https://edin.center/articles"><i class="icon icon-draft"></i>Статьи</a></li>
+									<li><a href="https://edin.center/mass-media"><i class="icon icon-world"></i>Мы в СМИ</a></li>
+									<li><a href="https://edin.center/mass-media/contactman"><i class="icon icon-user-voice"></i>Пресс-секретарь</a></li>
+									<li><a href="https://edin.center/vacancie"><i class="icon icon-people-search"></i>Вакансии</a></li>
+									<li><a href="https://edin.center/privedi-druga"><i class="icon icon-people"></i>Приведи друга</a></li>
+									<li><a href="https://edin.center/sotrudnichestvo"><i class="icon icon-heart"></i>Сотрудничество</a></li>
+									<li><a href="https://edin.center/newsfeed/tag/social-bankruptcy"><i class="icon icon-peoples"></i><b>Социальное банкротство</b></a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="mobile-menu-fixed" id="cons-menu">
+				<div class="mobile-menu-wrap">
+					<div class="mobile-menu-content">
+						<button type="button" class="close" aria-label="Закрыть"><span aria-hidden="true"></span></button>
+						<div class="mob-menu-content-wrap">
+							<div class="mobile-menu-header">
+								<div class="st-1 text-center">Консультация</div>
+							</div>
+							<div class="mobile-menu-scroll">
+								<div class="mobile-menu-links wrap">
+																			
+										<ul class="card-list cons-list">
+											<li class="red-card"><a class="nohide-phone" href="tel:+74852581515"><i class="icon icon-bg-small icon-phone icon-centered"></i><div>Позвонить <span class="d-block">проще и быстрее</span></div></a></li>
+																						<li><a href="#" data-toggle="modal" data-target="#modern_lead_modalform" class="mob-menu-main-form-btn"><i class="icon icon-bg-small icon-chat-alt icon-red icon-centered"></i><div>Консультация <span class="d-block">онлайн или в офисе</span></div></a></li>
+																					</ul>
+																	</div>
+							</div>
+						</div>
+						<!--div class="mobile-menu-form-wrapper">
+						</div>
+						<div class="loading">
+							<div></div>
+							<div></div>
+							<div></div>
+							<div></div>
+						</div-->
+					</div>
+				</div>
+			</div>
+			<div class="mobile-menu-fixed" id="reviews-menu">
+				<div class="mobile-menu-wrap">
+					<div class="mobile-menu-content">
+						<button type="button" class="close" aria-label="Close"><span aria-hidden="true"></span></button>
+						<div class="mobile-menu-header">
+							<div class="st-1 text-center">Отзывы</div>
+						</div>
+						<div class="mobile-menu-scroll">
+							<div class="data-attr-slider slick-slider ecz-style video-slider-menu" data-slick='{
+																				"slidesToShow": 2, 
+																				"slidesToScroll": 1,
+																				"infinite": false,
+																				"arrows": false,
+																				"speed" :300,
+																				"centerPadding": "15px",
+																				"centerMode":false
+																				}'>	
+																	<div class="slide-item">
+										<div class="video-card-wrap">
+											<div class="card video-card lazy-bg" style="background-image:url('https://i.ytimg.com/vi/VEcp9MLqO5U/hqdefault.jpg')">
+												<i class="icon icon-play-circle icon-giant icon-white"></i>
+												<a href="https://www.youtube.com/embed/VEcp9MLqO5U?autoplay=1&rel=0" data-fancybox rel="nofollow"></a>
+											</div>
+											<div class="h3 pl-15 mb-0">Ровел Сасуникович</div>
+											<div class="st-2 pl-15 gray-3">Омск</div>
+										</div>
+									</div>
+																	<div class="slide-item">
+										<div class="video-card-wrap">
+											<div class="card video-card lazy-bg" style="background-image:url('https://i.ytimg.com/vi/X9UMR7x7MMY/hqdefault.jpg')">
+												<i class="icon icon-play-circle icon-giant icon-white"></i>
+												<a href="https://www.youtube.com/embed/X9UMR7x7MMY?autoplay=1&rel=0" data-fancybox rel="nofollow"></a>
+											</div>
+											<div class="h3 pl-15 mb-0">Олеся</div>
+											<div class="st-2 pl-15 gray-3">Ростов-на-Дону</div>
+										</div>
+									</div>
+																	<div class="slide-item">
+										<div class="video-card-wrap">
+											<div class="card video-card lazy-bg" style="background-image:url('https://i.ytimg.com/vi/1VuVNnO04SQ/hqdefault.jpg')">
+												<i class="icon icon-play-circle icon-giant icon-white"></i>
+												<a href="https://www.youtube.com/embed/1VuVNnO04SQ?autoplay=1&rel=0" data-fancybox rel="nofollow"></a>
+											</div>
+											<div class="h3 pl-15 mb-0">Виталий</div>
+											<div class="st-2 pl-15 gray-3">Сочи</div>
+										</div>
+									</div>
+																	<div class="slide-item">
+										<div class="video-card-wrap">
+											<div class="card video-card lazy-bg" style="background-image:url('https://i.ytimg.com/vi/guLyFGQxVew/hqdefault.jpg')">
+												<i class="icon icon-play-circle icon-giant icon-white"></i>
+												<a href="https://www.youtube.com/embed/guLyFGQxVew?autoplay=1&rel=0" data-fancybox rel="nofollow"></a>
+											</div>
+											<div class="h3 pl-15 mb-0">Людмила</div>
+											<div class="st-2 pl-15 gray-3">Тюмень</div>
+										</div>
+									</div>
+																	<div class="slide-item">
+										<div class="video-card-wrap">
+											<div class="card video-card lazy-bg" style="background-image:url('https://i.ytimg.com/vi/-WkDMAXAnpo/hqdefault.jpg')">
+												<i class="icon icon-play-circle icon-giant icon-white"></i>
+												<a href="https://www.youtube.com/embed/-WkDMAXAnpo?autoplay=1&rel=0" data-fancybox rel="nofollow"></a>
+											</div>
+											<div class="h3 pl-15 mb-0">Жугират</div>
+											<div class="st-2 pl-15 gray-3">Сочи</div>
+										</div>
+									</div>
+																	<div class="slide-item">
+										<div class="video-card-wrap">
+											<div class="card video-card lazy-bg" style="background-image:url('https://i.ytimg.com/vi/JHE8DfjR8Go/hqdefault.jpg')">
+												<i class="icon icon-play-circle icon-giant icon-white"></i>
+												<a href="https://www.youtube.com/embed/JHE8DfjR8Go?autoplay=1&rel=0" data-fancybox rel="nofollow"></a>
+											</div>
+											<div class="h3 pl-15 mb-0">Александра</div>
+											<div class="st-2 pl-15 gray-3">Сочи</div>
+										</div>
+									</div>
+																	<div class="slide-item">
+										<div class="video-card-wrap">
+											<div class="card video-card lazy-bg" style="background-image:url('https://i.ytimg.com/vi/WAdW73NruzM/hqdefault.jpg')">
+												<i class="icon icon-play-circle icon-giant icon-white"></i>
+												<a href="https://www.youtube.com/embed/WAdW73NruzM?autoplay=1&rel=0" data-fancybox rel="nofollow"></a>
+											</div>
+											<div class="h3 pl-15 mb-0">Ирина</div>
+											<div class="st-2 pl-15 gray-3">Тольятти</div>
+										</div>
+									</div>
+																	<div class="slide-item">
+										<div class="video-card-wrap">
+											<div class="card video-card lazy-bg" style="background-image:url('https://i.ytimg.com/vi/ETvrzqPh1H0/hqdefault.jpg')">
+												<i class="icon icon-play-circle icon-giant icon-white"></i>
+												<a href="https://www.youtube.com/embed/ETvrzqPh1H0?autoplay=1&rel=0" data-fancybox rel="nofollow"></a>
+											</div>
+											<div class="h3 pl-15 mb-0">Елена</div>
+											<div class="st-2 pl-15 gray-3">Краснодар</div>
+										</div>
+									</div>
+																	<div class="slide-item">
+										<div class="video-card-wrap">
+											<div class="card video-card lazy-bg" style="background-image:url('https://i.ytimg.com/vi/vJZkDjVmP2Y/hqdefault.jpg')">
+												<i class="icon icon-play-circle icon-giant icon-white"></i>
+												<a href="https://www.youtube.com/embed/vJZkDjVmP2Y?autoplay=1&rel=0" data-fancybox rel="nofollow"></a>
+											</div>
+											<div class="h3 pl-15 mb-0">Александр</div>
+											<div class="st-2 pl-15 gray-3">Тольятти</div>
+										</div>
+									</div>
+																	<div class="slide-item">
+										<div class="video-card-wrap">
+											<div class="card video-card lazy-bg" style="background-image:url('https://i.ytimg.com/vi/qB3fCHPPcXk/hqdefault.jpg')">
+												<i class="icon icon-play-circle icon-giant icon-white"></i>
+												<a href="https://www.youtube.com/embed/qB3fCHPPcXk?autoplay=1&rel=0" data-fancybox rel="nofollow"></a>
+											</div>
+											<div class="h3 pl-15 mb-0">Надежда</div>
+											<div class="st-2 pl-15 gray-3">Тюмень</div>
+										</div>
+									</div>
+																	<div class="slide-item">
+										<div class="video-card-wrap">
+											<div class="card video-card lazy-bg" style="background-image:url('https://i.ytimg.com/vi/rStyq1T1s3E/hqdefault.jpg')">
+												<i class="icon icon-play-circle icon-giant icon-white"></i>
+												<a href="https://www.youtube.com/embed/rStyq1T1s3E?autoplay=1&rel=0" data-fancybox rel="nofollow"></a>
+											</div>
+											<div class="h3 pl-15 mb-0">Сергей</div>
+											<div class="st-2 pl-15 gray-3">Новокузнецк</div>
+										</div>
+									</div>
+																	<div class="slide-item">
+										<div class="video-card-wrap">
+											<div class="card video-card lazy-bg" style="background-image:url('https://i.ytimg.com/vi/7Nz9UdFJ3U0/hqdefault.jpg')">
+												<i class="icon icon-play-circle icon-giant icon-white"></i>
+												<a href="https://www.youtube.com/embed/7Nz9UdFJ3U0?autoplay=1&rel=0" data-fancybox rel="nofollow"></a>
+											</div>
+											<div class="h3 pl-15 mb-0">Евгений</div>
+											<div class="st-2 pl-15 gray-3">Оренбург</div>
+										</div>
+									</div>
+																	<div class="slide-item">
+										<div class="video-card-wrap">
+											<div class="card video-card lazy-bg" style="background-image:url('https://i.ytimg.com/vi/WPYwOLkU5l0/hqdefault.jpg')">
+												<i class="icon icon-play-circle icon-giant icon-white"></i>
+												<a href="https://www.youtube.com/embed/WPYwOLkU5l0?autoplay=1&rel=0" data-fancybox rel="nofollow"></a>
+											</div>
+											<div class="h3 pl-15 mb-0">Наталья</div>
+											<div class="st-2 pl-15 gray-3">Сочи</div>
+										</div>
+									</div>
+																	<div class="slide-item">
+										<div class="video-card-wrap">
+											<div class="card video-card lazy-bg" style="background-image:url('https://i.ytimg.com/vi/jqMcmf4jkBg/hqdefault.jpg')">
+												<i class="icon icon-play-circle icon-giant icon-white"></i>
+												<a href="https://www.youtube.com/embed/jqMcmf4jkBg?autoplay=1&rel=0" data-fancybox rel="nofollow"></a>
+											</div>
+											<div class="h3 pl-15 mb-0">Татьяна</div>
+											<div class="st-2 pl-15 gray-3">Красноярск</div>
+										</div>
+									</div>
+																	<div class="slide-item">
+										<div class="video-card-wrap">
+											<div class="card video-card lazy-bg" style="background-image:url('https://i.ytimg.com/vi/3RAy-C4_m1U/hqdefault.jpg')">
+												<i class="icon icon-play-circle icon-giant icon-white"></i>
+												<a href="https://www.youtube.com/embed/3RAy-C4_m1U?autoplay=1&rel=0" data-fancybox rel="nofollow"></a>
+											</div>
+											<div class="h3 pl-15 mb-0">Анастасия</div>
+											<div class="st-2 pl-15 gray-3">Тюмень</div>
+										</div>
+									</div>
+																	<div class="slide-item">
+										<div class="video-card-wrap">
+											<div class="card video-card lazy-bg" style="background-image:url('https://i.ytimg.com/vi/vilnkTOrAcA/hqdefault.jpg')">
+												<i class="icon icon-play-circle icon-giant icon-white"></i>
+												<a href="https://www.youtube.com/embed/vilnkTOrAcA?autoplay=1&rel=0" data-fancybox rel="nofollow"></a>
+											</div>
+											<div class="h3 pl-15 mb-0">Людмила</div>
+											<div class="st-2 pl-15 gray-3">Новокузнецк</div>
+										</div>
+									</div>
+																	<div class="slide-item">
+										<div class="video-card-wrap">
+											<div class="card video-card lazy-bg" style="background-image:url('https://i.ytimg.com/vi/t_1bKnfqZkc/hqdefault.jpg')">
+												<i class="icon icon-play-circle icon-giant icon-white"></i>
+												<a href="https://www.youtube.com/embed/t_1bKnfqZkc?autoplay=1&rel=0" data-fancybox rel="nofollow"></a>
+											</div>
+											<div class="h3 pl-15 mb-0">Нина</div>
+											<div class="st-2 pl-15 gray-3">Иркутск</div>
+										</div>
+									</div>
+																	<div class="slide-item">
+										<div class="video-card-wrap">
+											<div class="card video-card lazy-bg" style="background-image:url('https://i.ytimg.com/vi/zus0WOIhoQo/hqdefault.jpg')">
+												<i class="icon icon-play-circle icon-giant icon-white"></i>
+												<a href="https://www.youtube.com/embed/zus0WOIhoQo?autoplay=1&rel=0" data-fancybox rel="nofollow"></a>
+											</div>
+											<div class="h3 pl-15 mb-0">Александр</div>
+											<div class="st-2 pl-15 gray-3">Ростов-на-Дону</div>
+										</div>
+									</div>
+																	<div class="slide-item">
+										<div class="video-card-wrap">
+											<div class="card video-card lazy-bg" style="background-image:url('https://i.ytimg.com/vi/A_31Clwh0Tk/hqdefault.jpg')">
+												<i class="icon icon-play-circle icon-giant icon-white"></i>
+												<a href="https://www.youtube.com/embed/A_31Clwh0Tk?autoplay=1&rel=0" data-fancybox rel="nofollow"></a>
+											</div>
+											<div class="h3 pl-15 mb-0">Екатерина</div>
+											<div class="st-2 pl-15 gray-3">Иркутск</div>
+										</div>
+									</div>
+																	<div class="slide-item">
+										<div class="video-card-wrap">
+											<div class="card video-card lazy-bg" style="background-image:url('https://i.ytimg.com/vi/9Yj-e0guSOU/hqdefault.jpg')">
+												<i class="icon icon-play-circle icon-giant icon-white"></i>
+												<a href="https://www.youtube.com/embed/9Yj-e0guSOU?autoplay=1&rel=0" data-fancybox rel="nofollow"></a>
+											</div>
+											<div class="h3 pl-15 mb-0">Тамара</div>
+											<div class="st-2 pl-15 gray-3">Санкт-Петербург</div>
+										</div>
+									</div>
+																	<div class="slide-item">
+										<div class="video-card-wrap">
+											<div class="card video-card lazy-bg" style="background-image:url('https://i.ytimg.com/vi/edFBnAacp_s/hqdefault.jpg')">
+												<i class="icon icon-play-circle icon-giant icon-white"></i>
+												<a href="https://www.youtube.com/embed/edFBnAacp_s?autoplay=1&rel=0" data-fancybox rel="nofollow"></a>
+											</div>
+											<div class="h3 pl-15 mb-0">Валерия</div>
+											<div class="st-2 pl-15 gray-3">Новокузнецк</div>
+										</div>
+									</div>
+																	<div class="slide-item">
+										<div class="video-card-wrap">
+											<div class="card video-card lazy-bg" style="background-image:url('https://i.ytimg.com/vi/2hynSBMC4N8/hqdefault.jpg')">
+												<i class="icon icon-play-circle icon-giant icon-white"></i>
+												<a href="https://www.youtube.com/embed/2hynSBMC4N8?autoplay=1&rel=0" data-fancybox rel="nofollow"></a>
+											</div>
+											<div class="h3 pl-15 mb-0">Александр</div>
+											<div class="st-2 pl-15 gray-3">Новокузнецк</div>
+										</div>
+									</div>
+																	<div class="slide-item">
+										<div class="video-card-wrap">
+											<div class="card video-card lazy-bg" style="background-image:url('https://i.ytimg.com/vi/t_1pbcVlCCo/hqdefault.jpg')">
+												<i class="icon icon-play-circle icon-giant icon-white"></i>
+												<a href="https://www.youtube.com/embed/t_1pbcVlCCo?autoplay=1&rel=0" data-fancybox rel="nofollow"></a>
+											</div>
+											<div class="h3 pl-15 mb-0">Вера</div>
+											<div class="st-2 pl-15 gray-3">Новокузнецк</div>
+										</div>
+									</div>
+																	<div class="slide-item">
+										<div class="video-card-wrap">
+											<div class="card video-card lazy-bg" style="background-image:url('https://i.ytimg.com/vi/7qMaCb8YEuk/hqdefault.jpg')">
+												<i class="icon icon-play-circle icon-giant icon-white"></i>
+												<a href="https://www.youtube.com/embed/7qMaCb8YEuk?autoplay=1&rel=0" data-fancybox rel="nofollow"></a>
+											</div>
+											<div class="h3 pl-15 mb-0">Андрей</div>
+											<div class="st-2 pl-15 gray-3">Сочи</div>
+										</div>
+									</div>
+																	<div class="slide-item">
+										<div class="video-card-wrap">
+											<div class="card video-card lazy-bg" style="background-image:url('https://i.ytimg.com/vi/1TLD92qeUK4/hqdefault.jpg')">
+												<i class="icon icon-play-circle icon-giant icon-white"></i>
+												<a href="https://www.youtube.com/embed/1TLD92qeUK4?autoplay=1&rel=0" data-fancybox rel="nofollow"></a>
+											</div>
+											<div class="h3 pl-15 mb-0">Ирина</div>
+											<div class="st-2 pl-15 gray-3">Нижний Новгород</div>
+										</div>
+									</div>
+																	<div class="slide-item">
+										<div class="video-card-wrap">
+											<div class="card video-card lazy-bg" style="background-image:url('https://i.ytimg.com/vi/78XDmAIz8vY/hqdefault.jpg')">
+												<i class="icon icon-play-circle icon-giant icon-white"></i>
+												<a href="https://www.youtube.com/embed/78XDmAIz8vY?autoplay=1&rel=0" data-fancybox rel="nofollow"></a>
+											</div>
+											<div class="h3 pl-15 mb-0">Татьяна</div>
+											<div class="st-2 pl-15 gray-3">Нижний Новгород</div>
+										</div>
+									</div>
+																	<div class="slide-item">
+										<div class="video-card-wrap">
+											<div class="card video-card lazy-bg" style="background-image:url('https://i.ytimg.com/vi/H98_cGlbpTM/hqdefault.jpg')">
+												<i class="icon icon-play-circle icon-giant icon-white"></i>
+												<a href="https://www.youtube.com/embed/H98_cGlbpTM?autoplay=1&rel=0" data-fancybox rel="nofollow"></a>
+											</div>
+											<div class="h3 pl-15 mb-0">Галина</div>
+											<div class="st-2 pl-15 gray-3">Нижний Новгород</div>
+										</div>
+									</div>
+																	<div class="slide-item">
+										<div class="video-card-wrap">
+											<div class="card video-card lazy-bg" style="background-image:url('https://i.ytimg.com/vi/MyrzZXXAkmc/hqdefault.jpg')">
+												<i class="icon icon-play-circle icon-giant icon-white"></i>
+												<a href="https://www.youtube.com/embed/MyrzZXXAkmc?autoplay=1&rel=0" data-fancybox rel="nofollow"></a>
+											</div>
+											<div class="h3 pl-15 mb-0">Елена</div>
+											<div class="st-2 pl-15 gray-3">Сочи</div>
+										</div>
+									</div>
+																	<div class="slide-item">
+										<div class="video-card-wrap">
+											<div class="card video-card lazy-bg" style="background-image:url('https://i.ytimg.com/vi/r9dqDeeo4xI/hqdefault.jpg')">
+												<i class="icon icon-play-circle icon-giant icon-white"></i>
+												<a href="https://www.youtube.com/embed/r9dqDeeo4xI?autoplay=1&rel=0" data-fancybox rel="nofollow"></a>
+											</div>
+											<div class="h3 pl-15 mb-0">Венера</div>
+											<div class="st-2 pl-15 gray-3">Тюмень</div>
+										</div>
+									</div>
+																	<div class="slide-item">
+										<div class="video-card-wrap">
+											<div class="card video-card lazy-bg" style="background-image:url('https://i.ytimg.com/vi/KpSX-F53kns/hqdefault.jpg')">
+												<i class="icon icon-play-circle icon-giant icon-white"></i>
+												<a href="https://www.youtube.com/embed/KpSX-F53kns?autoplay=1&rel=0" data-fancybox rel="nofollow"></a>
+											</div>
+											<div class="h3 pl-15 mb-0">Ольга</div>
+											<div class="st-2 pl-15 gray-3">Барнаул</div>
+										</div>
+									</div>
+																	<div class="slide-item">
+										<div class="video-card-wrap">
+											<div class="card video-card lazy-bg" style="background-image:url('https://i.ytimg.com/vi/DOhmr4-HzrE/hqdefault.jpg')">
+												<i class="icon icon-play-circle icon-giant icon-white"></i>
+												<a href="https://www.youtube.com/embed/DOhmr4-HzrE?autoplay=1&rel=0" data-fancybox rel="nofollow"></a>
+											</div>
+											<div class="h3 pl-15 mb-0">Надежда</div>
+											<div class="st-2 pl-15 gray-3">Барнаул</div>
+										</div>
+									</div>
+																	<div class="slide-item">
+										<div class="video-card-wrap">
+											<div class="card video-card lazy-bg" style="background-image:url('https://i.ytimg.com/vi/UnRA5j0Q0G8/hqdefault.jpg')">
+												<i class="icon icon-play-circle icon-giant icon-white"></i>
+												<a href="https://www.youtube.com/embed/UnRA5j0Q0G8?autoplay=1&rel=0" data-fancybox rel="nofollow"></a>
+											</div>
+											<div class="h3 pl-15 mb-0">Юрий</div>
+											<div class="st-2 pl-15 gray-3">Барнаул</div>
+										</div>
+									</div>
+																	<div class="slide-item">
+										<div class="video-card-wrap">
+											<div class="card video-card lazy-bg" style="background-image:url('https://i.ytimg.com/vi/rTiGs68e5hw/hqdefault.jpg')">
+												<i class="icon icon-play-circle icon-giant icon-white"></i>
+												<a href="https://www.youtube.com/embed/rTiGs68e5hw?autoplay=1&rel=0" data-fancybox rel="nofollow"></a>
+											</div>
+											<div class="h3 pl-15 mb-0">Валентина</div>
+											<div class="st-2 pl-15 gray-3">Барнаул</div>
+										</div>
+									</div>
+																	<div class="slide-item">
+										<div class="video-card-wrap">
+											<div class="card video-card lazy-bg" style="background-image:url('https://i.ytimg.com/vi/zxoykfQnqX8/hqdefault.jpg')">
+												<i class="icon icon-play-circle icon-giant icon-white"></i>
+												<a href="https://www.youtube.com/embed/zxoykfQnqX8?autoplay=1&rel=0" data-fancybox rel="nofollow"></a>
+											</div>
+											<div class="h3 pl-15 mb-0">Николай</div>
+											<div class="st-2 pl-15 gray-3">Барнаул</div>
+										</div>
+									</div>
+																	<div class="slide-item">
+										<div class="video-card-wrap">
+											<div class="card video-card lazy-bg" style="background-image:url('https://i.ytimg.com/vi/f5o-e89Lmq8/hqdefault.jpg')">
+												<i class="icon icon-play-circle icon-giant icon-white"></i>
+												<a href="https://www.youtube.com/embed/f5o-e89Lmq8?autoplay=1&rel=0" data-fancybox rel="nofollow"></a>
+											</div>
+											<div class="h3 pl-15 mb-0">Мухарам</div>
+											<div class="st-2 pl-15 gray-3">Оренбург</div>
+										</div>
+									</div>
+																	<div class="slide-item">
+										<div class="video-card-wrap">
+											<div class="card video-card lazy-bg" style="background-image:url('https://i.ytimg.com/vi/ZwJrANBlfwY/hqdefault.jpg')">
+												<i class="icon icon-play-circle icon-giant icon-white"></i>
+												<a href="https://www.youtube.com/embed/ZwJrANBlfwY?autoplay=1&rel=0" data-fancybox rel="nofollow"></a>
+											</div>
+											<div class="h3 pl-15 mb-0">Татьяна</div>
+											<div class="st-2 pl-15 gray-3">Оренбург</div>
+										</div>
+									</div>
+																	<div class="slide-item">
+										<div class="video-card-wrap">
+											<div class="card video-card lazy-bg" style="background-image:url('https://i.ytimg.com/vi/1MY4GDYI7hY/hqdefault.jpg')">
+												<i class="icon icon-play-circle icon-giant icon-white"></i>
+												<a href="https://www.youtube.com/embed/1MY4GDYI7hY?autoplay=1&rel=0" data-fancybox rel="nofollow"></a>
+											</div>
+											<div class="h3 pl-15 mb-0">Алексей</div>
+											<div class="st-2 pl-15 gray-3">Новокузнецк</div>
+										</div>
+									</div>
+																	<div class="slide-item">
+										<div class="video-card-wrap">
+											<div class="card video-card lazy-bg" style="background-image:url('https://i.ytimg.com/vi/u4OHLAbwgdw/hqdefault.jpg')">
+												<i class="icon icon-play-circle icon-giant icon-white"></i>
+												<a href="https://www.youtube.com/embed/u4OHLAbwgdw?autoplay=1&rel=0" data-fancybox rel="nofollow"></a>
+											</div>
+											<div class="h3 pl-15 mb-0">Елена</div>
+											<div class="st-2 pl-15 gray-3">Ростов-на-Дону</div>
+										</div>
+									</div>
+																	<div class="slide-item">
+										<div class="video-card-wrap">
+											<div class="card video-card lazy-bg" style="background-image:url('https://i.ytimg.com/vi/fUqVr1QcPKU/hqdefault.jpg')">
+												<i class="icon icon-play-circle icon-giant icon-white"></i>
+												<a href="https://www.youtube.com/embed/fUqVr1QcPKU?autoplay=1&rel=0" data-fancybox rel="nofollow"></a>
+											</div>
+											<div class="h3 pl-15 mb-0">Алексей</div>
+											<div class="st-2 pl-15 gray-3">Ростов-на-Дону</div>
+										</div>
+									</div>
+																				
+							</div>													
+						
+						
+							<div class="mobile-menu-reviews">
+																	<div class="office-rating">
+										<div class="office-rating-header d-flex">
+											<div class="office-rating-avatar">А</div>
+											<div class="office-rating-header-content">
+												<div class="office-rating-name"><span>Алексей Г., </span>Ярославль</div>
+												<div class="office-rating-rating"><i data-star="5"></i><span>23.10.23</span></div>
+											</div>
+										</div>
+										<div class="office-rating-content bd-2">											
+											Все понравилось 	
+										</div>
+									</div>
+																	<div class="office-rating">
+										<div class="office-rating-header d-flex">
+											<div class="office-rating-avatar">В</div>
+											<div class="office-rating-header-content">
+												<div class="office-rating-name"><span>Владимир Ч., </span>Ярославль</div>
+												<div class="office-rating-rating"><i data-star="5"></i><span>20.10.23</span></div>
+											</div>
+										</div>
+										<div class="office-rating-content bd-2">											
+											Удобный офис, доброжелательный персонал.	
+										</div>
+									</div>
+																	<div class="office-rating">
+										<div class="office-rating-header d-flex">
+											<div class="office-rating-avatar">Л</div>
+											<div class="office-rating-header-content">
+												<div class="office-rating-name"><span>Людмила А., </span>Ярославль</div>
+												<div class="office-rating-rating"><i data-star="5"></i><span>06.10.23</span></div>
+											</div>
+										</div>
+										<div class="office-rating-content bd-2">											
+											Доброжелательность, профессионализм сотрудника. 	
+										</div>
+									</div>
+																	<div class="office-rating">
+										<div class="office-rating-header d-flex">
+											<div class="office-rating-avatar">И</div>
+											<div class="office-rating-header-content">
+												<div class="office-rating-name"><span>Игорь Ш., </span>Ярославль</div>
+												<div class="office-rating-rating"><i data-star="5"></i><span>03.10.23</span></div>
+											</div>
+										</div>
+										<div class="office-rating-content bd-2">											
+											Пока всё отлично за все благодарю	
+										</div>
+									</div>
+																	<div class="office-rating">
+										<div class="office-rating-header d-flex">
+											<div class="office-rating-avatar">С</div>
+											<div class="office-rating-header-content">
+												<div class="office-rating-name"><span>Светлана К., </span>Ярославль</div>
+												<div class="office-rating-rating"><i data-star="4.5"></i><span>30.09.23</span></div>
+											</div>
+										</div>
+										<div class="office-rating-content bd-2">											
+											Все хорошо 	
+										</div>
+									</div>
+																
+							</div>
+							<a href="https://edin.center/reviews" class="d-block text-center read-more st-2">Смотреть все отзывы</a>
+															<div class="menu-mobile-toggle-group external-ratings mt-20">
+									<span class="menu-mobile-toggle">Отзывы на сторонних площадках</span>
+									<ul class="mob-menu-list list-toggle">
+																						<li><a class="d-flex justify-content-between" rel="nofollow" href="/reviews/">ЕЦЗ.рф<span>4.8</span></a></li>
+																							<li><a class="d-flex justify-content-between" rel="nofollow" href="https://go.2gis.com/rdukp">2ГИС<span>5.0</span></a></li>
+																							<li><a class="d-flex justify-content-between" rel="nofollow" href="https://yaroslavl.flamp.ru/firm/edinyjj_centr_zashhity_yuridicheskaya_sluzhba-70000001061056941">Фламп<span>5.0</span></a></li>
+																							<li><a class="d-flex justify-content-between" rel="nofollow" href="https://yaroslavl.zoon.ru/law/yuridicheskaya_sluzhba_edinyj_tsentr_zaschity/">Zoon<span>4.1</span></a></li>
+																							<li><a class="d-flex justify-content-between" rel="nofollow" href="https://otzovik.com/reviews/ediniy_centr_zaschiti_russia_yaroslavl/">Отзовик.ру<span>4.0</span></a></li>
+																							<li><a class="d-flex justify-content-between" rel="nofollow" href="">Yell<span>4.6</span></a></li>
+																							<li><a class="d-flex justify-content-between" rel="nofollow" href="https://dostupnoepravo.ru/companies-page/1-edinyy-centr-zashchity">Доступное право<span>4.8</span></a></li>
+																				</ul>
+								</div>
+													</div>
+					</div>
+				</div>
+			</div>
+			<div class="mobile-menu-fixed" id="profile-menu">
+				<div class="mobile-menu-wrap">
+					<div class="mobile-menu-content">
+						<button type="button" class="close" aria-label="Close"><span aria-hidden="true"></span></button>
+						<div class="mobile-menu-header">
+							<div class="st-1 text-center">Профиль</div>
+						</div>
+						<div class="mobile-menu-scroll">
+							<div class="content text-center">
+								<div class="bd-2 mb-25">Войдите, чтобы получить доступ<br> к вашему личному кабинету</div>
+								<a class="btn btn-primary" href="https://edin.center/lk">Войти</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</header>
+
+
+
+<script>
+	  (function () {
+          'use strict';
+
+		var loadedRecaptha = false,
+			RtimerId;
+
+		window.addEventListener( 'scroll', loadRecaptha, {passive: true} );
+		window.addEventListener( 'touchstart', loadRecaptha );
+		document.addEventListener( 'mouseenter', loadRecaptha );
+		document.addEventListener( 'click', loadRecaptha );
+		document.addEventListener( 'DOMContentLoaded', loadRecFallback );
+
+		function loadRecFallback() {
+			RtimerId = setTimeout( loadRecaptha, 5000 );
+		}
+		
+		function loadRecaptha( e ) {
+			if ( loadedRecaptha ) {
+				return;
+			}
+			
+			let recaptcha_api = document.createElement('script');
+			recaptcha_api.src = "https://www.google.com/recaptcha/api.js?render=6Lcppb4ZAAAAAPvEtMSoL215kEBUIg8UVTjmt8xx";
+			recaptcha_api.async = true;
+			document.head.append(recaptcha_api);
+			
+			loadedRecaptha = true;
+			clearTimeout( RtimerId );
+
+			window.removeEventListener( 'scroll', loadRecaptha );
+			window.removeEventListener( 'touchstart', loadRecaptha );
+			document.removeEventListener( 'mouseenter', loadRecaptha );
+			document.removeEventListener( 'click', loadRecaptha );
+			document.removeEventListener( 'DOMContentLoaded', loadRecFallback );
+          }
+
+	})()
+</script>
+
+
+<script>
+    window.usluga = 8;
+    window.cityID = '37';
+    window.basicPhone = '+74852581515';
+    window.basicPhoneText = '8 (4852) 58-15-15';
+    window.rekey = '6Lcppb4ZAAAAAPvEtMSoL215kEBUIg8UVTjmt8xx';
+    window.retoken = null;
+    window.reviews = [{"id":"145130","name":"\u0410\u043b\u0435\u043a\u0441\u0435\u0439 \u0413.","comment":"\u0412\u0441\u0435 \u043f\u043e\u043d\u0440\u0430\u0432\u0438\u043b\u043e\u0441\u044c ","city":"\u042f\u0440\u043e\u0441\u043b\u0430\u0432\u043b\u044c","date":"2023-10-23 13:02:38","rating":5},{"id":"145116","name":"\u0412\u043b\u0430\u0434\u0438\u043c\u0438\u0440 \u0427.","comment":"\u0423\u0434\u043e\u0431\u043d\u044b\u0439 \u043e\u0444\u0438\u0441, \u0434\u043e\u0431\u0440\u043e\u0436\u0435\u043b\u0430\u0442\u0435\u043b\u044c\u043d\u044b\u0439 \u043f\u0435\u0440\u0441\u043e\u043d\u0430\u043b.","city":"\u042f\u0440\u043e\u0441\u043b\u0430\u0432\u043b\u044c","date":"2023-10-20 17:03:23","rating":5},{"id":"144955","name":"\u041b\u044e\u0434\u043c\u0438\u043b\u0430 \u0410.","comment":"\u0414\u043e\u0431\u0440\u043e\u0436\u0435\u043b\u0430\u0442\u0435\u043b\u044c\u043d\u043e\u0441\u0442\u044c, \u043f\u0440\u043e\u0444\u0435\u0441\u0441\u0438\u043e\u043d\u0430\u043b\u0438\u0437\u043c \u0441\u043e\u0442\u0440\u0443\u0434\u043d\u0438\u043a\u0430. ","city":"\u042f\u0440\u043e\u0441\u043b\u0430\u0432\u043b\u044c","date":"2023-10-06 13:11:59","rating":5},{"id":"144938","name":"\u0418\u0433\u043e\u0440\u044c \u0428.","comment":"\u041f\u043e\u043a\u0430 \u0432\u0441\u0451 \u043e\u0442\u043b\u0438\u0447\u043d\u043e \u0437\u0430 \u0432\u0441\u0435 \u0431\u043b\u0430\u0433\u043e\u0434\u0430\u0440\u044e","city":"\u042f\u0440\u043e\u0441\u043b\u0430\u0432\u043b\u044c","date":"2023-10-03 14:45:05","rating":5},{"id":"144916","name":"\u0421\u0432\u0435\u0442\u043b\u0430\u043d\u0430 \u041a.","comment":"\u0412\u0441\u0435 \u0445\u043e\u0440\u043e\u0448\u043e ","city":"\u042f\u0440\u043e\u0441\u043b\u0430\u0432\u043b\u044c","date":"2023-09-30 14:30:39","rating":4.5},{"id":"144885","name":"\u041c\u0430\u0440\u0433\u0430\u0440\u0438\u0442\u0430 \u0412.","comment":"\u0412\u0441\u0451 \u0445\u043e\u0440\u043e\u0448\u043e","city":"\u042f\u0440\u043e\u0441\u043b\u0430\u0432\u043b\u044c","date":"2023-09-28 09:26:44","rating":5},{"id":"144827","name":"\u042e\u043b\u0438\u044f .","comment":"\u041f\u0440\u043e\u0444\u0435\u0441\u0441\u0438\u043e\u043d\u0430\u043b\u0438\u0437, \u0447\u0443\u0442\u043a\u043e\u0435 \u043e\u0442\u043d\u043e\u0448\u0435\u043d\u0438\u0435 \u043a \u043a\u043b\u0438\u0435\u043d\u0442\u0443","city":"\u042f\u0440\u043e\u0441\u043b\u0430\u0432\u043b\u044c","date":"2023-09-21 17:54:10","rating":5},{"id":"144785","name":"\u041a\u043e\u043d\u0441\u0442\u0430\u043d\u0442\u0438\u043d .","comment":"\u041f\u043e\u0434\u0440\u043e\u0431\u043d\u043e \u043e\u0431\u0441\u0443\u0434\u0438\u043b\u0438 \u0432\u043e\u043b\u043d\u0443\u044e\u0449\u0438\u0435 \u043c\u0435\u043d\u044f \u043c\u043e\u043c\u0435\u043d\u0442\u044b","city":"\u042f\u0440\u043e\u0441\u043b\u0430\u0432\u043b\u044c","date":"2023-09-16 14:52:08","rating":4},{"id":"144752","name":"\u0421\u0435\u0440\u0433\u0435\u0439 \u0411.","comment":"\u0418\u043d\u0444\u043e\u0440\u043c\u0430\u0446\u0438\u044f \u0431\u044b\u043b\u0430 \u0440\u0430\u0441\u043a\u0440\u044b\u0442\u0430 \u0432 \u043f\u043e\u043b\u043d\u043e\u043c \u043e\u0431\u044a\u0435\u043c\u0435. \u0423\u0441\u043b\u0443\u0433\u0430 \u0431\u044b\u043b\u0430 \u043e\u043a\u0430\u0437\u0430\u043d\u0430 \u043d\u0430 \u0432\u044b\u0441\u043e\u043a\u043e\u043c \u0443\u0440\u043e\u0432\u043d\u0435","city":"\u042f\u0440\u043e\u0441\u043b\u0430\u0432\u043b\u044c","date":"2023-09-13 11:57:26","rating":5},{"id":"144689","name":"\u041e\u043b\u044c\u0433\u0430 \u041a.","comment":"\u042f \u0440\u0435\u0448\u0438\u043b\u0430 \u043e\u0431\u0440\u0430\u0442\u0438\u0442\u044c\u0441\u044f \u0432 \u043a\u043e\u043c\u043f\u0430\u043d\u0438\u044e \u0415\u0434\u0438\u043d\u044b\u0439 \u0446\u0435\u043d\u0442\u0440 \u0437\u0430\u0449\u0438\u0442\u044b \u0437\u0430 \u0431\u0430\u043d\u043a\u0440\u043e\u0442\u0441\u0442\u0432\u043e\u043c, \u043a\u043e\u0433\u0434\u0430 \u043c\u043e\u0438 \u0444\u0438\u043d\u0430\u043d\u0441\u043e\u0432\u044b\u0435 \u043f\u0440\u043e\u0431\u043b\u0435\u043c\u044b \u0441\u0442\u0430\u043b\u0438 \u043d\u0435\u0432\u044b\u043d\u043e\u0441\u0438\u043c\u043e \u0442\u044f\u0436\u0435\u043b\u044b\u043c\u0438.  \u042f \u043e\u0447\u0435\u043d\u044c \u0431\u043e\u044f\u043b\u0430\u0441\u044c \u044d\u0442\u043e\u0439 \u043f\u0440\u043e\u0446\u0435\u0434\u0443\u0440\u044b, \u043d\u043e \u0441\u043e\u0442\u0440\u0443\u0434\u043d\u0438\u043a\u0438 \u043a\u043e\u043c\u043f\u0430\u043d\u0438\u0438 \u043e\u0447\u0435\u043d\u044c \u0434\u0440\u0443\u0436\u0435\u043b\u044e\u0431\u043d\u044b\u0435 \u0438 \u043f\u0440\u043e\u0444\u0435\u0441\u0441\u0438\u043e\u043d\u0430\u043b\u044c\u043d\u044b\u0435, \u043e\u043d\u0438 \u043f\u043e\u043c\u043e\u0433\u043b\u0438 \u043c\u043d\u0435 \u043f\u043e\u043d\u044f\u0442\u044c \u0432\u0441\u0435 \u044d\u0442\u0430\u043f\u044b \u0438 \u0440\u0438\u0441\u043a\u0438 \u043f\u0440\u043e\u0446\u0435\u0434\u0443\u0440\u044b. \u0421\u043f\u0430\u0441\u0438\u0431\u043e! \u0420\u0435\u043a\u043e\u043c\u0435\u043d\u0434\u0443\u044e!","city":"\u042f\u0440\u043e\u0441\u043b\u0430\u0432\u043b\u044c","date":"2023-09-05 10:59:51","rating":5},{"id":"144658","name":"\u041e\u043b\u0435\u0433 .","comment":"\u041e\u0433\u0440\u043e\u043c\u043d\u043e\u0435 \u0441\u043f\u0430\u0441\u0438\u0431\u043e \u0437\u0430 \u043a\u043e\u043d\u0441\u0443\u043b\u044c\u0442\u0430\u0446\u0438\u044e!","city":"\u042f\u0440\u043e\u0441\u043b\u0430\u0432\u043b\u044c","date":"2023-08-31 17:13:08","rating":5},{"id":"144521","name":"\u0421\u0432\u0435\u0442\u043b\u0430\u043d\u0430  \u0416.","comment":"\u0413\u0440\u0430\u043c\u043e\u0442\u043d\u044b\u0435 \u0441\u043f\u0435\u0446\u0438\u0430\u043b\u0438\u0441\u0442\u044b","city":"\u042f\u0440\u043e\u0441\u043b\u0430\u0432\u043b\u044c","date":"2023-08-15 18:17:09","rating":5},{"id":"144497","name":"\u0415\u043b\u0435\u043d\u0430 \u0421.","comment":"\u0417\u0434\u0440\u0430\u0432\u0441\u0442\u0432\u0443\u0439\u0442\u0435!!! \u0412\u044b \u043d\u0430\u043c \u043e\u0447\u0435\u043d\u044c \u043f\u043e\u043c\u043e\u0433\u043b\u0438...\u0441\u043f\u0430\u0441\u0438\u0431\u043e \u0431\u043e\u043b\u044c\u0448\u043e\u0435 ,\u0447\u0442\u043e \u0435\u0441\u0442\u044c \u0442\u0430\u043a\u0438\u0435 \u0441\u043f\u0435\u0446\u0438\u0430\u043b\u0438\u0441\u0442\u044b,\u0437\u043d\u0430\u044e\u0449\u0438\u0435 \u0441\u0432\u043e\u0435 \u0434\u0435\u043b\u043e! ","city":"\u042f\u0440\u043e\u0441\u043b\u0430\u0432\u043b\u044c","date":"2023-08-13 19:01:04","rating":5},{"id":"144495","name":" \u041d.","comment":"\u041c\u043d\u0435 \u0440\u0435\u0430\u043b\u044c\u043d\u043e \u043f\u043e\u043c\u043e\u0433\u043b\u0438","city":"\u042f\u0440\u043e\u0441\u043b\u0430\u0432\u043b\u044c","date":"2023-08-12 17:26:40","rating":5},{"id":"144488","name":"\u0422\u0430\u0438\u0441\u0438\u044f \u042f.","comment":"\u041e\u0442\u043b\u0438\u0447\u043d\u043e.\u041f\u0440\u043e\u0444\u0435\u0441\u0438\u043e\u043d\u0430\u043b\u044c\u043d\u043e.\n\u041e\u0447\u0435\u043d\u044c \u0431\u043b\u0430\u0433\u043e\u0434\u0430\u0440\u043d\u044b. \n\u0416\u0435\u043b\u0430\u0435\u043c \u041c\u0430\u043a\u0441\u0438\u043c\u0443 \u043a\u0430\u0440\u044c\u0440\u043d\u043e\u0433\u043e \u0440\u043e\u0441\u0442\u0430!","city":"\u042f\u0440\u043e\u0441\u043b\u0430\u0432\u043b\u044c","date":"2023-08-11 22:10:52","rating":5},{"id":"144418","name":"\u0424\u0430\u0438\u043d\u0430 \u0412.","comment":"\u041e\u0431\u0440\u0430\u0442\u0438\u043b\u0430\u0441\u044c \u0432 \u043e\u0440\u0433\u0430\u043d\u0438\u0437\u0430\u0446\u0438\u044e \u0415\u0426\u0417 \u043f\u043e \u043f\u0440\u043e\u0446\u0435\u0434\u0443\u0440\u0435 \u0431\u0430\u043d\u043a\u0440\u043e\u0442\u0441\u0442\u0432\u0430. \u0413\u0440\u0430\u043c\u043e\u0442\u043d\u044b\u0435 \u0441\u043f\u0435\u0446\u0438\u0430\u043b\u0438\u0441\u0442\u044b, \u0432\u0441\u0435 \u044f\u0441\u043d\u043e \u0440\u0430\u0441\u0441\u043a\u0430\u0437\u0430\u043b\u0438, \u0437\u0430\u043a\u043b\u044e\u0447\u0438\u043b\u0438 \u0434\u043e\u0433\u043e\u0432\u043e\u0440. \u0412\u0441\u0435\u0433\u0434\u0430 \u043d\u0430 \u0441\u0432\u044f\u0437\u0438. \u0420\u0435\u043a\u043e\u043c\u0435\u043d\u0434\u0443\u044e!","city":"\u042f\u0440\u043e\u0441\u043b\u0430\u0432\u043b\u044c","date":"2023-08-02 13:51:31","rating":5},{"id":"144272","name":"\u0414\u0430\u043d\u0438\u0438\u043b \u0417.","comment":"\u0414\u043e\u0433\u043e\u0432\u0430\u0440\u0438\u0432\u0430\u043b\u0438\u0441\u044c \u0441 \u0434\u0430\u043d\u043d\u043e\u0439 \u0444\u0438\u0440\u043c\u043e\u0439, \u0447\u0442\u043e \u0435\u0441\u043b\u0438 \u043f\u0440\u043e\u0438\u0433\u0440\u0430\u044e, \u0442\u043e \u0437\u0430\u043f\u043b\u0430\u0447\u0443 30 000\u0440\u0443\u0431, \u0435\u0441\u043b\u0438 \u0432\u044b\u0438\u0433\u0440\u0430\u044e, \u0442\u043e \u0437\u0430\u043f\u043b\u0430\u0447\u0443 60 000\u0440\u0443\u0431. \u0412 \u0440\u0435\u0437\u0443\u043b\u044c\u0442\u0430\u0442\u0435, \u043a\u0430\u043a \u043f\u043e\u0442\u043e\u043c \u0432\u044b\u044f\u0441\u043d\u0438\u043b\u043e\u0441\u044c, \u0437\u0430 \u043a\u0430\u0436\u0434\u044b\u0439 \u0432\u044b\u0445\u043e\u0434 \u0432 \u0441\u0443\u0434 \u0430\u0434\u0432\u043e\u043a\u0430\u0442\u0430, \u043d\u0443\u0436\u043d\u043e \u0431\u044b\u043b\u043e \u043f\u043b\u0430\u0442\u0438\u0442\u044c \u0435\u0449\u0435 \u043f\u043e 20 000\u0440\u0443\u0431, \u0432 \u0438\u0442\u043e\u0433\u0435, \u0434\u0435\u043b\u043e \u043f\u0440\u043e\u0438\u0433\u0440\u0430\u043b\u0438, \u0430 \u044f \u0437\u0430\u043f\u043b\u0430\u0442\u0438\u043b \u0431\u043e\u043b\u044c\u0448\u0435 100 000\u0440\u0443\u0431!!! \u0412\u043d\u0438\u043c\u0430\u0442\u0435\u043b\u044c\u043d\u043e \u0447\u0438\u0442\u0430\u0439\u0442\u0435 \u0438\u0445 \u0434\u043e\u0433\u043e\u0432\u043e\u0440, \u043e\u043a\u0430\u0437\u044b\u0432\u0430\u0435\u0442\u0441\u044f \u0432 \u043d\u0435\u043c \u0442\u0430\u043a\u043e\u0433\u043e \u043d\u0435 \u0431\u044b\u043b\u043e \u043d\u0430\u043f\u0438\u0441\u0430\u043d\u043e, \u0430 \u0432 \u0443\u0441\u0442\u043d\u044b\u0439 \u0434\u043e\u0433\u043e\u0432\u043e\u0440 \u0441 \u043c\u0435\u043d\u0435\u0434\u0436\u0435\u0440\u043e\u043c \u043d\u0435 \u043a\u0442\u043e \u043d\u0435 \u043f\u043e\u0432\u0435\u0440\u0438\u043b, \u0434\u0430\u0436\u0435 \u043e\u043d \u0441\u0430\u043c \u0437\u0430\u0431\u044b\u043b, \u0447\u0442\u043e \u043c\u044b \u0442\u0430\u043a \u0434\u043e\u0433\u043e\u0432\u0430\u0440\u0438\u0432\u0430\u043b\u0438\u0441\u044c!!!","city":"\u042f\u0440\u043e\u0441\u043b\u0430\u0432\u043b\u044c","date":"2023-07-19 09:55:02","rating":0.5},{"id":"144170","name":"\u0410\u043b\u044c\u0431\u0438\u043d\u0430 \u0413.","comment":"\u0421\u043f\u0435\u0446\u0438\u0430\u043b\u0438\u0441\u0442 \u0434\u043e\u0441\u0442\u0443\u043f\u043d\u043e \u043e\u0431\u044a\u044f\u0441\u043d\u044f\u0435\u0442, \u043a\u043e\u043d\u0441\u0443\u043b\u044c\u0442\u0430\u0446\u0438\u044f \u043f\u043e\u043d\u0440\u0430\u0432\u0438\u043b\u0430\u0441\u044c","city":"\u042f\u0440\u043e\u0441\u043b\u0430\u0432\u043b\u044c","date":"2023-07-08 14:45:26","rating":5},{"id":"144073","name":"\u0421\u0432\u0435\u0442\u043b\u0430\u043d\u0430 \u041a.","comment":"\u043a\u043e\u0440\u043e\u0442\u043a\u043e \u0438 \u044f\u0441\u043d\u043e, \u0441\u043f\u0430\u0441\u0438\u0431\u043e ","city":"\u042f\u0440\u043e\u0441\u043b\u0430\u0432\u043b\u044c","date":"2023-06-26 11:51:12","rating":5},{"id":"144047","name":"\u041c\u0430\u0440\u0438\u044f \u041a.","comment":"\u041e\u0442\u043b\u0438\u0447\u043d\u043e \u0440\u0430\u0431\u043e\u0442\u0430\u044e\u0442 ","city":"\u042f\u0440\u043e\u0441\u043b\u0430\u0432\u043b\u044c","date":"2023-06-22 07:45:50","rating":5}];
+    window.rating_total = 4.8;
+    	window.office_photo = {"main":[{"small":"\/files\/office\/photo\/65\/pre\/4bd7e9edb7aa6c540f9bf43e2d6cf20d.jpg","big":"\/files\/office\/photo\/65\/4bd7e9edb7aa6c540f9bf43e2d6cf20d.jpg"},{"small":"\/files\/office\/photo\/65\/pre\/06108fe64457d266e713ad9d63e912f9.jpg","big":"\/files\/office\/photo\/65\/06108fe64457d266e713ad9d63e912f9.jpg"},{"small":"\/files\/office\/photo\/65\/pre\/2ad14bcf7d81befb3ac7cf88fc33bd24.jpg","big":"\/files\/office\/photo\/65\/2ad14bcf7d81befb3ac7cf88fc33bd24.jpg"}]}
+</script>
+
+<script src="https://edin.center/assets/input_mask_modification.js" defer></script>
+
+
+<div class="modal fade modern-modal gift-modal mobile-fullscreen-modal mobile-fullscreen-with-menu" id="gift_modal" tabindex="-1" role="dialog" aria-labelledby="gift_modal" aria-modal="true">
+	<div class="modal-dialog modal-dialog-centered" role="document">
+		<div class="modal-content">
+			<div class="modal-body">
+				<button type="button" class="close white-close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"></span></button>
+				<div class="mobile-menu-scroll">
+					<div class="content text-center">
+						<form class="" action="/api/lead" method="POST" modal-confirm="true" confirm-title="Поздравляем!<br>Мы зачислили на ваш бонусный счет 10 000 рублей" confirm-text="Оператор свяжется с вами и расскажет, как активировать подарок" confirm-button="Отлично" close-on-send="true">
+							<input id="gift_phone_number" name="lead[phone]" type="tel" required class="d-none">
+							<input name="lead[gift]" type="text" required class="d-none" value="списание долгов 10000 руб" data-notsavetostate="true">
+							<div class="h3 mb-0 white">Мы субсидируем до </div>
+							<div class="h1-nmv mb-0 white">10 000 ₽</div>
+							<div class="bd-2 mb-15 white">для тех, кто хочет списать долги</div>
+							<img class="mb-30 mx-auto" src="https://edin.center/images/gift-safe.png">
+							<button class="btn btn-white st-1 mb-25 close close-primary-btn" type="submit" >Получить 10 000 ₽</button>
+							<div class="d-flex px-30">
+								<p class="white bd-3 text-left mb-0">Нет долгов? Поделитесь с тем, у кого есть проблемы с кредитами</p>
+								<a href="https://edin.center/contacts" class="share-button ml-15" data-title="Подарок" data-text="Получите 10000 рублей на процедуру банкротства"><i class="icon icon-share icon-large icon-centered icon-bg-rounded icon-bg-opacity-black-1 icon-bg-small-medium icon-white"></i></a>
+							</div>
+						</form>
+					</div>
+				</div>	
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<div class="modal fade modern-modal mobile-fullscreen-modal mobile-menu-form" id="modern_lead_modalform" tabindex="-1" role="dialog" aria-labelledby="modern_lead_modalform" aria-modal="true">
+	<div class="modal-dialog modal-dialog-centered" role="document">
+		<div class="modal-content">
+			<div class="modal-body">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Закрыть"><span aria-hidden="true"></span></button>
+				<form class="steps-modal-form" action="/api/lead" method="POST">
+					<input type="hidden" name="form_sender" class="form-sender">
+					<div class="steps-wrap">
+						<div class="steps-wrap_step step-1">
+							<div class="mobile-menu-header">
+								<div class="st-1 text-center">Юридическая консультация</div>
+							</div>
+							<div class="mobile-menu-scroll">
+								<div class="content">
+									<div class="text-center text-lg-left sh-2 mb-20 mb-lg-15 quiz-theme-header d-none">Выберите тему</div>
+									<div class="quiz-themes d-none">
+										<span class="quiz-select" data-step="quiz" data-quiz='{"1":{"question":"Сумма ваших долгов","answers":{"1":"до 300 т. р.","2":"300 - 500 т. р.","3":"500 т.р - 1 млн р.","4":"более 1 млн р."}},"2":{"question":"Есть ли у вас автокредит или ипотека?","answers":{"1":"Да","2":"Нет"}},"3":{"question":"Есть ли у вас просрочки более 3-х месяцев?","answers":{"1":"Да","2":"Нет"}}}'>Списать долги, банкротство</span>
+										<!--span class="quiz-select" data-step="quiz" data-quiz='{"1":{"question":"Вопрос 1","answers":{"1":"Да","2":"Нет","3":"Не знаю"}},"2":{"question":"Вопрос 2?","answers":{"1":"Да","2":"Нет"}}}'>Иск, суды</span>
+										<span class="quiz-select" data-step="quiz" data-quiz='{"1":{"question":"Вопрос 1","answers":{"1":"Да","2":"Нет","3":"Не знаю"}},"2":{"question":"Вопрос 2?","answers":{"1":"Да","2":"Нет"}}}'>Документы</span>
+										<span class="quiz-select" data-step="quiz" data-quiz='{"1":{"question":"Вопрос 1","answers":{"1":"Да","2":"Нет","3":"Не знаю"}},"2":{"question":"Вопрос 2?","answers":{"1":"Да","2":"Нет"}}}'>Мобилизация</span>
+										<span class="quiz-select quiz-select-hidden" data-step="quiz" data-quiz='{"1":{"question":"Вопрос 1","answers":{"1":"Да","2":"Нет","3":"Не знаю"}},"2":{"question":"Вопрос 2?","answers":{"1":"Да","2":"Нет"}}}'>Еще одна тема</span>
+										<span class="quiz-select more">Еще <i class="icon icon-arrow-down icon-gray-2 icon-centered"></i></span-->
+									</div>
+									<textarea class="form-control" name="lead[question]" placeholder="Ваш вопрос юристу" data-notsavetostate="true"></textarea>
+								</div>
+								<div class="modal-btn-wrap">
+									<button class="btn btn-block btn-primary" data-step="info">Начать консультацию</button>
+								</div>
+							</div>
+						</div>
+						<div class="steps-wrap_step step-info d-none">
+							<div class="mobile-menu-header">
+								<div class="st-1 text-center">Укажите ваши данные</div>
+								<button type="button" class="back d-lg-none" aria-label="Назад" data-step="prev"><span aria-hidden="true"></span></button>
+							</div>
+							<div class="mobile-menu-scroll">
+								<div class="content">
+									<p class="sh-2 mb-20">Для того, чтобы юрист связался с вами</p>
+									<input type="text" name="lead[city_text]" class="form-control" placeholder="Ваш город" value="Ярославль" data-notsavetostate="true">
+									<input type="tel" name="lead[phone]" class="form-control" placeholder="Номер телефона" data-validation="phone" required maxlength="16">
+									<span class="form-control-annot">Для регистрации, никаких спам рассылок</span>
+									<input type="text" name="lead[name]" class="form-control" placeholder="Ваше имя">
+									<div class="bd-3 gray-2 mb-15">Отправляя данную форму, вы соглашаетесь с <a href="/security.pdf" target="_blank">политикой обработки персональных данных</a></div>
+								</div>
+								<div class="modal-btn-wrap">
+									<button class="btn btn-block btn-primary" name="main_lead" type="submit" data-send="send" data-step="next">Отправить данные</button>
+									<button type="button" class="back btn btn-block pb-0 d-none d-lg-block" data-step="prev">Назад</button>
+								</div>
+							</div>
+						</div>
+						<div class="steps-wrap_step step-contact-info d-none">
+							<div class="mobile-menu-header">
+								<div class="st-1 text-center">Как удобнее общаться?</div>
+								<button type="button" class="back d-lg-none" aria-label="Назад" data-step="prev"><span aria-hidden="true"></span></button>
+							</div>
+							<div class="mobile-menu-scroll">
+								<div class="content">
+									<div class="modal-choice-group row no-gutters">
+										<input type="radio" id="phone_choice" checked required name="lead[type]" value="phone" data-value="phone" data-notsavetostate="true">
+										<label class="modal-choice phone-choice" for="phone_choice">Звонок на телефон <span class="text-small d-block gray-2">проще и быстрее</span></label>
+																				<input type="radio" id="office_choice" required name="lead[type]" value="office" data-value="office" data-notsavetostate="true">
+										<label class="modal-choice office-choice" for="office_choice">Записаться на прием в офис <span class="text-small d-block gray-2">без звонков и переписок</span></label>
+																				<input type="radio" id="whatsapp_choice" required name="lead[type]" value="whatsapp" data-value="whatsapp" data-notsavetostate="true">
+										<label class="modal-choice whatsapp-choice" for="whatsapp_choice">Whatsapp</label>
+										<input type="radio" id="telegram_choice" required name="lead[type]" value="telegram" data-value="telegram" data-notsavetostate="true">
+										<label class="modal-choice telegram-choice" for="telegram_choice">Telegram</label>
+									</div>
+								</div>
+								<div class="modal-btn-wrap">
+									<button class="btn btn-block btn-primary" name="type_select_lead" type="submit" data-send="send" data-step="radio">Подтвердить</button>
+									<button type="button" class="back btn btn-block pb-0 d-none d-lg-block" data-step="prev">Назад</button>
+								</div>
+							</div>
+						</div>
+						<div class="steps-wrap_step step-phone d-none">
+							<div class="mobile-menu-header">
+								<div class="st-1 text-center">Вы выбрали бесплатный<br class="d-lg-none"> звонок<br class="d-none d-lg-block"> на ваш телефон</div>
+							</div>
+							<div class="mobile-menu-scroll">
+								<div class="content">
+									<p class="mb-30 text-center">Юрист будет звонить вам, пожалуйста, возьмите трубку</p>
+									<!--div class="modal-phone-info">8-800-600-95-05</div-->
+								</div>
+								<div class="modal-btn-wrap">
+									<button class="btn btn-block btn-purple close close-primary-btn" data-action="open-modal" data-target="#gift_modal">Для вас сюрприз <i class="icon icon-gift"></i></button>
+								</div>
+							</div>
+						</div>
+												<div class="steps-wrap_step step-office d-none">
+							<div class="mobile-menu-header">
+								<div class="st-1 text-center">Запись на прием в офис<br class="d-lg-none"> г. Ярославль</div>
+								<button type="button" class="back d-lg-none" aria-label="Назад" data-step="contact-info"><span aria-hidden="true"></span></button>
+							</div>
+							<div class="mobile-menu-scroll">
+								<div class="content">
+									<div class="menu-mobile-toggle-group menu-mobile-select office_address_select" data-change="#office_address">
+										<span class="menu-mobile-toggle d-flex justify-content-between disabled">ул. Свободы 11/37, 2 этаж</span>
+											<ul class="mob-menu-list list-toggle">
+												<li class="d-flex justify-content-between select" data-value="ул. Свободы 11/37, 2 этаж" data-city="Ярославль" data-phone="8 (4852) 58-15-15" data-office-time='{"1":["09:00","19:00"],"2":["09:00","19:00"],"3":["09:00","19:00"],"4":["09:00","19:00"],"5":["09:00","19:00"],"6":["10:00","16:00"],"0":[]}'>ул. Свободы 11/37, 2 этаж</li>
+																							</ul>
+									</div>
+									<div class="menu-mobile-toggle-group menu-mobile-select office_date_select" data-change="#office_date">
+										<span class="menu-mobile-toggle d-flex flex-wrap justify-content-between">27 Октября 2023<span class="gray-3 bd-2 regular">Сегодня</span></span>
+										<ul class="mob-menu-list list-toggle"></ul>
+									</div>
+									
+									<div class="menu-mobile-toggle-group menu-mobile-select office_time_select" data-change="#office_time">
+										<span class="menu-mobile-toggle d-flex justify-content-between">--:--</span>
+										<ul class="mob-menu-list list-toggle"></ul>
+									</div>
+									
+									<input class="d-none" name="lead[address]" id="office_address" type="text" value="ул. Свободы 11/37, 2 этаж" data-notsavetostate="true">
+									<input class="d-none" name="lead[date]" id="office_date" type="date" data-notsavetostate="true">
+									<input class="d-none" name="lead[time]" id="office_time" type="time" data-notsavetostate="true">
+								</div>
+								<div class="modal-btn-wrap mt-20">
+									<button class="btn btn-block btn-primary" data-step="office-sms">Далее</button>
+									<button type="button" class="back btn btn-block pb-0 d-none d-lg-block" data-step="contact-info">Назад</button>
+								</div>
+							</div>
+						</div>
+						<div class="steps-wrap_step step-office-sms d-none">
+							<div class="mobile-menu-header">
+								<div class="st-1 text-center">Подтверждение записи</div>
+								<button type="button" class="back d-lg-none" aria-label="Назад" data-step="office"><span aria-hidden="true"></span></button>
+							</div>
+							<div class="mobile-menu-scroll">
+								<div class="content">
+									<p class="bd-2">Для завершения записи на прием подтвердите ваш телефон.</p>
+									<p class="bd-2 mb-0">Введите код из СМС</p>
+									<p class="bd-2">Код отправлен на номер: <span class="sms-phone st-2"></span></p>
+									<input class="form-control mb-20" name="sms-code" type="tel" data-notsavetostate="true" maxlength="4">
+									<span class="error-msg bd-2 d-none red-1"></span>
+									
+									<div class="sms-resend bd-2 gray-3"><span class="sms-resend-text"></span><span class="sms-resend-seconds"></span></div>
+								</div>
+								<div class="modal-btn-wrap mt-20">
+									<button type="button" class="back btn btn-block pb-0 d-none d-lg-block" data-step="office">Назад</button>
+								</div>
+							</div>
+						</div>						
+
+												<div class="steps-wrap_step step-quiz d-none" data-next-step="info">
+							<div class="mobile-menu-header">
+								<div class="st-1 header text-center"></div>
+								<button type="button" class="back quiz-reset d-lg-none" aria-label="Назад" data-step="1"><span aria-hidden="true"></span></button>
+							</div>
+							<div class="mobile-menu-scroll">
+								<div class="content">
+									<div class="first-info text-center">
+										<button class="quiz-reset bd-3 gray-3 no-btn mb-20" data-step="1">Другая тема обращения?</button>
+										<div class="bd-2 mb-20 text-left">Ответьте на несколько вопросов, чтобы мы смогли сразу начать вам помогать</div>
+									</div>
+									<div class="quiz-progress"></div>
+									<div class="quiz-block">
+										<div class="quiz-question sh-2 mb-20"></div>
+										<div class="quiz-answers"></div>
+									</div>
+									<input class="quiz-data d-none" name="lead[quiz]" type="text" data-notsavetostate="true">
+																	</div>
+							</div>
+							<div class="modal-btn-wrap mt-20 d-none">
+								<button type="button" class="back quiz-reset btn btn-block pb-0 d-none d-lg-block" data-step="1">Назад</button>
+							</div>
+						</div>
+												<div class="steps-wrap_step step-office-confirm d-none">
+							<div class="mobile-menu-header">
+								<div class="st-1 text-center">Вы записаны на прием<br class="d-lg-none"> в Единый центр защиты</div>
+							</div>
+							<div class="mobile-menu-scroll">
+								<div class="content text-center">
+									<div class="btn btn-primary no-transform office-confirm-info"><i class="icon icon-calendar icon-centered icon-white"></i><span><span class="date"></span> в <span class="time"></span></span></div>
+									<div class="office-time-left bd-2"></div>
+									<button class="btn btn-purple close close-primary-btn" data-action="open-modal" data-target="#gift_modal">Для вас сюрприз <i class="icon icon-gift"></i></button>
+								</div>
+								<div class="content office-confirm-address-info mt-30">
+									<div class="header st-2">Контакты</div>
+									<div class="address mb-15 d-flex"><i class="icon icon-map-marker icon-gray-body icon-large mr-15"></i><span class="bd-2"></span></div>
+									<div class="phone mb-15 d-flex"><i class="icon icon-phone icon-gray-body icon-large mr-15"></i><span class="bd-2"></span></div>
+									<div class="worktime d-flex"><i class="icon icon-clock icon-gray-body icon-large mr-15"></i><span class="bd-2"></span></div>
+								</div>
+							</div>
+						</div>
+												<div class="steps-wrap_step step-office-confirm-phone d-none">
+							<div class="mobile-menu-header">
+								<div class="st-1 text-center">Вы выбрали запись на прием<br class="d-lg-none"> в офис на другой день</div>
+							</div>
+							<div class="mobile-menu-scroll">
+								<div class="content">
+									<p class="mb-30 text-center">Оператор прямо сейчас будет звонить вам. Пожалуйста, возьмите трубку</p>
+								</div>
+								<div class="modal-btn-wrap text-center mt-20">
+									<button class="btn btn-primary close close-primary-btn" data-dismiss="modal">Хорошо</button>
+								</div>
+							</div>
+						</div>
+						<div class="loading">
+							<div></div>
+							<div></div>
+							<div></div>
+							<div></div>
+						</div>
+					</div>	
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade modern-modal address-modal" id="address_modal" tabindex="-1" role="dialog" aria-labelledby="address_modal" aria-modal="true">
+	<div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+		<div class="modal-content">
+			<div class="modal-body">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Закрыть"><span aria-hidden="true"></span></button>
+				<div class="adress-info-modal-wrap">
+					<div class="adress-info-lines">
+						<div class="adress-line d-flex">
+							<div class="adress col">ул. Свободы 11/37, 2 этаж</div>
+							<div class="map-link col-4" data-coord="57.625171, 39.881902" 
+								data-address="ул. Свободы 11/37, 2 этаж" 
+								data-city="Ярославль" 
+								data-name="Yaroslavl" 
+								data-hours='{"1":["09:00","19:00"],"2":["09:00","19:00"],"3":["09:00","19:00"],"4":["09:00","19:00"],"5":["09:00","19:00"],"6":["10:00","16:00"],"0":[]}'
+								data-phone="8 (4852) 58-15-15" 
+								 data-busstop='Знаменская башня'								 data-bus="49, 99с, 139, 140, 178" 
+								 data-buses="71, 143, 176" 
+								 data-trolleybus="49, 99с, 139, 140, 178" 
+																 data-reference_point='Доходный дом Понизовкиных, вход с улицы Свободы, в соседних зданиях ТК Европа, ТЦ Ниагара'							>Показать на карте</div>
+							<div class="phone-wrap col-4"><a class="phone st-1 red-1" href="tel:+74852581515">8 (4852) 58-15-15</a></div>
+						</div>
+						
+											</div>
+				</div>
+				<div class="d-flex btn-area mb-15">
+					<a href="#" data-toggle="modal" data-dismiss="modal" data-target="#modern_lead_modalform" class="btn btn-primary mr-30">Записаться на прием к юристу</a>
+					<a class="btn btn-outline-primary" href="/contacts">Другие офисы по России</a>
+				</div>
+				<div class="gray-bd bd-2">Юристы принимают по предварительной записи</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade modern-modal popup_city_select" id="city_select" tabindex="-1" role="dialog" aria-labelledby="city_select" aria-modal="true">
+	<div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+		<div class="modal-content">
+			<div class="modal-body">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"></span></button>
+				<div class="city_wrapper">
+					<div class="city-search-wrap">
+						<div class="h3 modal-title">Укажите ваш город</div>
+						<p class="bd-2">Выберите город из списка или используйте поиск</p>
+						<div class="srch">
+							<div class="srch_wrapper">
+								<form action="" class="d-block searchForm searchForm--city">
+									<div class="position-relative">
+										<input type="text" class="form-control srch_text mb-0" placeholder="Ваш город" name="srch_text" data-notsavetostate="true" autocomplete="off">
+										<button type="submit" class="srch_submit no-btn"><i class="icon icon-magnifier icon-centered"></i></button>
+										<span class="srch_reset no-btn d-none"><i class="icon icon-close icon-centered"></i></span>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+					<div class="cities-scroll">
+						<div class="ajax_city_list"></div>
+						<div class="ajax_city_container">
+							<div class="office_primary">
+								<div class="st-2 subtitle"><i class="icon icon-lawhouse icon-centered"></i>Офисы в городах:</div>
+								<ul class="officesList first_list" data-cities="offices">
+																				<li><a href="/abakan/contacts">Абакан</a></li>
+																					<li><a href="/arkhangelsk/contacts">Архангельск</a></li>
+																					<li><a href="/barnaul/contacts">Барнаул</a></li>
+																					<li><a href="/vladivostok/contacts">Владивосток</a></li>
+																					<li><a href="/voronezh/contacts">Воронеж</a></li>
+																					<li><a href="/ekaterinburg/contacts">Екатеринбург</a></li>
+																					<li><a href="/izhevsk/contacts">Ижевск</a></li>
+																					<li><a href="/irkutsk/contacts">Иркутск</a></li>
+																					<li><a href="/kaliningrad/contacts">Калининград</a></li>
+																					<li><a href="/kamensk-uralskiy/contacts">Каменск-Уральский</a></li>
+																					<li><a href="/kemerovo/contacts">Кемерово</a></li>
+																					<li><a href="/kirov/contacts">Киров</a></li>
+																					<li><a href="/krasnodar/contacts">Краснодар</a></li>
+																					<li><a href="/krasnoyarsk/contacts">Красноярск</a></li>
+																					<li><a href="/murmansk/contacts">Мурманск</a></li>
+																					<li><a href="/nizhnevartovsk/contacts">Нижневартовск</a></li>
+																					<li><a href="/nizhniy-novgorod/contacts">Нижний Новгород</a></li>
+																					<li><a href="/nizhniy-tagil/contacts">Нижний Тагил</a></li>
+																					<li><a href="/novokuzneck/contacts">Новокузнецк</a></li>
+																					<li><a href="/novorossiysk/contacts">Новороссийск</a></li>
+																					<li><a href="/omsk/contacts">Омск</a></li>
+																					<li><a href="/orenburg/contacts">Оренбург</a></li>
+																					<li><a href="/perm/contacts">Пермь</a></li>
+																					<li><a href="/prokopevsk/contacts">Прокопьевск</a></li>
+																					<li><a href="/rostov-na-donu/contacts">Ростов-на-Дону</a></li>
+																					<li><a href="/samara/contacts">Самара</a></li>
+																					<li><a href="/sankt-peterburg/contacts">Санкт-Петербург</a></li>
+																					<li><a href="/saratov/contacts">Саратов</a></li>
+																					<li><a href="/sochi/contacts">Сочи</a></li>
+																					<li><a href="/surgut/contacts">Сургут</a></li>
+																					<li><a href="/tolyatti/contacts">Тольятти</a></li>
+																					<li><a href="/tomsk/contacts">Томск</a></li>
+																					<li><a href="/tyumen/contacts">Тюмень</a></li>
+																					<li><a href="/ufa/contacts">Уфа</a></li>
+																					<li><a href="/habarovsk/contacts">Хабаровск</a></li>
+																					<li><a href="/cheboksary/contacts">Чебоксары</a></li>
+																					<li><a href="/sahalin/contacts">Южно-Сахалинск</a></li>
+																					<li><a href="/yaroslavl/contacts">Ярославль</a></li>
+																		</ul>
+							</div>
+							<div class="office_partners">
+								<div class="st-2 subtitle"><i class="icon icon-peoples icon-centered"></i>Собственная сеть представителей:</div>
+								<ul class="letters_list">
+									<li class="active"><a href="#" data-letter="А">А</a></li>
+									<li class=""><a href="#" data-letter="Б">Б</a></li>
+									<li class=""><a href="#" data-letter="В">В</a></li>
+									<li class=""><a href="#" data-letter="Г">Г</a></li>
+									<li class=""><a href="#" data-letter="Д">Д</a></li>
+									<li class=""><a href="#" data-letter="Е">Е</a></li>
+									<li class=""><a href="#" data-letter="Ж">Ж</a></li>
+									<li class=""><a href="#" data-letter="З">З</a></li>
+									<li class=""><a href="#" data-letter="И">И</a></li>
+									<li class=""><a href="#" data-letter="К">К</a></li>
+									<li class=""><a href="#" data-letter="Л">Л</a></li>
+									<li class=""><a href="#" data-letter="М">М</a></li>
+									<li class=""><a href="#" data-letter="Н">Н</a></li>
+									<li class=""><a href="#" data-letter="О">О</a></li>
+									<li class=""><a href="#" data-letter="П">П</a></li>
+									<li class=""><a href="#" data-letter="Р">Р</a></li>
+									<li class=""><a href="#" data-letter="С">С</a></li>
+									<li class=""><a href="#" data-letter="Т">Т</a></li>
+									<li class=""><a href="#" data-letter="У">У</a></li>
+									<li class=""><a href="#" data-letter="Ф">Ф</a></li>
+									<li class=""><a href="#" data-letter="Х">Х</a></li>
+									<li class=""><a href="#" data-letter="Ц">Ц</a></li>
+									<li class=""><a href="#" data-letter="Ч">Ч</a></li>
+									<li class=""><a href="#" data-letter="Ш">Ш</a></li>
+									<li class=""><a href="#" data-letter="Щ">Щ</a></li>
+									<li class=""><a href="#" data-letter="Э">Э</a></li>
+									<li class=""><a href="#" data-letter="Ю">Ю</a></li>
+									<li class=""><a href="#" data-letter="Я">Я</a></li>
+								</ul>
+								<div class="another_list">
+									<ul data-cities="letter">
+																			</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade modern-modal remember-modal" id="remember_modal" tabindex="-1" role="dialog" aria-labelledby="remember_modal" aria-modal="true">
+	<div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+		<div class="modal-content step-content">
+			<div class="modal-body bg-radial-grad-spark">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"></span></button>
+				<form class="steps-modal-form" action="/api/lead" method="POST" modal-confirm="true" confirm-class="remember-modal-confirm" close-on-send="true">
+					<div class="steps-wrap">
+						<div class="steps-wrap_step step-1">
+							<div class="content">
+								<div class="small-header mb-20">Не успели вам сказать <i class="icon icon-star-smile icon-blue"></i></div>
+								<div class="h2 mb-20 mb-lg-40 mw-330">Мы даем <span class="red-1 bold">10 000</span> рублей на списание долгов</div>
+								<button class="btn btn-primary btn-lg" data-step="next">Получить<span class="d-none d-lg-inline"> 10 000 ₽</span><i class="icon icon-gift icon-white d-lg-none"></i></button>
+								<div class="text-right">
+								<picture>
+									<source srcset="/images/mtp-100.webp" type="image/webp">
+									<img class="remember-modal-img" src="/images/mtp-100.png">
+								</picture>
+								</div>
+							</div>
+						</div>
+						<div class="steps-wrap_step step-2 d-none">
+							<div class="row no-gutters">
+								<div class="col-lg-6 pr-lg-75 mb-30 mb-lg-0">
+									<div class="small-header mb-20">Готовы получить <span class="red-1">10 000 ₽ ?</span></div>
+									<div class="h2 mb-15">Заполните заявку</div>
+									<p>Наш менеджер свяжется с вами и расскажет, как получить 10 000 рублей <i class="icon icon-coins icon-yellow"></i></p>
+								</div>
+								<div class="col-lg-6 pl-lg-30">
+									<input type="text" name="lead[name]" class="form-control mb-10" placeholder="Ваше имя" required> 
+									<input type="tel" name="lead[phone]" class="form-control mb-10" placeholder="Номер телефона" data-validation="phone" required maxlength="16">
+									<input type="text" name="lead[gift]" required class="d-none" value="списание долгов 10000 руб" data-notsavetostate="true">
+									<div class="bd-3 gray-2 mb-15">Отправляя данную форму, вы соглашаетесь с <a href="/security.pdf" target="_blank">политикой обработки персональных данных</a></div>
+									<button class="btn btn-block btn-primary" type="submit">Подтвердить</button>
+								</div>
+							</div>
+						</div>
+						<div class="loading">
+							<div></div>
+							<div></div>
+							<div></div>
+							<div></div>
+						</div>
+					</div>
+				</form>	
+			</div>
+		</div>
+	</div>
+</div>
+
+
+</body>
+</html>

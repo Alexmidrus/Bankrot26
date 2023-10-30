@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:og="http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title }}</title>
+    <meta name="description" content="{{ description }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <meta property="og:site_name" content="Юридический центр Алиби Ставрополь">
+    <meta property="og:title" content="Юридический центр Алиби Ставрополь">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ og_url }}">
+    <meta property="og:image" content="{{ url_for('static', filename='img/edin_center_share.webp') }}">
+    <meta property="og:image:type" content="image/webp">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:description" content="{{ og_description }}">
+
+    <link rel="canonical" href="{{ canonical }}">
+    <link rel="apple-touch-icon" sizes="76x76" href="{{ url_for('static', filename='img/apple-touch-icon.png') }}" type="image/png">
+    <link rel="icon" sizes="32x32" href="{{ url_for('static', filename='img/favicon-32x32.png') }}" type="image/png">
+    <link rel="icon" sizes="16x16" href="{{ url_for('static', filename='img/favicon-16x16.png') }}" type="image/png">
+    <link rel="icon" sizes="120x120" href="{{ url_for('static', filename='img/favicon-120x120.png') }}" type="image/png">
+    <link rel="manifest" href="{{ url_for('static', filename='utill/site.webmanifest') }}" crossorigin="use-credentials">
+    <link rel="mask-icon" href="{{ url_for('static', filename='img/safari-pinned-tab.svg') }}" color="#ff0000">
+
+
+	<link rel="stylesheet" as="style" crossorigin href="{{ url_for('static', filename='css/bootstrap.css') }}" type="text/css">
+	<link rel="stylesheet" as="style" crossorigin href="{{ url_for('static', filename='css/main.css') }}" type="text/css">
+    <link rel="stylesheet" as="style" crossorigin href="{{ url_for('static', filename='css/main_page.css') }}" type="text/css">
+
+    <link rel="preload" href="{{ url_for('static', filename='css/icons.css') }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+	<link rel="preload" href="{{ url_for('static', filename='css/slick.css') }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+	<link rel="preload" href="{{ url_for('static', filename='css/fancybox.css') }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+	<noscript>
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/icons.css') }}">
+		<link rel="stylesheet" href="{{ url_for('static', filename='css/slick.css') }}">
+		<link rel="stylesheet" href="{{ url_for('static', filename='css/fancybox.css') }}">
+	</noscript>
+
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="theme-color" content="#ffffff">
+
+
+    <script src="{{ url_for('static', filename='js/bundle.js') }}" defer></script>
+	<script src="{{ url_for('static', filename='js/main.js') }}" defer></script>
+    <script src="{{ url_for('static', filename='js/mainpage.js') }}" defer></script>
+
+</head>
+<body id="body">
+	<script>
+        function _getCookie(key) {
+            var keyValue = document.cookie.match('(^|;) ?' + key + '=([^;]*)(;|$)');
+            return keyValue ? keyValue[2] : null;
+        }
+
+        calltrack_cookie = _getCookie('calltrack');
+        utm_cookie = _getCookie('utm_campaign');
+
+        if(!calltrack_cookie && utm_cookie){
+            sessionStorage.removeItem("phone-shown");
+        }
+
+		if(sessionStorage.getItem("phone-shown")){
+			body = document.querySelector('body');
+			body.classList.add("show-all-phones");
+		}
+	</script>
+
+    {% include 'include/menu.html' %}
+    {% block content %}
+    {% endblock %}
+    {% include 'include/bot_button.html' %}
+    {% include 'include/footer.html' %}
+    {% include 'include/menu_mobile.html' %}
+    <script src="{{ url_for ('static', filename = 'js/inp_mask.js') }}" defer></script>
+    {% include 'include/modal_1.html' %}
+    {% include 'include/modal_2.html' %}
+    {% include 'include/modal_3.html' %}
+    {% include 'include/modal_4.html' %}
+    {% include 'include/modal_5.html' %}
+</body>
+
+</html>

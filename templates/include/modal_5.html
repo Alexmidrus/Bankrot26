@@ -1,0 +1,48 @@
+<div class="modal fade modern-modal remember-modal" id="remember_modal" tabindex="-1" role="dialog" aria-labelledby="remember_modal" aria-modal="true">
+	<div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+		<div class="modal-content step-content">
+			<div class="modal-body bg-radial-grad-spark">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"></span></button>
+				<form class="steps-modal-form" action="/api/lead" method="POST" modal-confirm="true" confirm-class="remember-modal-confirm" close-on-send="true">
+					<div class="steps-wrap">
+						<div class="steps-wrap_step step-1">
+							<div class="content">
+								<div class="small-header mb-20">Не успели вам сказать <i class="icon icon-star-smile icon-blue"></i></div>
+								<div class="h2 mb-20 mb-lg-40 mw-330">Мы даем <span class="red-1 bold">10 000</span> рублей на списание долгов</div>
+								<button class="btn btn-primary btn-lg" data-step="next">Получить<span class="d-none d-lg-inline"> 10 000 ₽</span><i class="icon icon-gift icon-white d-lg-none"></i></button>
+								<div class="text-right">
+								<picture>
+									<source srcset="/images/mtp-100.webp" type="image/webp">
+									<img class="remember-modal-img" src="/images/mtp-100.png">
+								</picture>
+								</div>
+							</div>
+						</div>
+						<div class="steps-wrap_step step-2 d-none">
+							<div class="row no-gutters">
+								<div class="col-lg-6 pr-lg-75 mb-30 mb-lg-0">
+									<div class="small-header mb-20">Готовы получить <span class="red-1">10 000 ₽ ?</span></div>
+									<div class="h2 mb-15">Заполните заявку</div>
+									<p>Наш менеджер свяжется с вами и расскажет, как получить 10 000 рублей <i class="icon icon-coins icon-yellow"></i></p>
+								</div>
+								<div class="col-lg-6 pl-lg-30">
+									<input type="text" name="lead[name]" class="form-control mb-10" placeholder="Ваше имя" required>
+									<input type="tel" name="lead[phone]" class="form-control mb-10" placeholder="Номер телефона" data-validation="phone" required maxlength="16">
+									<input type="text" name="lead[gift]" required class="d-none" value="списание долгов 10000 руб" data-notsavetostate="true">
+									<div class="bd-3 gray-2 mb-15">Отправляя данную форму, вы соглашаетесь с <a href="/security.pdf" target="_blank">политикой обработки персональных данных</a></div>
+									<button class="btn btn-block btn-primary" type="submit">Подтвердить</button>
+								</div>
+							</div>
+						</div>
+						<div class="loading">
+							<div></div>
+							<div></div>
+							<div></div>
+							<div></div>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
