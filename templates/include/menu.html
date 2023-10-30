@@ -3,7 +3,7 @@
         <nav class="navbar navbar-light navbar-expand-lg noshadow flex-wrap">
 			<div class="header__main d-flex w-100 justify-content-between align-items-start align-items-lg-start">
                 <div class="header__logo  position-relative">
-					<a class="d-flex justify-content-center align-items-center" href="http://alibi-center.ru">
+					<a class="d-flex justify-content-center align-items-center" href="/">
 						<img class="logo logo__img" src="{{ url_for('static', filename='img/mtp-logo.svg') }}" alt="Юридический центр Алиби" width="52" height="60">
 						<img class="logo logo__img white d-none" style="display:none" src="{{ url_for('static', filename='img/mtp-logo-white.svg') }}" alt="Юридический центр Алиби" width="52" height="60">
 						<div class="logo logo__withText">Алиби<span class="logo__subTitle">Юридический центр</span></div>
@@ -23,17 +23,17 @@
                                     <div class="adress-info-lines">
                                         <div class="adress-line d-flex">
                                             <div class="adress col">пр. Кулакова 9Б, 3 этаж</div>
-                                            <div class="map-link col-4" data-coord="57.625171, 39.881902"
+                                            <div class="map-link col-4" data-coord="45.050240, 41.914906"
                                                  data-address="пр. Кулакова 9Б, 3 этаж"
                                                  data-city="Ставрополь"
-                                                 data-name="Stavropol"
+                                                 data-name="Ставрополь"
                                                  data-hours='{"1":["09:00","18:00"],"2":["09:00","18:00"],"3":["09:00","18:00"],"4":["09:00","18:00"],"5":["09:00","18:00"],"6":["10:00","15:00"],"0":[]}'
                                                  data-phone="8 (918) 887-36-30"
                                                  data-busstop='Малая Химия'
                                                  data-bus="10, 13, 20, 50"
                                                  data-buses="9м, 12м, 19, 31, 35, 42, 110, 142"
                                                  data-trolleybus="7, 9"
-                                                 data-reference_point='Вход с проспекта Кулакова, въезд на паркову со стороны "Новая керамика"'>Показать на карте</div>
+                                                 data-reference_point='Вход с проспекта Кулакова, въезд на паркову со стороны магазина "Новая керамика"'>Показать на карте</div>
                                             <div class="phone-wrap col-4"><a class="phone st-1 red-1" href="tel:+79188873630">8 (918) 887-36-30</a></div>
                                         </div>
                                     </div>
@@ -57,30 +57,30 @@
                                         <div class="col">
                                             <div class="multi-column-dropdown">
                                                 <span class="dropdown-item menu-header">Заемщикам</span>
-                                                    <a class="dropdown-item" href="/bankrotstvo-fizicheskih-lic">Банкротство физических лиц</a>
-                                                    <a class="dropdown-item" href="/uproshchennoe-bankrotstvo">Внесудебное банкротство</a>
-                                                    <a class="dropdown-item" href="/vzyskanie-dolgov-s-fiz-lic">Взыскание долгов</a>
+                                                    <a class="dropdown-item" href="/bankrotstvo-fizlic">Банкротство физических лиц</a>
+                                                    <a class="dropdown-item" href="/lite-bankrotstvo">Внесудебное банкротство</a>
+                                                    <a class="dropdown-item" href="/vzyskanie-dolgov-fiz-lic">Взыскание долгов</a>
                                             </div>
                                         </div>
                                         <div class="col">
                                             <div class="multi-column-dropdown">
                                                 <span class="dropdown-item menu-header">Физическим лицами</span>
                                                     <a class="dropdown-item" href="/zashhita-v-sude">Защита в суде</a>
-                                                    <a class="dropdown-item" href="/advokat">Помощь по уголовным делам</a>
+                                                    <a class="dropdown-item" href="/ugolovnye-dela">Помощь по уголовным делам</a>
                                                     <a class="dropdown-item" href="/semejnoe-pravo">Семейное право</a>
                                                     <a class="dropdown-item" href="/nasledstvennye-spory">Наследственные споры</a>
                                                     <a class="dropdown-item" href="/zemelnye-spory">Земельные споры</a>
                                                     <a class="dropdown-item" href="/zhilishnye-spory">Жилищные споры</a>
-                                                    <a class="dropdown-item" href="/vozvrat-strahovovk-i-komissii-bankov">Возврат страховок</a>
+                                                    <a class="dropdown-item" href="/vozvrat-strahovovk">Возврат страховок</a>
                                                     <a class="dropdown-item" href="/trudovoe-pravo">Трудовое право</a>
-                                                    <a class="dropdown-item" href="/autourist">Помощь автоюриста</a>
+                                                    <a class="dropdown-item" href="/auto-urist">Помощь автоюриста</a>
                                                     <a class="dropdown-item" href="/zashchita-prav-potrebitelya">Защита прав потребителей</a>
                                             </div>
                                         </div>
                                         <div class="col">
                                             <div class="multi-column-dropdown">
                                                 <span class="dropdown-item menu-header">Юридическим лицам</span>
-                                                <a class="dropdown-item" href="/bankrotstvo-ul">Банкротство юрлиц</a>
+                                                <a class="dropdown-item" href="/bankrotstvo-ul">Банкротство</a>
                                                 <a class="dropdown-item" href="/vzyskanie-dolgov-ul">Взыскание долгов</a>
                                                 <a class="dropdown-item" href="/corporate">Корпоративное обслуживание</a>
                                             </div>
@@ -96,7 +96,7 @@
                                 <a class="nav-link  dropdown-toggle bissness" id="navbarDropdown104" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="javascript:;">О компании</a>
                                 <div class="dropdown-menu arrow-box dropdown-menu-center dropdown-primary" aria-labelledby="navbarDropdown104">
                                     <a class="dropdown-item" href="/about">Информация</a>
-                                    <a class="dropdown-item" href="/newsfeed">Новости</a>
+                                    <a class="dropdown-item" href="/news">Новости</a>
                                 </div>
 								</li>
                             <li class="nav-item  dropdown">
