@@ -6268,7 +6268,7 @@
     }
 
     .mainpage-upd.section--help-with-decorated .section__content {
-        background: url('../23553edfdcd812ca5933b887e78f38f0.svg') 50% 160px/100% no-repeat
+        background: url('/static/img/dot_bg.svg') 50% 160px/100% no-repeat;
     }
 
     .mainpage-upd .h3,.mainpage-upd h3 {
