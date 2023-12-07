@@ -99,8 +99,8 @@
 }
 
 .icon.icon-gift:before {
-    mask-image: url('/images/icon-gift.svg');
-    -webkit-mask-image: url('/images/icon-gift.svg');
+    mask-image: url('static/img/icon-gift.svg');
+    -webkit-mask-image: url('static/img/icon-gift.svg');
 }
 
 .icon.icon-time:before {
