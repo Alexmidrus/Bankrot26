@@ -2631,7 +2631,7 @@ $( document ).ready(function() {
 						<div class="row no-gutters map-modal-wrap">
 							<div class="col map-modal-info">
 								<div class="map-modal-info-wrap">
-									<div class="h3 mb-10">Юридический центр Алиби</div>
+									<div class="h3 mb-10">Юридический центр "Алиби"</div>
 									<div class="bd-2 mb-15 d-flex align-items-center"><i class="icon load icon-centered icon-map-marker mr-2"></i>`+data['city']+`</div>
 									<ul class="nav nav-tabs nav-fill" role="tablist">
 										<li class="nav-item" role="presentation">
@@ -2721,7 +2721,7 @@ $( document ).ready(function() {
 					searchControlProvider: 'yandex#search'
 				}),
 				placemark = new ymaps.Placemark([data['coord_arr'][0], data['coord_arr'][1]], {
-					balloonContentHeader: 'Единый Центр Защиты - ' + data['city'],
+					balloonContentHeader: 'Юридицеский центр "Алиби"',
 					balloonContentBody: data['address'] + '<br/>' + '<a href="tel:'+phone_format(data['phone'])+'" class="phone phone-shown blue-1">'+data['phone']+'</a>',
 					isOpen: true
 				});
