@@ -2569,7 +2569,7 @@ $( document ).ready(function() {
 		}
 
 		if (data['buses']){
-			buses_html += '<div class="d-flex align-items-center"><i class="icon load icon-minibus icon-gray-body icon-centered icon-bg-gray-6 icon-bg-rounded icon-bg-light-medium mr-10"></i><div class="bd-2">Маршрутки</div></div><div class="buses-list red">';
+			buses_html += '<div class="d-flex align-items-center"><i class="icon load icon-minibus icon-gray-body icon-centered icon-bg-gray-6 icon-bg-rounded icon-bg-light-medium mr-10"></i><div class="bd-2">Маршрутное такси</div></div><div class="buses-list red">';
 
 			remove_shit_from_buses(data['buses']).forEach(function(el, i) {
 				buses_html += '<span>'+el+'</span>';
@@ -2590,18 +2590,6 @@ $( document ).ready(function() {
 
 		let reviews_html = '';
 
-		if (data['reviews']){
-			for (var i = 0; i <10; i++) {
-
-				let date = new Date(data['reviews'][i]['date']);
-
-				reviews_html += '<div class="office-rating"><div class="office-rating-header d-flex"><div class="office-rating-avatar">'+data['reviews'][i]['name'].substring(0, 1)+'</div><div class="office-rating-header-content"><div class="office-rating-name"><span>'+data['reviews'][i]['name'].replace('.','');
-				reviews_html += data['reviews'][i]['city'] ? ', </span>'+ data['reviews'][i]['city'] : '</span>';
-				reviews_html += '</div><div class="office-rating-rating"><i data-star="'+data['reviews'][i]['rating']+'"></i><span>'+formatDate(date)+'</span></div></div></div><div class="office-rating-content bd-2">';
-				reviews_html += data['reviews'][i]['comment'].length > 112 ? data['reviews'][i]['comment'].substring(0,112) + '<span class="more-addit">...</span><span class="hidden-text ">'+data['reviews'][i]['comment'].substring(112)+'</span><div class="read-more st-2">Читать полностью</div>' : data['reviews'][i]['comment'];
-				reviews_html +='</div></div>';
-			}
-		}
 
 		let image_html = '';
 		let image_count = 0;
@@ -2638,7 +2626,7 @@ $( document ).ready(function() {
 										<button class="nav-link active st-2 text-nowrap" data-toggle="tab" data-target="#map_modal_info" type="button" role="tab" aria-selected="true">Контакты</button>
 										</li>
 										<li class="nav-item" role="presentation">
-										<button class="nav-link st-2 text-nowrap" data-toggle="tab" data-target="#map_modal_route" type="button" role="tab" aria-selected="false">Как добраться</button>
+										<button class="nav-link st-2 text-nowrap" data-toggle="tab" data-target="#map_modal_route" type="button" role="tab" aria-selected="false">Маршрут</button>
 										</li>
 										</li>
 									</ul>
